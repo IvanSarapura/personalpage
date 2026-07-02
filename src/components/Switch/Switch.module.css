@@ -1,0 +1,69 @@
+/* ─── Switch — componente headless reutilizable ───
+   Geometría 100% derivada de tokens --switch-*. Cero pixeles
+   literales: cualquier cambio de tamaño se propaga sin recálculo.
+
+   Estructura:
+   • Track:  --switch-width × --switch-height
+   • Border: --switch-border (incluido en el alto/ancho)
+   • Gap:    --switch-gap (clearance interior uniforme)
+   • Knob:   --switch-knob-size (derivado)
+   • Travel: --switch-travel (derivado, = width − height) */
+
+.switch {
+  /* Reset de <button> para eliminar estilos UA sin perder semántica */
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  /* Geometría del track */
+  width: var(--switch-width);
+  height: var(--switch-height);
+  border-radius: var(--radius-full);
+  border: var(--switch-border) solid var(--text-on-light);
+  background: transparent;
+  position: relative;
+  transition: var(--transition-hover);
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--text-on-light);
+  outline-offset: 2px;
+}
+
+.switch:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+
+/* Knob — centrado vertical vía translateY(-50%) para
+   eliminar asimetrías por redondeo sub-pixel del borde. */
+.knob {
+  position: absolute;
+  top: 50%;
+  left: var(--switch-gap);
+  width: var(--switch-knob-size);
+  height: var(--switch-knob-size);
+  border-radius: 50%;
+  background: var(--text-on-light);
+  transform: translateY(-50%);
+  transition: transform var(--duration-base) var(--ease-smooth);
+  will-change: transform;
+}
+
+.switch[aria-checked="true"] .knob {
+  transform: translateY(-50%) translateX(var(--switch-travel));
+}
+
+/* Respeta preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .knob {
+    transition: none;
+  }
+  .switch {
+    transition: none;
+  }
+}

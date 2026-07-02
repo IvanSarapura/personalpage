@@ -1,0 +1,164 @@
+.statsSection {
+  position: relative;
+}
+
+/* Línea divisora sutil entre SignalsSection y StatsSection */
+.statsSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--container-max-width));
+  height: 1px;
+  background: var(--color-border-subtle);
+}
+
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.headline {
+  font-size: var(--display-2);
+  font-weight: 400;
+  line-height: var(--display-2-lh);
+  letter-spacing: var(--display-2-tracking);
+  color: var(--text-primary);
+  margin-bottom: var(--element-gap);
+}
+
+.subheadline {
+  font-size: var(--body-large);
+  font-weight: var(--body-large-weight);
+  line-height: var(--body-large-lh);
+  color: var(--text-primary);
+  opacity: var(--opacity-moderate);
+  max-width: 620px;
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-5);
+  position: relative;
+}
+
+/* Líneas divisorias verticales entre cards */
+.card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--color-border-subtle);
+}
+
+.value {
+  font-size: var(--heading-1);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
+}
+
+.label {
+  font-size: var(--caption);
+  font-weight: var(--caption-weight);
+  line-height: var(--caption-lh);
+  color: var(--text-primary);
+  opacity: var(--opacity-deemphasized);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* ─── Tablet (2 cols) ─── */
+@media (max-width: 768px) {
+  .headline {
+    font-size: var(--heading-1);
+    line-height: var(--heading-1-lh);
+    letter-spacing: var(--heading-1-tracking);
+  }
+
+  .subheadline {
+    font-size: var(--body);
+    line-height: var(--body-lh);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* En 2 cols, solo cards 1 y 3 tienen línea divisoria a la derecha */
+  .card:nth-child(1)::after,
+  .card:nth-child(3)::after {
+    display: block;
+  }
+
+  .card:nth-child(2)::after,
+  .card:nth-child(4)::after {
+    display: none;
+  }
+
+  /* Líneas horizontales entre filas */
+  .card:nth-child(1)::before,
+  .card:nth-child(2)::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: var(--color-border-subtle);
+  }
+
+  .card:nth-child(3)::before,
+  .card:nth-child(4)::before {
+    display: none;
+  }
+
+  .value {
+    font-size: var(--heading-2);
+  }
+}
+
+/* ─── Mobile (1 col, 480px = --bp-xs) ─── */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* En 1 col, todas las cards excepto la última tienen línea horizontal */
+  .card:not(:last-child)::after {
+    display: none;
+  }
+
+  .card:nth-child(1)::before,
+  .card:nth-child(2)::before,
+  .card:nth-child(3)::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: var(--color-border-subtle);
+  }
+
+  .card:nth-child(4)::before {
+    display: none;
+  }
+}

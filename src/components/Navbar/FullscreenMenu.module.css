@@ -1,0 +1,299 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: var(--surface-primary);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--duration-smooth) var(--ease-smooth),
+    visibility 0s linear var(--duration-smooth);
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--duration-smooth) var(--ease-smooth),
+    visibility 0s linear 0s;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* Padding y max-width delegados a Container para alineación
+     exacta con el navbar principal. */
+}
+
+/* ─── Header — misma estructura que el navbar principal ─── */
+.headerInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--navbar-padding-y);
+  padding-bottom: var(--navbar-padding-y);
+}
+
+.navLabel {
+  font-size: var(--body);
+  font-weight: var(--body-weight);
+  line-height: var(--body-lh);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--text-primary);
+  opacity: var(--opacity-muted);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.closeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--navbar-touch-target);
+  height: var(--navbar-touch-target);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.closeBtn:hover {
+  opacity: var(--opacity-moderate);
+}
+
+/* Wrapper que mantiene el icono visual siempre en 28×28,
+   independientemente del tamaño del botón táctil (44×44). */
+.closeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--navbar-icon-size);
+  height: var(--navbar-icon-size);
+}
+
+.closeIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Divider idéntico al del navbar principal */
+.divider {
+  height: var(--divider-thickness);
+  background: var(--border-default);
+  width: 100%;
+  opacity: var(--opacity-divider);
+}
+
+/* ─── Body — centrado verticalmente, empuja footer hacia abajo ─── */
+.body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  width: 100%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-smooth) var(--ease-smooth),
+    transform var(--duration-smooth) var(--ease-smooth);
+  border-bottom: 1px solid var(--color-white-subtle);
+}
+
+.itemLast {
+  border-bottom: none;
+}
+
+.itemOpen {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  width: 100%;
+  padding: var(--space-5) 0;
+  font-size: var(--heading-2);
+  font-weight: var(--heading-2-weight);
+  line-height: var(--heading-2-lh);
+  letter-spacing: var(--heading-2-tracking);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out);
+  opacity: var(--opacity-strong);
+}
+
+.link:hover:not(:disabled) {
+  opacity: 1;
+  transform: translateX(8px);
+}
+
+.link:disabled {
+  cursor: default;
+  opacity: var(--opacity-disabled);
+}
+
+.index {
+  font-size: var(--caption);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--text-primary);
+  opacity: var(--opacity-dim);
+  min-width: 28px;
+  flex-shrink: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.link:hover:not(:disabled) .index {
+  opacity: var(--opacity-secondary);
+}
+
+.label {
+  position: relative;
+}
+
+/* Indicador visual al hover: pequeño punto */
+.label::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  opacity: 0;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out);
+}
+
+.link:hover:not(:disabled) .label::before {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+/* ─── Footer del menú ─── */
+.footerBar {
+  padding-top: var(--space-6);
+  padding-bottom: var(--navbar-padding-y);
+}
+
+.footerDivider {
+  height: 1px;
+  background: var(--color-white-muted);
+  margin-bottom: var(--space-5);
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.footerTagline {
+  font-size: var(--caption);
+  font-weight: var(--caption-weight);
+  line-height: var(--caption-lh);
+  color: var(--text-primary);
+  opacity: var(--opacity-muted);
+  margin: 0;
+}
+
+.footerEmail {
+  font-size: var(--caption);
+  font-weight: 500;
+  line-height: var(--caption-lh);
+  color: var(--text-primary);
+  opacity: var(--opacity-moderate);
+  text-decoration: none;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.footerEmail:hover {
+  opacity: 1;
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .headerInner {
+    padding-top: var(--navbar-padding-y-mobile);
+    padding-bottom: var(--navbar-padding-y-mobile);
+  }
+
+  .link {
+    font-size: var(--heading-3);
+    line-height: var(--heading-3-lh);
+    padding: var(--space-4) 0;
+  }
+
+  .index {
+    min-width: 24px;
+  }
+
+  .footerBar {
+    padding-bottom: var(--navbar-padding-y-mobile);
+  }
+
+  .footerContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    transition: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .item {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .link {
+    transition: none;
+  }
+
+  .label::before {
+    transition: none;
+  }
+}

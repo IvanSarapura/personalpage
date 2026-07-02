@@ -1,26 +1,498 @@
-@import "tailwindcss";
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKEN SYSTEM — Sira Brand (clon en Tailwind v4)
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+   Estructura CSS-first (sin tailwind.config.js):
+   - ZONA A  @theme        → primitivos estáticos que generan utilidades
+   - ZONA C  @theme inline  → puente de fuente (theme-aware en build-time)
+   - ZONA B  :root/html.dark → tokens semánticos y de sistema (flip por tema)
+   - ZONA D  @layer base    → resets y estilos globales
+
+   DARK MODE: por clase `dark` en <html> (lo aplica ThemeProvider +
+   el script anti-flash del layout). Los tokens semánticos hacen flip
+   en html.dark, así las utilidades con arbitrary values los siguen.
+   ═══════════════════════════════════════════════════════════════ */
+
+@import "tailwindcss";
+/* Animaciones para componentes shadcn/ui (Dialog, Popover, etc.). */
+@import "tw-animate-css";
+
+/* Dark mode por clase (preserva el ThemeProvider basado en html.dark).
+   Usamos :is() (no :where()) para que las utilidades `dark:` aporten
+   especificidad y ganen a la utilidad base del mismo color/propiedad sin
+   depender del orden de emisión — clave para los overrides card/botón/meta. */
+@custom-variant dark (&:is(.dark, .dark *));
+
+/* ═══════════════════════════════════════════════════════════════
+   ZONA A — Primitivos estáticos (@theme → :root vars + utilidades)
+   ═══════════════════════════════════════════════════════════════ */
+@theme {
+  /* Paleta de marca → bg-*, text-*, border-* */
+  --color-deep: #19192d;
+  --color-deep-elevated: #121226;
+  --color-b-white: #ebecff;
+  --color-blue-screen: #0051e9;
+  --color-g-nova: #66cef6;
+  --color-white-pure: #ffffff;
+
+  /* Radios de Sira (sobrescriben los defaults del framework a propósito) */
+  --radius-full: 100px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+
+  /* Curvas de easing de Sira */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Breakpoint extra (640/768/1024/1280 ya coinciden con sm/md/lg/xl) */
+  --breakpoint-xs: 480px;
+
+  /* Estilos tipográficos fluidos → text-display-1, text-heading-2, …
+     (nombres semánticos: no colisionan con la escala numérica text-xs…9xl) */
+  --text-display-1: clamp(56px, 8vw, 96px);
+  --text-display-1--line-height: 0.92;
+  --text-display-1--font-weight: 700;
+  --text-display-1--letter-spacing: -0.04em;
+
+  --text-display-2: clamp(48px, 6vw, 72px);
+  --text-display-2--line-height: 0.94;
+  --text-display-2--font-weight: 700;
+  --text-display-2--letter-spacing: -0.05em;
+
+  --text-heading-1: clamp(40px, 5vw, 56px);
+  --text-heading-1--line-height: 1;
+  --text-heading-1--font-weight: 700;
+  --text-heading-1--letter-spacing: -0.03em;
+
+  --text-heading-2: clamp(32px, 4vw, 40px);
+  --text-heading-2--line-height: 1.1;
+  --text-heading-2--font-weight: 600;
+  --text-heading-2--letter-spacing: -0.02em;
+
+  --text-heading-3: clamp(24px, 3vw, 28px);
+  --text-heading-3--line-height: 1.21;
+  --text-heading-3--font-weight: 600;
+  --text-heading-3--letter-spacing: -0.01em;
+
+  --text-body-large: 20px;
+  --text-body-large--line-height: 1.5;
+  --text-body-large--font-weight: 400;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--font-weight: 400;
+
+  --text-caption: 13px;
+  --text-caption--line-height: 1.38;
+  --text-caption--font-weight: 400;
+
+  --text-label: 13px;
+  --text-label--line-height: 1.38;
+  --text-label--font-weight: 400;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ZONA C — Puente de fuente (build-time inline)
+   ═══════════════════════════════════════════════════════════════ */
 @theme inline {
+  --font-sans: var(--font-inter);
+
+  /* Puente shadcn/ui → utilidades bg-primary, text-foreground, border-border…
+     apuntan a las CSS vars semánticas de shadcn (definidas más abajo y
+     mapeadas a la marca Sira, con flip automático en dark). */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════════════════════════════════════════════════════════
+   ZONA B — Tokens semánticos y de sistema (CSS vars planas)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Bordes primitivos con alpha */
+:root {
+  --color-border-subtle: rgba(235, 236, 255, 0.2);
+  --color-border-muted: rgba(235, 236, 255, 0.08);
+}
+
+/* Semantic — light (default) */
+:root {
+  --surface-primary: var(--color-blue-screen);
+  --surface-secondary: var(--color-b-white);
+  --surface-tertiary: var(--color-deep);
+  --surface-dark: var(--color-deep);
+
+  --text-primary: var(--color-white-pure);
+  --text-secondary: var(--color-b-white);
+  --text-on-light: var(--color-blue-screen);
+  --text-muted: rgba(235, 236, 255, 0.6);
+
+  --border-default: var(--color-white-pure);
+  --border-subtle: var(--color-border-subtle);
+
+  --navbar-bg-scrolled: rgba(235, 236, 255, 0.72);
+  --navbar-border-scrolled: rgba(235, 236, 255, 0.35);
+}
+
+/* Semantic — dark */
+html.dark {
+  --surface-primary: var(--color-deep);
+  --surface-secondary: var(--color-deep);
+  --surface-tertiary: var(--color-deep-elevated);
+  --surface-dark: var(--color-deep-elevated);
+
+  --text-primary: var(--color-b-white);
+  --text-secondary: var(--color-b-white);
+  --text-on-light: var(--color-b-white);
+  --text-muted: rgba(235, 236, 255, 0.5);
+
+  --border-default: var(--color-b-white);
+  --border-subtle: rgba(235, 236, 255, 0.15);
+
+  --navbar-bg-scrolled: rgba(18, 18, 38, 0.72);
+  --navbar-border-scrolled: rgba(235, 236, 255, 0.1);
+}
+
+/* ─── Tokens shadcn/ui mapeados a la marca Sira ───
+   La mayoría apunta a las vars semánticas de arriba, así heredan el flip
+   claro/oscuro sin un bloque .dark aparte. Los de marca (primary/accent/
+   destructive) son constantes en ambos temas. Un componente shadcn recién
+   añadido adopta automáticamente la identidad visual de Sira. */
+:root {
+  --background: var(--surface-primary);
+  --foreground: var(--text-primary);
+  --card: var(--surface-secondary);
+  --card-foreground: var(--text-on-light);
+  --popover: var(--surface-secondary);
+  --popover-foreground: var(--text-on-light);
+  --primary: var(--color-blue-screen);
+  --primary-foreground: var(--color-white-pure);
+  --secondary: var(--color-b-white);
+  --secondary-foreground: var(--color-blue-screen);
+  --muted: var(--color-b-white);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--color-g-nova);
+  --accent-foreground: var(--color-deep);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--color-g-nova);
+  --radius: 0.625rem;
+}
+
+/* Alpha variants de colores de marca */
+:root {
+  --color-blue-screen-subtle: rgba(0, 81, 233, 0.08);
+  --color-blue-screen-muted: rgba(0, 81, 233, 0.12);
+  --color-blue-screen-moderate: rgba(0, 81, 233, 0.3);
+
+  --color-g-nova-subtle: rgba(102, 206, 246, 0.12);
+
+  --color-b-white-moderate: rgba(235, 236, 255, 0.35);
+
+  --color-white-subtle: rgba(255, 255, 255, 0.08);
+  --color-white-muted: rgba(255, 255, 255, 0.1);
+}
+
+/* Escala de opacidad semántica */
+:root {
+  --opacity-divider: 0.2;
+  --opacity-dim: 0.35;
+  --opacity-disabled: 0.4;
+  --opacity-muted: 0.5;
+  --opacity-deemphasized: 0.55;
+  --opacity-subtle: 0.6;
+  --opacity-moderate: 0.7;
+  --opacity-emphasized: 0.75;
+  --opacity-secondary: 0.8;
+  --opacity-strong: 0.85;
+}
+
+/* Espaciado base */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+}
+
+/* Espaciado semántico + layout + geometría de componentes */
+:root {
+  --section-padding-y: var(--space-7);
+  --section-padding-y-mobile: var(--space-6);
+  --section-gap: var(--space-8);
+  --content-gap: var(--space-5);
+  --content-gap-mobile: var(--space-4);
+  --element-gap: var(--space-4);
+  --element-gap-sm: var(--space-3);
+  --navbar-padding-y: var(--space-5);
+  --navbar-padding-y-mobile: var(--space-4);
+  --divider-thickness: 2px;
+  --container-max-width: 1200px;
+  --container-padding-x: var(--space-7);
+  --container-padding-x-mobile: var(--space-5);
+
+  /* Switch geometry — derivada 100% de tokens (knob y travel calculados) */
+  --switch-width: 52px;
+  --switch-height: 32px;
+  --switch-border: var(--border-width-thin);
+  --switch-gap: 3px;
+  --switch-knob-size: calc(var(--switch-height) - 2 * var(--switch-border) - 2 * var(--switch-gap));
+  --switch-travel: calc(var(--switch-width) - var(--switch-height));
+
+  /* Navbar geometry (alias al sistema Switch) */
+  --navbar-toggle-width: var(--switch-width);
+  --navbar-toggle-height: var(--switch-height);
+  --navbar-toggle-border: var(--switch-border);
+  --navbar-toggle-gap: var(--switch-gap);
+  --navbar-touch-target: 44px;
+  --navbar-icon-size: 28px;
+
+  /* Icon sizes */
+  --icon-xs: 16px;
+  --icon-sm: 24px;
+  --icon-md: 32px;
+  --icon-lg: 40px;
+  --icon-xl: 48px;
+
+  --action-btn-size: 36px;
+
+  /* Content max-widths */
+  --content-max-description: 520px;
+  --content-max-narrow: 560px;
+  --content-max-text: 620px;
+  --content-max-wide: 680px;
+
+  /* Component layout */
+  --footer-brand-max: 220px;
+  --footer-brand-col: 280px;
+  --modulelist-num-col: 64px;
+  --modulelist-num-col-mobile: 48px;
+}
+
+/* Tipografía — tokens semánticos para los módulos CSS conservados
+   (valores literales; espejo de los estilos @theme de la Zona A) */
+:root {
+  --font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --display-1: clamp(56px, 8vw, 96px);
+  --display-1-lh: 0.92;
+  --display-1-weight: 700;
+  --display-1-tracking: -0.04em;
+
+  --display-2: clamp(48px, 6vw, 72px);
+  --display-2-lh: 0.94;
+  --display-2-weight: 700;
+  --display-2-tracking: -0.05em;
+
+  --heading-1: clamp(40px, 5vw, 56px);
+  --heading-1-lh: 1;
+  --heading-1-weight: 700;
+  --heading-1-tracking: -0.03em;
+
+  --heading-2: clamp(32px, 4vw, 40px);
+  --heading-2-lh: 1.1;
+  --heading-2-weight: 600;
+  --heading-2-tracking: -0.02em;
+
+  --heading-3: clamp(24px, 3vw, 28px);
+  --heading-3-lh: 1.21;
+  --heading-3-weight: 600;
+  --heading-3-tracking: -0.01em;
+
+  --body-large: 20px;
+  --body-large-lh: 1.5;
+  --body-large-weight: 400;
+
+  --body: 16px;
+  --body-lh: 1.5;
+  --body-weight: 400;
+
+  --caption: 13px;
+  --caption-lh: 1.38;
+  --caption-weight: 400;
+
+  --label: 13px;
+  --label-lh: 1.38;
+  --label-weight: 400;
+
+  --letter-spacing-tight: -0.04em;
+  --letter-spacing-snug: -0.03em;
+  --letter-spacing-normal: -0.01em;
+  --letter-spacing-wide: 0.02em;
+  --letter-spacing-wider: 0.05em;
+}
+
+/* Motion, sombras y botones (easings/radios ya están en @theme) */
+:root {
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-smooth: 450ms;
+
+  --transition-hover:
+    background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out), opacity var(--duration-base) var(--ease-out);
+
+  --transition-theme:
+    background-color var(--duration-slow) var(--ease-in-out),
+    color var(--duration-slow) var(--ease-in-out),
+    border-color var(--duration-slow) var(--ease-in-out);
+
+  --navbar-backdrop-blur: 16px;
+  --navbar-transition:
+    background-color var(--duration-slow) var(--ease-in-out),
+    backdrop-filter var(--duration-slow) var(--ease-in-out),
+    box-shadow var(--duration-slow) var(--ease-in-out),
+    border-color var(--duration-slow) var(--ease-in-out);
+
+  --btn-radius: var(--radius-full);
+  --btn-padding-y: 12px;
+  --btn-padding-x: 28px;
+  --btn-padding-y-sm: 8px;
+  --btn-padding-x-sm: 20px;
+  --btn-padding-y-lg: 16px;
+  --btn-padding-x-lg: 36px;
+}
+
+/* Z-index, breakpoints (referencia) y misceláneos */
+:root {
+  --z-base: 0;
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-nav: 1000;
+  --z-overlay: 1500;
+  --z-modal: 2000;
+
+  /* Las custom properties no pueden usarse dentro de @media (limitación del
+     spec). Sirven como referencia canónica: usar estos px exactos en las
+     media queries de todos los módulos para mantener breakpoints consistentes. */
+  --bp-xs: 480px;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+
+  --touch-target: 44px;
+  --border-width-thin: 1.5px;
+  --offset-xs: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ZONA D — Estilos base
+   ═══════════════════════════════════════════════════════════════ */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+
+  html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+
+  /* Compensar altura del navbar sticky en scroll a anclas */
+  [id] {
+    scroll-margin-top: 80px;
+  }
+
+  @media (min-width: 768px) {
+    [id] {
+      scroll-margin-top: 100px;
+    }
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: var(--transition-theme);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Elimina el outline por defecto en focus por mouse/touch; mantiene
+     un outline accesible en focus-visible (navegación por teclado). */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-g-nova);
+    color: var(--color-deep);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Skip link de accesibilidad */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-4);
+    z-index: var(--z-overlay);
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--body);
+    border: var(--border-width-thin) solid var(--border-default);
+    transition: top var(--duration-fast) var(--ease-out);
+  }
+
+  .skip-link:focus {
+    top: var(--space-4);
+  }
 }

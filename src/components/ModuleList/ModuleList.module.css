@@ -1,0 +1,227 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: var(--divider-thickness) solid var(--border-default);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: var(--modulelist-num-col) 1fr;
+  column-gap: var(--element-gap);
+  align-items: start;
+  padding: var(--space-5) 0;
+  border-bottom: var(--divider-thickness) solid var(--border-default);
+}
+
+.num {
+  font-size: var(--body-large);
+  font-weight: var(--body-large-weight);
+  line-height: var(--body-large-lh);
+  color: var(--text-secondary);
+  opacity: var(--opacity-subtle);
+  text-align: center;
+  padding-top: 2px;
+}
+
+/* ─── Right column: header + expandable content ─── */
+.moduleBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.moduleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--element-gap);
+}
+
+.name {
+  font-size: var(--body-large);
+  font-weight: var(--body-large-weight);
+  line-height: var(--body-large-lh);
+  color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ─── Toggle Button ─── */
+.plusBtn {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--action-btn-size);
+  height: var(--action-btn-size);
+  border-radius: 50%;
+  border: var(--border-width-thin) solid var(--text-secondary);
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.plusBtn:hover {
+  background: var(--text-secondary);
+  color: var(--surface-primary);
+}
+
+.plusBtn:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+/* Icons: more and less crossfade */
+.iconWrapper,
+.iconWrapperLess {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  transition:
+    opacity var(--duration-smooth) var(--ease-smooth),
+    transform var(--duration-smooth) var(--ease-smooth);
+}
+
+.iconWrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.iconWrapperLess {
+  opacity: 0;
+  transform: translateY(2px);
+}
+
+.plusBtnOpen .iconWrapper {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+
+.plusBtnOpen .iconWrapperLess {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.plusBtnOpen {
+  background: var(--text-secondary);
+  color: var(--surface-primary);
+}
+
+/* ─── Expandable Content ───
+   Fluye naturalmente dentro de .moduleBody (flex column).
+   No es una celda de grid separada.
+
+   Estado cerrado:
+   - grid-template-rows: 0fr  → altura exactamente 0
+   - visibility: hidden        → no visible, no interactivo
+   - padding-top: 0            → sin espacio residual
+
+   Estado abierto:
+   - grid-template-rows: 1fr  → altura automática según contenido
+   - visibility: visible       → visible e interactivo
+   - padding-top: var(--space-4) → espacio entre header y descripción
+
+   La transición de visibility está coordinada:
+   - Al ABRIR: visibility cambia inmediatamente (delay 0s), luego crece
+   - Al CERRAR: primero encoge, luego visibility cambia al final
+*/
+.itemContent {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--duration-smooth) var(--ease-smooth),
+    visibility 0s linear var(--duration-smooth);
+}
+
+.itemContentOpen {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--duration-smooth) var(--ease-smooth),
+    visibility 0s linear 0s;
+}
+
+.itemContentInner {
+  overflow: hidden;
+  padding-top: 0;
+  transition: padding-top var(--duration-smooth) var(--ease-smooth);
+}
+
+.itemContentOpen .itemContentInner {
+  padding-top: var(--space-4);
+}
+
+.description {
+  font-size: var(--body);
+  font-weight: var(--body-weight);
+  line-height: var(--body-lh);
+  color: var(--text-secondary);
+  opacity: var(--opacity-strong);
+  letter-spacing: var(--letter-spacing-normal);
+  max-width: var(--content-max-description);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .item {
+    grid-template-columns: var(--modulelist-num-col-mobile) 1fr;
+    column-gap: var(--element-gap-sm);
+    padding: var(--space-4) 0;
+  }
+
+  .num {
+    font-size: var(--body);
+    line-height: var(--body-lh);
+    padding-top: 1px;
+  }
+
+  .name {
+    font-size: var(--body);
+    line-height: var(--body-lh);
+  }
+
+  .plusBtn {
+    width: var(--icon-md);
+    height: var(--icon-md);
+  }
+
+  .iconPlus,
+  .iconUp {
+    font-size: var(--body);
+  }
+
+  .itemContentOpen .itemContentInner {
+    padding-top: var(--space-3);
+  }
+
+  .description {
+    font-size: var(--caption);
+    line-height: 1.45;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .itemContent,
+  .itemContentInner {
+    transition: none;
+  }
+
+  .itemContentOpen {
+    visibility: visible;
+  }
+
+  .iconWrapper,
+  .iconWrapperLess {
+    transition: none;
+  }
+}
