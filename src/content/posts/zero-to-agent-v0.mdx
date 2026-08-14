@@ -1,0 +1,21 @@
+At Vercel's Zero to Agent sessions I set myself one constraint: ship a working, type-safe AI agent without hand-writing the interface. The experiment was v0 as the prototyping environment, the Vercel AI SDK as the agent runtime, and MCP for tools. Here's what held up and what didn't.
+
+## The workflow
+
+The loop that worked looked like this:
+
+1. **Describe the interface to v0, not the implementation.** "A panel showing the agent's tool calls as they stream, with a retry affordance per step" gets a better result than pasting component code. v0 is strongest when you treat it as a design partner with opinions about React, not as autocomplete.
+2. **Own the agent loop in code.** The AI SDK's tool-calling primitives stay in hand-written TypeScript — typed tool schemas, explicit control over what the model may call. Generated UI, hand-written behavior. That boundary is the whole trick.
+3. **MCP for the outside world.** Wiring tools through Model Context Protocol servers meant the agent's capabilities were declared, inspectable and swappable — closer to configuration than code.
+
+## What surprised me
+
+The generated TypeScript was more readable than I expected — enough that reviewing it felt like reviewing a colleague's PR rather than deciphering output. Accessibility held up too, but only when I asked for it explicitly. The lesson generalizes: generative tools meet the bar you set in the prompt, and silence is a decision.
+
+What didn't hold up: state that lives across many components. Past a certain complexity, v0 iterations started fighting each other, and moving the state design back into my editor was faster than prompting around it.
+
+## Why this changed my default
+
+Before, prototype quality and prototype speed were a trade-off. Now my MVP loop is: generate the interface, write the logic, and spend the recovered hours on the part that differentiates the product — for me, that's usually the domain logic where regulation meets code.
+
+The workflow from that weekend is now how I start every new build, including parts of this site.

@@ -1,0 +1,164 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import blogVisual from "@/assets/blog/legal-engineering-log.png";
+import Container from "@/components/Container/Container";
+import Section from "@/components/Section/Section";
+import { localePath, type Locale } from "@/data/locale";
+import { getPosts, type PostMeta } from "@/data/posts";
+import { getUi } from "@/data/ui";
+import styles from "./BlogIndex.module.css";
+
+interface BlogIndexProps {
+  locale: Locale;
+}
+
+function formatDate(iso: string, locale: Locale): string {
+  return new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${iso}T00:00:00Z`));
+}
+
+function postHref(locale: Locale, post: PostMeta): string {
+  return localePath(locale, `/blog/${post.slug}`);
+}
+
+export default function BlogIndex({ locale }: BlogIndexProps) {
+  const ui = getUi(locale).blog;
+  const posts = getPosts();
+  const featuredPost = posts.find((post) => post.lang === locale) ?? posts[0];
+
+  if (!featuredPost) return null;
+
+  const archivePosts = posts.filter((post) => post.slug !== featuredPost.slug);
+
+  return (
+    <>
+      <Section variant="white" paddingY="none" as="div" className={styles.heroSection}>
+        <Container>
+          <header className={styles.hero}>
+            <h1 className={styles.title}>{ui.heading}</h1>
+
+            <div className={styles.heroFooter}>
+              <p className={styles.entryCount}>
+                <span>{String(posts.length).padStart(2, "0")}</span>
+                {ui.entries}
+              </p>
+            </div>
+          </header>
+        </Container>
+      </Section>
+
+      <Section
+        variant="blue"
+        paddingY="lg"
+        as="section"
+        className="dark:bg-[var(--surface-tertiary)]"
+      >
+        <Container>
+          <div className={styles.sectionHeadingOnBlue}>
+            <h2>{ui.featured}</h2>
+            <span aria-hidden="true" />
+          </div>
+
+          <article
+            lang={featuredPost.lang}
+            className={styles.featuredArticle}
+            aria-labelledby={`featured-title-${featuredPost.slug}`}
+          >
+            <div className={styles.featuredImage}>
+              <Image
+                src={blogVisual}
+                alt={ui.featuredImageAlt}
+                sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1200px) 58vw, 672px"
+                preload
+              />
+            </div>
+
+            <div className={styles.featuredBody}>
+              <p className={styles.featuredMeta}>
+                <time dateTime={featuredPost.date}>{formatDate(featuredPost.date, locale)}</time>
+                <span aria-hidden="true">·</span>
+                <span>
+                  {featuredPost.readingMinutes} {ui.readingTime}
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>{ui.langBadge[featuredPost.lang]}</span>
+              </p>
+
+              <h3 id={`featured-title-${featuredPost.slug}`} className={styles.featuredTitle}>
+                <Link href={postHref(locale, featuredPost)}>
+                  {featuredPost.title}
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              </h3>
+
+              <p className={styles.featuredDescription}>{featuredPost.description}</p>
+
+              {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
+              <ul role="list" className={styles.featuredTags} aria-label={ui.tagsLabel}>
+                {featuredPost.tags.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        </Container>
+      </Section>
+
+      <Section variant="white" paddingY="lg" as="section">
+        <Container>
+          <div className={styles.archiveHeading}>
+            <h2>{ui.archive}</h2>
+            <span>{String(archivePosts.length).padStart(2, "0")}</span>
+          </div>
+
+          {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
+          <ol role="list" className={styles.archiveList}>
+            {archivePosts.map((post, index) => (
+              <li key={post.slug} className={styles.archiveItem}>
+                <article
+                  lang={post.lang}
+                  className={styles.archiveArticle}
+                  aria-labelledby={`post-title-${post.slug}`}
+                >
+                  <span className={styles.archiveIndex} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <p className={styles.archiveMeta}>
+                    <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
+                    <span>
+                      {post.readingMinutes} {ui.readingTime}
+                    </span>
+                    <span>{ui.langBadge[post.lang]}</span>
+                  </p>
+
+                  <div className={styles.archiveCopy}>
+                    <h3 id={`post-title-${post.slug}`}>
+                      <Link href={postHref(locale, post)}>
+                        <span>{post.title}</span>
+                        <ArrowUpRight aria-hidden="true" />
+                      </Link>
+                    </h3>
+                    <p>{post.description}</p>
+                  </div>
+
+                  {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
+                  <ul role="list" className={styles.archiveTags} aria-label={ui.tagsLabel}>
+                    {post.tags.map((tag) => (
+                      <li key={tag}>{tag}</li>
+                    ))}
+                  </ul>
+                </article>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </Section>
+    </>
+  );
+}

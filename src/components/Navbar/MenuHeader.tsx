@@ -4,21 +4,23 @@ import styles from "./FullscreenMenu.module.css";
 
 interface MenuHeaderProps {
   onClose: () => void;
+  navigationLabel: string;
+  closeLabel: string;
 }
 
 /** Cabecera del menú fullscreen: etiqueta y botón de cierre, con la misma
  *  estructura que el navbar principal. */
-export default function MenuHeader({ onClose }: MenuHeaderProps) {
+export default function MenuHeader({ onClose, navigationLabel, closeLabel }: MenuHeaderProps) {
   return (
     <div className={styles.headerBar}>
       <Container>
         <div className={styles.headerInner}>
-          <span className={styles.navLabel}>Navigation</span>
+          <span className={styles.navLabel}>{navigationLabel}</span>
           <button
             type="button"
             className={styles.closeBtn}
             onClick={onClose}
-            aria-label="Close menu"
+            aria-label={closeLabel}
           >
             <span className={styles.closeIcon} aria-hidden="true">
               <CloseIcon />

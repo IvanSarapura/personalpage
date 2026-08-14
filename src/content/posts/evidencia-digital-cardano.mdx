@@ -1,0 +1,23 @@
+Con mi equipo ganamos el Legalthon de Gobernanza Descentralizada (UBA, comunidad Cardano) con un paper que propone rediseñar la cadena de custodia de la evidencia digital como un protocolo sobre Cardano. Esta es la versión corta de por qué el problema importa y qué aprendí escribiéndolo.
+
+## La cadena de custodia es un protocolo... en papel
+
+Todo proceso judicial depende de poder responder una pregunta simple: ¿esta prueba es la misma que se recolectó, sin alteraciones? La respuesta hoy es un expediente de actas, firmas y sellos — un protocolo, pero implementado en papel y personas. Cada eslabón humano es un punto de falla, y las nulidades por defectos de custodia lo demuestran.
+
+Lo que propusimos no es "poner la evidencia en la blockchain" (error común: la evidencia sensible no debe ser pública). Es registrar **las interacciones** con la evidencia:
+
+- Cada acceso, traslado o pericia genera una firma criptográfica anclada en Cardano.
+- El contenido nunca sale del ámbito judicial; lo que se publica es la huella (hash) y los metadatos de custodia.
+- El sellado de tiempo deja de depender de un acta y pasa a ser verificable por cualquiera.
+
+## Traducir requisitos procesales a reglas de protocolo
+
+La parte más difícil del paper no fue la técnica, fue la traducción. "Firma del funcionario autorizado" suena directo hasta que hay que decidir: ¿autorizado según qué registro? ¿quién rota las claves? ¿qué pasa si un juzgado pierde las suyas? Cada requisito procesal esconde decisiones de diseño de sistemas, y viceversa: cada decisión técnica tiene consecuencias procesales.
+
+Por eso el paper incluye lineamientos para un anteproyecto de ley: sin reforma normativa, el mejor protocolo del mundo es solo una demo. La tecnología y la norma tienen que moverse juntas — esa es, literalmente, la tesis de todo lo que construyo.
+
+## Del paper a la práctica
+
+El siguiente paso natural es un piloto con expedientes de bajo riesgo, donde el registro on-chain corra en paralelo al proceso tradicional sin reemplazarlo. Es el patrón correcto para modernización judicial: primero demostrar equivalencia, después proponer sustitución.
+
+Si trabajás en digitalización de justicia, evidencia digital o gobernanza de DLT, escribime — el paper y sus lineamientos están pensados para discutirse.

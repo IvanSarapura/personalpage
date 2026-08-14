@@ -3,9 +3,15 @@
 import { useState, useCallback } from "react";
 import styles from "./ModuleList.module.css";
 import { ToggleIcon } from "@/components/Icons/ToggleIcon";
-import { MODULES } from "@/data/modules";
+import type { Module } from "@/data/modules";
 
-export default function ModuleList() {
+interface ModuleListProps {
+  modules: Module[];
+  expandLabel: string;
+  collapseLabel: string;
+}
+
+export default function ModuleList({ modules, expandLabel, collapseLabel }: ModuleListProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = useCallback((index: number) => {
@@ -14,7 +20,7 @@ export default function ModuleList() {
 
   return (
     <ul className={styles.list}>
-      {MODULES.map((mod, index) => {
+      {modules.map((mod, index) => {
         const isOpen = openIndex === index;
 
         return (
@@ -29,7 +35,9 @@ export default function ModuleList() {
                 <button
                   type="button"
                   className={`${styles.plusBtn} ${isOpen ? styles.plusBtnOpen : ""}`}
-                  aria-label={isOpen ? `Collapse ${mod.name}` : `Expand ${mod.name}`}
+                  aria-label={
+                    isOpen ? `${collapseLabel} ${mod.name}` : `${expandLabel} ${mod.name}`
+                  }
                   aria-expanded={isOpen}
                   aria-controls={`module-content-${mod.num}`}
                   onClick={() => handleToggle(index)}

@@ -5,13 +5,21 @@ import { useTheme } from "@/providers/useTheme";
 import { MenuIcon, CloseIcon } from "@/components/Icons/MenuIcons";
 import { Switch } from "@/components/Switch";
 import FullscreenMenu from "./FullscreenMenu";
+import LocaleSwitcher from "./LocaleSwitcher";
+import { getUi } from "@/data/ui";
+import type { Locale } from "@/data/locale";
 
 const menuBtnClass =
   "inline-flex h-[var(--navbar-touch-target)] w-[var(--navbar-touch-target)] cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[var(--text-on-light)] [transition:opacity_var(--duration-base)_var(--ease-out)] hover:opacity-[var(--opacity-moderate)]";
 
-export default function NavbarControls() {
+interface NavbarControlsProps {
+  locale: Locale;
+}
+
+export default function NavbarControls({ locale }: NavbarControlsProps) {
   const { isDark, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ui = getUi(locale);
 
   // El React Compiler memoiza estas funciones; useCallback sería redundante.
   const openMenu = () => setIsMenuOpen(true);
@@ -19,11 +27,13 @@ export default function NavbarControls() {
 
   /* El label "Dark/Light" describe la acción (a dónde vas si pulsas),
      no el estado actual — es un CTA, coherente con el aria-label. */
-  const switchLabel = isDark ? "Switch to light mode" : "Switch to dark mode";
-  const labelText = isDark ? "Light" : "Dark";
+  const switchLabel = isDark ? ui.navbar.switchToLight : ui.navbar.switchToDark;
+  const labelText = isDark ? ui.navbar.lightLabel : ui.navbar.darkLabel;
 
   return (
     <div className="flex items-center gap-[var(--element-gap)]">
+      <LocaleSwitcher locale={locale} />
+
       {/* suppressHydrationWarning: `isDark` proviene de useSyncExternalStore;
           en SSR siempre es "light", pero el script anti-FOUC de layout.tsx
           ya aplicó la clase `dark` al <html> antes de hidratar. La diferencia
@@ -39,7 +49,7 @@ export default function NavbarControls() {
         type="button"
         className={`${menuBtnClass}${isMenuOpen ? " opacity-[var(--opacity-moderate)]" : ""}`}
         onClick={isMenuOpen ? closeMenu : openMenu}
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        aria-label={isMenuOpen ? ui.navbar.closeMenu : ui.navbar.openMenu}
         aria-expanded={isMenuOpen}
       >
         <span
@@ -50,7 +60,7 @@ export default function NavbarControls() {
         </span>
       </button>
 
-      <FullscreenMenu isOpen={isMenuOpen} onClose={closeMenu} />
+      <FullscreenMenu isOpen={isMenuOpen} onClose={closeMenu} locale={locale} />
     </div>
   );
 }

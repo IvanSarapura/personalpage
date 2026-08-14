@@ -1,9 +1,14 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import createMDX from "@next/mdx";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
+
+// Posts del blog en src/content/posts/*.mdx, importados dinámicamente
+// desde app/[lang]/blog/[slug] — ver la guía MDX del Next.js del repo.
+const withMDX = createMDX({});
 
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
@@ -27,14 +32,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  headers() {
-    return Promise.resolve([
+  async headers() {
+    return [
       {
         source: "/(.*)",
         headers: securityHeaders,
       },
-    ]);
+    ];
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzer(withMDX(nextConfig));

@@ -1,0 +1,21 @@
+Proven — the dispute-resolution protocol my team started at the Aleph & GenLayer Hackathon — rests on an unusual primitive: smart contracts that ask LLMs to evaluate evidence. Here's what building on non-deterministic oracles actually feels like.
+
+## Determinism was the whole point. Now what?
+
+Classic smart contracts are valuable _because_ they're deterministic: same input, same output, every node agrees. Subjective-logic contracts on GenLayer break that on purpose — validators run LLM inference over the evidence each party submits, and the network reaches consensus over judgments, not hashes.
+
+That trade unlocks a category of problems blockchains couldn't touch (was this delivery late? is this photo consistent with the claim?), but it imports every operational reality of LLMs into your protocol design:
+
+- **Latency is consensus-bound.** Your slowest validator's inference time is your floor. UI patterns that work for chat (streaming, optimistic rendering) don't apply when the answer _is_ a verdict.
+- **Cost scales with evidence size.** Every page of submitted evidence is tokens each validator pays to process. We learned to treat evidence like a legal brief: structured, bounded, with the burden on the submitter to be concise.
+- **Disagreement is a feature.** Validators won't always agree — that's the subjective part. The protocol has to define what happens at the margins, exactly like appellate review exists because trial courts get things wrong.
+
+## Where the law background pays off
+
+Designing the evidence flow, I kept reaching for procedural law concepts: admissibility (what evidence the contract accepts), burden of proof (who must submit what), and standard of review (how much validators can weigh context). These aren't metaphors — they're requirements. A dispute protocol without them produces verdicts nobody trusts.
+
+The interesting discovery of the hackathon was that writing the prompt for a validator looks a lot like drafting jury instructions: you're specifying, in plain language, how a reasoner should weigh evidence within bounds.
+
+## What's next
+
+We're still building Proven past the hackathon — the current focus is making verdicts reproducible enough to audit without making them trivially gameable. If you're working on subjective consensus or computational dispute resolution, get in touch.

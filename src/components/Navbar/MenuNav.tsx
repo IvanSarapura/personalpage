@@ -9,15 +9,16 @@ interface MenuNavProps {
   isOpen: boolean;
   onNavigate: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
   onClose: () => void;
+  ariaLabel: string;
 }
 
 /** Lista de navegación del menú fullscreen. Los ítems con `href` son enlaces; los
  *  que no, botones deshabilitados. El stagger anima la entrada/salida en cascada. */
-export default function MenuNav({ items, isOpen, onNavigate, onClose }: MenuNavProps) {
+export default function MenuNav({ items, isOpen, onNavigate, onClose, ariaLabel }: MenuNavProps) {
   return (
     <div className={styles.body}>
       <Container>
-        <nav className={styles.nav} aria-label="Fullscreen navigation">
+        <nav className={styles.nav} aria-label={ariaLabel}>
           <ul className={styles.list}>
             {items.map((item, i) => {
               const { href, label, index } = item;

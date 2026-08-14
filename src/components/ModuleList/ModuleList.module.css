@@ -7,7 +7,7 @@
 
 .item {
   display: grid;
-  grid-template-columns: var(--modulelist-num-col) 1fr;
+  grid-template-columns: var(--modulelist-num-col) minmax(0, 1fr);
   column-gap: var(--element-gap);
   align-items: start;
   padding: var(--space-5) 0;
@@ -29,6 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  min-inline-size: 0;
 }
 
 .moduleHeader {
@@ -36,6 +37,7 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--element-gap);
+  min-inline-size: 0;
 }
 
 .name {
@@ -44,6 +46,7 @@
   line-height: var(--body-large-lh);
   color: var(--text-primary);
   letter-spacing: var(--letter-spacing-normal);
+  overflow-wrap: anywhere;
 }
 
 /* ─── Toggle Button ─── */
@@ -168,12 +171,13 @@
   opacity: var(--opacity-strong);
   letter-spacing: var(--letter-spacing-normal);
   max-width: var(--content-max-description);
+  overflow-wrap: anywhere;
 }
 
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .item {
-    grid-template-columns: var(--modulelist-num-col-mobile) 1fr;
+    grid-template-columns: var(--modulelist-num-col-mobile) minmax(0, 1fr);
     column-gap: var(--element-gap-sm);
     padding: var(--space-4) 0;
   }

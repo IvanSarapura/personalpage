@@ -2,6 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
+  overflow-x: clip;
   background: var(--surface-primary);
   display: flex;
   flex-direction: column;
@@ -153,9 +154,11 @@
   opacity: var(--opacity-strong);
 }
 
-.link:hover:not(:disabled) {
-  opacity: 1;
-  transform: translateX(8px);
+@media (hover: hover) and (pointer: fine) {
+  .link:hover:not(:disabled) {
+    opacity: 1;
+    transform: translateX(8px);
+  }
 }
 
 .link:disabled {

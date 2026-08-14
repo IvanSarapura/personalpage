@@ -3,7 +3,9 @@
 import { useEffect, useCallback, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { useLockBodyScroll, useFocusTrap, useIsClient } from "@/hooks";
-import { MENU_ITEMS } from "@/data/menuItems";
+import { getMenuItems } from "@/data/menuItems";
+import { getUi } from "@/data/ui";
+import type { Locale } from "@/data/locale";
 import MenuHeader from "./MenuHeader";
 import MenuNav from "./MenuNav";
 import MenuFooter from "./MenuFooter";
@@ -12,6 +14,7 @@ import styles from "./FullscreenMenu.module.css";
 interface FullscreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  locale: Locale;
 }
 
 const MENU_CLOSE_DELAY_MS = 100;
@@ -32,36 +35,48 @@ function forceReflow(element: HTMLElement): void {
  * Orquesta los hooks (lock de scroll, focus trap, cierre por Escape/backdrop) y
  * compone la cabecera, la navegación y el pie.
  */
-export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
+export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMenuProps) {
   const isClient = useIsClient();
+  const ui = getUi(locale);
+  const items = getMenuItems(locale);
 
   useLockBodyScroll(isOpen);
   const containerRef = useFocusTrap<HTMLDivElement>(isOpen);
 
   /*
-    Smooth scroll a la sección objetivo y cerrar el menú.
-
-    Estrategia:
-    1. Cerrar el menú primero.
-    2. Esperar a que la transición de cierre del overlay comience
-       y el body scroll se restaure completamente (~100ms).
-    3. Calcular el offset manualmente considerando la altura del navbar
-       para evitar que el target quede detrás del sticky header.
-    4. Usar window.scrollTo en lugar de scrollIntoView para control total.
-
-    Esto previene la condición de carrera entre useLockBodyScroll
-    y scrollIntoView que causaba el bug del navbar.
+    Los ítems del menú mezclan rutas ("/about") y anclas dentro de una página
+    ("/#focus", "/#projects"). Solo interceptamos las anclas que apuntan a la página ACTUAL:
+    ahí hacemos smooth scroll manual (compensando la altura del navbar sticky y
+    la condición de carrera con useLockBodyScroll). Para rutas y anclas de otra
+    página dejamos que el navegador haga la navegación por defecto.
   */
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      const hashIndex = href.indexOf("#");
+      if (hashIndex === -1) {
+        // Ruta sin ancla: navegación por defecto; solo cerramos el menú.
+        onClose();
+        return;
+      }
+
+      const normalize = (path: string) => path.replace(/\/+$/, "") || "/";
+      const targetPath = normalize(href.slice(0, hashIndex));
+      const currentPath = normalize(window.location.pathname);
+      if (targetPath !== currentPath) {
+        // Ancla de otra página: navegación por defecto.
+        onClose();
+        return;
+      }
+
       e.preventDefault();
       onClose();
 
+      const hash = href.slice(hashIndex);
       window.setTimeout(() => {
-        const target = document.querySelector(href);
+        const target = document.querySelector(hash);
         if (!target) return;
 
-        const navbar = document.querySelector("nav[aria-label='Main navigation']");
+        const navbar = document.querySelector(`nav[aria-label='${ui.navbar.mainNavAriaLabel}']`);
         const navbarHeight = navbar?.getBoundingClientRect().height ?? 0;
         const targetRect = target.getBoundingClientRect();
         const targetPosition = window.scrollY + targetRect.top - navbarHeight;
@@ -69,7 +84,7 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
         window.scrollTo({ top: Math.max(0, targetPosition), behavior: "smooth" });
       }, MENU_CLOSE_DELAY_MS);
     },
-    [onClose]
+    [onClose, ui.navbar.mainNavAriaLabel]
   );
 
   // Forzar un reflow antes de la transición de apertura (ver forceReflow).
@@ -116,13 +131,23 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
       className={overlayClass}
       role="dialog"
       aria-modal="true"
-      aria-label="Main navigation menu"
+      aria-label={ui.navbar.menuDialogLabel}
       onClick={handleBackdropClick}
     >
       <div className={styles.panel}>
-        <MenuHeader onClose={onClose} />
-        <MenuNav items={MENU_ITEMS} isOpen={isOpen} onNavigate={handleNavClick} onClose={onClose} />
-        <MenuFooter />
+        <MenuHeader
+          onClose={onClose}
+          navigationLabel={ui.navbar.navigationLabel}
+          closeLabel={ui.navbar.closeMenu}
+        />
+        <MenuNav
+          items={items}
+          isOpen={isOpen}
+          onNavigate={handleNavClick}
+          onClose={onClose}
+          ariaLabel={ui.navbar.menuNavAriaLabel}
+        />
+        <MenuFooter locale={locale} />
       </div>
     </div>,
     document.body

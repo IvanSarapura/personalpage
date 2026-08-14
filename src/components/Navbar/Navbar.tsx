@@ -2,12 +2,19 @@
 
 import Link from "next/link";
 import Container from "@/components/Container/Container";
-import { SiraLogo } from "@/components/Icons/SiraLogo";
+import { Logo } from "@/components/Icons/Logo";
 import NavbarControls from "./NavbarControls";
 import { useScrolled } from "@/hooks";
+import { localePath, type Locale } from "@/data/locale";
+import { getUi } from "@/data/ui";
 
-export default function Navbar() {
+interface NavbarProps {
+  locale: Locale;
+}
+
+export default function Navbar({ locale }: NavbarProps) {
   const scrolled = useScrolled(8);
+  const ui = getUi(locale);
 
   // Fondo en un solo origen condicional: en reposo surface-secondary; al hacer
   // scroll, glassmorphism (bg translúcido + blur + hairline). Evita conflictos
@@ -18,14 +25,18 @@ export default function Navbar() {
 
   return (
     <nav
-      aria-label="Main navigation"
+      aria-label={ui.navbar.mainNavAriaLabel}
       className={`sticky top-0 z-[var(--z-nav)] w-full text-[var(--text-on-light)] [transition:var(--navbar-transition)] ${surfaceClass}`}
     >
       <Container className="flex items-center justify-between py-[var(--navbar-padding-y)] max-[768px]:py-[var(--navbar-padding-y-mobile)]">
-        <Link href="/" className="flex items-center" aria-label="Sira home">
-          <SiraLogo className="h-auto w-[48px] text-[var(--text-on-light)] max-[768px]:w-[40px]" />
+        <Link
+          href={localePath(locale, "/")}
+          className="flex items-center"
+          aria-label={ui.navbar.homeAriaLabel}
+        >
+          <Logo className="h-auto w-[48px] text-[var(--text-on-light)] max-[768px]:w-[40px]" />
         </Link>
-        <NavbarControls />
+        <NavbarControls locale={locale} />
       </Container>
       <Container>
         <div

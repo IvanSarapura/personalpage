@@ -8,38 +8,46 @@ import {
   BellIcon,
   ChartBarIcon,
 } from "@/components/Icons/SignalIcons";
-import { SIGNALS, type SignalId } from "@/data/signals";
+import { getSignals, type SignalId } from "@/data/signals";
+import { getUi } from "@/data/ui";
+import type { Locale } from "@/data/locale";
 import type { ReactElement } from "react";
 
 const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
-  "guest-reviews": <StarIcon />,
-  "social-sentiment": <ChatIcon />,
-  "direct-feedback": <EnvelopeIcon />,
-  "location-signals": <MapPinIcon />,
-  "incident-reports": <BellIcon />,
-  "competitor-intel": <ChartBarIcon />,
+  "web3-contracts": <MapPinIcon />,
+  "ai-agents": <ChatIcon />,
+  regtech: <BellIcon />,
+  "legal-engineering": <StarIcon />,
+  "typesafe-frontend": <EnvelopeIcon />,
+  "product-venture": <ChartBarIcon />,
 };
 
 const cardClass =
   "flex flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] bg-[var(--color-white-pure)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--color-blue-screen-moderate)] dark:border-[color:var(--border-subtle)] dark:bg-[var(--surface-primary)] dark:hover:border-[color:var(--color-b-white-moderate)]";
 
-export default function SignalsSection() {
+interface SignalsSectionProps {
+  locale: Locale;
+}
+
+export default function SignalsSection({ locale }: SignalsSectionProps) {
+  const ui = getUi(locale);
+  const signals = getSignals(locale);
+
   return (
     <Section
       variant="white"
       paddingY="lg"
-      ariaLabel="Customer signals"
+      ariaLabel={ui.focus.ariaLabel}
       className="dark:bg-[var(--surface-tertiary)]"
-      id="features"
+      id="focus"
     >
       <Container>
         <h2 className="mb-[var(--element-gap)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] max-[768px]:mb-[var(--element-gap-sm)] max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
-          All customer signals. One place, Zero blind spots.
+          {ui.focus.heading}
         </h2>
 
         <p className="mb-[var(--section-gap)] max-w-[var(--content-max-text)] text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:mb-[var(--content-gap)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]">
-          AI Customer Intelligence for restaurants that pinpoints where you&apos;re
-          losing&nbsp;money in the customer experience journey.
+          {ui.focus.subheading}
         </p>
 
         {/* role="list" intencional: Safari descarta la semántica de lista con list-style:none. */}
@@ -48,7 +56,7 @@ export default function SignalsSection() {
           className="mb-[var(--section-gap)] grid list-none grid-cols-3 gap-[var(--content-gap)] max-[768px]:mb-[var(--content-gap)] max-[768px]:grid-cols-2 max-[768px]:gap-[var(--element-gap)] max-[480px]:grid-cols-1"
           role="list"
         >
-          {SIGNALS.map((signal) => (
+          {signals.map((signal) => (
             <li key={signal.id} className={cardClass}>
               <div
                 className="flex h-[var(--icon-lg)] w-[var(--icon-lg)] shrink-0 items-center justify-center text-[var(--color-blue-screen)] dark:text-[var(--color-g-nova)]"

@@ -1,11 +1,52 @@
 import type { MenuItem } from "@/types/navigation";
+import { DEFAULT_LOCALE, localePath, type Locale } from "@/data/locale";
 
-/** Ítems del menú fullscreen. Los que no tienen `href` se muestran deshabilitados. */
-export const MENU_ITEMS: MenuItem[] = [
-  { label: "Home", href: "#home", index: "01" },
-  { label: "Modules", href: "#modules", index: "02" },
-  { label: "Features", href: "#features", index: "03" },
-  { label: "Pricing", index: "04" },
-  { label: "About", index: "05" },
-  { label: "Contact", href: "#contact", index: "06" },
-];
+interface MenuLabels {
+  home: string;
+  focus: string;
+  projects: string;
+  about: string;
+  blog: string;
+  contact: string;
+}
+
+const MENU_LABELS: Record<Locale, MenuLabels> = {
+  en: {
+    home: "Home",
+    focus: "What I do",
+    projects: "Projects",
+    about: "About",
+    blog: "Blog",
+    contact: "Contact",
+  },
+  es: {
+    home: "Inicio",
+    focus: "Qué hago",
+    projects: "Proyectos",
+    about: "Sobre mí",
+    blog: "Blog",
+    contact: "Contacto",
+  },
+};
+
+/** Ancla dentro de la home del locale: "/#focus" (en) · "/es/#focus" (es). */
+function homeAnchor(locale: Locale, anchor: string): string {
+  const homePath = localePath(locale, "/");
+  return homePath === "/" ? `/${anchor}` : `${homePath}/${anchor}`;
+}
+
+/** Ítems del menú fullscreen para un locale. Los que no tienen `href` se muestran
+ *  deshabilitados. */
+export function getMenuItems(locale: Locale): MenuItem[] {
+  const labels = MENU_LABELS[locale];
+  return [
+    { label: labels.home, href: localePath(locale, "/"), index: "01" },
+    { label: labels.focus, href: homeAnchor(locale, "#focus"), index: "02" },
+    { label: labels.projects, href: homeAnchor(locale, "#projects"), index: "03" },
+    { label: labels.about, href: localePath(locale, "/about"), index: "04" },
+    { label: labels.blog, href: localePath(locale, "/blog"), index: "05" },
+    { label: labels.contact, href: homeAnchor(locale, "#contact"), index: "06" },
+  ];
+}
+
+export const MENU_ITEMS: MenuItem[] = getMenuItems(DEFAULT_LOCALE);

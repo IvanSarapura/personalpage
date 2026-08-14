@@ -1,0 +1,21 @@
+Cuando empecé a construir el oráculo de cumplimiento del Código Alimentario, asumí que la parte difícil iba a ser el modelo. Me equivoqué: la parte difícil son los datos.
+
+## El problema no es la IA, es la fuente
+
+Las bases públicas de ANMAT, SENASA y FAO no fueron diseñadas para ser consumidas por software. Cada organismo publica en formatos distintos, con estructuras que cambian sin aviso y sin versionado. Un registro que hoy vive en una tabla, mañana aparece dentro de un PDF escaneado. Para un sistema RAG, eso significa que el pipeline de ingesta importa más que el prompt.
+
+Tres decisiones que me ordenaron el trabajo:
+
+1. **Normalizar antes de indexar.** Cada fuente pasa por una capa de normalización propia que produce un esquema común (organismo, norma, artículo, fecha de vigencia). El índice nunca ve el formato original.
+2. **Versionar la normativa.** El Código Alimentario cambia con frecuencia; una respuesta correcta hoy puede ser incorrecta el mes que viene. Cada chunk indexado lleva su fecha de vigencia, y las respuestas citan la versión exacta de la norma.
+3. **Trazabilidad total o nada.** En un dominio regulatorio, una respuesta sin cita es peor que no responder. Cada afirmación del oráculo referencia el registro y el artículo del que sale.
+
+## Lo que el derecho me enseñó del RAG
+
+Mi formación en derecho comercial me dio un reflejo útil acá: en derecho, la fuente manda. Un abogado no cita "la ley" en abstracto; cita artículo, inciso y jurisprudencia. Un sistema RAG para cumplimiento tiene que comportarse igual — la recuperación es el argumento, y la generación es solo la redacción.
+
+Ese estándar cambia cómo se evalúa el sistema: la métrica que me importa no es si la respuesta "suena bien", sino si un auditor puede verificar cada afirmación siguiendo las citas. Auditable primero, elocuente después.
+
+## Siguiente paso
+
+Estoy trabajando en el cruce automático entre formulaciones de productos y los artículos aplicables del Código — el paso que convierte al oráculo en una herramienta de pre-aprobación y no solo de consulta. Si trabajás con datos públicos argentinos o normativa alimentaria, me interesa comparar notas: escribime.

@@ -413,6 +413,9 @@ html.dark {
   }
 
   html {
+    overflow-x: hidden;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
     scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
