@@ -22,6 +22,19 @@ function formatDate(iso: string, locale: Locale): string {
   }).format(new Date(`${iso}T00:00:00Z`));
 }
 
+function formatDayMonth(iso: string, locale: Locale): string {
+  const parts = new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
+    day: "2-digit",
+    month: "short",
+    timeZone: "UTC",
+  }).formatToParts(new Date(`${iso}T00:00:00Z`));
+
+  return parts
+    .filter(({ type }) => type === "day" || type === "month")
+    .map(({ value }) => value)
+    .join(" ");
+}
+
 function postHref(locale: Locale, post: PostMeta): string {
   return localePath(locale, `/blog/${post.slug}`);
 }
@@ -29,9 +42,10 @@ function postHref(locale: Locale, post: PostMeta): string {
 export default function BlogIndex({ locale }: BlogIndexProps) {
   const ui = getUi(locale).blog;
   const posts = getPosts();
+  const latestPost = posts[0];
   const featuredPost = posts.find((post) => post.lang === locale) ?? posts[0];
 
-  if (!featuredPost) return null;
+  if (!latestPost || !featuredPost) return null;
 
   const archivePosts = posts.filter((post) => post.slug !== featuredPost.slug);
 
@@ -43,10 +57,20 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
             <h1 className={styles.title}>{ui.heading}</h1>
 
             <div className={styles.heroFooter}>
-              <p className={styles.entryCount}>
-                <span>{String(posts.length).padStart(2, "0")}</span>
-                {ui.entries}
-              </p>
+              <dl className={styles.heroMetrics}>
+                <div className={styles.metric}>
+                  <dt className={styles.metricLabel}>{ui.publications}</dt>
+                  <dd className={styles.metricValue}>{String(posts.length).padStart(2, "0")}</dd>
+                </div>
+                <div className={styles.metric}>
+                  <dt className={styles.metricLabel}>{ui.latestPublication}</dt>
+                  <dd className={styles.metricValue}>
+                    <time dateTime={latestPost.date}>
+                      {formatDayMonth(latestPost.date, locale)}
+                    </time>
+                  </dd>
+                </div>
+              </dl>
             </div>
           </header>
         </Container>

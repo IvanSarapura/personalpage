@@ -46,7 +46,7 @@ export async function generateMetadata({
   if (!hasLocale(lang)) return {};
 
   const copy = getSiteCopy(lang);
-  const pageTitle = `${SITE.shortName} — Law × Code`;
+  const pageTitle = `${SITE.shortName} - Law & Code`;
 
   return {
     metadataBase: new URL(SITE.url),

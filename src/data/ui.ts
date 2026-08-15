@@ -53,8 +53,6 @@ export interface UiDict {
     ariaLabel: string;
     navAriaLabel: string;
     homeAriaLabel: string;
-    onLinkedIn: string;
-    onGitHub: string;
     rights: string;
   };
   projectsPage: {
@@ -89,7 +87,8 @@ export interface UiDict {
     title: string;
     heading: string;
     description: string;
-    entries: string;
+    publications: string;
+    latestPublication: string;
     featured: string;
     archive: string;
     tagsLabel: string;
@@ -159,8 +158,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Footer",
       navAriaLabel: "Footer navigation",
       homeAriaLabel: "Iván Sarapura — home",
-      onLinkedIn: "Iván Sarapura on LinkedIn",
-      onGitHub: "Iván Sarapura on GitHub",
       rights: "All rights reserved.",
     },
     projectsPage: {
@@ -195,11 +192,12 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       stack: "Stack",
     },
     blog: {
-      title: "Blog",
-      heading: "Blog",
+      title: "Personal Blog",
+      heading: "Personal Blog",
       description:
         "Blog — notes on smart contracts, RegTech, AI compliance and the projects behind them.",
-      entries: "Published entries",
+      publications: "Publications",
+      latestPublication: "Latest post",
       featured: "Featured note",
       archive: "The index",
       tagsLabel: "Topics",
@@ -268,8 +266,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Pie de página",
       navAriaLabel: "Navegación del pie de página",
       homeAriaLabel: "Iván Sarapura — inicio",
-      onLinkedIn: "Iván Sarapura en LinkedIn",
-      onGitHub: "Iván Sarapura en GitHub",
       rights: "Todos los derechos reservados.",
     },
     projectsPage: {
@@ -304,11 +300,12 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       stack: "Stack",
     },
     blog: {
-      title: "Blog",
-      heading: "Blog",
+      title: "Blog Personal",
+      heading: "Blog Personal",
       description:
         "Blog — notas sobre contratos inteligentes, RegTech, cumplimiento con IA y los proyectos detrás.",
-      entries: "Entradas publicadas",
+      publications: "Publicaciones",
+      latestPublication: "Última publicación",
       featured: "Nota destacada",
       archive: "El índice",
       tagsLabel: "Temas",
