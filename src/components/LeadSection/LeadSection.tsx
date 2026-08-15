@@ -6,7 +6,7 @@ import { SITE } from "@/data/site";
 import { getUi } from "@/data/ui";
 
 const btnBase =
-  "inline-flex items-center justify-center rounded-[var(--btn-radius)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--text-on-light)] px-[var(--btn-padding-x-sm)] py-[var(--btn-padding-y-sm)] text-[length:var(--label)] font-normal tracking-[var(--letter-spacing-wide)] no-underline cursor-pointer [transition:var(--transition-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-blue-screen)] max-[768px]:w-full max-[768px]:text-center";
+  "inline-flex w-full min-w-0 items-center justify-center rounded-[var(--btn-radius)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--text-on-light)] px-[var(--btn-padding-x-sm)] py-[var(--btn-padding-y-sm)] text-center text-[length:var(--label)] font-normal tracking-[var(--letter-spacing-wide)] no-underline cursor-pointer [transition:var(--transition-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-blue-screen)]";
 
 const btnWhite =
   "bg-transparent text-[var(--text-on-light)] hover:bg-[var(--text-on-light)] hover:text-[var(--color-white-pure)] dark:hover:text-[var(--color-deep)]";
@@ -33,7 +33,7 @@ export default function LeadSection({ locale }: LeadSectionProps) {
             {ui.hero.subheadline}
           </p>
 
-          <div className="flex items-center gap-[var(--element-gap)] max-[768px]:flex-col max-[768px]:items-start">
+          <div className="grid w-fit max-w-full grid-cols-2 items-stretch gap-[var(--element-gap)] max-[768px]:w-full">
             <Link href={localePath(locale, "/projects")} className={`${btnBase} ${btnWhite}`}>
               {ui.hero.ctaPrimary}
             </Link>
