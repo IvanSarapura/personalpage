@@ -4,11 +4,8 @@ import { SITE } from "@/data/site";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 
-const primaryBtn =
-  "inline-flex items-center justify-center rounded-[var(--btn-radius)] border-2 border-solid border-[color:var(--text-on-light)] bg-[var(--text-on-light)] px-[var(--btn-padding-x-lg)] py-[var(--btn-padding-y-lg)] text-[length:var(--body)] font-medium leading-[1.25] tracking-[var(--letter-spacing-wide)] text-[var(--color-white-pure)] no-underline cursor-pointer [transition:var(--transition-hover)] hover:bg-transparent hover:text-[var(--text-on-light)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--text-on-light)] dark:text-[var(--color-deep)] dark:hover:text-[var(--color-white-pure)] max-[768px]:px-[28px] max-[768px]:py-[14px]";
-
-const secondaryLink =
-  "text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--text-on-light)]";
+const emailBtn =
+  "inline-flex items-center justify-center rounded-[var(--btn-radius)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--text-on-light)] bg-transparent px-[var(--btn-padding-x-sm)] py-[var(--btn-padding-y-sm)] text-center text-[length:var(--label)] font-normal tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] no-underline cursor-pointer [transition:var(--transition-hover)] hover:bg-[var(--text-on-light)] hover:text-[var(--color-white-pure)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-blue-screen)] dark:hover:text-[var(--color-deep)]";
 
 interface CTABandProps {
   locale: Locale;
@@ -34,29 +31,9 @@ export default function CTABand({ locale }: CTABandProps) {
             {ui.contact.subheading}
           </p>
 
-          <div className="mt-[var(--space-3)] flex flex-col items-center gap-[var(--space-4)]">
-            <a href={`mailto:${SITE.email}`} className={primaryBtn}>
-              {ui.contact.emailCta}
-            </a>
-            <div className="flex items-center gap-[var(--space-5)]">
-              <a
-                href={SITE.social.linkedin}
-                className={secondaryLink}
-                rel="me noopener"
-                target="_blank"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={SITE.social.github}
-                className={secondaryLink}
-                rel="me noopener"
-                target="_blank"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
+          <a href={`mailto:${SITE.email}`} className={emailBtn}>
+            {ui.contact.emailCta}
+          </a>
         </div>
       </Container>
     </Section>

@@ -23,7 +23,7 @@ const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
 };
 
 const cardClass =
-  "flex flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] bg-[var(--color-white-pure)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--color-blue-screen-moderate)] dark:border-[color:var(--border-subtle)] dark:bg-[var(--surface-primary)] dark:hover:border-[color:var(--color-b-white-moderate)]";
+  "flex flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--signal-card-border)] bg-[var(--color-white-pure)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--signal-card-border-hover)] dark:bg-[var(--surface-primary)]";
 
 interface SignalsSectionProps {
   locale: Locale;

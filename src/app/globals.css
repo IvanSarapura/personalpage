@@ -196,6 +196,35 @@ html.dark {
   --radius: 0.625rem;
 }
 
+/* Signals cards: el borde conserva una elevación intermedia entre el fondo
+   de la sección y la superficie de la card. En hover se acerca al fondo para
+   ganar definición sin superar el rango de luminosidad de ambas superficies. */
+:root {
+  --signal-card-border: color-mix(
+    in oklab,
+    var(--surface-secondary) 50%,
+    var(--color-white-pure) 50%
+  );
+  --signal-card-border-hover: color-mix(
+    in oklab,
+    var(--surface-secondary) 75%,
+    var(--color-white-pure) 25%
+  );
+}
+
+html.dark {
+  --signal-card-border: color-mix(
+    in oklab,
+    var(--surface-tertiary) 50%,
+    var(--surface-primary) 50%
+  );
+  --signal-card-border-hover: color-mix(
+    in oklab,
+    var(--surface-tertiary) 75%,
+    var(--surface-primary) 25%
+  );
+}
+
 /* Alpha variants de colores de marca */
 :root {
   --color-blue-screen-subtle: rgba(0, 81, 233, 0.08);
