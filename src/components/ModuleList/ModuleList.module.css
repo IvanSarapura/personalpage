@@ -32,7 +32,6 @@
   text-align: start;
   cursor: pointer;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: var(--border-subtle);
   transition: padding-bottom var(--duration-smooth) var(--ease-smooth);
 }
 

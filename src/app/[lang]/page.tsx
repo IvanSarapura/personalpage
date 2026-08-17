@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import LeadSection from "@/components/LeadSection/LeadSection";
-import Hero from "@/components/Hero/Hero";
+import SelectedWorkSection from "@/components/SelectedWorkSection/SelectedWorkSection";
+import CurrentWorkSection from "@/components/CurrentWorkSection/CurrentWorkSection";
 import SignalsSection from "@/components/SignalsSection/SignalsSection";
 import StatsSection from "@/components/StatsSection/StatsSection";
 import CTABand from "@/components/CTABand/CTABand";
@@ -14,7 +15,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <main id="main-content">
       <LeadSection locale={lang} />
       <SignalsSection locale={lang} />
-      <Hero locale={lang} />
+      <SelectedWorkSection locale={lang} />
+      <CurrentWorkSection locale={lang} />
       <StatsSection locale={lang} />
       <CTABand locale={lang} />
     </main>

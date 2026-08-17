@@ -2,7 +2,7 @@
   position: relative;
 }
 
-/* Línea divisora sutil entre SignalsSection y StatsSection */
+/* Línea divisora sutil respecto de la sección de trabajo actual. */
 .statsSection::before {
   content: "";
   position: absolute;

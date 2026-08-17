@@ -31,10 +31,16 @@ export interface UiDict {
     heading: string;
     subheading: string;
   };
-  building: {
+  selectedWork: {
     ariaLabel: string;
     heading: string;
     allCaseStudies: string;
+  };
+  building: {
+    ariaLabel: string;
+    heading: string;
+    subheading: string;
+    opensInNewTab: string;
   };
   stats: {
     ariaLabel: string;
@@ -149,10 +155,17 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       subheading:
         "Six areas of work, each backed by a shipped project — from subjective-logic smart contracts to AI agents for regulatory compliance.",
     },
-    building: {
-      ariaLabel: "Case studies",
-      heading: "What I'm building",
+    selectedWork: {
+      ariaLabel: "Selected projects",
+      heading: "Selected work",
       allCaseStudies: "All case studies →",
+    },
+    building: {
+      ariaLabel: "Current work",
+      heading: "What I'm building",
+      subheading:
+        "Two products in active development: one connects learning with rewards; the other makes global digital payments simpler and verifiable.",
+      opensInNewTab: "opens in a new tab",
     },
     stats: {
       ariaLabel: "Track record",
@@ -271,10 +284,17 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       subheading:
         "Seis áreas de trabajo, cada una respaldada por un proyecto real — de contratos de lógica subjetiva a agentes de IA para cumplimiento regulatorio.",
     },
-    building: {
-      ariaLabel: "Casos de estudio",
-      heading: "Qué estoy construyendo",
+    selectedWork: {
+      ariaLabel: "Proyectos seleccionados",
+      heading: "Proyectos seleccionados",
       allCaseStudies: "Todos los casos de estudio →",
+    },
+    building: {
+      ariaLabel: "Trabajo actual",
+      heading: "Qué estoy construyendo",
+      subheading:
+        "Dos productos en desarrollo: uno conecta aprendizaje y recompensas; el otro simplifica pagos digitales globales y verificables.",
+      opensInNewTab: "se abre en una pestaña nueva",
     },
     stats: {
       ariaLabel: "Trayectoria",

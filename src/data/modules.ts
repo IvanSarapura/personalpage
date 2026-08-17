@@ -7,7 +7,7 @@ export interface Module {
   description: string;
 }
 
-/** Ítems del acordeón "What I'm building" de la home, derivados de la única
+/** Ítems del acordeón "Selected work" de la home, derivados de la única
  *  fuente de verdad de proyectos (src/data/projects.ts) para que la home y
  *  /projects nunca diverjan. */
 export function getModules(locale: Locale): Module[] {
