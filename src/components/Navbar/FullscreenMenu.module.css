@@ -3,6 +3,8 @@
   inset: 0;
   z-index: var(--z-modal);
   overflow-x: clip;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--surface-primary);
   display: flex;
   flex-direction: column;

@@ -25,6 +25,7 @@ interface SectionProps {
   className?: string;
   as?: ElementType;
   ariaLabel?: string;
+  ariaLabelledBy?: string;
   id?: string;
 }
 
@@ -35,6 +36,7 @@ export default function Section({
   className = "",
   as: Component = "section",
   ariaLabel,
+  ariaLabelledBy,
   id,
 }: SectionProps) {
   const combined = `w-full ${VARIANT_CLASSES[variant]} ${PADDING_CLASSES[paddingY]}${
@@ -42,7 +44,7 @@ export default function Section({
   }`;
 
   return (
-    <Component id={id} className={combined} aria-label={ariaLabel}>
+    <Component id={id} className={combined} aria-label={ariaLabel} aria-labelledby={ariaLabelledBy}>
       {children}
     </Component>
   );

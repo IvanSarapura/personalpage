@@ -26,6 +26,22 @@ export interface UiDict {
     ctaPrimary: string;
     ctaSecondary: string;
   };
+  research: {
+    heading: string;
+    subheading: string;
+    allResearch: string;
+    pageTitle: string;
+    pageDescription: string;
+    pageIntro: string;
+    archiveHeading: string;
+    worksLabel: string;
+    authorLabel: string;
+    authorsLabel: string;
+    contextLabel: string;
+    backgroundLabel: string;
+    recognitionLabel: string;
+    opensInNewTab: string;
+  };
   focus: {
     ariaLabel: string;
     heading: string;
@@ -90,6 +106,7 @@ export interface UiDict {
     liveDemo: string;
     repo: string;
     paper: string;
+    opensInNewTab: string;
     readCaseStudy: string;
     getInTouch: string;
     stackAriaLabel: string;
@@ -148,6 +165,24 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "I build software where law meets code — type-safe web apps, smart contracts and AI for regulatory compliance. Law student (UBA), blockchain developer (UTN), hackathon winner.",
       ctaPrimary: "View my work",
       ctaSecondary: "Get in touch",
+    },
+    research: {
+      heading: "Research & publications",
+      subheading: "A concise view of my ongoing and published work in legal technology.",
+      allResearch: "Explore all research →",
+      pageTitle: "Research & publications",
+      pageDescription:
+        "An evolving archive of Iván Sarapura's academic research on legal technology, cryptographic infrastructure and digital evidence.",
+      pageIntro:
+        "An evolving archive of academic work at the intersection of law, cryptography and digital evidence. It brings together research in progress and published papers, with context, authorship and access to the complete work when available.",
+      archiveHeading: "Research archive",
+      worksLabel: "works",
+      authorLabel: "Author",
+      authorsLabel: "Authors",
+      contextLabel: "Context",
+      backgroundLabel: "Academic background",
+      recognitionLabel: "Recognition",
+      opensInNewTab: "opens in a new tab",
     },
     focus: {
       ariaLabel: "What I do",
@@ -217,7 +252,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       future: "What's next",
       liveDemo: "Live demo",
       repo: "GitHub",
-      paper: "Paper",
+      paper: "Paper (PDF)",
+      opensInNewTab: "opens in a new tab",
       readCaseStudy: "Read case study",
       getInTouch: "Get in touch",
       stackAriaLabel: "Stack",
@@ -277,6 +313,25 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Construyo software donde el derecho se encuentra con el código — aplicaciones web type-safe, contratos inteligentes e IA para cumplimiento regulatorio. Estudiante de Abogacía (UBA), desarrollador blockchain (UTN), ganador de hackathons.",
       ctaPrimary: "Ver mis proyectos",
       ctaSecondary: "Contactame",
+    },
+    research: {
+      heading: "Investigación y publicaciones",
+      subheading:
+        "Una selección breve de mi trabajo académico en curso y publicado sobre tecnología jurídica.",
+      allResearch: "Ver todas las investigaciones →",
+      pageTitle: "Investigación y publicaciones",
+      pageDescription:
+        "Un archivo en evolución de las investigaciones académicas de Iván Sarapura sobre tecnología jurídica, infraestructura criptográfica y evidencia digital.",
+      pageIntro:
+        "Un archivo en evolución de trabajos académicos en la intersección entre derecho, criptografía y evidencia digital. Reúne investigaciones en desarrollo y papers publicados, con su contexto, autoría y acceso al trabajo completo cuando está disponible.",
+      archiveHeading: "Archivo de investigaciones",
+      worksLabel: "trabajos",
+      authorLabel: "Autor",
+      authorsLabel: "Autores",
+      contextLabel: "Contexto",
+      backgroundLabel: "Formación académica",
+      recognitionLabel: "Reconocimiento",
+      opensInNewTab: "se abre en una pestaña nueva",
     },
     focus: {
       ariaLabel: "Qué hago",
@@ -346,7 +401,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       future: "Lo que sigue",
       liveDemo: "Demo en vivo",
       repo: "GitHub",
-      paper: "Paper",
+      paper: "Paper (PDF)",
+      opensInNewTab: "se abre en una pestaña nueva",
       readCaseStudy: "Leer caso de estudio",
       getInTouch: "Contactame",
       stackAriaLabel: "Stack",

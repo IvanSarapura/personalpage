@@ -79,7 +79,8 @@ export default function ProjectCard({ project, locale }: ProjectCardProps) {
             href={project.links.paper}
             className={externalLinkClass}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
+            aria-label={`${ui.paper} (${ui.opensInNewTab})`}
           >
             {ui.paper}
           </a>

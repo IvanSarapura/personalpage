@@ -15,6 +15,7 @@ interface FooterLabels {
   site: string;
   elsewhere: string;
   home: string;
+  research: string;
   projects: string;
   about: string;
   blog: string;
@@ -26,6 +27,7 @@ const FOOTER_LABELS: Record<Locale, FooterLabels> = {
     site: "Site",
     elsewhere: "Elsewhere",
     home: "Home",
+    research: "Research",
     projects: "Projects",
     about: "About",
     blog: "Blog",
@@ -35,6 +37,7 @@ const FOOTER_LABELS: Record<Locale, FooterLabels> = {
     site: "Sitio",
     elsewhere: "En otros lados",
     home: "Inicio",
+    research: "Investigación",
     projects: "Proyectos",
     about: "Sobre mí",
     blog: "Blog",
@@ -51,6 +54,7 @@ export function getFooterLinks(locale: Locale): FooterColumn[] {
       title: labels.site,
       links: [
         { label: labels.home, href: homePath },
+        { label: labels.research, href: localePath(locale, "/research") },
         { label: labels.projects, href: localePath(locale, "/projects") },
         { label: labels.about, href: localePath(locale, "/about") },
         { label: labels.blog, href: localePath(locale, "/blog") },

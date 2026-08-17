@@ -1,4 +1,5 @@
 import { DEFAULT_LOCALE, type Locale } from "@/data/locale";
+import { CHAIN_OF_CUSTODY_PAPER_URL } from "@/data/research";
 
 /** Tags de filtrado en /projects — .agents/propuesta.md §5.2. */
 export type ProjectTag = "Web3" | "AI" | "RegTech" | "Legal" | "Product" | "Academic";
@@ -11,7 +12,6 @@ export interface ProjectLinks {
    *    proven    → repo: "https://github.com/IvanSarapura/proven"
    *    ecotrace  → repo: "https://github.com/IvanSarapura/ecotrace"
    *    sana      → repo: "https://github.com/IvanSarapura/sana"
-   *    cardano-… → paper: URL del paper del Legalthon
    */
   demo?: string;
   repo?: string;
@@ -55,7 +55,9 @@ const PROJECT_BASES = [
     num: "02",
     tags: ["Web3", "Legal", "Academic"],
     stack: ["Cardano", "Legal research"],
-    links: {},
+    links: {
+      paper: CHAIN_OF_CUSTODY_PAPER_URL,
+    },
   },
   {
     slug: "ecotrace",

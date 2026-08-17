@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import LeadSection from "@/components/LeadSection/LeadSection";
+import ResearchSection from "@/components/ResearchSection/ResearchSection";
 import SelectedWorkSection from "@/components/SelectedWorkSection/SelectedWorkSection";
 import CurrentWorkSection from "@/components/CurrentWorkSection/CurrentWorkSection";
 import SignalsSection from "@/components/SignalsSection/SignalsSection";
@@ -14,6 +15,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <main id="main-content">
       <LeadSection locale={lang} />
+      <ResearchSection locale={lang} />
       <SignalsSection locale={lang} />
       <SelectedWorkSection locale={lang} />
       <CurrentWorkSection locale={lang} />

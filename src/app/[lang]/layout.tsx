@@ -6,8 +6,9 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { getSiteCopy, SITE } from "@/data/site";
+import { buildPersonJsonLd, serializeJsonLd } from "@/data/structured-data";
 import { getUi } from "@/data/ui";
-import { hasLocale, localePath, LOCALES, type Locale } from "@/data/locale";
+import { hasLocale, localePath, LOCALES } from "@/data/locale";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,22 +19,6 @@ const inter = Inter({
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
-}
-
-function buildJsonLd(locale: Locale) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.name,
-    url: SITE.url,
-    jobTitle: "Web Developer & Commercial-Law Student",
-    description: getSiteCopy(locale).description,
-    sameAs: [SITE.social.linkedin, SITE.social.github],
-    alumniOf: [
-      { "@type": "CollegeOrUniversity", name: "Universidad de Buenos Aires" },
-      { "@type": "CollegeOrUniversity", name: "Universidad Tecnológica Nacional" },
-    ],
-  };
 }
 
 export async function generateMetadata({
@@ -114,7 +99,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(lang)) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildPersonJsonLd(lang)) }}
         />
       </head>
       <body>

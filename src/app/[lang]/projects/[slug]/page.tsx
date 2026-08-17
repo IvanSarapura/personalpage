@@ -118,7 +118,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </a>
               )}
               {project.links.paper && (
-                <a href={project.links.paper} className={linkClass} target="_blank" rel="noopener">
+                <a
+                  href={project.links.paper}
+                  className={linkClass}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${ui.paper} (${ui.opensInNewTab})`}
+                >
                   {ui.paper}
                 </a>
               )}
