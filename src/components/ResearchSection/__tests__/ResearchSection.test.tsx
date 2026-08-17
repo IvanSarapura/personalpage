@@ -27,10 +27,12 @@ describe("ResearchSection", () => {
     expect(screen.queryByText("Academic background")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Read paper/ })).not.toBeInTheDocument();
 
-    expect(screen.getByRole("link", { name: "Explore all research →" })).toHaveAttribute(
-      "href",
-      "/research"
-    );
+    const archiveLink = screen.getByRole("link", { name: "Explore all research →" });
+    expect(archiveLink).toHaveAttribute("href", "/research");
+    expect(
+      screen.getByRole("list").compareDocumentPosition(archiveLink) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
   });
 
   it("localiza el enlace interno y evita un lang redundante en español", () => {

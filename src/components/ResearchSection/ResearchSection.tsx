@@ -21,16 +21,10 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
     <Section variant="blue" paddingY="lg" ariaLabelledBy={headingId} id="research">
       <Container>
         <header className={styles.header}>
-          <div>
-            <h2 id={headingId} className={styles.heading}>
-              {ui.heading}
-            </h2>
-            <p className={styles.subheading}>{ui.subheading}</p>
-          </div>
-
-          <Link href={localePath(locale, "/research")} className={styles.link}>
-            {ui.allResearch}
-          </Link>
+          <h2 id={headingId} className={styles.heading}>
+            {ui.heading}
+          </h2>
+          <p className={styles.subheading}>{ui.subheading}</p>
         </header>
 
         {/* role="list" preserva la semántica en Safari cuando CSS elimina el marcador. */}
@@ -61,6 +55,10 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
             );
           })}
         </ul>
+
+        <Link href={localePath(locale, "/research")} className={styles.link}>
+          {ui.allResearch}
+        </Link>
       </Container>
     </Section>
   );

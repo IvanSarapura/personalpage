@@ -1,8 +1,4 @@
 .header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-6);
-  align-items: end;
   margin-bottom: var(--section-gap);
 }
 
@@ -28,6 +24,10 @@
 }
 
 .link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: var(--content-gap);
   color: var(--text-primary);
   font-size: var(--body);
   font-weight: 500;
@@ -130,7 +130,6 @@
 
 @media (max-width: 768px) {
   .header {
-    grid-template-columns: minmax(0, 1fr);
     margin-bottom: var(--content-gap);
   }
 
@@ -143,10 +142,6 @@
   .subheading {
     font-size: var(--body);
     line-height: var(--body-lh);
-  }
-
-  .link {
-    justify-self: start;
   }
 
   .list {
