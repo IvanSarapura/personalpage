@@ -26,7 +26,6 @@ function buildJsonLd(locale: Locale) {
     "@type": "Person",
     name: SITE.name,
     url: SITE.url,
-    email: `mailto:${SITE.email}`,
     jobTitle: "Web Developer & Commercial-Law Student",
     description: getSiteCopy(locale).description,
     sameAs: [SITE.social.linkedin, SITE.social.github],

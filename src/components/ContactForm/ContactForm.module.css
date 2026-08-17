@@ -1,0 +1,266 @@
+.card {
+  width: 100%;
+  overflow: hidden;
+  border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+  border-radius: var(--radius-lg);
+  background: transparent;
+}
+
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  text-align: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  color: var(--text-on-light);
+  font-size: var(--label);
+  font-weight: 600;
+  line-height: var(--label-lh);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.requiredMark {
+  margin-inline-start: var(--space-1);
+  color: var(--color-blue-screen);
+}
+
+.control {
+  width: 100%;
+  min-height: 48px;
+  border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+  border-radius: var(--radius-md);
+  background: var(--color-white-pure);
+  color: var(--color-deep);
+  font: inherit;
+  font-size: var(--body);
+  line-height: var(--body-lh);
+  padding: var(--space-3) var(--space-4);
+  transition: var(--transition-hover);
+}
+
+.control::placeholder {
+  color: rgba(25, 25, 45, 0.48);
+}
+
+.control:hover {
+  border-color: var(--color-blue-screen);
+}
+
+.control:focus-visible {
+  border-color: var(--color-blue-screen);
+  outline: 3px solid var(--color-blue-screen-muted);
+  outline-offset: 2px;
+}
+
+.textarea {
+  min-height: 152px;
+  resize: vertical;
+}
+
+.fieldError {
+  display: none;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--destructive);
+  font-size: var(--caption);
+  line-height: var(--caption-lh);
+}
+
+.fieldError svg {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  flex: 0 0 auto;
+}
+
+.control:user-invalid + .fieldError,
+.control[aria-invalid="true"] + .fieldError,
+.fieldError[data-visible="true"] {
+  display: flex;
+}
+
+.control:user-invalid,
+.control[aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+
+.submit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  align-self: center;
+  border: var(--border-width-thin) solid var(--text-on-light);
+  border-radius: var(--btn-radius);
+  background: var(--text-on-light);
+  color: var(--color-white-pure);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--label);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-wide);
+  padding: var(--btn-padding-y-sm) var(--btn-padding-x-sm);
+  touch-action: manipulation;
+  transition: var(--transition-hover);
+}
+
+/* Mantiene el hit target recomendado sin alterar la altura visual compacta
+   que comparte con el CTA "Get in touch". */
+.submit::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 48px;
+  transform: translateY(-50%);
+}
+
+.submit svg {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+}
+
+.submit:hover:not(:disabled) {
+  background: transparent;
+  color: var(--text-on-light);
+}
+
+.submit:focus-visible {
+  outline: 2px solid var(--color-blue-screen);
+  outline-offset: 2px;
+}
+
+.submit:disabled {
+  cursor: wait;
+  opacity: var(--opacity-subtle);
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+.statusRegion:empty {
+  display: none;
+}
+
+.successStatus,
+.errorStatus {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: var(--caption);
+  line-height: var(--body-lh);
+}
+
+.successStatus {
+  border: 1px solid var(--color-blue-screen-moderate);
+  background: var(--color-blue-screen-subtle);
+  color: var(--text-on-light);
+}
+
+.errorStatus {
+  border: 1px solid color-mix(in oklab, var(--destructive) 35%, transparent);
+  background: color-mix(in oklab, var(--destructive) 8%, transparent);
+  color: var(--text-on-light);
+}
+
+.successStatus > svg,
+.errorStatus > svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex: 0 0 auto;
+}
+
+.successStatus > svg {
+  color: var(--color-blue-screen);
+}
+
+.errorStatus > svg {
+  color: var(--destructive);
+}
+
+.fallback {
+  margin-top: var(--space-2);
+  opacity: var(--opacity-secondary);
+}
+
+.fallback a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.honeypot {
+  position: absolute;
+  left: -5000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
+:global(html.dark) .card {
+  background: transparent;
+  border-color: var(--color-border-subtle);
+}
+
+:global(html.dark) .control {
+  border-color: var(--color-border-subtle);
+  background: var(--color-deep-elevated);
+  color: var(--color-b-white);
+}
+
+:global(html.dark) .control::placeholder {
+  color: rgba(235, 236, 255, 0.46);
+}
+
+:global(html.dark) .control:hover,
+:global(html.dark) .control:focus-visible {
+  border-color: var(--color-g-nova);
+}
+
+:global(html.dark) .successStatus > svg {
+  color: var(--color-g-nova);
+}
+
+:global(html.dark) .requiredMark {
+  color: var(--color-g-nova);
+}
+
+:global(html.dark) .submit:hover:not(:disabled) {
+  color: var(--color-white-pure);
+}
+
+:global(html.dark) .submit {
+  color: var(--color-deep);
+}

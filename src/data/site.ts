@@ -28,7 +28,6 @@ export const SITE = {
   shortName: "Iván Sarapura",
   ...SITE_COPY[DEFAULT_LOCALE],
   url: env.NEXT_PUBLIC_SITE_URL,
-  email: "sarapuraivane@gmail.com",
   social: {
     linkedin: "https://www.linkedin.com/in/ivansarapura/",
     github: "https://github.com/IvanSarapura",

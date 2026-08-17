@@ -21,11 +21,7 @@ export default function Hero({ locale }: HeroProps) {
         </h2>
 
         <div className="mx-auto max-w-[var(--content-max-wide)]">
-          <ModuleList
-            modules={getModules(locale)}
-            expandLabel={ui.building.expand}
-            collapseLabel={ui.building.collapse}
-          />
+          <ModuleList modules={getModules(locale)} />
 
           <div className="mt-[var(--content-gap)]">
             <Link

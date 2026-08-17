@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Iván Sarapura — Personal portfolio
 
-## Getting Started
+Bilingual portfolio built with Next.js 16, React 19, TypeScript and Tailwind CSS 4. The contact section sends direct messages through Resend and protects the Server Action with Vercel BotID.
 
-First, run the development server:
+## Local development
+
+Use Node.js 22 or newer, install dependencies and create your local environment file:
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site is available at [http://localhost:3000](http://localhost:3000). English is served at `/` and Spanish at `/es`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The form uses Resend's outbound Emails API. Resend Receiving and inbound webhooks are not required.
 
-## Learn More
+1. In Resend, add and verify a sending subdomain such as `mail.your-domain.com`.
+2. Create an API key with sending access limited to that domain.
+3. Set the following server-only variables locally and in Vercel:
 
-To learn more about Next.js, take a look at the following resources:
+```dotenv
+RESEND_API_KEY=re_xxxxxxxxx
+RESEND_FROM_EMAIL=contact@mail.your-domain.com
+CONTACT_TO_EMAIL=your-private-inbox@example.com
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`RESEND_FROM_EMAIL` must belong to the verified domain. `CONTACT_TO_EMAIL` is the private inbox that receives form submissions. The visitor's address is set as `Reply-To`; it is never used as the sender.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Also set `NEXT_PUBLIC_SITE_URL` to the canonical production URL. Do not prefix any secret with `NEXT_PUBLIC_`.
 
-## Deploy on Vercel
+### Vercel setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Enable OIDC for the project so BotID can verify requests in production.
+- Keep BotID Basic enabled; optionally enable Deep Analysis in the Firewall dashboard.
+- Configure a WAF rate-limit rule for contact-form POST requests if traffic warrants it.
+- Add the environment variables to Production, Preview and Development as appropriate.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Vercel CLI is optional but useful for synchronizing configuration:
+
+```bash
+npm i -g vercel
+vercel env pull
+```
+
+## Quality checks
+
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run format:check
+npm run build
+```

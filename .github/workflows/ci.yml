@@ -43,4 +43,4 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://sira.ai
+          NEXT_PUBLIC_SITE_URL: https://portfolio.example.com

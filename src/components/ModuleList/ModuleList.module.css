@@ -6,12 +6,43 @@
 }
 
 .item {
-  display: grid;
-  grid-template-columns: var(--modulelist-num-col) minmax(0, 1fr);
-  column-gap: var(--element-gap);
-  align-items: start;
-  padding: var(--space-5) 0;
+  --module-num-width: var(--modulelist-num-col);
+  --module-row-gap: var(--element-gap);
+  --module-row-padding: var(--space-5);
+  --module-action-size: var(--action-btn-size);
+
   border-bottom: var(--divider-thickness) solid var(--border-default);
+}
+
+/* La fila visible completa es un único control para mouse, touch y teclado. */
+.trigger {
+  display: grid;
+  grid-template-columns:
+    var(--module-num-width) minmax(0, 1fr)
+    var(--module-action-size);
+  align-items: center;
+  column-gap: var(--module-row-gap);
+  width: 100%;
+  min-inline-size: 0;
+  padding: var(--module-row-padding) 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: var(--border-subtle);
+  transition: padding-bottom var(--duration-smooth) var(--ease-smooth);
+}
+
+.triggerOpen {
+  padding-bottom: 0;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: -2px;
 }
 
 .num {
@@ -21,26 +52,10 @@
   color: var(--text-secondary);
   opacity: var(--opacity-subtle);
   text-align: center;
-  padding-top: 2px;
-}
-
-/* ─── Right column: header + expandable content ─── */
-.moduleBody {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-inline-size: 0;
-}
-
-.moduleHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--element-gap);
-  min-inline-size: 0;
 }
 
 .name {
+  min-inline-size: 0;
   font-size: var(--body-large);
   font-weight: var(--body-large-weight);
   line-height: var(--body-large-lh);
@@ -49,12 +64,11 @@
   overflow-wrap: anywhere;
 }
 
-/* ─── Toggle Button ─── */
-.plusBtn {
+/* El círculo conserva la affordance visual; la interacción pertenece a .trigger. */
+.toggleIndicator {
   position: relative;
-  flex-shrink: 0;
-  width: var(--action-btn-size);
-  height: var(--action-btn-size);
+  width: var(--module-action-size);
+  height: var(--module-action-size);
   border-radius: 50%;
   border: var(--border-width-thin) solid var(--text-secondary);
   background: transparent;
@@ -62,65 +76,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  padding: 0;
   transition:
     background var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out);
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
 }
 
-.plusBtn:hover {
-  background: var(--text-secondary);
-  color: var(--surface-primary);
+@media (hover: hover) and (pointer: fine) {
+  .trigger:hover .toggleIndicator {
+    background: var(--text-secondary);
+    color: var(--surface-primary);
+  }
 }
 
-.plusBtn:focus-visible {
-  outline: 2px solid var(--text-primary);
-  outline-offset: 2px;
-}
-
-/* Icons: more and less crossfade */
-.iconWrapper,
-.iconWrapperLess {
+/* Un único chevron rota para reflejar el estado del disclosure. */
+.iconWrapper {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 7px;
-  transition:
-    opacity var(--duration-smooth) var(--ease-smooth),
-    transform var(--duration-smooth) var(--ease-smooth);
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform var(--duration-smooth) var(--ease-smooth);
 }
 
-.iconWrapper {
-  opacity: 1;
-  transform: translateY(0);
+.triggerOpen .iconWrapper {
+  transform: rotate(180deg);
 }
 
-.iconWrapperLess {
-  opacity: 0;
-  transform: translateY(2px);
-}
-
-.plusBtnOpen .iconWrapper {
-  opacity: 0;
-  transform: translateY(-2px);
-}
-
-.plusBtnOpen .iconWrapperLess {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.plusBtnOpen {
+.triggerOpen .toggleIndicator {
   background: var(--text-secondary);
   color: var(--surface-primary);
 }
 
 /* ─── Expandable Content ───
-   Fluye naturalmente dentro de .moduleBody (flex column).
-   No es una celda de grid separada.
+   Se alinea con el título mediante el mismo ancho de número y gap del trigger.
 
    Estado cerrado:
    - grid-template-rows: 0fr  → altura exactamente 0
@@ -139,6 +131,7 @@
 .itemContent {
   display: grid;
   grid-template-rows: 0fr;
+  margin-inline-start: calc(var(--module-num-width) + var(--module-row-gap));
   visibility: hidden;
   transition:
     grid-template-rows var(--duration-smooth) var(--ease-smooth),
@@ -156,11 +149,15 @@
 .itemContentInner {
   overflow: hidden;
   padding-top: 0;
-  transition: padding-top var(--duration-smooth) var(--ease-smooth);
+  padding-bottom: 0;
+  transition:
+    padding-top var(--duration-smooth) var(--ease-smooth),
+    padding-bottom var(--duration-smooth) var(--ease-smooth);
 }
 
 .itemContentOpen .itemContentInner {
   padding-top: var(--space-4);
+  padding-bottom: var(--module-row-padding);
 }
 
 .description {
@@ -177,30 +174,20 @@
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .item {
-    grid-template-columns: var(--modulelist-num-col-mobile) minmax(0, 1fr);
-    column-gap: var(--element-gap-sm);
-    padding: var(--space-4) 0;
+    --module-num-width: var(--modulelist-num-col-mobile);
+    --module-row-gap: var(--element-gap-sm);
+    --module-row-padding: var(--space-4);
+    --module-action-size: var(--icon-md);
   }
 
   .num {
     font-size: var(--body);
     line-height: var(--body-lh);
-    padding-top: 1px;
   }
 
   .name {
     font-size: var(--body);
     line-height: var(--body-lh);
-  }
-
-  .plusBtn {
-    width: var(--icon-md);
-    height: var(--icon-md);
-  }
-
-  .iconPlus,
-  .iconUp {
-    font-size: var(--body);
   }
 
   .itemContentOpen .itemContentInner {
@@ -215,6 +202,7 @@
 
 /* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
+  .trigger,
   .itemContent,
   .itemContentInner {
     transition: none;
@@ -224,8 +212,7 @@
     visibility: visible;
   }
 
-  .iconWrapper,
-  .iconWrapperLess {
+  .iconWrapper {
     transition: none;
   }
 }

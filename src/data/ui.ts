@@ -35,8 +35,6 @@ export interface UiDict {
     ariaLabel: string;
     heading: string;
     allCaseStudies: string;
-    expand: string;
-    collapse: string;
   };
   stats: {
     ariaLabel: string;
@@ -47,7 +45,23 @@ export interface UiDict {
     ariaLabel: string;
     heading: string;
     subheading: string;
-    emailCta: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    nameError: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailError: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    messageError: string;
+    submit: string;
+    submitting: string;
+    success: string;
+    validationError: string;
+    error: string;
+    fallbackPrefix: string;
+    fallbackLink: string;
+    openFormCta: string;
   };
   footer: {
     ariaLabel: string;
@@ -139,8 +153,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Case studies",
       heading: "What I'm building",
       allCaseStudies: "All case studies →",
-      expand: "Expand",
-      collapse: "Collapse",
     },
     stats: {
       ariaLabel: "Track record",
@@ -152,7 +164,23 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Contact",
       heading: "Let's build something.",
       subheading: "Open to opportunities, collaborations and good conversations.",
-      emailCta: "Email me",
+      nameLabel: "Name",
+      namePlaceholder: "Your name",
+      nameError: "Enter your name (2–80 characters).",
+      emailLabel: "Email",
+      emailPlaceholder: "you@example.com",
+      emailError: "Enter a valid email address.",
+      messageLabel: "Message",
+      messagePlaceholder: "Tell me briefly what you would like to discuss…",
+      messageError: "Add a little more detail (20–2,000 characters).",
+      submit: "Send",
+      submitting: "Sending…",
+      success: "Message sent. Thanks — I'll reply to the email address you provided.",
+      validationError: "Review the highlighted fields before sending your message.",
+      error: "I couldn't send your message right now. Please try again in a moment.",
+      fallbackPrefix: "If the problem continues, you can also",
+      fallbackLink: "contact me on LinkedIn",
+      openFormCta: "Write to me",
     },
     footer: {
       ariaLabel: "Footer",
@@ -247,8 +275,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Casos de estudio",
       heading: "Qué estoy construyendo",
       allCaseStudies: "Todos los casos de estudio →",
-      expand: "Expandir",
-      collapse: "Colapsar",
     },
     stats: {
       ariaLabel: "Trayectoria",
@@ -260,7 +286,23 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Contacto",
       heading: "Construyamos algo.",
       subheading: "Abierto a oportunidades, colaboraciones y buenas conversaciones.",
-      emailCta: "Escribime",
+      nameLabel: "Nombre",
+      namePlaceholder: "Tu nombre",
+      nameError: "Ingresá tu nombre (entre 2 y 80 caracteres).",
+      emailLabel: "Email",
+      emailPlaceholder: "vos@ejemplo.com",
+      emailError: "Ingresá una dirección de email válida.",
+      messageLabel: "Mensaje",
+      messagePlaceholder: "Contame brevemente qué te gustaría conversar…",
+      messageError: "Agregá un poco más de detalle (entre 20 y 2.000 caracteres).",
+      submit: "Enviar",
+      submitting: "Enviando…",
+      success: "Mensaje enviado. Gracias; voy a responder al email que indicaste.",
+      validationError: "Revisá los campos indicados antes de enviar tu mensaje.",
+      error: "No pude enviar tu mensaje en este momento. Intentá nuevamente en unos instantes.",
+      fallbackPrefix: "Si el problema continúa, también podés",
+      fallbackLink: "contactarme por LinkedIn",
+      openFormCta: "Escribime",
     },
     footer: {
       ariaLabel: "Pie de página",

@@ -19,7 +19,6 @@ interface FooterLabels {
   about: string;
   blog: string;
   contact: string;
-  email: string;
 }
 
 const FOOTER_LABELS: Record<Locale, FooterLabels> = {
@@ -31,7 +30,6 @@ const FOOTER_LABELS: Record<Locale, FooterLabels> = {
     about: "About",
     blog: "Blog",
     contact: "Contact",
-    email: "Email",
   },
   es: {
     site: "Sitio",
@@ -41,7 +39,6 @@ const FOOTER_LABELS: Record<Locale, FooterLabels> = {
     about: "Sobre mí",
     blog: "Blog",
     contact: "Contacto",
-    email: "Email",
   },
 };
 
@@ -68,7 +65,6 @@ export function getFooterLinks(locale: Locale): FooterColumn[] {
       links: [
         { label: "GitHub", href: SITE.social.github },
         { label: "LinkedIn", href: SITE.social.linkedin },
-        { label: labels.email, href: `mailto:${SITE.email}` },
       ],
     },
   ];

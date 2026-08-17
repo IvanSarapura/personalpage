@@ -7,11 +7,9 @@ import type { Module } from "@/data/modules";
 
 interface ModuleListProps {
   modules: Module[];
-  expandLabel: string;
-  collapseLabel: string;
 }
 
-export default function ModuleList({ modules, expandLabel, collapseLabel }: ModuleListProps) {
+export default function ModuleList({ modules }: ModuleListProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = useCallback((index: number) => {
@@ -22,50 +20,38 @@ export default function ModuleList({ modules, expandLabel, collapseLabel }: Modu
     <ul className={styles.list}>
       {modules.map((mod, index) => {
         const isOpen = openIndex === index;
+        const triggerId = `module-trigger-${mod.num}`;
+        const contentId = `module-content-${mod.num}`;
 
         return (
           <li key={mod.num} className={styles.item}>
-            <span className={styles.num}>{mod.num}</span>
-
-            <div className={styles.moduleBody}>
-              <div className={styles.moduleHeader}>
-                <span id={`module-label-${mod.num}`} className={styles.name}>
-                  {mod.name}
+            <button
+              id={triggerId}
+              type="button"
+              className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""}`}
+              aria-expanded={isOpen}
+              aria-controls={contentId}
+              onClick={() => handleToggle(index)}
+            >
+              <span className={styles.num} aria-hidden="true">
+                {mod.num}
+              </span>
+              <span className={styles.name}>{mod.name}</span>
+              <span className={styles.toggleIndicator} aria-hidden="true">
+                <span className={styles.iconWrapper}>
+                  <ToggleIcon />
                 </span>
-                <button
-                  type="button"
-                  className={`${styles.plusBtn} ${isOpen ? styles.plusBtnOpen : ""}`}
-                  aria-label={
-                    isOpen ? `${collapseLabel} ${mod.name}` : `${expandLabel} ${mod.name}`
-                  }
-                  aria-expanded={isOpen}
-                  aria-controls={`module-content-${mod.num}`}
-                  onClick={() => handleToggle(index)}
-                >
-                  <span
-                    className={`${styles.iconWrapper} ${isOpen ? styles.iconWrapperOpen : ""}`}
-                    aria-hidden="true"
-                  >
-                    <ToggleIcon variant="more" />
-                  </span>
-                  <span
-                    className={`${styles.iconWrapper} ${styles.iconWrapperLess} ${isOpen ? styles.iconWrapperLessOpen : ""}`}
-                    aria-hidden="true"
-                  >
-                    <ToggleIcon variant="less" />
-                  </span>
-                </button>
-              </div>
+              </span>
+            </button>
 
-              <div
-                id={`module-content-${mod.num}`}
-                role="region"
-                aria-labelledby={`module-label-${mod.num}`}
-                className={`${styles.itemContent} ${isOpen ? styles.itemContentOpen : ""}`}
-              >
-                <div className={styles.itemContentInner}>
-                  <p className={styles.description}>{mod.description}</p>
-                </div>
+            <div
+              id={contentId}
+              role="region"
+              aria-labelledby={triggerId}
+              className={`${styles.itemContent} ${isOpen ? styles.itemContentOpen : ""}`}
+            >
+              <div className={styles.itemContentInner}>
+                <p className={styles.description}>{mod.description}</p>
               </div>
             </div>
           </li>

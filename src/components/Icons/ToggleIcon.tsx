@@ -1,14 +1,8 @@
-interface ToggleIconProps {
-  variant: "more" | "less";
-}
-
 /**
- * Ícono toggle usado en los módulos de la lista.
- * Renderiza un SVG inline con currentColor para adaptarse al tema.
+ * Chevron descendente usado en controles disclosure.
+ * Su contenedor lo rota 180° cuando el panel está expandido.
  */
-export function ToggleIcon({ variant }: ToggleIconProps) {
-  const isMore = variant === "more";
-
+export function ToggleIcon() {
   return (
     <svg
       width="24"
@@ -24,21 +18,12 @@ export function ToggleIcon({ variant }: ToggleIconProps) {
       }}
     >
       <path
-        d="M6 12H18"
+        d="M6 9L12 15L18 9"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {isMore && (
-        <path
-          d="M12 18L12 6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
     </svg>
   );
 }
