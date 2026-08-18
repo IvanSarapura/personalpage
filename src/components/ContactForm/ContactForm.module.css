@@ -1,9 +1,11 @@
 .card {
+  --contact-form-surface: var(--color-white-pure);
+
   width: 100%;
   overflow: hidden;
   border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
   border-radius: var(--radius-lg);
-  background: transparent;
+  background: var(--contact-form-surface);
 }
 
 .form {
@@ -39,7 +41,7 @@
   min-height: 48px;
   border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
   border-radius: var(--radius-md);
-  background: var(--color-white-pure);
+  background: var(--contact-form-surface);
   color: var(--color-deep);
   font: inherit;
   font-size: var(--body);
@@ -57,9 +59,9 @@
 }
 
 .control:focus-visible {
-  border-color: var(--color-blue-screen);
-  outline: 3px solid var(--color-blue-screen-muted);
-  outline-offset: 2px;
+  border-color: transparent;
+  outline: 2px solid var(--color-blue-screen);
+  outline-offset: calc(-1 * var(--border-width-thin));
 }
 
 .textarea {
@@ -88,8 +90,8 @@
   display: flex;
 }
 
-.control:user-invalid,
-.control[aria-invalid="true"] {
+.control:user-invalid:not(:focus-visible),
+.control[aria-invalid="true"]:not(:focus-visible) {
   border-color: var(--destructive);
 }
 
@@ -230,13 +232,13 @@
 }
 
 :global(html.dark) .card {
-  background: transparent;
+  --contact-form-surface: var(--color-deep-elevated);
+
   border-color: var(--color-border-subtle);
 }
 
 :global(html.dark) .control {
   border-color: var(--color-border-subtle);
-  background: var(--color-deep-elevated);
   color: var(--color-b-white);
 }
 
@@ -244,9 +246,13 @@
   color: rgba(235, 236, 255, 0.46);
 }
 
-:global(html.dark) .control:hover,
-:global(html.dark) .control:focus-visible {
+:global(html.dark) .control:hover {
   border-color: var(--color-g-nova);
+}
+
+:global(html.dark) .control:focus-visible {
+  border-color: transparent;
+  outline-color: var(--color-g-nova);
 }
 
 :global(html.dark) .successStatus > svg {
