@@ -31,7 +31,6 @@
   --color-deep-elevated: #121226;
   --color-b-white: #ebecff;
   --color-blue-screen: #0051e9;
-  --color-g-nova: #66cef6;
   --color-white-pure: #ffffff;
 
   /* Radios de Sira (sobrescriben los defaults del framework a propósito) */
@@ -143,6 +142,10 @@
   --text-on-light: var(--color-blue-screen);
   --text-muted: rgba(235, 236, 255, 0.6);
 
+  /* Accent follows the established palette instead of introducing a third hue. */
+  --accent-emphasis: var(--color-blue-screen);
+  --accent-surface-subtle: var(--color-blue-screen-subtle);
+
   --border-default: var(--color-white-pure);
   --border-subtle: var(--color-border-subtle);
 
@@ -161,6 +164,10 @@ html.dark {
   --text-secondary: var(--color-b-white);
   --text-on-light: var(--color-b-white);
   --text-muted: rgba(235, 236, 255, 0.5);
+
+  /* Same off-white used by dark-mode headings. */
+  --accent-emphasis: var(--color-b-white);
+  --accent-surface-subtle: var(--color-border-muted);
 
   --border-default: var(--color-b-white);
   --border-subtle: rgba(235, 236, 255, 0.15);
@@ -187,12 +194,12 @@ html.dark {
   --secondary-foreground: var(--color-blue-screen);
   --muted: var(--color-b-white);
   --muted-foreground: var(--text-muted);
-  --accent: var(--color-g-nova);
-  --accent-foreground: var(--color-deep);
+  --accent: var(--accent-emphasis);
+  --accent-foreground: var(--surface-secondary);
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--border-subtle);
   --input: var(--border-subtle);
-  --ring: var(--color-g-nova);
+  --ring: var(--accent-emphasis);
   --radius: 0.625rem;
 }
 
@@ -230,8 +237,6 @@ html.dark {
   --color-blue-screen-subtle: rgba(0, 81, 233, 0.08);
   --color-blue-screen-muted: rgba(0, 81, 233, 0.12);
   --color-blue-screen-moderate: rgba(0, 81, 233, 0.3);
-
-  --color-g-nova-subtle: rgba(102, 206, 246, 0.12);
 
   --color-b-white-moderate: rgba(235, 236, 255, 0.35);
 
@@ -491,8 +496,8 @@ html.dark {
   }
 
   ::selection {
-    background: var(--color-g-nova);
-    color: var(--color-deep);
+    background: var(--accent-emphasis);
+    color: var(--surface-secondary);
   }
 
   @media (prefers-reduced-motion: reduce) {

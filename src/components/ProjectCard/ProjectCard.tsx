@@ -7,7 +7,7 @@ const cardClass =
   "flex h-full flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] bg-[var(--surface-secondary)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--color-blue-screen-moderate)] dark:border-[color:var(--border-subtle)] dark:bg-[var(--color-deep-elevated)] dark:hover:border-[color:var(--color-b-white-moderate)]";
 
 const chipClass =
-  "inline-block rounded-[var(--radius-full)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]";
+  "inline-block rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
 
 const externalLinkClass =
   "text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--color-blue-screen)]";
@@ -38,7 +38,7 @@ export default function ProjectCard({ project, locale }: ProjectCardProps) {
       </p>
 
       {project.award && (
-        <p className="text-[length:var(--caption)] leading-[var(--caption-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:text-[var(--color-g-nova)]">
+        <p className="text-[length:var(--caption)] leading-[var(--caption-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]">
           🏆 {project.award}
         </p>
       )}

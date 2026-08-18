@@ -36,10 +36,10 @@ const bodyClass =
   "text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]";
 
 const chipClass =
-  "inline-block rounded-[var(--radius-full)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]";
+  "inline-block rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
 
 const badgeClass =
-  "inline-block shrink-0 rounded-[var(--radius-full)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]";
+  "inline-block shrink-0 rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
 
 export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
   const { lang } = await params;

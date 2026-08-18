@@ -303,8 +303,8 @@
 .archiveTags li {
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-full);
-  background: var(--color-blue-screen-subtle);
-  color: var(--color-blue-screen);
+  background: var(--accent-surface-subtle);
+  color: var(--accent-emphasis);
   font-size: var(--caption);
   font-weight: 500;
   line-height: var(--caption-lh);
@@ -315,11 +315,6 @@
 :global(.dark) .archiveList,
 :global(.dark) .archiveItem {
   border-color: var(--border-subtle);
-}
-
-:global(.dark) .archiveTags li {
-  background: var(--color-g-nova-subtle);
-  color: var(--color-g-nova);
 }
 
 @media (max-width: 1024px) {

@@ -93,8 +93,8 @@
 .highlight {
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-full);
-  background: var(--color-blue-screen-subtle);
-  color: var(--color-blue-screen);
+  background: var(--accent-surface-subtle);
+  color: var(--accent-emphasis);
   font-size: var(--caption);
   font-weight: 500;
   line-height: var(--caption-lh);
@@ -116,22 +116,13 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--color-blue-screen);
+  outline: 2px solid var(--accent-emphasis);
   outline-offset: 3px;
 }
 
 :global(html.dark) .list,
 :global(html.dark) .item + .item {
   border-color: var(--border-subtle);
-}
-
-:global(html.dark) .highlight {
-  background: var(--color-g-nova-subtle);
-  color: var(--color-g-nova);
-}
-
-:global(html.dark) .link:focus-visible {
-  outline-color: var(--text-on-light);
 }
 
 @media (hover: hover) and (pointer: fine) {

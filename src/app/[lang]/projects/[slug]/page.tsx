@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 }
 
 const chipClass =
-  "inline-block rounded-[var(--radius-full)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]";
+  "inline-block rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
 
 const sectionHeadingClass =
   "mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--text-on-light)]";
@@ -81,7 +81,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <p className={`${bodyClass} mb-[var(--element-gap)]`}>{project.tagline}</p>
 
             {project.award && (
-              <p className="mb-[var(--element-gap)] text-[length:var(--body)] leading-[var(--body-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:text-[var(--color-g-nova)]">
+              <p className="mb-[var(--element-gap)] text-[length:var(--body)] leading-[var(--body-lh)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]">
                 🏆 {project.award}
               </p>
             )}

@@ -99,7 +99,7 @@
 }
 
 .status {
-  color: var(--color-blue-screen);
+  color: var(--accent-emphasis);
   font-size: var(--caption);
   font-weight: 700;
   line-height: var(--caption-lh);
@@ -200,7 +200,7 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--color-blue-screen);
+  outline: 2px solid var(--accent-emphasis);
   outline-offset: 3px;
 }
 
@@ -208,14 +208,6 @@
 :global(html.dark) .list,
 :global(html.dark) .item {
   border-color: var(--border-subtle);
-}
-
-:global(html.dark) .status {
-  color: var(--color-g-nova);
-}
-
-:global(html.dark) .link:focus-visible {
-  outline-color: var(--text-on-light);
 }
 
 @media (hover: hover) and (pointer: fine) {

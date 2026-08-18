@@ -44,7 +44,7 @@ const components: MDXComponents = {
     </blockquote>
   ),
   code: ({ children }) => (
-    <code className="rounded-[var(--radius-sm)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-1)] py-[2px] font-mono text-[0.9em] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]">
+    <code className="rounded-[var(--radius-sm)] bg-[var(--accent-surface-subtle)] px-[var(--space-1)] py-[2px] font-mono text-[0.9em] text-[var(--accent-emphasis)]">
       {children}
     </code>
   ),

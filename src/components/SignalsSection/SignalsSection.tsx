@@ -59,7 +59,7 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
           {signals.map((signal) => (
             <li key={signal.id} className={cardClass}>
               <div
-                className="flex h-[var(--icon-lg)] w-[var(--icon-lg)] shrink-0 items-center justify-center text-[var(--color-blue-screen)] dark:text-[var(--color-g-nova)]"
+                className="flex h-[var(--icon-lg)] w-[var(--icon-lg)] shrink-0 items-center justify-center text-[var(--accent-emphasis)]"
                 aria-hidden="true"
               >
                 {SIGNAL_ICONS[signal.id]}
@@ -70,7 +70,7 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
               <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-emphasized)]">
                 {signal.description}
               </p>
-              <span className="inline-block self-start rounded-[var(--radius-full)] bg-[var(--color-blue-screen-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--color-blue-screen)] dark:bg-[var(--color-g-nova-subtle)] dark:text-[var(--color-g-nova)]">
+              <span className="inline-block self-start rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]">
                 {signal.meta}
               </span>
             </li>

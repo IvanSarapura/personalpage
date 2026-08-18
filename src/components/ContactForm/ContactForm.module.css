@@ -33,7 +33,7 @@
 
 .requiredMark {
   margin-inline-start: var(--space-1);
-  color: var(--color-blue-screen);
+  color: var(--accent-emphasis);
 }
 
 .control {
@@ -61,12 +61,12 @@
 }
 
 .control:hover {
-  border-color: var(--color-blue-screen);
+  border-color: var(--accent-emphasis);
 }
 
 .control:focus-visible {
   border-color: transparent;
-  outline: 2px solid var(--color-blue-screen);
+  outline: 2px solid var(--accent-emphasis);
   outline-offset: calc(-1 * var(--border-width-thin));
 }
 
@@ -145,7 +145,7 @@
 }
 
 .submit:focus-visible {
-  outline: 2px solid var(--color-blue-screen);
+  outline: 2px solid var(--accent-emphasis);
   outline-offset: 2px;
 }
 
@@ -193,7 +193,7 @@
 }
 
 .successStatus > svg {
-  color: var(--color-blue-screen);
+  color: var(--accent-emphasis);
 }
 
 .errorStatus > svg {
@@ -253,23 +253,6 @@
 :global(html.dark) .control:is(:autofill, :-webkit-autofill) {
   -webkit-text-fill-color: var(--color-b-white);
   caret-color: var(--color-b-white);
-}
-
-:global(html.dark) .control:hover {
-  border-color: var(--color-g-nova);
-}
-
-:global(html.dark) .control:focus-visible {
-  border-color: transparent;
-  outline-color: var(--color-g-nova);
-}
-
-:global(html.dark) .successStatus > svg {
-  color: var(--color-g-nova);
-}
-
-:global(html.dark) .requiredMark {
-  color: var(--color-g-nova);
 }
 
 :global(html.dark) .submit:hover:not(:disabled) {
