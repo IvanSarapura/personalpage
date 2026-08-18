@@ -1,5 +1,5 @@
 .card {
-  --contact-control-surface: var(--color-white-pure);
+  --contact-control-surface: var(--surface-secondary);
 
   width: 100%;
   overflow: hidden;
