@@ -1,11 +1,11 @@
 .card {
-  --contact-form-surface: var(--color-white-pure);
+  --contact-control-surface: var(--color-white-pure);
 
   width: 100%;
   overflow: hidden;
-  border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+  border: var(--border-width-thin) solid var(--text-on-light);
   border-radius: var(--radius-lg);
-  background: var(--contact-form-surface);
+  background: transparent;
 }
 
 .form {
@@ -41,7 +41,7 @@
   min-height: 48px;
   border: var(--border-width-thin) solid var(--color-blue-screen-moderate);
   border-radius: var(--radius-md);
-  background: var(--contact-form-surface);
+  background: var(--contact-control-surface);
   color: var(--color-deep);
   font: inherit;
   font-size: var(--body);
@@ -52,6 +52,12 @@
 
 .control::placeholder {
   color: rgba(25, 25, 45, 0.48);
+}
+
+.control:is(:autofill, :-webkit-autofill) {
+  box-shadow: 0 0 0 100vmax var(--contact-control-surface) inset;
+  -webkit-text-fill-color: var(--color-deep);
+  caret-color: var(--color-deep);
 }
 
 .control:hover {
@@ -232,9 +238,7 @@
 }
 
 :global(html.dark) .card {
-  --contact-form-surface: var(--color-deep-elevated);
-
-  border-color: var(--color-border-subtle);
+  --contact-control-surface: var(--color-deep-elevated);
 }
 
 :global(html.dark) .control {
@@ -244,6 +248,11 @@
 
 :global(html.dark) .control::placeholder {
   color: rgba(235, 236, 255, 0.46);
+}
+
+:global(html.dark) .control:is(:autofill, :-webkit-autofill) {
+  -webkit-text-fill-color: var(--color-b-white);
+  caret-color: var(--color-b-white);
 }
 
 :global(html.dark) .control:hover {

@@ -28,7 +28,7 @@ describe("ContactForm", () => {
     expect(email).toHaveAttribute("type", "email");
     expect(email).toHaveAttribute("autocomplete", "email");
     expect(message).toHaveAttribute("maxlength", String(CONTACT_LIMITS.messageMax));
-    expect(screen.getByRole("button", { name: /^send$/i })).toBeEnabled();
+    expect(screen.getByRole("button", { name: /^send message$/i })).toBeEnabled();
   });
 
   it("renderiza la experiencia completa en español", () => {
@@ -42,7 +42,7 @@ describe("ContactForm", () => {
 
     expect(screen.getByRole("textbox", { name: "Nombre" })).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Mensaje" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /^enviar$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^enviar mensaje$/i })).toBeInTheDocument();
     expect(screen.queryByText("Mensaje directo")).not.toBeInTheDocument();
     expect(screen.queryByText("Todos los campos son obligatorios.")).not.toBeInTheDocument();
     expect(screen.queryByText(/No incluyas contraseñas/)).not.toBeInTheDocument();
