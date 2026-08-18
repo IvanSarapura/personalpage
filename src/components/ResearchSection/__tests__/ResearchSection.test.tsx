@@ -20,7 +20,7 @@ describe("ResearchSection", () => {
       "Infraestructura criptográfica implementable"
     );
     expect(within(articles[0]!).getByText("Research in progress")).toBeVisible();
-    expect(within(articles[0]!).getByText("2026")).toHaveAttribute("datetime", "2026");
+    expect(within(articles[0]!).getByText("October, 2026")).toHaveAttribute("datetime", "2026");
     expect(within(articles[1]!).getByText("Published paper")).toBeVisible();
 
     expect(screen.queryByText("Sarapura, Iván Enzo")).not.toBeInTheDocument();
