@@ -22,7 +22,13 @@ export default function LeadSection({ locale }: LeadSectionProps) {
   const ui = getUi(locale);
 
   return (
-    <Section variant="white" paddingY="none" ariaLabel={ui.hero.ariaLabel} id="home">
+    <Section
+      variant="white"
+      paddingY="none"
+      ariaLabel={ui.hero.ariaLabel}
+      className="dark:bg-[var(--surface-tertiary)]"
+      id="home"
+    >
       <div className="py-[var(--section-padding-y)] max-[768px]:py-[var(--section-padding-y-mobile)]">
         <Container>
           <h1 className="mb-[var(--content-gap)] text-[length:var(--display-1)] leading-[var(--display-1-lh)] font-normal tracking-[var(--display-1-tracking)] text-[var(--text-on-light)] text-balance max-[768px]:mb-[var(--element-gap)] max-[768px]:text-[length:var(--display-2)] max-[768px]:leading-[var(--display-2-lh)] max-[768px]:tracking-[var(--display-2-tracking)]">

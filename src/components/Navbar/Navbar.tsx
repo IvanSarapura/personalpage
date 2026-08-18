@@ -16,12 +16,13 @@ export default function Navbar({ locale }: NavbarProps) {
   const scrolled = useScrolled(8);
   const ui = getUi(locale);
 
-  // Fondo en un solo origen condicional: en reposo surface-secondary; al hacer
-  // scroll, glassmorphism (bg translúcido + blur + hairline). Evita conflictos
-  // de especificidad entre utilidades bg-[...] de igual jerarquía.
+  // Fondo en un solo origen condicional: en reposo surface-secondary en light
+  // y surface-tertiary en dark; al hacer scroll, glassmorphism (bg translúcido
+  // + blur + hairline). Evita conflictos de especificidad entre utilidades
+  // bg-[...] de igual jerarquía.
   const surfaceClass = scrolled
     ? "bg-[var(--navbar-bg-scrolled)] [backdrop-filter:blur(var(--navbar-backdrop-blur))] [-webkit-backdrop-filter:blur(var(--navbar-backdrop-blur))] shadow-[0_1px_0_0_var(--navbar-border-scrolled)]"
-    : "bg-[var(--surface-secondary)]";
+    : "bg-[var(--surface-secondary)] dark:bg-[var(--surface-tertiary)]";
 
   return (
     <nav
