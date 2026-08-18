@@ -11,7 +11,7 @@ export const CONTACT_LIMITS = {
 export type ContactField = "name" | "email" | "message";
 
 export interface ContactActionState {
-  status: "idle" | "validation-error" | "success" | "error";
+  status: "idle" | "validation-error" | "rate-limited" | "success" | "error";
   fieldErrors?: Partial<Record<ContactField, true>>;
 }
 

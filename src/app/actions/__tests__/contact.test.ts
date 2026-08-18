@@ -3,11 +3,15 @@ import { INITIAL_CONTACT_STATE } from "@/lib/contact";
 
 const mocks = vi.hoisted(() => ({
   checkBotId: vi.fn(),
+  isContactRateLimited: vi.fn(),
   send: vi.fn(),
 }));
 
 vi.mock("server-only", () => ({}));
 vi.mock("botid/server", () => ({ checkBotId: mocks.checkBotId }));
+vi.mock("@/lib/contact-rate-limit", () => ({
+  isContactRateLimited: mocks.isContactRateLimited,
+}));
 vi.mock("resend", () => ({
   Resend: class MockResend {
     emails = { send: mocks.send };
@@ -35,6 +39,7 @@ function validFormData(): FormData {
 describe("sendContactMessage", () => {
   beforeEach(() => {
     mocks.checkBotId.mockReset().mockResolvedValue({ isBot: false, isHuman: true });
+    mocks.isContactRateLimited.mockReset().mockResolvedValue(false);
     mocks.send.mockReset().mockResolvedValue({
       data: { id: "email_123" },
       error: null,
@@ -65,6 +70,7 @@ describe("sendContactMessage", () => {
 
     expect(result).toEqual({ status: "validation-error", fieldErrors: { email: true } });
     expect(mocks.checkBotId).not.toHaveBeenCalled();
+    expect(mocks.isContactRateLimited).not.toHaveBeenCalled();
     expect(mocks.send).not.toHaveBeenCalled();
   });
 
@@ -76,6 +82,7 @@ describe("sendContactMessage", () => {
 
     expect(result).toEqual({ status: "success" });
     expect(mocks.checkBotId).not.toHaveBeenCalled();
+    expect(mocks.isContactRateLimited).not.toHaveBeenCalled();
     expect(mocks.send).not.toHaveBeenCalled();
   });
 
@@ -85,6 +92,18 @@ describe("sendContactMessage", () => {
     const result = await sendContactMessage("en", INITIAL_CONTACT_STATE, validFormData());
 
     expect(result).toEqual({ status: "error" });
+    expect(mocks.isContactRateLimited).not.toHaveBeenCalled();
+    expect(mocks.send).not.toHaveBeenCalled();
+  });
+
+  it("bloquea envíos que exceden el límite sin llamar a Resend", async () => {
+    mocks.isContactRateLimited.mockResolvedValue(true);
+
+    const result = await sendContactMessage("es", INITIAL_CONTACT_STATE, validFormData());
+
+    expect(result).toEqual({ status: "rate-limited" });
+    expect(mocks.checkBotId).toHaveBeenCalledOnce();
+    expect(mocks.isContactRateLimited).toHaveBeenCalledOnce();
     expect(mocks.send).not.toHaveBeenCalled();
   });
 });

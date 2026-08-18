@@ -1,14 +1,19 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ContactForm from "@/components/ContactForm/ContactForm";
 import { getUi } from "@/data/ui";
 import { CONTACT_LIMITS } from "@/lib/contact";
 
-vi.mock("@/app/actions/contact", () => ({
-  sendContactMessage: vi.fn(async () => ({ status: "success" })),
-}));
+const mocks = vi.hoisted(() => ({ sendContactMessage: vi.fn() }));
+
+vi.mock("@/app/actions/contact", () => ({ sendContactMessage: mocks.sendContactMessage }));
 
 describe("ContactForm", () => {
+  beforeEach(() => {
+    mocks.sendContactMessage.mockReset().mockResolvedValue({ status: "success" });
+  });
+
   it("expone labels, tipos, autocompletado y límites nativos accesibles", () => {
     render(
       <ContactForm
@@ -47,5 +52,36 @@ describe("ContactForm", () => {
     expect(screen.queryByText("Todos los campos son obligatorios.")).not.toBeInTheDocument();
     expect(screen.queryByText(/No incluyas contraseñas/)).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /email/i })).not.toBeInTheDocument();
+  });
+
+  it("anuncia el límite en español y conserva los datos para reintentar", async () => {
+    const user = userEvent.setup();
+    mocks.sendContactMessage.mockResolvedValue({ status: "rate-limited" });
+
+    render(
+      <ContactForm
+        locale="es"
+        copy={getUi("es").contact}
+        fallbackHref="https://www.linkedin.com/in/example"
+      />
+    );
+
+    const name = screen.getByRole("textbox", { name: "Nombre" });
+    const email = screen.getByRole("textbox", { name: "Email" });
+    const message = screen.getByRole("textbox", { name: "Mensaje" });
+
+    await user.type(name, "Ada Lovelace");
+    await user.type(email, "ada@example.com");
+    await user.type(message, "Me gustaría conversar sobre una colaboración profesional.");
+    await user.click(screen.getByRole("button", { name: /^enviar mensaje$/i }));
+
+    const feedback = await screen.findByText(
+      "Enviaste varios mensajes en poco tiempo. Intentá nuevamente en unos minutos."
+    );
+    expect(feedback.closest("[aria-live]")).toHaveAttribute("aria-live", "assertive");
+    expect(name).toHaveValue("Ada Lovelace");
+    expect(email).toHaveValue("ada@example.com");
+    expect(message).toHaveValue("Me gustaría conversar sobre una colaboración profesional.");
+    expect(screen.queryByRole("link", { name: /linkedin/i })).not.toBeInTheDocument();
   });
 });

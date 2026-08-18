@@ -6,6 +6,7 @@ import { env } from "@/env";
 import { hasLocale, type Locale } from "@/data/locale";
 import { hasFilledHoneypot, parseContactSubmission, type ContactActionState } from "@/lib/contact";
 import { buildContactEmail } from "@/lib/contact-email";
+import { isContactRateLimited } from "@/lib/contact-rate-limit";
 
 const ERROR_STATE: ContactActionState = { status: "error" };
 
@@ -42,6 +43,10 @@ export async function sendContactMessage(
       submissionId: parsed.data.submissionId,
     });
     return ERROR_STATE;
+  }
+
+  if (await isContactRateLimited()) {
+    return { status: "rate-limited" };
   }
 
   const email = buildContactEmail(parsed.data, locale);

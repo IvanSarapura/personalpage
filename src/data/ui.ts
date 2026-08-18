@@ -80,6 +80,7 @@ export interface UiDict {
     submitting: string;
     success: string;
     validationError: string;
+    rateLimited: string;
     error: string;
     fallbackPrefix: string;
     fallbackLink: string;
@@ -225,6 +226,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       submitting: "Sending message…",
       success: "Message sent. Thanks — I'll reply to the email address you provided.",
       validationError: "Review the highlighted fields before sending your message.",
+      rateLimited:
+        "You've sent several messages in a short time. Please try again in a few minutes.",
       error: "I couldn't send your message right now. Please try again in a moment.",
       fallbackPrefix: "If the problem continues, you can also",
       fallbackLink: "contact me on LinkedIn",
@@ -374,6 +377,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       submitting: "Enviando mensaje…",
       success: "Mensaje enviado. Gracias; voy a responder al email que indicaste.",
       validationError: "Revisá los campos indicados antes de enviar tu mensaje.",
+      rateLimited: "Enviaste varios mensajes en poco tiempo. Intentá nuevamente en unos minutos.",
       error: "No pude enviar tu mensaje en este momento. Intentá nuevamente en unos instantes.",
       fallbackPrefix: "Si el problema continúa, también podés",
       fallbackLink: "contactarme por LinkedIn",

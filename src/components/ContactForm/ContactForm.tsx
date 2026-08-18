@@ -16,7 +16,14 @@ interface ContactFormProps {
 
 type ContactControl = HTMLInputElement | HTMLTextAreaElement;
 
-function isContactControl(target: EventTarget): target is ContactControl {
+interface SubmittedContactValues {
+  name: string;
+  email: string;
+  message: string;
+  submissionId: string;
+}
+
+function isContactControl(target: unknown): target is ContactControl {
   return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
 }
 
@@ -28,6 +35,7 @@ function syncValidity(target: EventTarget) {
 export default function ContactForm({ locale, copy, fallbackHref }: ContactFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const submissionIdRef = useRef<HTMLInputElement>(null);
+  const submittedValuesRef = useRef<SubmittedContactValues | null>(null);
   const localizedAction = sendContactMessage.bind(null, locale);
   const [state, formAction, isPending] = useActionState(localizedAction, INITIAL_CONTACT_STATE);
 
@@ -37,15 +45,38 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
     if (state.status === "success") {
       formRef.current?.reset();
       submissionIdRef.current.value = crypto.randomUUID();
+      submittedValuesRef.current = null;
       return;
     }
 
-    // Keep the same key after a transport error so a retry cannot create a
-    // duplicate email if the first Resend request had an uncertain outcome.
+    // React resets uncontrolled fields after a form action resolves. Restore
+    // them after expected failures so visitors do not lose their message, and
+    // keep the same idempotency key for a safe retry.
+    const submittedValues = submittedValuesRef.current;
+    const form = formRef.current;
+    if (state.status !== "idle" && submittedValues && form) {
+      for (const name of ["name", "email", "message"] as const) {
+        const control = form.elements.namedItem(name);
+        if (isContactControl(control)) control.value = submittedValues[name];
+      }
+      submissionIdRef.current.value = submittedValues.submissionId;
+      return;
+    }
+
     if (!submissionIdRef.current.value) {
       submissionIdRef.current.value = crypto.randomUUID();
     }
-  }, [state.status]);
+  }, [state]);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const formData = new FormData(event.currentTarget);
+    submittedValuesRef.current = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      message: String(formData.get("message") ?? ""),
+      submissionId: String(formData.get("submissionId") ?? ""),
+    };
+  }
 
   function handleInput(event: FormEvent<HTMLFormElement>) {
     syncValidity(event.target);
@@ -56,7 +87,18 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
   }
 
   const showStatus = state.status !== "idle";
-  const isError = state.status === "error" || state.status === "validation-error";
+  const isError =
+    state.status === "error" ||
+    state.status === "validation-error" ||
+    state.status === "rate-limited";
+  const statusMessage =
+    state.status === "success"
+      ? copy.success
+      : state.status === "validation-error"
+        ? copy.validationError
+        : state.status === "rate-limited"
+          ? copy.rateLimited
+          : copy.error;
 
   return (
     <div className={styles.card}>
@@ -67,6 +109,7 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
         onBlurCapture={handleInput}
         onInputCapture={handleInput}
         onInvalidCapture={handleInvalid}
+        onSubmitCapture={handleSubmit}
       >
         <input ref={submissionIdRef} type="hidden" name="submissionId" />
 
@@ -180,13 +223,7 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
             <div className={isError ? styles.errorStatus : styles.successStatus}>
               {isError ? <CircleAlert aria-hidden="true" /> : <CircleCheck aria-hidden="true" />}
               <div>
-                <p>
-                  {state.status === "success"
-                    ? copy.success
-                    : state.status === "validation-error"
-                      ? copy.validationError
-                      : copy.error}
-                </p>
+                <p>{statusMessage}</p>
                 {state.status === "error" && (
                   <p className={styles.fallback}>
                     {copy.fallbackPrefix}{" "}
