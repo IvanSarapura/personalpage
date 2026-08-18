@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Container from "@/components/Container/Container";
 import ModuleList from "@/components/ModuleList/ModuleList";
 import Section from "@/components/Section/Section";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { localePath, type Locale } from "@/data/locale";
 import { getModules } from "@/data/modules";
 import { getUi } from "@/data/ui";
@@ -24,12 +24,7 @@ export default function SelectedWorkSection({ locale }: SelectedWorkSectionProps
           <ModuleList modules={getModules(locale)} />
 
           <div className="mt-[var(--content-gap)]">
-            <Link
-              href={localePath(locale, "/projects")}
-              className="text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-primary)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--text-primary)]"
-            >
-              {ui.allCaseStudies}
-            </Link>
+            <SectionLink href={localePath(locale, "/projects")}>{ui.allCaseStudies}</SectionLink>
           </div>
         </div>
       </Container>

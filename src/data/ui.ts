@@ -170,7 +170,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     research: {
       heading: "Research & publications",
       subheading: "A concise view of my ongoing and published work in legal technology.",
-      allResearch: "Explore all research →",
+      allResearch: "Explore all research",
       pageTitle: "Research & publications",
       pageDescription:
         "An evolving archive of Iván Sarapura's academic research on legal technology, cryptographic infrastructure and digital evidence.",
@@ -194,7 +194,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     selectedWork: {
       ariaLabel: "Selected projects",
       heading: "Selected work",
-      allCaseStudies: "All case studies →",
+      allCaseStudies: "All case studies",
     },
     building: {
       ariaLabel: "Current work",
@@ -321,7 +321,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       heading: "Investigación y publicaciones",
       subheading:
         "Una selección breve de mi trabajo académico en curso y publicado sobre tecnología jurídica.",
-      allResearch: "Ver todas las investigaciones →",
+      allResearch: "Ver todas las investigaciones",
       pageTitle: "Investigación y publicaciones",
       pageDescription:
         "Un archivo en evolución de las investigaciones académicas de Iván Sarapura sobre tecnología jurídica, infraestructura criptográfica y evidencia digital.",
@@ -345,7 +345,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     selectedWork: {
       ariaLabel: "Proyectos seleccionados",
       heading: "Proyectos seleccionados",
-      allCaseStudies: "Todos los casos de estudio →",
+      allCaseStudies: "Todos los casos de estudio",
     },
     building: {
       ariaLabel: "Trabajo actual",

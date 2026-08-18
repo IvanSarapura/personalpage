@@ -27,8 +27,9 @@ describe("ResearchSection", () => {
     expect(screen.queryByText("Academic background")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Read paper/ })).not.toBeInTheDocument();
 
-    const archiveLink = screen.getByRole("link", { name: "Explore all research →" });
+    const archiveLink = screen.getByRole("link", { name: "Explore all research" });
     expect(archiveLink).toHaveAttribute("href", "/research");
+    expect(archiveLink.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
     expect(
       screen.getByRole("list").compareDocumentPosition(archiveLink) &
         Node.DOCUMENT_POSITION_FOLLOWING
@@ -42,7 +43,7 @@ describe("ResearchSection", () => {
       screen.getByRole("heading", { level: 2, name: "Investigación y publicaciones" })
     ).toBeVisible();
     expect(container.querySelector("cite")).not.toHaveAttribute("lang");
-    expect(screen.getByRole("link", { name: "Ver todas las investigaciones →" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Ver todas las investigaciones" })).toHaveAttribute(
       "href",
       "/es/research"
     );

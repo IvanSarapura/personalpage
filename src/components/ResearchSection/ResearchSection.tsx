@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { localePath, type Locale } from "@/data/locale";
 import { getResearch } from "@/data/research";
 import { getUi } from "@/data/ui";
@@ -56,9 +56,9 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
           })}
         </ul>
 
-        <Link href={localePath(locale, "/research")} className={styles.link}>
-          {ui.allResearch}
-        </Link>
+        <div className={styles.archiveLink}>
+          <SectionLink href={localePath(locale, "/research")}>{ui.allResearch}</SectionLink>
+        </div>
       </Container>
     </Section>
   );

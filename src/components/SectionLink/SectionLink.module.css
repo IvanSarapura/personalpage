@@ -22,7 +22,6 @@
   width: var(--icon-xs);
   height: var(--icon-xs);
   flex: 0 0 auto;
-  transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .link:focus-visible {
@@ -34,19 +33,5 @@
   .link:hover .label {
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
-  }
-
-  .link:hover .chevron {
-    transform: translateX(var(--space-1));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .chevron {
-    transition: none;
-  }
-
-  .link:hover .chevron {
-    transform: none;
   }
 }

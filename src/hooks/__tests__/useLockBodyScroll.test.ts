@@ -6,6 +6,7 @@ describe("useLockBodyScroll", () => {
   beforeEach(() => {
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 0 });
   });
 
   it("does not lock body when locked=false", () => {
@@ -23,6 +24,15 @@ describe("useLockBodyScroll", () => {
     const { unmount } = renderHook(() => useLockBodyScroll(true));
     unmount();
     expect(document.body.style.overflow).toBe("auto");
+  });
+
+  it("restores the original scroll position on unmount", () => {
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 240 });
+    const { unmount } = renderHook(() => useLockBodyScroll(true));
+
+    unmount();
+
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 240);
   });
 
   it("restores overflow when locked changes from true to false", () => {
