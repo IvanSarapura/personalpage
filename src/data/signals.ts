@@ -121,30 +121,3 @@ export function getSignals(locale: Locale): readonly Signal[] {
 }
 
 export const SIGNALS = SIGNALS_BY_LOCALE[DEFAULT_LOCALE];
-
-interface Stat {
-  value: string;
-  label: string;
-}
-
-/** Strip de logros (sección "Track record") — .agents/propuesta.md §5.1. */
-const STATS_BY_LOCALE: Record<Locale, readonly Stat[]> = {
-  en: [
-    { value: "1st", label: "Prediction Markets — Aleph & GenLayer Hackathon" },
-    { value: "1st", label: "Legalthon UBA · Cardano — co-authored paper" },
-    { value: "Finalist", label: "Trama BootCamp (ITBA) — Lupio" },
-    { value: "FS '26", label: "Founder School — Crecimiento & Lucero Ventures" },
-  ],
-  es: [
-    { value: "1º", label: "Prediction Markets — Aleph & GenLayer Hackathon" },
-    { value: "1º", label: "Legalthon UBA · Cardano — paper en co-autoría" },
-    { value: "Finalista", label: "BootCamp de Trama (ITBA) — Lupio" },
-    { value: "FS '26", label: "Founder School — Crecimiento & Lucero Ventures" },
-  ],
-};
-
-export function getStats(locale: Locale): readonly Stat[] {
-  return STATS_BY_LOCALE[locale];
-}
-
-export const STATS = STATS_BY_LOCALE[DEFAULT_LOCALE];

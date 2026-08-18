@@ -104,14 +104,14 @@ const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
       title: "Proven",
       tagline: "Decentralized dispute resolution",
       summary:
-        "1st place, Prediction Markets track at the Aleph & GenLayer Hackathon. Proven mediates peer-to-peer commercial disputes with subjective-logic smart contracts on GenLayer, where LLM validators evaluate the evidence each party submits — still in active development with the team.",
+        "1st place, Prediction Markets track at GenLayer's Bradbury Builders Hackathon. Proven mediates peer-to-peer commercial disputes with subjective-logic smart contracts on GenLayer, where LLM validators evaluate the evidence each party submits — still in active development with the team.",
       origin:
-        "Traditional smart contracts can't weigh subjective evidence: they execute deterministic rules, while real commercial conflicts turn on interpretation. Proven was conceived at the Aleph & GenLayer Hackathon (organized by Crecimiento) to mediate peer-to-peer disputes in digital commerce, and won 1st place in the Prediction Markets track.",
+        "Traditional smart contracts can't weigh subjective evidence: they execute deterministic rules, while real commercial conflicts turn on interpretation. Proven was conceived at GenLayer's Bradbury Builders Hackathon to mediate peer-to-peer disputes in digital commerce, and won 1st place in the Prediction Markets track.",
       mechanism:
         "The protocol runs subjective-logic smart contracts on GenLayer's experimental network, where coordinated LLM validators act as decentralized adjudicators over the evidence each party submits. The TypeScript/Next.js frontend covers the dispute flow end to end: structured evidence upload, state tracking and verdict monitoring.",
       future:
         "Development continues with the post-hackathon team. The mid-term roadmap explores digital identity schemes and extending subjective logic to automated audits of supply contracts, reducing the cost of traditional commercial arbitration.",
-      award: "1st place — Prediction Markets, Aleph & GenLayer Hackathon",
+      award: "1st place — Prediction Markets, GenLayer Bradbury Builders Hackathon",
       status: "In active development",
     },
     "cardano-chain-of-custody": {
@@ -200,14 +200,14 @@ const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
       title: "Proven",
       tagline: "Resolución descentralizada de disputas",
       summary:
-        "1er puesto, track de Prediction Markets en el Aleph & GenLayer Hackathon. Proven media disputas comerciales peer-to-peer con contratos de lógica subjetiva sobre GenLayer, donde validadores LLM evalúan la evidencia que aporta cada parte — en desarrollo activo con el equipo.",
+        "1er puesto, track de Prediction Markets en el GenLayer Bradbury Builders Hackathon. Proven media disputas comerciales peer-to-peer con contratos de lógica subjetiva sobre GenLayer, donde validadores LLM evalúan la evidencia que aporta cada parte — en desarrollo activo con el equipo.",
       origin:
-        "Los smart contracts tradicionales no pueden ponderar evidencia subjetiva: ejecutan reglas deterministas, mientras los conflictos comerciales reales dependen de interpretación. Proven se concibió en el Aleph & GenLayer Hackathon (organizado por Crecimiento) para mediar disputas peer-to-peer en el comercio digital, y ganó el 1er puesto del track de Prediction Markets.",
+        "Los smart contracts tradicionales no pueden ponderar evidencia subjetiva: ejecutan reglas deterministas, mientras los conflictos comerciales reales dependen de interpretación. Proven se concibió en el GenLayer Bradbury Builders Hackathon para mediar disputas peer-to-peer en el comercio digital, y ganó el 1er puesto del track de Prediction Markets.",
       mechanism:
         "El protocolo ejecuta contratos de lógica subjetiva sobre la red experimental de GenLayer, donde validadores LLM coordinados actúan como adjudicadores descentralizados sobre la evidencia que aporta cada parte. El frontend en TypeScript/Next.js cubre el flujo completo: carga estructurada de evidencia, seguimiento de estados y monitoreo de veredictos.",
       future:
         "El desarrollo continúa con el equipo post-hackathon. La proyección a mediano plazo explora esquemas de identidad digital y extender la lógica subjetiva a auditorías automáticas de contratos de suministro, reduciendo el costo del arbitraje comercial tradicional.",
-      award: "1er puesto — Prediction Markets, Aleph & GenLayer Hackathon",
+      award: "1er puesto — Prediction Markets, GenLayer Bradbury Builders Hackathon",
       status: "En desarrollo activo",
     },
     "cardano-chain-of-custody": {

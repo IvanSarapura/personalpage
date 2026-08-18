@@ -62,6 +62,7 @@ export interface UiDict {
     ariaLabel: string;
     heading: string;
     subheading: string;
+    opensInNewTab: string;
   };
   contact: {
     ariaLabel: string;
@@ -207,7 +208,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Track record",
       heading: "Track record",
       subheading:
-        "Hackathons won, a published paper and programs that back the work — facts, not promises.",
+        "Selected recognition across product building, legal research and entrepreneurship — with the work behind each result.",
+      opensInNewTab: "opens in a new tab",
     },
     contact: {
       ariaLabel: "Contact",
@@ -358,7 +360,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Trayectoria",
       heading: "Trayectoria",
       subheading:
-        "Hackathons ganados, un paper publicado y programas que respaldan el trabajo — hechos, no promesas.",
+        "Reconocimientos seleccionados en producto, investigación jurídica y emprendimiento, junto con el trabajo que respalda cada resultado.",
+      opensInNewTab: "se abre en una pestaña nueva",
     },
     contact: {
       ariaLabel: "Contacto",
