@@ -56,7 +56,7 @@ export const POSTS: readonly PostMeta[] = [
     lang: "en",
     title: "From zero to agent: prototyping with v0 and the AI SDK",
     description:
-      "One constraint — ship a type-safe agent without hand-writing the interface. What held up, what didn't, and why it changed my MVP workflow.",
+      "The constraint was to ship a type-safe agent without hand-writing the interface. What held up, what didn't, and why it changed my MVP workflow.",
     date: "2026-03-30",
     tags: ["AI", "v0", "Vercel AI SDK"],
     readingMinutes: 4,

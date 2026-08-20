@@ -8,7 +8,7 @@ describe("ResearchIndex", () => {
     const { container } = render(<ResearchIndex locale="en" />);
 
     expect(
-      screen.getByRole("heading", { level: 1, name: "Research & publications" })
+      screen.getByRole("heading", { level: 1, name: "Publications & research" })
     ).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Research archive" })).toBeVisible();
     expect(screen.getByText(/works/)).toHaveTextContent("02 works");
@@ -40,7 +40,7 @@ describe("ResearchIndex", () => {
     render(<ResearchIndex locale="es" />);
 
     expect(
-      screen.getByRole("heading", { level: 1, name: "Investigación y publicaciones" })
+      screen.getByRole("heading", { level: 1, name: "Publicaciones e investigación" })
     ).toBeVisible();
     expect(
       screen.getByRole("heading", { level: 2, name: "Archivo de investigaciones" })

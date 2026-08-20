@@ -7,9 +7,9 @@ describe("ResearchSection", () => {
     const { container } = render(<ResearchSection locale="en" />);
 
     expect(
-      screen.getByRole("heading", { level: 2, name: "Research & publications" })
+      screen.getByRole("heading", { level: 2, name: "Publications & research" })
     ).toBeVisible();
-    expect(screen.getByRole("region", { name: "Research & publications" })).toHaveAttribute(
+    expect(screen.getByRole("region", { name: "Publications & research" })).toHaveAttribute(
       "id",
       "research"
     );
@@ -40,7 +40,7 @@ describe("ResearchSection", () => {
     const { container } = render(<ResearchSection locale="es" />);
 
     expect(
-      screen.getByRole("heading", { level: 2, name: "Investigación y publicaciones" })
+      screen.getByRole("heading", { level: 2, name: "Publicaciones e investigación" })
     ).toBeVisible();
     expect(container.querySelector("cite")).not.toHaveAttribute("lang");
     expect(screen.getByRole("link", { name: "Ver todas las investigaciones" })).toHaveAttribute(

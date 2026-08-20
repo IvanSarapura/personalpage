@@ -27,7 +27,7 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       category: "EdTech",
       status: "In development",
       description:
-        "Curiosity is an EdTech platform for young people and students. Users complete short courses, earn points and redeem them for discounts on books, courses and other educational programs.",
+        "Curiosity is an EdTech platform for young people and students. Short courses build study habits, and completed work earns points that turn into discounts on books, courses and other educational programs.",
       highlights: ["Micro-courses", "Points", "Learning rewards"],
     },
     {
@@ -36,7 +36,7 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       category: "FinTech",
       status: "Active venture",
       description:
-        "Link2Pay is non-custodial payment-link infrastructure on Stellar. It lets businesses and independent professionals create invoices and share checkout links in XLM, USDC and EURC, with on-chain confirmation plus an API and TypeScript SDK for integrations.",
+        "Link2Pay is non-custodial payment-link infrastructure on Stellar. Businesses and independent professionals create invoices and share checkout links in XLM, USDC and EURC. Payment settles on-chain, and an API plus TypeScript SDK make the flow easy to integrate.",
       highlights: ["Stellar", "Payment links", "API & SDK"],
       link: {
         href: "https://www.link2pay.xyz",
@@ -51,7 +51,7 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       category: "EdTech",
       status: "En desarrollo",
       description:
-        "Curiosity es una plataforma EdTech para jóvenes y estudiantes. Las personas completan minicursos, suman puntos y los canjean por descuentos en libros, cursos y otras formaciones.",
+        "Curiosity es una plataforma EdTech para jóvenes y estudiantes. Los minicursos construyen hábitos de estudio, y el trabajo terminado suma puntos que se canjean por descuentos en libros, cursos y otras formaciones.",
       highlights: ["Minicursos", "Puntos", "Beneficios educativos"],
     },
     {
@@ -60,7 +60,7 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       category: "FinTech",
       status: "Emprendimiento activo",
       description:
-        "Link2Pay es una infraestructura no custodial de links de pago sobre Stellar. Permite a empresas y profesionales independientes crear facturas y compartir checkouts en XLM, USDC y EURC, con confirmación on-chain, una API y un SDK de TypeScript para integraciones.",
+        "Link2Pay es una infraestructura no custodial de links de pago sobre Stellar. Empresas y profesionales independientes crean facturas y comparten checkouts en XLM, USDC y EURC. El pago se confirma on-chain, y una API más un SDK de TypeScript facilitan la integración.",
       highlights: ["Stellar", "Links de pago", "API y SDK"],
       link: {
         href: "https://www.link2pay.xyz",

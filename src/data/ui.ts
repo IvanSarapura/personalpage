@@ -147,7 +147,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
   en: {
     skipLink: "Skip to main content",
     navbar: {
-      homeAriaLabel: "Iván Sarapura — home",
+      homeAriaLabel: "Iván Sarapura - home",
       mainNavAriaLabel: "Main navigation",
       openMenu: "Open menu",
       closeMenu: "Close menu",
@@ -164,19 +164,19 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     hero: {
       ariaLabel: "Introduction",
       subheadline:
-        "I build software where law meets code — type-safe web apps, smart contracts and AI for regulatory compliance. Law student (UBA), blockchain developer (UTN), hackathon winner.",
+        "I build software where law meets code. Web apps with strict typing, smart contracts, and AI tools for regulatory compliance. I study law at UBA, develop on blockchain at UTN, and back the words with shipped work.",
       ctaPrimary: "View my work",
       ctaSecondary: "Get in touch",
     },
     research: {
-      heading: "Research & publications",
-      subheading: "A concise view of my ongoing and published work in legal technology.",
+      heading: "Publications & research",
+      subheading: "A short view of my work in legal technology, both in progress and published.",
       allResearch: "Explore all research",
-      pageTitle: "Research & publications",
+      pageTitle: "Publications & research",
       pageDescription:
-        "An evolving archive of Iván Sarapura's academic research on legal technology, cryptographic infrastructure and digital evidence.",
+        "Academic research by Iván Sarapura on legal technology, cryptographic infrastructure and digital evidence.",
       pageIntro:
-        "An evolving archive of academic work at the intersection of law, cryptography and digital evidence. It brings together research in progress and published papers, with context, authorship and access to the complete work when available.",
+        "Work that sits where law, cryptography and digital evidence meet. You'll find research in progress and published papers, each with context, authorship and a link to the full work when it's available.",
       archiveHeading: "Research archive",
       worksLabel: "works",
       authorLabel: "Author",
@@ -190,7 +190,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "What I do",
       heading: "Where law meets code.",
       subheading:
-        "Six areas of work, each backed by a shipped project — from subjective-logic smart contracts to AI agents for regulatory compliance.",
+        "Six areas of work, each with a real project behind it. They range from smart contracts that weigh evidence to AI tools for compliance.",
     },
     selectedWork: {
       ariaLabel: "Selected projects",
@@ -201,32 +201,33 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Current work",
       heading: "What I'm building",
       subheading:
-        "Two products in active development: one connects learning with rewards; the other makes global digital payments simpler and verifiable.",
+        "Two products in active development. One turns learning into a habit with rewards; the other makes global digital payments simple and verifiable.",
       opensInNewTab: "opens in a new tab",
     },
     stats: {
       ariaLabel: "Track record",
       heading: "Track record",
       subheading:
-        "Selected recognition across product building, legal research and entrepreneurship — with the work behind each result.",
+        "Product awards, legal research and startup programs, each with the work that earned it.",
       opensInNewTab: "opens in a new tab",
     },
     contact: {
       ariaLabel: "Contact",
-      heading: "Let's build something.",
-      subheading: "Open to opportunities, collaborations and good conversations.",
+      heading: "Let's talk about a concrete problem.",
+      subheading:
+        "If you're building at the edge of law and software, or you have a case worth studying, write to me.",
       nameLabel: "Name",
       namePlaceholder: "Your name",
-      nameError: "Enter your name (2–80 characters).",
+      nameError: "Enter your name (2 to 80 characters).",
       emailLabel: "Email",
       emailPlaceholder: "you@example.com",
       emailError: "Enter a valid email address.",
       messageLabel: "Message",
-      messagePlaceholder: "Tell me briefly what you would like to discuss…",
-      messageError: "Add a little more detail (20–2,000 characters).",
+      messagePlaceholder: "Tell me briefly what you'd like to discuss.",
+      messageError: "Add a little more detail (20 to 2,000 characters).",
       submit: "Send message",
-      submitting: "Sending message…",
-      success: "Message sent. Thanks — I'll reply to the email address you provided.",
+      submitting: "Sending message",
+      success: "Message sent. I'll reply to the email address you provided.",
       validationError: "Review the highlighted fields before sending your message.",
       rateLimited:
         "You've sent several messages in a short time. Please try again in a few minutes.",
@@ -238,13 +239,13 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     footer: {
       ariaLabel: "Footer",
       navAriaLabel: "Footer navigation",
-      homeAriaLabel: "Iván Sarapura — home",
+      homeAriaLabel: "Iván Sarapura - home",
       rights: "All rights reserved.",
     },
     projectsPage: {
       title: "Projects",
       intro:
-        "Engineering case studies, not screenshots: the problem behind each project, the architecture chosen and where it goes next.",
+        "Case studies that show the problem each project solves, the architecture behind it, and where it goes next.",
       description:
         "Case studies at the intersection of law and code: decentralized dispute resolution, digital evidence on Cardano, environmental traceability and AI compliance.",
       filterGroupLabel: "Filter projects by tag",
@@ -267,7 +268,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     aboutPage: {
       title: "About",
       description:
-        "Commercial-law student at UBA, blockchain developer at UTN. Hackathon winner, co-author of an awarded paper on Cardano and Founder School alumn.",
+        "Commercial-law student at UBA, blockchain developer at UTN, and founder-track builder. Hackathon winner, co-author of an awarded paper on Cardano and Founder School alumnus.",
       ariaLabel: "About me",
       journey: "Journey",
       education: "Education & credentials",
@@ -276,8 +277,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     blog: {
       title: "Personal Blog",
       heading: "Personal Blog",
-      description:
-        "Blog — notes on smart contracts, RegTech, AI compliance and the projects behind them.",
+      description: "Notes on smart contracts, RegTech, AI compliance and the projects behind them.",
       publications: "Publications",
       latestPublication: "Latest post",
       featured: "Featured note",
@@ -298,7 +298,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
   es: {
     skipLink: "Saltar al contenido principal",
     navbar: {
-      homeAriaLabel: "Iván Sarapura — inicio",
+      homeAriaLabel: "Iván Sarapura - inicio",
       mainNavAriaLabel: "Navegación principal",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
@@ -315,20 +315,20 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     hero: {
       ariaLabel: "Introducción",
       subheadline:
-        "Construyo software donde el derecho se encuentra con el código — aplicaciones web type-safe, contratos inteligentes e IA para cumplimiento regulatorio. Estudiante de Abogacía (UBA), desarrollador blockchain (UTN), ganador de hackathons.",
+        "Construyo software donde el derecho se encuentra con el código. Aplicaciones web con tipado estricto, contratos inteligentes y herramientas de IA para cumplimiento regulatorio. Estudio Abogacía en la UBA, desarrollo sobre blockchain en la UTN y respaldo lo que digo con trabajo publicado.",
       ctaPrimary: "Ver mis proyectos",
       ctaSecondary: "Contactame",
     },
     research: {
-      heading: "Investigación y publicaciones",
+      heading: "Publicaciones e investigación",
       subheading:
-        "Una selección breve de mi trabajo académico en curso y publicado sobre tecnología jurídica.",
+        "Una mirada breve a mi trabajo en tecnología jurídica, en desarrollo y ya publicado.",
       allResearch: "Ver todas las investigaciones",
-      pageTitle: "Investigación y publicaciones",
+      pageTitle: "Publicaciones e investigación",
       pageDescription:
-        "Un archivo en evolución de las investigaciones académicas de Iván Sarapura sobre tecnología jurídica, infraestructura criptográfica y evidencia digital.",
+        "Investigación académica de Iván Sarapura sobre tecnología jurídica, infraestructura criptográfica y evidencia digital.",
       pageIntro:
-        "Un archivo en evolución de trabajos académicos en la intersección entre derecho, criptografía y evidencia digital. Reúne investigaciones en desarrollo y papers publicados, con su contexto, autoría y acceso al trabajo completo cuando está disponible.",
+        "Trabajo que se ubica donde se juntan el derecho, la criptografía y la evidencia digital. Vas a encontrar investigaciones en desarrollo y papers publicados, cada uno con su contexto, autoría y acceso al trabajo completo cuando está disponible.",
       archiveHeading: "Archivo de investigaciones",
       worksLabel: "trabajos",
       authorLabel: "Autor",
@@ -342,7 +342,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Qué hago",
       heading: "Donde el derecho se encuentra con el código.",
       subheading:
-        "Seis áreas de trabajo, cada una respaldada por un proyecto real — de contratos de lógica subjetiva a agentes de IA para cumplimiento regulatorio.",
+        "Seis áreas de trabajo, cada una con un proyecto real detrás. Van desde contratos inteligentes que ponderan evidencia hasta herramientas de IA para cumplimiento.",
     },
     selectedWork: {
       ariaLabel: "Proyectos seleccionados",
@@ -353,20 +353,21 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Trabajo actual",
       heading: "Qué estoy construyendo",
       subheading:
-        "Dos productos en desarrollo: uno conecta aprendizaje y recompensas; el otro simplifica pagos digitales globales y verificables.",
+        "Dos productos en desarrollo activo. Uno convierte el aprendizaje en un hábito con recompensas; el otro hace simples y verificables los pagos digitales globales.",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     stats: {
       ariaLabel: "Trayectoria",
       heading: "Trayectoria",
       subheading:
-        "Reconocimientos seleccionados en producto, investigación jurídica y emprendimiento, junto con el trabajo que respalda cada resultado.",
+        "Premios de producto, investigación jurídica y programas para startups, cada uno con el trabajo que lo respalda.",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     contact: {
       ariaLabel: "Contacto",
-      heading: "Construyamos algo.",
-      subheading: "Abierto a oportunidades, colaboraciones y buenas conversaciones.",
+      heading: "Hablemos de un problema concreto.",
+      subheading:
+        "Si estás construyendo en el borde entre el derecho y el software, o tenés un caso que valga la pena estudiar, escribime.",
       nameLabel: "Nombre",
       namePlaceholder: "Tu nombre",
       nameError: "Ingresá tu nombre (entre 2 y 80 caracteres).",
@@ -374,11 +375,11 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       emailPlaceholder: "vos@ejemplo.com",
       emailError: "Ingresá una dirección de email válida.",
       messageLabel: "Mensaje",
-      messagePlaceholder: "Contame brevemente qué te gustaría conversar…",
+      messagePlaceholder: "Contame brevemente qué te gustaría conversar.",
       messageError: "Agregá un poco más de detalle (entre 20 y 2.000 caracteres).",
       submit: "Enviar mensaje",
-      submitting: "Enviando mensaje…",
-      success: "Mensaje enviado. Gracias; voy a responder al email que indicaste.",
+      submitting: "Enviando mensaje",
+      success: "Mensaje enviado. Voy a responder al email que indicaste.",
       validationError: "Revisá los campos indicados antes de enviar tu mensaje.",
       rateLimited: "Enviaste varios mensajes en poco tiempo. Intentá nuevamente en unos minutos.",
       error: "No pude enviar tu mensaje en este momento. Intentá nuevamente en unos instantes.",
@@ -389,13 +390,13 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     footer: {
       ariaLabel: "Pie de página",
       navAriaLabel: "Navegación del pie de página",
-      homeAriaLabel: "Iván Sarapura — inicio",
+      homeAriaLabel: "Iván Sarapura - inicio",
       rights: "Todos los derechos reservados.",
     },
     projectsPage: {
       title: "Proyectos",
       intro:
-        "Casos de estudio de ingeniería, no capturas de pantalla: el problema detrás de cada proyecto, la arquitectura elegida y hacia dónde va.",
+        "Casos de estudio que muestran el problema que resuelve cada proyecto, la arquitectura detrás y hacia dónde va.",
       description:
         "Casos de estudio en la intersección del derecho y el código: resolución descentralizada de disputas, evidencia digital en Cardano, trazabilidad ambiental y cumplimiento con IA.",
       filterGroupLabel: "Filtrar proyectos por tag",
@@ -418,7 +419,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
     aboutPage: {
       title: "Sobre mí",
       description:
-        "Estudiante de derecho comercial en la UBA, desarrollador blockchain en la UTN. Ganador de hackathons, co-autor de un paper premiado sobre Cardano y alumno de Founder School.",
+        "Estudiante de derecho comercial en la UBA, desarrollador blockchain en la UTN y constructor en etapa fundacional. Ganador de hackathons, coautor de un paper premiado sobre Cardano y alumni de Founder School.",
       ariaLabel: "Sobre mí",
       journey: "Recorrido",
       education: "Educación y credenciales",
@@ -428,7 +429,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       title: "Blog Personal",
       heading: "Blog Personal",
       description:
-        "Blog — notas sobre contratos inteligentes, RegTech, cumplimiento con IA y los proyectos detrás.",
+        "Notas sobre contratos inteligentes, RegTech, cumplimiento con IA y los proyectos detrás.",
       publications: "Publicaciones",
       latestPublication: "Última publicación",
       featured: "Nota destacada",

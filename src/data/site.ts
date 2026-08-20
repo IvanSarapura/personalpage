@@ -10,12 +10,12 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
   en: {
     tagline: "Software where law meets code",
     description:
-      "Web developer and commercial-law student building at the intersection of law and code: smart contracts, RegTech and AI compliance. GenLayer hackathon winner; co-author of an awarded paper on Cardano.",
+      "I build software that turns real-world regulation into reliable, executable logic. Smart contracts, RegTech and AI compliance, backed by a GenLayer hackathon win and an awarded paper on Cardano.",
   },
   es: {
     tagline: "Software donde el derecho se encuentra con el código",
     description:
-      "Desarrollador web y estudiante de derecho comercial construyendo en la intersección del derecho y el código: contratos inteligentes, RegTech y cumplimiento con IA. Ganador de un hackathon de GenLayer; co-autor de un paper premiado sobre Cardano.",
+      "Construyo software que convierte regulación real en lógica ejecutable y confiable. Contratos inteligentes, RegTech y cumplimiento con IA, respaldados por un hackathon de GenLayer y un paper premiado sobre Cardano.",
   },
 };
 

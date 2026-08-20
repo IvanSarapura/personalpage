@@ -15,7 +15,7 @@ export function buildPersonJsonLd(locale: Locale) {
     "@id": PERSON_JSON_LD_ID,
     name: SITE.name,
     url: SITE.url,
-    jobTitle: "Web Developer & Commercial-Law Student",
+    jobTitle: "Legal Engineer & Software Developer",
     description: getSiteCopy(locale).description,
     sameAs: [SITE.social.linkedin, SITE.social.github],
     alumniOf: [

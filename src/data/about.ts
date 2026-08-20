@@ -30,10 +30,10 @@ interface AboutContent {
 const ABOUT_BY_LOCALE: Record<Locale, AboutContent> = {
   en: {
     bio: [
-      "I'm Iván Enzo Sarapura. I study commercial law at UBA and blockchain & digital finance at UTN — and I build software at the intersection of both.",
-      "Modern software has a structural problem: translating real-world regulation into reliable, executable logic. That's the problem I keep coming back to. With my teams I won the Prediction Markets track at GenLayer's Bradbury Builders Hackathon — we're still building Proven, a peer-to-peer dispute-resolution protocol — and co-authored an award-winning paper on digital chain of custody over Cardano. I built Sana at the Kaszek & Anthropic Hackathon, reached the finals of ITBA's Trama BootCamp with Lupio, and was selected for Founder School (Crecimiento & Lucero Ventures).",
+      "I'm Iván Enzo Sarapura. I study commercial law at UBA and blockchain and digital finance at UTN, and I build software where the two meet.",
+      "The problem I keep coming back to is turning real-world regulation into reliable, executable logic. With my teams I won the Prediction Markets track at GenLayer's Bradbury Builders Hackathon, where we started Proven, a peer-to-peer dispute-resolution protocol. I also co-authored an awarded paper on digital chain of custody over Cardano, built Sana at the Kaszek & Anthropic Hackathon, reached the finals of ITBA's Trama BootCamp with Lupio, and was selected for Founder School at Crecimiento & Lucero Ventures.",
       "Today I'm developing EcoTrace at UTN and an AI compliance oracle that crosses ANMAT, SENASA and FAO datasets with Argentina's food code.",
-      "Open to opportunities, collaborations and good conversations.",
+      "If you work at the same edge between law and software, write to me. I'm most useful when the problem is specific.",
     ],
     timeline: [
       {
@@ -123,10 +123,10 @@ const ABOUT_BY_LOCALE: Record<Locale, AboutContent> = {
   },
   es: {
     bio: [
-      "Soy Iván Enzo Sarapura. Estudio Derecho Comercial en la UBA y Blockchain y Finanzas Digitales en la UTN — y construyo software en la intersección de ambos.",
-      "El software moderno tiene un problema estructural: traducir la regulación del mundo real a lógica ejecutable y confiable. Ese es el problema al que siempre vuelvo. Con mis equipos gané el track de Prediction Markets del GenLayer Bradbury Builders Hackathon — seguimos construyendo Proven, un protocolo peer-to-peer de resolución de disputas — y co-escribí un paper premiado sobre cadena de custodia digital en Cardano. Construí Sana en el Kaszek & Anthropic Hackathon, llegué a la final del BootCamp de Trama (ITBA) con Lupio y fui seleccionado para Founder School (Crecimiento & Lucero Ventures).",
+      "Soy Iván Enzo Sarapura. Estudio derecho comercial en la UBA y blockchain y finanzas digitales en la UTN, y construyo software donde se juntan ambas.",
+      "El problema al que siempre vuelvo es convertir la regulación del mundo real en lógica ejecutable y confiable. Con mis equipos gané el track de Prediction Markets del GenLayer Bradbury Builders Hackathon, donde empezamos Proven, un protocolo peer-to-peer de resolución de disputas. También soy coautor de un paper premiado sobre cadena de custodia digital en Cardano, construí Sana en el Kaszek & Anthropic Hackathon, llegué a la final del BootCamp de Trama (ITBA) con Lupio y fui seleccionado para Founder School en Crecimiento & Lucero Ventures.",
       "Hoy desarrollo EcoTrace en la UTN y un oráculo de cumplimiento con IA que cruza bases de ANMAT, SENASA y FAO con el código alimentario argentino.",
-      "Abierto a oportunidades, colaboraciones y buenas conversaciones.",
+      "Si trabajás en ese mismo borde entre el derecho y el software, escribime. Aporto más cuando el problema es específico.",
     ],
     timeline: [
       {
