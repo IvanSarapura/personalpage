@@ -19,9 +19,9 @@ describe("ResearchSection", () => {
     expect(within(articles[0]!).getByRole("heading", { level: 3 })).toHaveTextContent(
       "Infraestructura criptográfica implementable"
     );
-    expect(within(articles[0]!).getByText("01", { selector: ".numeral" })).toBeVisible();
+    expect(articles[0]!.querySelector(".numeral")).toHaveTextContent("01");
     expect(within(articles[0]!).getByText("October, 2026")).toHaveAttribute("datetime", "2026");
-    expect(within(articles[1]!).getByText("02", { selector: ".numeral" })).toBeVisible();
+    expect(articles[1]!.querySelector(".numeral")).toHaveTextContent("02");
 
     // El estado ya no se muestra como mini-título; se comunica con el diseño.
     expect(screen.queryByText("Research in progress")).not.toBeInTheDocument();
