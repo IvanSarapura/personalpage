@@ -6,10 +6,10 @@
 }
 
 .item {
-  --module-num-width: var(--modulelist-num-col);
-  --module-row-gap: var(--element-gap);
-  --module-row-padding: var(--space-5);
-  --module-action-size: var(--action-btn-size);
+  --module-num-width: var(--modulelist-num-col-mobile);
+  --module-row-gap: var(--element-gap-sm);
+  --module-row-padding: var(--space-4);
+  --module-action-size: var(--icon-md);
 
   border-bottom: var(--divider-thickness) solid var(--border-default);
 }
@@ -45,9 +45,9 @@
 }
 
 .num {
-  font-size: var(--body-large);
-  font-weight: var(--body-large-weight);
-  line-height: var(--body-large-lh);
+  font-size: var(--body);
+  font-weight: var(--body-weight);
+  line-height: var(--body-lh);
   color: var(--text-secondary);
   opacity: var(--opacity-subtle);
   text-align: center;
@@ -55,9 +55,9 @@
 
 .name {
   min-inline-size: 0;
-  font-size: var(--body-large);
-  font-weight: var(--body-large-weight);
-  line-height: var(--body-large-lh);
+  font-size: var(--body);
+  font-weight: var(--body-weight);
+  line-height: var(--body-lh);
   color: var(--text-primary);
   letter-spacing: var(--letter-spacing-normal);
   overflow-wrap: anywhere;
@@ -160,9 +160,9 @@
 }
 
 .description {
-  font-size: var(--body);
+  font-size: var(--caption);
   font-weight: var(--body-weight);
-  line-height: var(--body-lh);
+  line-height: 1.45;
   color: var(--text-secondary);
   opacity: var(--opacity-strong);
   letter-spacing: var(--letter-spacing-normal);
@@ -170,32 +170,32 @@
   overflow-wrap: anywhere;
 }
 
-/* ─── Mobile ─── */
-@media (max-width: 768px) {
+/* ─── Desktop ─── */
+@media (min-width: 48rem) {
   .item {
-    --module-num-width: var(--modulelist-num-col-mobile);
-    --module-row-gap: var(--element-gap-sm);
-    --module-row-padding: var(--space-4);
-    --module-action-size: var(--icon-md);
+    --module-num-width: var(--modulelist-num-col);
+    --module-row-gap: var(--element-gap);
+    --module-row-padding: var(--space-5);
+    --module-action-size: var(--action-btn-size);
   }
 
   .num {
-    font-size: var(--body);
-    line-height: var(--body-lh);
+    font-size: var(--body-large);
+    line-height: var(--body-large-lh);
   }
 
   .name {
-    font-size: var(--body);
-    line-height: var(--body-lh);
+    font-size: var(--body-large);
+    line-height: var(--body-large-lh);
   }
 
   .itemContentOpen .itemContentInner {
-    padding-top: var(--space-3);
+    padding-top: var(--space-4);
   }
 
   .description {
-    font-size: var(--caption);
-    line-height: 1.45;
+    font-size: var(--body);
+    line-height: var(--body-lh);
   }
 }
 

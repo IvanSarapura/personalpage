@@ -29,6 +29,10 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       description:
         "Curiosity is an EdTech platform for young people and students. Short courses build study habits, and completed work earns points that turn into discounts on books, courses and other educational programs.",
       highlights: ["Micro-courses", "Points", "Learning rewards"],
+      link: {
+        href: "#",
+        label: "Visit Curiosity",
+      },
     },
     {
       id: "link2pay",
@@ -53,6 +57,10 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       description:
         "Curiosity es una plataforma EdTech para jóvenes y estudiantes. Los minicursos construyen hábitos de estudio, y el trabajo terminado suma puntos que se canjean por descuentos en libros, cursos y otras formaciones.",
       highlights: ["Minicursos", "Puntos", "Beneficios educativos"],
+      link: {
+        href: "#",
+        label: "Visitar Curiosity",
+      },
     },
     {
       id: "link2pay",

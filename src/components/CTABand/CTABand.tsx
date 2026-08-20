@@ -22,11 +22,11 @@ export default function CTABand({ locale }: CTABandProps) {
     >
       <Container className="flex justify-center text-center">
         <div className="flex w-full max-w-[var(--content-max-wide)] flex-col items-center gap-[var(--space-5)]">
-          <h2 className="text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] text-balance max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
+          <h2 className="text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] text-balance md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
             {ui.contact.heading}
           </h2>
 
-          <p className="max-w-[var(--content-max-narrow)] text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-secondary)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]">
+          <p className="max-w-[var(--content-max-narrow)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-secondary)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
             {ui.contact.subheading}
           </p>
 

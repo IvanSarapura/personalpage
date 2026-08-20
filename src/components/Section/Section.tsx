@@ -10,11 +10,11 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   dark: "bg-[var(--surface-dark)] text-[var(--text-primary)]",
 };
 
-// Padding vertical por tamaño (con override mobile en ≤768px, como Sira).
+// Padding vertical por tamaño (mobile-first: base móvil, crece en ≥768px).
 const PADDING_CLASSES: Record<PaddingY, string> = {
-  lg: "py-[var(--section-padding-y)] max-[768px]:py-[var(--section-padding-y-mobile)]",
-  md: "py-[var(--space-6)] max-[768px]:py-[var(--space-5)]",
-  sm: "py-[var(--space-5)] max-[768px]:py-[var(--space-4)]",
+  lg: "py-[var(--section-padding-y-mobile)] md:py-[var(--section-padding-y)]",
+  md: "py-[var(--space-5)] md:py-[var(--space-6)]",
+  sm: "py-[var(--space-4)] md:py-[var(--space-5)]",
   none: "py-0",
 };
 

@@ -42,18 +42,18 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
       id="focus"
     >
       <Container>
-        <h2 className="mb-[var(--element-gap)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] max-[768px]:mb-[var(--element-gap-sm)] max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
+        <h2 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
           {ui.focus.heading}
         </h2>
 
-        <p className="mb-[var(--section-gap)] max-w-[var(--content-max-text)] text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:mb-[var(--content-gap)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]">
+        <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:mb-[var(--section-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
           {ui.focus.subheading}
         </p>
 
         {/* role="list" intencional: Safari descarta la semántica de lista con list-style:none. */}
         {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
-          className="mb-[var(--section-gap)] grid list-none grid-cols-3 gap-[var(--content-gap)] max-[768px]:mb-[var(--content-gap)] max-[768px]:grid-cols-2 max-[768px]:gap-[var(--element-gap)] max-[480px]:grid-cols-1"
+          className="mb-[var(--content-gap)] grid list-none grid-cols-1 gap-[var(--element-gap)] sm:grid-cols-2 md:mb-[var(--section-gap)] md:grid-cols-3 md:gap-[var(--content-gap)]"
           role="list"
         >
           {signals.map((signal) => (

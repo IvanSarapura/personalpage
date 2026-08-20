@@ -60,7 +60,7 @@ export default function ProjectsGrid({ locale }: ProjectsGridProps) {
       {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
       <ul
         role="list"
-        className="grid list-none grid-cols-2 gap-[var(--content-gap)] max-[768px]:grid-cols-1 max-[768px]:gap-[var(--element-gap)]"
+        className="grid list-none grid-cols-1 gap-[var(--element-gap)] md:grid-cols-2 md:gap-[var(--content-gap)]"
       >
         {visibleProjects.map((project) => (
           <li key={project.slug}>

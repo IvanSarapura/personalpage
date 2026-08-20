@@ -33,7 +33,7 @@ const headingClass =
   "mb-[var(--element-gap)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--text-on-light)]";
 
 const bodyClass =
-  "text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]";
+  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
 
 const chipClass =
   "inline-block rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
@@ -53,7 +53,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
       <Section variant="white" paddingY="lg" ariaLabel={ui.ariaLabel}>
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
-            <h1 className="mb-[var(--element-gap)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] max-[768px]:mb-[var(--element-gap-sm)] max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
+            <h1 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
               {ui.title}
             </h1>
 

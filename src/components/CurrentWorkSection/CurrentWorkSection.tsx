@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import { ExternalLink } from "lucide-react";
 import { getCurrentWork } from "@/data/current-work";
 import type { Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
@@ -60,7 +61,7 @@ export default function CurrentWorkSection({ locale }: CurrentWorkSectionProps) 
                       rel="noopener noreferrer"
                     >
                       {item.link.label}
-                      <span aria-hidden="true"> ↗</span>
+                      <ExternalLink aria-hidden="true" focusable="false" />
                       <span className="sr-only"> ({ui.opensInNewTab})</span>
                     </a>
                   )}

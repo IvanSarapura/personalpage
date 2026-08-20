@@ -9,7 +9,11 @@ describe("CurrentWorkSection", () => {
     expect(screen.getByRole("heading", { level: 2, name: "What I'm building" })).toBeVisible();
     expect(screen.getByRole("heading", { level: 3, name: "Curiosity" })).toBeVisible();
     expect(screen.getByRole("heading", { level: 3, name: "Link2Pay" })).toBeVisible();
-    expect(screen.queryByRole("link", { name: /Curiosity/i })).not.toBeInTheDocument();
+
+    const curiosityLink = screen.getByRole("link", { name: /Visit Curiosity/i });
+    expect(curiosityLink).toHaveAttribute("href", "#");
+    expect(curiosityLink).toHaveAttribute("target", "_blank");
+    expect(curiosityLink).toHaveAttribute("rel", "noopener noreferrer");
 
     const link = screen.getByRole("link", { name: /Visit Link2Pay/i });
     expect(link).toHaveAttribute("href", "https://www.link2pay.xyz");

@@ -29,17 +29,17 @@ export default function LeadSection({ locale }: LeadSectionProps) {
       className="dark:bg-[var(--surface-tertiary)]"
       id="home"
     >
-      <div className="py-[var(--section-padding-y)] max-[768px]:py-[var(--section-padding-y-mobile)]">
+      <div className="py-[var(--section-padding-y-mobile)] md:py-[var(--section-padding-y)]">
         <Container>
-          <h1 className="mb-[var(--content-gap)] text-[length:var(--display-1)] leading-[var(--display-1-lh)] font-normal tracking-[var(--display-1-tracking)] text-[var(--text-on-light)] text-balance max-[768px]:mb-[var(--element-gap)] max-[768px]:text-[length:var(--display-2)] max-[768px]:leading-[var(--display-2-lh)] max-[768px]:tracking-[var(--display-2-tracking)]">
+          <h1 className="mb-[var(--element-gap)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] text-balance md:mb-[var(--content-gap)] md:text-[length:var(--display-1)] md:leading-[var(--display-1-lh)] md:tracking-[var(--display-1-tracking)]">
             {SITE.name}
           </h1>
 
-          <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:mb-[var(--content-gap-mobile)] max-[768px]:text-[length:var(--body)]">
+          <p className="mb-[var(--content-gap-mobile)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:mb-[var(--content-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
             {ui.hero.subheadline}
           </p>
 
-          <div className="grid w-fit max-w-full grid-cols-2 items-stretch gap-[var(--element-gap)] max-[768px]:w-full">
+          <div className="grid w-full max-w-full grid-cols-2 items-stretch gap-[var(--element-gap)] md:w-fit">
             <Link href={localePath(locale, "/projects")} className={`${btnBase} ${btnWhite}`}>
               {ui.hero.ctaPrimary}
             </Link>

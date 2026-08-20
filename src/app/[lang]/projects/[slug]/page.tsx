@@ -41,7 +41,7 @@ const sectionHeadingClass =
   "mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--text-on-light)]";
 
 const bodyClass =
-  "text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]";
+  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
 
 const linkClass =
   "text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--color-blue-screen)]";
@@ -74,7 +74,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {project.num} · {project.status}
             </p>
 
-            <h1 className="mt-[var(--space-2)] mb-[var(--element-gap-sm)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-on-light)] max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
+            <h1 className="mt-[var(--space-2)] mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
               {project.title}
             </h1>
 

@@ -97,7 +97,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
               <Image
                 src={blogVisual}
                 alt={ui.featuredImageAlt}
-                sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1200px) 58vw, 672px"
+                sizes={`(max-width: 47.99rem) calc(100vw - ${2 * 24}px), (max-width: 1200px) 58vw, 672px`}
                 preload
               />
             </div>

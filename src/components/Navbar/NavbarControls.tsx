@@ -40,7 +40,7 @@ export default function NavbarControls({ locale }: NavbarControlsProps) {
           es intencional y esperada — no eliminar este prop. */}
       <div className="flex items-center gap-[var(--space-3)]" suppressHydrationWarning>
         <Switch checked={isDark} onChange={toggleTheme} ariaLabel={switchLabel} />
-        <span className="text-label min-w-[36px] text-center tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] select-none max-[768px]:hidden">
+        <span className="text-label hidden min-w-[36px] text-center tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] select-none md:inline-block">
           {labelText}
         </span>
       </div>

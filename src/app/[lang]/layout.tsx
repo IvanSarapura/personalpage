@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import "../globals.css";
 import ThemeProvider from "@/providers/ThemeProvider";
 import Navbar from "@/components/Navbar/Navbar";
@@ -81,7 +82,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html lang={lang} className={inter.variable} suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="theme-anti-flash"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function () {

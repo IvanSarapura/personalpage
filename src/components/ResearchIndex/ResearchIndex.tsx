@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import { ExternalLink } from "lucide-react";
 import type { Locale } from "@/data/locale";
 import { getResearch } from "@/data/research";
 import { getUi } from "@/data/ui";
@@ -52,13 +53,9 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
             return (
               <li key={item.id} className={styles.item}>
                 <article id={item.id} className={styles.article} aria-labelledby={titleId}>
-                  <div className={styles.index}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <p className={styles.status}>{item.status}</p>
-                    <time className={styles.date} dateTime={dateTime}>
-                      {item.dateLabel}
-                    </time>
-                  </div>
+                  <span className={styles.numeral} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
                   <div className={styles.content}>
                     <h3 id={titleId} className={styles.title}>
@@ -66,6 +63,10 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
                         {item.title}
                       </cite>
                     </h3>
+
+                    <p className={styles.date}>
+                      <time dateTime={dateTime}>{item.dateLabel}</time>
+                    </p>
 
                     {item.kind === "published" && (
                       <p
@@ -110,7 +111,7 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
                         aria-label={`${item.link.label} (${ui.opensInNewTab})`}
                       >
                         {item.link.label}
-                        <span aria-hidden="true"> ↗</span>
+                        <ExternalLink aria-hidden="true" focusable="false" />
                       </a>
                     )}
                   </div>

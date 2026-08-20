@@ -16,7 +16,7 @@ export default function SelectedWorkSection({ locale }: SelectedWorkSectionProps
   return (
     <Section variant="blue" paddingY="lg" ariaLabel={ui.ariaLabel} id="projects">
       <Container>
-        <h2 className="mb-[var(--section-gap)] text-[length:var(--display-2)] leading-[var(--display-2-lh)] font-normal tracking-[var(--display-2-tracking)] text-[var(--text-primary)] text-balance max-[768px]:mb-[var(--space-6)] max-[768px]:text-[length:var(--heading-1)] max-[768px]:leading-[var(--heading-1-lh)] max-[768px]:tracking-[var(--heading-1-tracking)]">
+        <h2 className="mb-[var(--space-6)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-primary)] text-balance md:mb-[var(--section-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
           {ui.heading}
         </h2>
 

@@ -29,13 +29,13 @@ export default function Navbar({ locale }: NavbarProps) {
       aria-label={ui.navbar.mainNavAriaLabel}
       className={`sticky top-0 z-[var(--z-nav)] w-full text-[var(--text-on-light)] [transition:var(--navbar-transition)] ${surfaceClass}`}
     >
-      <Container className="flex items-center justify-between py-[var(--navbar-padding-y)] max-[768px]:py-[var(--navbar-padding-y-mobile)]">
+      <Container className="flex items-center justify-between py-[var(--navbar-padding-y-mobile)] md:py-[var(--navbar-padding-y)]">
         <Link
           href={localePath(locale, "/")}
           className="flex items-center"
           aria-label={ui.navbar.homeAriaLabel}
         >
-          <Logo className="h-auto w-[48px] text-[var(--text-on-light)] max-[768px]:w-[40px]" />
+          <Logo className="h-auto w-[40px] text-[var(--text-on-light)] md:w-[48px]" />
         </Link>
         <NavbarControls locale={locale} />
       </Container>

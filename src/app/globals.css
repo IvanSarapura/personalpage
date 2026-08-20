@@ -44,9 +44,6 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Breakpoint extra (640/768/1024/1280 ya coinciden con sm/md/lg/xl) */
-  --breakpoint-xs: 480px;
-
   /* Estilos tipográficos fluidos → text-display-1, text-heading-2, …
      (nombres semánticos: no colisionan con la escala numérica text-xs…9xl) */
   --text-display-1: clamp(56px, 8vw, 96px);
@@ -412,7 +409,7 @@ html.dark {
   --btn-padding-x-lg: 36px;
 }
 
-/* Z-index, breakpoints (referencia) y misceláneos */
+/* Z-index y misceláneos */
 :root {
   --z-base: 0;
   --z-dropdown: 50;
@@ -421,14 +418,11 @@ html.dark {
   --z-overlay: 1500;
   --z-modal: 2000;
 
-  /* Las custom properties no pueden usarse dentro de @media (limitación del
-     spec). Sirven como referencia canónica: usar estos px exactos en las
-     media queries de todos los módulos para mantener breakpoints consistentes. */
-  --bp-xs: 480px;
-  --bp-sm: 640px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1280px;
+  /* CONVENCIÓN RESPONSIVE — Mobile-First:
+     El estado base de todo componente es móvil. Los breakpoints progresivos
+     usan min-width (Tailwind: sm=40rem, md=48rem, lg=64rem, xl=80rem) y en
+     CSS Modules se escriben como @media (min-width: 48rem) / (min-width: 64rem).
+     No usar @media (max-width) ni variantes max-[…]. */
 
   --touch-target: 44px;
   --border-width-thin: 1.5px;
@@ -464,7 +458,7 @@ html.dark {
     scroll-margin-top: 80px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 48rem) {
     [id] {
       scroll-margin-top: 100px;
     }

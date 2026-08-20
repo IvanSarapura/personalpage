@@ -37,17 +37,19 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
             return (
               <li key={item.id} className={styles.item}>
                 <article className={styles.article} aria-labelledby={titleId}>
-                  <div className={styles.meta}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <p>{item.status}</p>
-                    <time dateTime={dateTime}>{item.dateLabel}</time>
-                  </div>
+                  <span className={styles.numeral} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
                   <h3 id={titleId} className={styles.title}>
                     <cite lang={locale === "en" ? item.titleLanguage : undefined}>
                       {item.title}
                     </cite>
                   </h3>
+
+                  <p className={styles.date}>
+                    <time dateTime={dateTime}>{item.dateLabel}</time>
+                  </p>
 
                   <p className={styles.preview}>{item.preview}</p>
                 </article>

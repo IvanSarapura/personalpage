@@ -37,8 +37,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: var(--navbar-padding-y);
-  padding-bottom: var(--navbar-padding-y);
+  padding-top: var(--navbar-padding-y-mobile);
+  padding-bottom: var(--navbar-padding-y-mobile);
 }
 
 .navLabel {
@@ -138,11 +138,11 @@
   align-items: baseline;
   gap: var(--space-5);
   width: 100%;
-  padding: var(--space-5) 0;
-  font-size: var(--heading-2);
-  font-weight: var(--heading-2-weight);
-  line-height: var(--heading-2-lh);
-  letter-spacing: var(--heading-2-tracking);
+  padding: var(--space-4) 0;
+  font-size: var(--heading-3);
+  font-weight: var(--heading-3-weight);
+  line-height: var(--heading-3-lh);
+  letter-spacing: var(--heading-3-tracking);
   color: var(--text-primary);
   background: none;
   border: none;
@@ -175,7 +175,7 @@
   letter-spacing: var(--letter-spacing-wide);
   color: var(--text-primary);
   opacity: var(--opacity-dim);
-  min-width: 28px;
+  min-width: 24px;
   flex-shrink: 0;
   transition: opacity var(--duration-base) var(--ease-out);
 }
@@ -213,7 +213,7 @@
 /* ─── Footer del menú ─── */
 .footerBar {
   padding-top: var(--space-6);
-  padding-bottom: var(--navbar-padding-y);
+  padding-bottom: var(--navbar-padding-y-mobile);
 }
 
 .footerDivider {
@@ -225,8 +225,9 @@
 .footerContent {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-3);
 }
 
@@ -253,30 +254,30 @@
   opacity: 1;
 }
 
-/* ─── Mobile ─── */
-@media (max-width: 768px) {
+/* ─── Desktop ─── */
+@media (min-width: 48rem) {
   .headerInner {
-    padding-top: var(--navbar-padding-y-mobile);
-    padding-bottom: var(--navbar-padding-y-mobile);
+    padding-top: var(--navbar-padding-y);
+    padding-bottom: var(--navbar-padding-y);
   }
 
   .link {
-    font-size: var(--heading-3);
-    line-height: var(--heading-3-lh);
-    padding: var(--space-4) 0;
+    font-size: var(--heading-2);
+    line-height: var(--heading-2-lh);
+    padding: var(--space-5) 0;
   }
 
   .index {
-    min-width: 24px;
+    min-width: 28px;
   }
 
   .footerBar {
-    padding-bottom: var(--navbar-padding-y-mobile);
+    padding-bottom: var(--navbar-padding-y);
   }
 
   .footerContent {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
   }
 }
 

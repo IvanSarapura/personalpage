@@ -6,9 +6,9 @@ interface ContainerProps {
   as?: ElementType;
 }
 
-// Contenedor centrado: max-width 1200px, padding-x responsive (48px → 24px en ≤768px).
+// Contenedor centrado: max-width 1200px, padding-x responsive (móvil 24px → 48px en ≥768px).
 const CONTAINER_CLASS =
-  "mx-auto w-full max-w-[var(--container-max-width)] px-[var(--container-padding-x)] max-[768px]:px-[var(--container-padding-x-mobile)]";
+  "mx-auto w-full max-w-[var(--container-max-width)] px-[var(--container-padding-x-mobile)] md:px-[var(--container-padding-x)]";
 
 export default function Container({
   children,

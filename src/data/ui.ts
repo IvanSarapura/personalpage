@@ -201,14 +201,14 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Current work",
       heading: "What I'm building",
       subheading:
-        "Two products in active development. One turns learning into a habit with rewards; the other makes global digital payments simple and verifiable.",
+        "Products I'm building end to end, from validated idea to working system, with the same rigor I bring to the rest of my work.",
       opensInNewTab: "opens in a new tab",
     },
     stats: {
       ariaLabel: "Track record",
       heading: "Track record",
       subheading:
-        "Product awards, legal research and startup programs, each with the work that earned it.",
+        "A selection of work and recognition that shows what I build and how it's valued.",
       opensInNewTab: "opens in a new tab",
     },
     contact: {
@@ -353,14 +353,14 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       ariaLabel: "Trabajo actual",
       heading: "Qué estoy construyendo",
       subheading:
-        "Dos productos en desarrollo activo. Uno convierte el aprendizaje en un hábito con recompensas; el otro hace simples y verificables los pagos digitales globales.",
+        "Productos que construyo de punta a punta, desde la idea validada hasta el sistema funcionando, con el mismo rigor que aplico al resto de mi trabajo.",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     stats: {
       ariaLabel: "Trayectoria",
       heading: "Trayectoria",
       subheading:
-        "Premios de producto, investigación jurídica y programas para startups, cada uno con el trabajo que lo respalda.",
+        "Una selección de mi trabajo y reconocimientos que muestra qué construyo y cómo se valora.",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     contact: {

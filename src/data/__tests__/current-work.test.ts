@@ -14,7 +14,8 @@ describe("CURRENT_WORK", () => {
       const curiosity = getCurrentWork(locale).find((item) => item.id === "curiosity");
       const link2pay = getCurrentWork(locale).find((item) => item.id === "link2pay");
 
-      expect(curiosity?.link).toBeUndefined();
+      // Curiosity aún no tiene URL pública: placeholder hasta definir el destino.
+      expect(curiosity?.link?.href).toBe("#");
       expect(link2pay?.link?.href).toBe("https://www.link2pay.xyz");
     }
   });

@@ -22,14 +22,14 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <Section variant="blue" paddingY="lg" ariaLabel={ui.footer.ariaLabel} as="footer">
       <Container>
-        <div className="grid grid-cols-[var(--footer-brand-col)_1fr] items-start gap-[var(--space-8)] max-[1024px]:grid-cols-1 max-[1024px]:gap-[var(--space-7)] max-[768px]:gap-[var(--space-6)]">
+        <div className="grid grid-cols-1 items-start gap-[var(--space-6)] md:gap-[var(--space-7)] lg:grid-cols-[var(--footer-brand-col)_1fr] lg:gap-[var(--space-8)]">
           <div className="flex flex-col gap-[var(--space-4)]">
             <Link
               href={localePath(locale, "/")}
               className="flex items-center"
               aria-label={ui.footer.homeAriaLabel}
             >
-              <Logo className="h-auto w-[var(--icon-xl)] text-[var(--text-primary)] max-[768px]:w-[var(--icon-lg)]" />
+              <Logo className="h-auto w-[var(--icon-lg)] text-[var(--text-primary)] md:w-[var(--icon-xl)]" />
             </Link>
             <p className="text-caption max-w-[var(--footer-brand-max)] tracking-[var(--letter-spacing-wide)] text-[var(--text-secondary)] opacity-[var(--opacity-secondary)]">
               {siteCopy.tagline}
@@ -37,15 +37,15 @@ export default function Footer({ locale }: FooterProps) {
           </div>
 
           <nav
-            className="grid grid-cols-4 gap-[var(--space-6)] max-[1024px]:grid-cols-2 max-[768px]:grid-cols-2 max-[768px]:gap-[var(--space-5)]"
+            className="grid grid-cols-2 gap-[var(--space-5)] lg:grid-cols-4 lg:gap-[var(--space-6)]"
             aria-label={ui.footer.navAriaLabel}
           >
             {footerLinks.map((column) => (
               <div key={column.title}>
-                <h4 className="text-label mb-[var(--space-4)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--text-primary)] max-[768px]:mb-[var(--space-3)]">
+                <h4 className="text-label mb-[var(--space-3)] font-semibold tracking-[var(--letter-spacing-wide)] text-[var(--text-primary)] md:mb-[var(--space-4)]">
                   {column.title}
                 </h4>
-                <ul className="m-0 flex list-none flex-col gap-[var(--space-3)] p-0 max-[768px]:gap-[var(--space-2)]">
+                <ul className="m-0 flex list-none flex-col gap-[var(--space-2)] p-0 md:gap-[var(--space-3)]">
                   {column.links.map((link) => (
                     <li key={link.label}>
                       <a href={link.href} className={columnLinkClass}>
@@ -59,7 +59,7 @@ export default function Footer({ locale }: FooterProps) {
           </nav>
         </div>
 
-        <div className="mt-[var(--space-6)] flex items-center justify-center border-t border-[color:var(--border-subtle)] pt-[var(--space-4)] max-[768px]:mt-[var(--space-5)] max-[768px]:pt-[var(--space-3)]">
+        <div className="mt-[var(--space-5)] flex items-center justify-center border-t border-[color:var(--border-subtle)] pt-[var(--space-3)] md:mt-[var(--space-6)] md:pt-[var(--space-4)]">
           <p className="text-caption tracking-[var(--letter-spacing-wide)] text-[var(--text-secondary)] opacity-[var(--opacity-subtle)]">
             © {new Date().getFullYear()} {SITE.name}. {ui.footer.rights}
           </p>

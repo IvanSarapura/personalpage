@@ -5,7 +5,7 @@ import type { MDXComponents } from "mdx/types";
  *  sin estilos ad-hoc. */
 
 const bodyText =
-  "text-[length:var(--body-large)] leading-[var(--body-large-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] max-[768px]:text-[length:var(--body)] max-[768px]:leading-[var(--body-lh)]";
+  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
 
 const components: MDXComponents = {
   h2: ({ children }) => (
