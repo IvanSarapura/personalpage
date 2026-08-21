@@ -6,7 +6,7 @@ describe("TrackRecordSection", () => {
   it("presenta una evidencia principal y tres registros con destinos verificables", () => {
     const { container } = render(<TrackRecordSection locale="en" />);
 
-    expect(screen.getByRole("region", { name: "Track record" })).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Achievements" })).toBeInTheDocument();
 
     const featured = screen.getByRole("article", {
       name: "La blockchain como tecnología aplicable a la cadena de custodia",
@@ -49,7 +49,7 @@ describe("TrackRecordSection", () => {
   it("localiza el contenido, las rutas internas y la ayuda de enlaces externos", () => {
     render(<TrackRecordSection locale="es" />);
 
-    expect(screen.getByRole("region", { name: "Trayectoria" })).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Reconocimientos" })).toBeInTheDocument();
 
     const featured = screen.getByRole("article", {
       name: "La blockchain como tecnología aplicable a la cadena de custodia",

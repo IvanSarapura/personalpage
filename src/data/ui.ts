@@ -210,8 +210,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       opensInNewTab: "opens in a new tab",
     },
     stats: {
-      ariaLabel: "Track record",
-      heading: "Track record",
+      ariaLabel: "Achievements",
+      heading: "Achievements",
       subheading:
         "A selection of work and recognition that shows what I build and how it's valued.",
       opensInNewTab: "opens in a new tab",
@@ -368,8 +368,8 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       opensInNewTab: "se abre en una pestaña nueva",
     },
     stats: {
-      ariaLabel: "Trayectoria",
-      heading: "Trayectoria",
+      ariaLabel: "Reconocimientos",
+      heading: "Reconocimientos",
       subheading:
         "Una selección de mi trabajo y reconocimientos que muestra qué construyo y cómo se valora.",
       opensInNewTab: "se abre en una pestaña nueva",
