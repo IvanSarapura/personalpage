@@ -45,14 +45,6 @@ export default function CurrentWorkSection({ locale }: CurrentWorkSectionProps) 
                   </h3>
                   <p className={styles.description}>{item.description}</p>
 
-                  <ul className={styles.highlights}>
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight} className={styles.highlight}>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
                   {item.link && (
                     <a
                       href={item.link.href}

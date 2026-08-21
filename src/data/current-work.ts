@@ -15,7 +15,6 @@ export interface CurrentWorkItem {
   category: string;
   status: string;
   description: string;
-  highlights: readonly string[];
   link?: CurrentWorkLink;
 }
 
@@ -28,7 +27,6 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       status: "In development",
       description:
         "Curiosity is an EdTech platform for young people and students. Short courses build study habits, and completed work earns points that turn into discounts on books, courses and other educational programs.",
-      highlights: ["Micro-courses", "Points", "Learning rewards"],
       link: {
         href: "#",
         label: "Visit Curiosity",
@@ -41,7 +39,6 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       status: "Active venture",
       description:
         "Link2Pay is non-custodial payment-link infrastructure on Stellar. Businesses and independent professionals create invoices and share checkout links in XLM, USDC and EURC. Payment settles on-chain, and an API plus TypeScript SDK make the flow easy to integrate.",
-      highlights: ["Stellar", "Payment links", "API & SDK"],
       link: {
         href: "https://www.link2pay.xyz",
         label: "Visit Link2Pay",
@@ -56,7 +53,6 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       status: "En desarrollo",
       description:
         "Curiosity es una plataforma EdTech para jóvenes y estudiantes. Los minicursos construyen hábitos de estudio, y el trabajo terminado suma puntos que se canjean por descuentos en libros, cursos y otras formaciones.",
-      highlights: ["Minicursos", "Puntos", "Beneficios educativos"],
       link: {
         href: "#",
         label: "Visitar Curiosity",
@@ -69,7 +65,6 @@ const CURRENT_WORK_BY_LOCALE: Record<Locale, readonly CurrentWorkItem[]> = {
       status: "Emprendimiento activo",
       description:
         "Link2Pay es una infraestructura no custodial de links de pago sobre Stellar. Empresas y profesionales independientes crean facturas y comparten checkouts en XLM, USDC y EURC. El pago se confirma on-chain, y una API más un SDK de TypeScript facilitan la integración.",
-      highlights: ["Stellar", "Links de pago", "API y SDK"],
       link: {
         href: "https://www.link2pay.xyz",
         label: "Visitar Link2Pay",

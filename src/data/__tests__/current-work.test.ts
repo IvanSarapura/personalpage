@@ -27,7 +27,6 @@ describe("CURRENT_WORK", () => {
         expect(item.category.length).toBeGreaterThan(0);
         expect(item.status.length).toBeGreaterThan(0);
         expect(item.description.length).toBeGreaterThan(80);
-        expect(item.highlights).toHaveLength(3);
       }
     }
   });
