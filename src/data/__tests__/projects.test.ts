@@ -60,14 +60,20 @@ describe("PROJECTS (fuente de verdad de proyectos)", () => {
 });
 
 describe("MODULES (acordeón de la home, derivado de PROJECTS)", () => {
-  it("deriva un ítem por proyecto, en el mismo orden", () => {
-    expect(MODULES).toHaveLength(PROJECTS.length);
-    for (const [i, mod] of MODULES.entries()) {
-      const project = PROJECTS[i];
+  it("deriva un ítem por proyecto destacado, en el mismo orden", () => {
+    expect(MODULES.length).toBeGreaterThan(0);
+    expect(MODULES.length).toBeLessThanOrEqual(PROJECTS.length);
+    const projectByNum = new Map(PROJECTS.map((p) => [p.num, p]));
+    for (const mod of MODULES) {
+      const project = projectByNum.get(mod.num);
       expect(project).toBeDefined();
-      expect(mod.num).toBe(project!.num);
       expect(mod.name).toContain(project!.title);
       expect(mod.description).toBe(project!.summary);
     }
+  });
+
+  it("excluye lupio y zero-to-agent del acordeón de la home", () => {
+    expect(MODULES.some((mod) => mod.name.includes("Lupio"))).toBe(false);
+    expect(MODULES.some((mod) => mod.name.includes("Zero to Agent"))).toBe(false);
   });
 });

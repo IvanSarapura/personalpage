@@ -46,8 +46,8 @@ const PROJECT_BASES = [
   {
     slug: "proven",
     num: "01",
-    tags: ["Web3", "Legal", "Product"],
-    stack: ["TypeScript", "Next.js", "GenLayer"],
+    tags: ["Product"],
+    stack: ["Interface design", "Web development"],
     links: {},
   },
   {
@@ -101,18 +101,17 @@ export type ProjectSlug = (typeof PROJECT_BASES)[number]["slug"];
 const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
   en: {
     proven: {
-      title: "Proven",
-      tagline: "Decentralized dispute resolution",
+      title: "Sakura Labs",
+      tagline: "Web Development & AI SEO",
       summary:
-        "1st place, Prediction Markets track at GenLayer's Bradbury Builders Hackathon. Proven mediates peer-to-peer commercial disputes with smart contracts that weigh evidence on GenLayer, where coordinated LLM validators review what each party submits. The project is still in active development.",
+        "Sakura Agency is a development agency focused on interfaces and websites. We turn ideas into clear, engaging digital experiences that help brands stand out, connect with their audience and grow online.",
       origin:
-        "Traditional smart contracts run deterministic rules and cannot weigh subjective evidence. Real commercial conflicts turn on interpretation. Proven started at GenLayer's Bradbury Builders Hackathon to mediate peer-to-peer disputes in digital commerce, and won 1st place in the Prediction Markets track.",
+        "Sakura Agency was created to help brands turn a digital presence into a clear, memorable experience. Every project starts by connecting the brand's goals with the way people actually navigate and make decisions online.",
       mechanism:
-        "The protocol runs subjective-logic smart contracts on GenLayer's experimental network. Coordinated LLM validators act as decentralized adjudicators over the evidence each party submits. The TypeScript and Next.js frontend covers the full dispute flow: structured evidence upload, state tracking and verdict monitoring.",
+        "The agency brings strategy, interface design and web development into one focused process. From the first visual direction to the final responsive page, each detail is designed to make the product easier to understand, more engaging to use and ready to grow.",
       future:
-        "Development continues with the post-hackathon team. The mid-term roadmap explores digital identity and applying subjective logic to automated audits of supply contracts, to lower the cost of commercial arbitration.",
-      award: "1st place — Prediction Markets, GenLayer Bradbury Builders Hackathon",
-      status: "In active development",
+        "Sakura Agency is building a flexible studio model for ambitious brands that want a sharper digital presence, a stronger first impression and web experiences that keep working after launch.",
+      status: "Agency project",
     },
     "cardano-chain-of-custody": {
       title: "Chain of Custody on Cardano",
@@ -197,18 +196,17 @@ const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
   },
   es: {
     proven: {
-      title: "Proven",
-      tagline: "Resolución descentralizada de disputas",
+      title: "Sakura Labs",
+      tagline: "Web Development & AI SEO",
       summary:
-        "1er puesto, track de Prediction Markets en el GenLayer Bradbury Builders Hackathon. Proven media disputas comerciales peer-to-peer con contratos inteligentes que ponderan evidencia sobre GenLayer, donde validadores LLM coordinados revisan lo que aporta cada parte. El proyecto sigue en desarrollo activo.",
+        "Sakura Agency es una agencia de desarrollo especializada en interfaces y páginas web. Convertimos ideas en experiencias digitales claras y atractivas que ayudan a las marcas a destacarse, conectar con su audiencia y crecer online.",
       origin:
-        "Los smart contracts tradicionales ejecutan reglas deterministas y no pueden ponderar evidencia subjetiva. Los conflictos comerciales reales dependen de interpretación. Proven empezó en el GenLayer Bradbury Builders Hackathon para mediar disputas peer-to-peer en el comercio digital, y ganó el 1er puesto del track de Prediction Markets.",
+        "Sakura Agency nació para ayudar a las marcas a convertir su presencia digital en una experiencia clara y memorable. Cada proyecto parte de conectar los objetivos de la marca con la forma en que las personas navegan y deciden online.",
       mechanism:
-        "El protocolo ejecuta contratos de lógica subjetiva sobre la red experimental de GenLayer. Validadores LLM coordinados actúan como adjudicadores descentralizados sobre la evidencia que aporta cada parte. El frontend en TypeScript y Next.js cubre el flujo completo: carga estructurada de evidencia, seguimiento de estados y monitoreo de veredictos.",
+        "La agencia reúne estrategia, diseño de interfaces y desarrollo web en un proceso enfocado. Desde la primera dirección visual hasta la página responsive final, cada detalle está pensado para que el producto se entienda mejor, resulte más atractivo y pueda crecer.",
       future:
-        "El desarrollo continúa con el equipo post-hackathon. La proyección a mediano plazo explora identidad digital y aplicar lógica subjetiva a auditorías automáticas de contratos de suministro, para bajar el costo del arbitraje comercial.",
-      award: "1er puesto — Prediction Markets, GenLayer Bradbury Builders Hackathon",
-      status: "En desarrollo activo",
+        "Sakura Agency está construyendo un modelo de estudio flexible para marcas ambiciosas que buscan una presencia digital más sólida, una primera impresión más potente y experiencias web que sigan funcionando después del lanzamiento.",
+      status: "Proyecto de agencia",
     },
     "cardano-chain-of-custody": {
       title: "Cadena de Custodia sobre Cardano",
