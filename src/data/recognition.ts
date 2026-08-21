@@ -1,5 +1,4 @@
 import { DEFAULT_LOCALE, type Locale } from "@/data/locale";
-import type { ProjectSlug } from "@/data/projects";
 import { CHAIN_OF_CUSTODY_PAPER_URL } from "@/data/research";
 
 export const RECOGNITION_IDS = [
@@ -19,15 +18,9 @@ export type RecognitionKind =
 
 type EvidenceLabelId =
   | "read-paper"
-  | "view-case-study"
   | "official-genlayer-result"
-  | "founder-school-program";
-
-interface InternalEvidenceBase {
-  type: "internal";
-  projectSlug: ProjectSlug;
-  labelId: EvidenceLabelId;
-}
+  | "founder-school-program"
+  | "lupio-app";
 
 interface ExternalEvidenceBase {
   type: "external";
@@ -35,11 +28,9 @@ interface ExternalEvidenceBase {
   labelId: EvidenceLabelId;
 }
 
-type RecognitionEvidenceBase = InternalEvidenceBase | ExternalEvidenceBase;
+type RecognitionEvidenceBase = ExternalEvidenceBase;
 
-export type RecognitionEvidence =
-  | (Omit<InternalEvidenceBase, "labelId"> & { label: string })
-  | (Omit<ExternalEvidenceBase, "labelId"> & { label: string });
+export type RecognitionEvidence = Omit<ExternalEvidenceBase, "labelId"> & { label: string };
 
 interface RecognitionBase {
   id: RecognitionId;
@@ -52,7 +43,7 @@ interface RecognitionBase {
 interface RecognitionCopy {
   eyebrow: string;
   outcome: string;
-  title: string;
+  title?: string;
   issuer: string;
   summary: string;
 }
@@ -74,11 +65,6 @@ const RECOGNITION_BASES = [
         href: CHAIN_OF_CUSTODY_PAPER_URL,
         labelId: "read-paper",
       },
-      {
-        type: "internal",
-        projectSlug: "cardano-chain-of-custody",
-        labelId: "view-case-study",
-      },
     ],
   },
   {
@@ -87,13 +73,8 @@ const RECOGNITION_BASES = [
     year: 2026,
     evidence: [
       {
-        type: "internal",
-        projectSlug: "proven",
-        labelId: "view-case-study",
-      },
-      {
         type: "external",
-        href: "https://portal.genlayer.foundation/#/mission/5",
+        href: "https://portal.genlayer.foundation/hackathon-winners",
         labelId: "official-genlayer-result",
       },
     ],
@@ -104,9 +85,9 @@ const RECOGNITION_BASES = [
     year: 2026,
     evidence: [
       {
-        type: "internal",
-        projectSlug: "lupio",
-        labelId: "view-case-study",
+        type: "external",
+        href: "https://lupia.vercel.app/",
+        labelId: "lupio-app",
       },
     ],
   },
@@ -127,15 +108,15 @@ const RECOGNITION_BASES = [
 const EVIDENCE_LABELS: Record<Locale, Record<EvidenceLabelId, string>> = {
   en: {
     "read-paper": "Read the paper",
-    "view-case-study": "View case study",
     "official-genlayer-result": "Official GenLayer result",
     "founder-school-program": "About Founder School",
+    "lupio-app": "Visit Lupio",
   },
   es: {
     "read-paper": "Leer el paper",
-    "view-case-study": "Ver caso de estudio",
     "official-genlayer-result": "Resultado oficial de GenLayer",
     "founder-school-program": "Sobre Founder School",
+    "lupio-app": "Visitar Lupio",
   },
 };
 
@@ -152,7 +133,6 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     "genlayer-bradbury-builders": {
       eyebrow: "Product award",
       outcome: "Prediction Markets track winner",
-      title: "Proven",
       issuer: "GenLayer · Bradbury Builders Hackathon",
       summary:
         "A peer-to-peer challenge market where AI-native consensus evaluates submitted evidence and resolves subjective disputes.",
@@ -160,16 +140,14 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     "trama-bootcamp": {
       eyebrow: "Venture recognition",
       outcome: "Finalist",
-      title: "Lupio",
       issuer: "Trama Entrepreneurship BootCamp · ITBA",
       summary:
         "Business-model validation for early-stage founders, developed and evaluated before panels of investors and mentors.",
     },
     "founder-school": {
       eyebrow: "Founder program",
-      outcome: "Selected",
-      title: "Founder School · FS26-2",
-      issuer: "Crecimiento ecosystem",
+      outcome: "Selected for Founder School · FS26-2",
+      issuer: "Crecimiento ecosystem and Protocol Labs",
       summary:
         "Selected for an intensive program focused on building, validating and scaling technology startups.",
     },
@@ -186,7 +164,6 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     "genlayer-bradbury-builders": {
       eyebrow: "Premio de producto",
       outcome: "Ganador del track Prediction Markets",
-      title: "Proven",
       issuer: "GenLayer · Bradbury Builders Hackathon",
       summary:
         "Un mercado de desafíos peer-to-peer donde el consenso nativo con IA evalúa la evidencia aportada y resuelve disputas subjetivas.",
@@ -194,16 +171,14 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     "trama-bootcamp": {
       eyebrow: "Reconocimiento emprendedor",
       outcome: "Finalista",
-      title: "Lupio",
       issuer: "BootCamp Emprendedor de Trama · ITBA",
       summary:
         "Validación de modelos de negocio para founders early-stage, desarrollada y evaluada ante paneles de inversores y mentores.",
     },
     "founder-school": {
       eyebrow: "Programa para founders",
-      outcome: "Seleccionado",
-      title: "Founder School · FS26-2",
-      issuer: "Ecosistema Crecimiento",
+      outcome: "Seleccionado para Founder School · FS26-2",
+      issuer: "Ecosistema Crecimiento y Protocol Labs",
       summary:
         "Seleccionado para un programa intensivo enfocado en construir, validar y escalar startups tecnológicas.",
     },
@@ -211,13 +186,11 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
 };
 
 function localizeEvidence(evidence: RecognitionEvidenceBase, locale: Locale): RecognitionEvidence {
-  const label = EVIDENCE_LABELS[locale][evidence.labelId];
-
-  if (evidence.type === "internal") {
-    return { type: evidence.type, projectSlug: evidence.projectSlug, label };
-  }
-
-  return { type: evidence.type, href: evidence.href, label };
+  return {
+    type: evidence.type,
+    href: evidence.href,
+    label: EVIDENCE_LABELS[locale][evidence.labelId],
+  };
 }
 
 function buildRecognitions(locale: Locale): Recognition[] {

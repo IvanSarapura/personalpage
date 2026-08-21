@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { LOCALES } from "@/data/locale";
-import { getProject } from "@/data/projects";
 import { RECOGNITION_IDS, getRecognitions } from "@/data/recognition";
 
 const EXPECTED_YEARS = {
@@ -21,7 +20,6 @@ describe("recognition data", () => {
       for (const item of recognitions) {
         expect(item.eyebrow).not.toHaveLength(0);
         expect(item.outcome).not.toHaveLength(0);
-        expect(item.title).not.toHaveLength(0);
         expect(item.issuer).not.toHaveLength(0);
         expect(item.summary).not.toHaveLength(0);
         expect(item.evidence.length).toBeGreaterThan(0);
@@ -29,21 +27,11 @@ describe("recognition data", () => {
     }
   });
 
-  it("enlaza a casos existentes y limita las fuentes externas a HTTPS", () => {
+  it("limita las fuentes externas a HTTPS", () => {
     for (const locale of LOCALES) {
       for (const recognition of getRecognitions(locale)) {
         for (const evidence of recognition.evidence) {
-          if (evidence.type === "external") {
-            expect(evidence.href).toMatch(/^https:\/\//);
-            continue;
-          }
-
-          const project = getProject(evidence.projectSlug, locale);
-          expect(project, `${recognition.id} apunta a un proyecto inexistente`).toBeDefined();
-          expect(
-            project?.award,
-            `${recognition.id} enlaza a ${evidence.projectSlug} sin reconocimiento`
-          ).toBeTruthy();
+          expect(evidence.href).toMatch(/^https:\/\//);
         }
       }
     }

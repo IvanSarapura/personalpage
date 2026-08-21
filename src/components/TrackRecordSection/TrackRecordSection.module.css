@@ -93,7 +93,7 @@
 
 .featuredSummary {
   max-width: var(--content-max-text);
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
@@ -138,15 +138,6 @@
   line-height: var(--body-large-lh);
   color: var(--text-primary);
   text-wrap: balance;
-}
-
-.supportingTitle {
-  margin-bottom: var(--space-2);
-  font-size: var(--body);
-  font-weight: 600;
-  line-height: var(--body-lh);
-  color: var(--text-primary);
-  overflow-wrap: anywhere;
 }
 
 .supportingSummary {

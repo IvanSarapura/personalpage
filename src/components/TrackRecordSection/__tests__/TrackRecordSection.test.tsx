@@ -13,10 +13,6 @@ describe("TrackRecordSection", () => {
     });
     expect(within(featured).getByText("1st prize")).toBeInTheDocument();
     expect(within(featured).getByText("2025")).toHaveAttribute("dateTime", "2025");
-    expect(within(featured).getByRole("link", { name: "View case study" })).toHaveAttribute(
-      "href",
-      "/projects/cardano-chain-of-custody"
-    );
 
     const paperLink = within(featured).getByRole("link", {
       name: "Read the paper (opens in a new tab)",
@@ -26,9 +22,13 @@ describe("TrackRecordSection", () => {
 
     const articles = screen.getAllByRole("article");
     expect(articles).toHaveLength(4);
-    expect(screen.getByRole("article", { name: "Proven" })).toBeInTheDocument();
-    expect(screen.getByRole("article", { name: "Lupio" })).toBeInTheDocument();
-    expect(screen.getByRole("article", { name: "Founder School · FS26-2" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("article", { name: "Prediction Markets track winner" })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("article", { name: "Finalist" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("article", { name: "Selected for Founder School · FS26-2" })
+    ).toBeInTheDocument();
 
     const years = Array.from(container.querySelectorAll("time"), (time) => ({
       label: time.textContent,
@@ -55,20 +55,20 @@ describe("TrackRecordSection", () => {
       name: "La blockchain como tecnología aplicable a la cadena de custodia",
     });
     expect(within(featured).getByText("1er premio")).toBeInTheDocument();
-    expect(within(featured).getByRole("link", { name: "Ver caso de estudio" })).toHaveAttribute(
-      "href",
-      "/es/projects/cardano-chain-of-custody"
-    );
 
-    const proven = screen.getByRole("article", { name: "Proven" });
+    const proven = screen.getByRole("article", {
+      name: "Ganador del track Prediction Markets",
+    });
     expect(
       within(proven).getByRole("link", {
         name: "Resultado oficial de GenLayer (se abre en una pestaña nueva)",
       })
-    ).toHaveAttribute("href", "https://portal.genlayer.foundation/#/mission/5");
+    ).toHaveAttribute("href", "https://portal.genlayer.foundation/hackathon-winners");
 
     expect(
-      within(screen.getByRole("article", { name: "Lupio" })).getByRole("link")
-    ).toHaveAttribute("href", "/es/projects/lupio");
+      within(screen.getByRole("article", { name: "Finalista" })).getByRole("link", {
+        name: "Visitar Lupio (se abre en una pestaña nueva)",
+      })
+    ).toHaveAttribute("href", "https://lupia.vercel.app/");
   });
 });
