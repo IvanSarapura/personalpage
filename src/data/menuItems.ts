@@ -3,7 +3,6 @@ import { DEFAULT_LOCALE, localePath, type Locale } from "@/data/locale";
 
 interface MenuLabels {
   home: string;
-  focus: string;
   research: string;
   projects: string;
   about: string;
@@ -14,7 +13,6 @@ interface MenuLabels {
 const MENU_LABELS: Record<Locale, MenuLabels> = {
   en: {
     home: "Home",
-    focus: "What I do",
     research: "Research",
     projects: "Projects",
     about: "About",
@@ -23,7 +21,6 @@ const MENU_LABELS: Record<Locale, MenuLabels> = {
   },
   es: {
     home: "Inicio",
-    focus: "Qué hago",
     research: "Investigación",
     projects: "Proyectos",
     about: "Sobre mí",
@@ -44,12 +41,11 @@ export function getMenuItems(locale: Locale): MenuItem[] {
   const labels = MENU_LABELS[locale];
   return [
     { label: labels.home, href: localePath(locale, "/"), index: "01" },
-    { label: labels.focus, href: homeAnchor(locale, "#focus"), index: "02" },
-    { label: labels.research, href: localePath(locale, "/research"), index: "03" },
-    { label: labels.projects, href: homeAnchor(locale, "#projects"), index: "04" },
-    { label: labels.about, href: localePath(locale, "/about"), index: "05" },
-    { label: labels.blog, href: localePath(locale, "/blog"), index: "06" },
-    { label: labels.contact, href: homeAnchor(locale, "#contact"), index: "07" },
+    { label: labels.research, href: localePath(locale, "/research"), index: "02" },
+    { label: labels.projects, href: homeAnchor(locale, "#projects"), index: "03" },
+    { label: labels.about, href: localePath(locale, "/about"), index: "04" },
+    { label: labels.blog, href: localePath(locale, "/blog"), index: "05" },
+    { label: labels.contact, href: homeAnchor(locale, "#contact"), index: "06" },
   ];
 }
 

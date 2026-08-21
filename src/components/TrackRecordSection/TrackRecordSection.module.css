@@ -133,9 +133,10 @@
 
 .supportingOutcome {
   margin-bottom: var(--space-3);
-  font-size: var(--body-large);
+  font-size: var(--heading-3);
   font-weight: var(--heading-3-weight);
-  line-height: var(--body-large-lh);
+  line-height: var(--heading-3-lh);
+  letter-spacing: var(--heading-3-tracking);
   color: var(--text-primary);
   text-wrap: balance;
 }

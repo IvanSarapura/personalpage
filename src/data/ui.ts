@@ -85,7 +85,6 @@ export interface UiDict {
     error: string;
     fallbackPrefix: string;
     fallbackLink: string;
-    openFormCta: string;
   };
   footer: {
     ariaLabel: string;
@@ -239,7 +238,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       error: "I couldn't send your message right now. Please try again in a moment.",
       fallbackPrefix: "If the problem continues, you can also",
       fallbackLink: "contact me on LinkedIn",
-      openFormCta: "Write to me",
     },
     footer: {
       ariaLabel: "Footer",
@@ -396,7 +394,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       error: "No pude enviar tu mensaje en este momento. Intentá nuevamente en unos instantes.",
       fallbackPrefix: "Si el problema continúa, también podés",
       fallbackLink: "contactarme por LinkedIn",
-      openFormCta: "Escribime",
     },
     footer: {
       ariaLabel: "Pie de página",

@@ -224,9 +224,6 @@
 
 .footerContent {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
   flex-direction: column;
   gap: var(--space-3);
 }
@@ -238,20 +235,6 @@
   color: var(--text-primary);
   opacity: var(--opacity-muted);
   margin: 0;
-}
-
-.footerEmail {
-  font-size: var(--caption);
-  font-weight: 500;
-  line-height: var(--caption-lh);
-  color: var(--text-primary);
-  opacity: var(--opacity-moderate);
-  text-decoration: none;
-  transition: opacity var(--duration-base) var(--ease-out);
-}
-
-.footerEmail:hover {
-  opacity: 1;
 }
 
 /* ─── Desktop ─── */
@@ -273,11 +256,6 @@
 
   .footerBar {
     padding-bottom: var(--navbar-padding-y);
-  }
-
-  .footerContent {
-    flex-direction: row;
-    align-items: center;
   }
 }
 

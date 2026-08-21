@@ -61,7 +61,7 @@ export default function Footer({ locale }: FooterProps) {
 
         <div className="mt-[var(--space-5)] flex items-center justify-center border-t border-[color:var(--border-subtle)] pt-[var(--space-3)] md:mt-[var(--space-6)] md:pt-[var(--space-4)]">
           <p className="text-caption tracking-[var(--letter-spacing-wide)] text-[var(--text-secondary)] opacity-[var(--opacity-subtle)]">
-            © {new Date().getFullYear()} {SITE.name}. {ui.footer.rights}
+            © {new Date().getFullYear()} {SITE.initials}. {ui.footer.rights}
           </p>
         </div>
       </Container>

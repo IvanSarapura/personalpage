@@ -26,6 +26,7 @@ export function getSiteCopy(locale: Locale): SiteCopy {
 export const SITE = {
   name: "Iván Enzo Sarapura",
   shortName: "Iván Sarapura",
+  initials: "IS",
   ...SITE_COPY[DEFAULT_LOCALE],
   url: env.NEXT_PUBLIC_SITE_URL,
   social: {

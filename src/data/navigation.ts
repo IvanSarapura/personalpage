@@ -51,9 +51,9 @@ export function getFooterLinks(locale: Locale): FooterColumn[] {
       title: labels.site,
       links: [
         { label: labels.home, href: homePath },
+        { label: labels.about, href: localePath(locale, "/about") },
         { label: labels.research, href: localePath(locale, "/research") },
         { label: labels.projects, href: localePath(locale, "/projects") },
-        { label: labels.about, href: localePath(locale, "/about") },
         { label: labels.blog, href: localePath(locale, "/blog") },
       ],
     },
