@@ -1,6 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Container from "@/components/Container/Container";
+import Section from "@/components/Section/Section";
+import { DEFAULT_LOCALE, hasLocale, type Locale } from "@/data/locale";
+import { getUi } from "@/data/ui";
+import styles from "./error.module.css";
+
+/** Error boundary por segmento [lang]. No recibe params, así que deduce el
+ *  locale de la URL actual (los fallbacks de ruta caen en el default). */
+function useRouteLocale(): Locale {
+  const pathname = usePathname() ?? "";
+  const firstSegment = pathname.split("/")[1];
+  return firstSegment && hasLocale(firstSegment) ? firstSegment : DEFAULT_LOCALE;
+}
 
 export default function Error({
   error,
@@ -9,17 +23,22 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const ui = getUi(useRouteLocale()).errorPage;
+
   // Registrar el error para diagnóstico; no se traga en silencio.
   useEffect(() => {
     console.error(error);
   }, [error]);
 
   return (
-    <div role="alert" style={{ padding: "var(--space-7)", textAlign: "center" }}>
-      <h2>Something went wrong</h2>
-      <button onClick={reset} style={{ marginTop: "var(--space-4)" }}>
-        Try again
-      </button>
-    </div>
+    <Section variant="white" paddingY="lg" ariaLabel={ui.title}>
+      <Container className="flex flex-col items-start gap-[var(--element-gap)]">
+        <h1 className={styles.title}>{ui.title}</h1>
+        <p className={styles.message}>{ui.message}</p>
+        <button type="button" onClick={reset} className={styles.button}>
+          {ui.retry}
+        </button>
+      </Container>
+    </Section>
   );
 }

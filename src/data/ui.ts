@@ -141,6 +141,11 @@ export interface UiDict {
     message: string;
     backHome: string;
   };
+  errorPage: {
+    title: string;
+    message: string;
+    retry: string;
+  };
 }
 
 const UI_BY_LOCALE: Record<Locale, UiDict> = {
@@ -294,6 +299,12 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       message: "The page you're looking for doesn't exist or was moved.",
       backHome: "Back to home",
     },
+    errorPage: {
+      title: "Something went wrong",
+      message:
+        "An unexpected error occurred. Try again, and if the problem persists, get in touch.",
+      retry: "Try again",
+    },
   },
   es: {
     skipLink: "Saltar al contenido principal",
@@ -445,6 +456,11 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       title: "Página no encontrada",
       message: "La página que buscás no existe o fue movida.",
       backHome: "Volver al inicio",
+    },
+    errorPage: {
+      title: "Algo salió mal",
+      message: "Ocurrió un error inesperado. Probá de nuevo y, si el problema continúa, escribime.",
+      retry: "Intentar de nuevo",
     },
   },
 };
