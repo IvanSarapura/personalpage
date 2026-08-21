@@ -45,7 +45,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-3);
   font-size: var(--caption);
   font-weight: 600;
   line-height: var(--caption-lh);
@@ -132,7 +132,7 @@
 }
 
 .supportingOutcome {
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
   font-size: var(--body-large);
   font-weight: var(--heading-3-weight);
   line-height: var(--body-large-lh);
@@ -156,7 +156,6 @@
   align-items: center;
   gap: var(--space-2) var(--space-3);
   margin-top: auto;
-  padding-top: var(--space-5);
 }
 
 .actionLink {

@@ -9,9 +9,8 @@ describe("TrackRecordSection", () => {
     expect(screen.getByRole("region", { name: "Achievements" })).toBeInTheDocument();
 
     const featured = screen.getByRole("article", {
-      name: "La blockchain como tecnología aplicable a la cadena de custodia",
+      name: "First prize for legaltech research",
     });
-    expect(within(featured).getByText("1st prize")).toBeInTheDocument();
     expect(within(featured).getByText("2025")).toHaveAttribute("dateTime", "2025");
 
     const paperLink = within(featured).getByRole("link", {
@@ -51,10 +50,11 @@ describe("TrackRecordSection", () => {
 
     expect(screen.getByRole("region", { name: "Reconocimientos" })).toBeInTheDocument();
 
-    const featured = screen.getByRole("article", {
-      name: "La blockchain como tecnología aplicable a la cadena de custodia",
-    });
-    expect(within(featured).getByText("1er premio")).toBeInTheDocument();
+    expect(
+      screen.getByRole("article", {
+        name: "Primer premio por investigación en legaltech",
+      })
+    ).toBeInTheDocument();
 
     const proven = screen.getByRole("article", {
       name: "Ganador del track Prediction Markets",

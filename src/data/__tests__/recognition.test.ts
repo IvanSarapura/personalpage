@@ -19,7 +19,9 @@ describe("recognition data", () => {
 
       for (const item of recognitions) {
         expect(item.eyebrow).not.toHaveLength(0);
-        expect(item.outcome).not.toHaveLength(0);
+        if (item.outcome) {
+          expect(item.outcome).not.toHaveLength(0);
+        }
         expect(item.issuer).not.toHaveLength(0);
         expect(item.summary).not.toHaveLength(0);
         expect(item.evidence.length).toBeGreaterThan(0);

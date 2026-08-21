@@ -78,8 +78,8 @@ export default function TrackRecordSection({ locale }: TrackRecordSectionProps) 
         <div className={styles.evidenceBoard}>
           <article className={styles.featured} aria-labelledby={featuredTitleId}>
             <RecordMeta item={featured} />
-            <p className={styles.featuredOutcome}>{featured.outcome}</p>
-            <h3 id={featuredTitleId} className={styles.featuredTitle} lang={featured.titleLanguage}>
+            {featured.outcome && <p className={styles.featuredOutcome}>{featured.outcome}</p>}
+            <h3 id={featuredTitleId} className={styles.featuredTitle}>
               {featured.title}
             </h3>
             <p className={styles.issuer}>{featured.issuer}</p>

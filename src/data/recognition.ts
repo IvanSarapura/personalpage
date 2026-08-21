@@ -36,13 +36,12 @@ interface RecognitionBase {
   id: RecognitionId;
   kind: RecognitionKind;
   year: number;
-  titleLanguage?: "es";
   evidence: readonly RecognitionEvidenceBase[];
 }
 
 interface RecognitionCopy {
   eyebrow: string;
-  outcome: string;
+  outcome?: string;
   title?: string;
   issuer: string;
   summary: string;
@@ -58,7 +57,6 @@ const RECOGNITION_BASES = [
     id: "legalthon-uba-cardano",
     kind: "academic-award",
     year: 2025,
-    titleLanguage: "es",
     evidence: [
       {
         type: "external",
@@ -123,10 +121,9 @@ const EVIDENCE_LABELS: Record<Locale, Record<EvidenceLabelId, string>> = {
 const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> = {
   en: {
     "legalthon-uba-cardano": {
-      eyebrow: "Research recognition",
-      outcome: "1st prize",
-      title: "La blockchain como tecnología aplicable a la cadena de custodia",
-      issuer: "Facultad de Derecho (UBA) · Comunidad Cardano · FinGurú",
+      eyebrow: "Academic recognition",
+      title: "First prize for legaltech research",
+      issuer: "Comunidad Cardano · Facultad de Derecho",
       summary:
         "Co-authored research proposing a hybrid Cardano architecture for preserving digital evidence integrity, forensic traceability and procedural guarantees.",
     },
@@ -155,9 +152,8 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
   es: {
     "legalthon-uba-cardano": {
       eyebrow: "Reconocimiento académico",
-      outcome: "1er premio",
-      title: "La blockchain como tecnología aplicable a la cadena de custodia",
-      issuer: "Facultad de Derecho (UBA) · Comunidad Cardano · FinGurú",
+      title: "Primer premio por investigación en legaltech",
+      issuer: "Comunidad Cardano · Facultad de Derecho",
       summary:
         "Investigación en coautoría que propone una arquitectura híbrida sobre Cardano para preservar la integridad de la evidencia digital, la trazabilidad forense y las garantías procesales.",
     },
