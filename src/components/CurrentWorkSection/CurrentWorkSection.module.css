@@ -87,7 +87,7 @@
   align-items: center;
   gap: var(--space-2);
   margin-top: auto;
-  padding-top: var(--space-5);
+  padding-top: var(--space-4);
   color: var(--text-on-light);
   font-size: var(--caption);
   font-weight: 600;
