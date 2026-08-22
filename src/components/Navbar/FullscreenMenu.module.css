@@ -170,45 +170,19 @@
 }
 
 .index {
-  font-size: var(--caption);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: var(--letter-spacing-wide);
-  color: var(--text-primary);
+  display: inline-flex;
+  width: 2ch;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  font-variant-numeric: tabular-nums;
   opacity: var(--opacity-dim);
-  min-width: 24px;
   flex-shrink: 0;
   transition: opacity var(--duration-base) var(--ease-out);
 }
 
 .link:hover:not(:disabled) .index {
   opacity: var(--opacity-secondary);
-}
-
-.label {
-  position: relative;
-}
-
-/* Indicador visual al hover: pequeño punto */
-.label::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%) scale(0);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  opacity: 0;
-  transition:
-    transform var(--duration-base) var(--ease-out),
-    opacity var(--duration-base) var(--ease-out);
-}
-
-.link:hover:not(:disabled) .label::before {
-  transform: translateY(-50%) scale(1);
-  opacity: 1;
 }
 
 /* ─── Footer del menú ─── */
@@ -271,10 +245,6 @@
   }
 
   .link {
-    transition: none;
-  }
-
-  .label::before {
     transition: none;
   }
 }

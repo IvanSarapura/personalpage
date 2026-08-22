@@ -4,6 +4,14 @@ import userEvent from "@testing-library/user-event";
 import FullscreenMenu from "../FullscreenMenu";
 import { MENU_ITEMS } from "@/data/menuItems";
 
+const { smoothScrollToMock } = vi.hoisted(() => ({
+  smoothScrollToMock: vi.fn(),
+}));
+
+vi.mock("@/lib/smooth-scroll", () => ({
+  smoothScrollTo: smoothScrollToMock,
+}));
+
 const DIALOG_NAME = "Main navigation menu";
 const ITEM_LABELS = MENU_ITEMS.map((item) => item.label);
 const LINKED_ITEMS = MENU_ITEMS.filter((item) => item.href);
@@ -12,6 +20,7 @@ const DISABLED_ITEMS = MENU_ITEMS.filter((item) => !item.href);
 describe("FullscreenMenu", () => {
   beforeEach(() => {
     document.body.style.overflow = "";
+    smoothScrollToMock.mockClear();
   });
 
   it("renderiza un diálogo accesible con todos los ítems del menú", () => {
@@ -82,18 +91,18 @@ describe("FullscreenMenu", () => {
   it("conserva el hash de la página actual en el historial al cerrar el menú", async () => {
     window.history.replaceState(null, "", "/");
     const target = document.createElement("section");
-    target.id = "projects";
+    target.id = "contact";
     document.body.appendChild(target);
     const onClose = vi.fn();
 
     try {
       render(<FullscreenMenu isOpen onClose={onClose} locale="en" />);
 
-      fireEvent.click(screen.getByRole("link", { name: /Projects/ }));
+      fireEvent.click(screen.getByRole("link", { name: /Contact/ }));
 
       expect(onClose).toHaveBeenCalledOnce();
-      await waitFor(() => expect(window.location.hash).toBe("#projects"));
-      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+      await waitFor(() => expect(window.location.hash).toBe("#contact"));
+      expect(smoothScrollToMock).toHaveBeenCalledWith(0);
     } finally {
       target.remove();
       window.history.replaceState(null, "", "/");

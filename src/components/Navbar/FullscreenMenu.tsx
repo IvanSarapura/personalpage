@@ -6,6 +6,7 @@ import { useLockBodyScroll, useFocusTrap, useIsClient } from "@/hooks";
 import { getMenuItems } from "@/data/menuItems";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 import MenuHeader from "./MenuHeader";
 import MenuNav from "./MenuNav";
 import MenuFooter from "./MenuFooter";
@@ -74,7 +75,7 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
         const targetRect = target.getBoundingClientRect();
         const targetPosition = window.scrollY + targetRect.top - navbarHeight;
 
-        window.scrollTo({ top: Math.max(0, targetPosition), behavior: "smooth" });
+        smoothScrollTo(targetPosition);
       }, MENU_CLOSE_DELAY_MS);
     },
     [onClose, ui.navbar.mainNavAriaLabel]

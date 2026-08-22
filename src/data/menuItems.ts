@@ -42,7 +42,7 @@ export function getMenuItems(locale: Locale): MenuItem[] {
   return [
     { label: labels.home, href: localePath(locale, "/"), index: "01" },
     { label: labels.research, href: localePath(locale, "/research"), index: "02" },
-    { label: labels.projects, href: homeAnchor(locale, "#projects"), index: "03" },
+    { label: labels.projects, href: localePath(locale, "/projects"), index: "03" },
     { label: labels.about, href: localePath(locale, "/about"), index: "04" },
     { label: labels.blog, href: localePath(locale, "/blog"), index: "05" },
     { label: labels.contact, href: homeAnchor(locale, "#contact"), index: "06" },

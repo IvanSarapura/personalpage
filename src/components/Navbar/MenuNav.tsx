@@ -37,12 +37,12 @@ export default function MenuNav({ items, isOpen, onNavigate, onClose, ariaLabel 
                   {href ? (
                     <Link href={href} className={styles.link} onClick={(e) => onNavigate(e, href)}>
                       <span className={styles.index}>{index}</span>
-                      <span className={styles.label}>{label}</span>
+                      <span>{label}</span>
                     </Link>
                   ) : (
                     <button type="button" className={styles.link} onClick={onClose} disabled>
                       <span className={styles.index}>{index}</span>
-                      <span className={styles.label}>{label}</span>
+                      <span>{label}</span>
                     </button>
                   )}
                 </li>
