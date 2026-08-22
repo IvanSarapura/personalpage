@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useCallback, useSyncExternalStore } from "react";
+import {
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 
 export type Theme = "light" | "dark";
 
@@ -28,38 +35,85 @@ export function useThemeContext() {
    ────────────────────────────────────────────────────────────── */
 
 const MEDIA_QUERY = "(prefers-color-scheme: dark)";
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const THEME_TRANSITION_CLASS = "theme-transitioning";
+const THEME_TRANSITION_DURATION_MS = 350;
+const THEME_CHANGE_EVENT = "themechange";
+const THEME_STORAGE_KEY = "theme";
 
 function getThemeFromDOM(): Theme {
   if (typeof document === "undefined") return "light";
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-function subscribe(onStoreChange: () => void) {
-  const media = window.matchMedia(MEDIA_QUERY);
+function readStoredTheme(): Theme | null {
+  try {
+    const theme = localStorage.getItem(THEME_STORAGE_KEY);
+    return theme === "dark" || theme === "light" ? theme : null;
+  } catch {
+    return null;
+  }
+}
 
-  const handleMedia = () => {
-    try {
-      const hasStored = localStorage.getItem("theme");
-      if (!hasStored) {
-        onStoreChange();
-      }
-    } catch {
-      onStoreChange();
-    }
+function resolveTheme(
+  storedTheme = readStoredTheme(),
+  sessionTheme: Theme | null = null,
+  systemDark = typeof window.matchMedia === "function" && window.matchMedia(MEDIA_QUERY).matches
+): Theme {
+  return sessionTheme ?? storedTheme ?? (systemDark ? "dark" : "light");
+}
+
+function applyTheme(theme: Theme) {
+  document.documentElement.classList.toggle("dark", theme === "dark");
+}
+
+function persistTheme(theme: Theme): boolean {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    return true;
+  } catch {
+    // localStorage no disponible (modo privado o cuota excedida): se ignora.
+    return false;
+  }
+}
+
+function notifyThemeChange() {
+  window.dispatchEvent(new CustomEvent(THEME_CHANGE_EVENT));
+}
+
+function subscribe(onStoreChange: () => void, sessionThemeRef: { current: Theme | null }) {
+  const media = typeof window.matchMedia === "function" ? window.matchMedia(MEDIA_QUERY) : null;
+
+  const handleMedia = (event: MediaQueryListEvent) => {
+    const storedTheme = readStoredTheme();
+    if (storedTheme || sessionThemeRef.current) return;
+
+    applyTheme(resolveTheme(storedTheme, sessionThemeRef.current, event.matches));
+    onStoreChange();
   };
 
   const handleStorage = (e: StorageEvent) => {
-    if (e.key === "theme") {
+    if (e.key === THEME_STORAGE_KEY || e.key === null) {
+      sessionThemeRef.current =
+        e.key === THEME_STORAGE_KEY && (e.newValue === "dark" || e.newValue === "light")
+          ? e.newValue
+          : null;
+
+      applyTheme(resolveTheme(readStoredTheme(), sessionThemeRef.current));
       onStoreChange();
     }
   };
 
-  media.addEventListener("change", handleMedia);
+  const handleThemeChange = () => onStoreChange();
+
+  media?.addEventListener("change", handleMedia);
   window.addEventListener("storage", handleStorage);
+  window.addEventListener(THEME_CHANGE_EVENT, handleThemeChange);
 
   return () => {
-    media.removeEventListener("change", handleMedia);
+    media?.removeEventListener("change", handleMedia);
     window.removeEventListener("storage", handleStorage);
+    window.removeEventListener(THEME_CHANGE_EVENT, handleThemeChange);
   };
 }
 
@@ -72,30 +126,61 @@ interface ThemeProviderProps {
 }
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
+  const clearThemeTransitionRef = useRef<(() => void) | null>(null);
+  const sessionThemeRef = useRef<Theme | null>(null);
+
+  const subscribeToTheme = useCallback(
+    (onStoreChange: () => void) => subscribe(onStoreChange, sessionThemeRef),
+    []
+  );
+
   const theme = useSyncExternalStore<Theme>(
-    subscribe,
+    subscribeToTheme,
     getThemeFromDOM,
     () => "light" // getServerSnapshot — SSR siempre renderiza "light"
   );
 
-  const setTheme = useCallback((next: Theme) => {
+  const startThemeTransition = useCallback(() => {
     const html = document.documentElement;
+    clearThemeTransitionRef.current?.();
 
-    if (next === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia(REDUCED_MOTION_QUERY).matches
+    ) {
+      return;
     }
 
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      // localStorage no disponible (modo privado o cuota excedida): se ignora.
-    }
+    html.classList.add(THEME_TRANSITION_CLASS);
 
-    // Notificar a otras pestañas mediante un storage event.
-    window.dispatchEvent(new StorageEvent("storage", { key: "theme", newValue: next }));
+    const timeoutId = window.setTimeout(() => {
+      clearThemeTransitionRef.current?.();
+    }, THEME_TRANSITION_DURATION_MS);
+
+    clearThemeTransitionRef.current = () => {
+      window.clearTimeout(timeoutId);
+      html.classList.remove(THEME_TRANSITION_CLASS);
+      clearThemeTransitionRef.current = null;
+    };
   }, []);
+
+  useEffect(() => {
+    return () => clearThemeTransitionRef.current?.();
+  }, []);
+
+  const setTheme = useCallback(
+    (next: Theme) => {
+      startThemeTransition();
+
+      applyTheme(next);
+      sessionThemeRef.current = persistTheme(next) ? null : next;
+
+      // `storage` se reserva para cambios reales de otras pestañas. Esta señal
+      // interna conserva el tema local aunque localStorage no esté disponible.
+      notifyThemeChange();
+    },
+    [startThemeTransition]
+  );
 
   const toggleTheme = useCallback(() => {
     const next = theme === "light" ? "dark" : "light";

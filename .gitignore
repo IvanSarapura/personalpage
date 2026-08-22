@@ -42,5 +42,9 @@ yarn-error.log*
 next-env.d.ts
 
 # skills
+.codex/
 .agents/
 .commandcode/
+
+#docs
+docs/

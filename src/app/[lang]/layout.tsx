@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import "../globals.css";
 import ThemeProvider from "@/providers/ThemeProvider";
 import Navbar from "@/components/Navbar/Navbar";
@@ -82,20 +81,21 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html lang={lang} className={inter.variable} suppressHydrationWarning>
       <head>
-        <Script
-          id="theme-anti-flash"
-          strategy="beforeInteractive"
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
+                var theme = null;
+
                 try {
-                  const theme = localStorage.getItem("theme");
-                  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                  const isDark = theme === "dark" || (!theme && systemDark);
-                  if (isDark) {
-                    document.documentElement.classList.add("dark");
-                  }
-                } catch (e) {}
+                  theme = localStorage.getItem("theme");
+                } catch {}
+
+                var isDark =
+                  theme === "dark" ||
+                  (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+                document.documentElement.classList.toggle("dark", isDark);
               })();
             `,
           }}

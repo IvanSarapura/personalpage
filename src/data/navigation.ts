@@ -1,10 +1,19 @@
 import { SITE } from "@/data/site";
 import { DEFAULT_LOCALE, localePath, type Locale } from "@/data/locale";
 
-export interface FooterLink {
+interface InternalFooterLink {
   label: string;
   href: string;
+  kind: "internal";
 }
+
+interface ExternalFooterLink {
+  label: string;
+  href: string;
+  kind: "external";
+}
+
+export type FooterLink = InternalFooterLink | ExternalFooterLink;
 
 export interface FooterColumn {
   title: string;
@@ -50,18 +59,18 @@ export function getFooterLinks(locale: Locale): FooterColumn[] {
     {
       title: labels.site,
       links: [
-        { label: labels.home, href: homePath },
-        { label: labels.about, href: localePath(locale, "/about") },
-        { label: labels.research, href: localePath(locale, "/research") },
-        { label: labels.projects, href: localePath(locale, "/projects") },
-        { label: labels.blog, href: localePath(locale, "/blog") },
+        { label: labels.home, href: homePath, kind: "internal" },
+        { label: labels.about, href: localePath(locale, "/about"), kind: "internal" },
+        { label: labels.research, href: localePath(locale, "/research"), kind: "internal" },
+        { label: labels.projects, href: localePath(locale, "/projects"), kind: "internal" },
+        { label: labels.blog, href: localePath(locale, "/blog"), kind: "internal" },
       ],
     },
     {
       title: labels.elsewhere,
       links: [
-        { label: "GitHub", href: SITE.social.github },
-        { label: "LinkedIn", href: SITE.social.linkedin },
+        { label: "GitHub", href: SITE.social.github, kind: "external" },
+        { label: "LinkedIn", href: SITE.social.linkedin, kind: "external" },
       ],
     },
   ];

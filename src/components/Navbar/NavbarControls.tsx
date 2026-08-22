@@ -34,11 +34,7 @@ export default function NavbarControls({ locale }: NavbarControlsProps) {
     <div className="flex items-center gap-[var(--element-gap)]">
       <LocaleSwitcher locale={locale} />
 
-      {/* suppressHydrationWarning: `isDark` proviene de useSyncExternalStore;
-          en SSR siempre es "light", pero el script anti-FOUC de layout.tsx
-          ya aplicó la clase `dark` al <html> antes de hidratar. La diferencia
-          es intencional y esperada — no eliminar este prop. */}
-      <div className="flex items-center gap-[var(--space-3)]" suppressHydrationWarning>
+      <div className="flex items-center gap-[var(--space-3)]">
         <Switch checked={isDark} onChange={toggleTheme} ariaLabel={switchLabel} />
         <span className="text-label hidden min-w-[36px] text-center tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] select-none md:inline-block">
           {labelText}

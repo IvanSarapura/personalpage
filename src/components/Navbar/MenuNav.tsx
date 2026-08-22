@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "@/components/Container/Container";
 import styles from "./FullscreenMenu.module.css";
 import type { MenuItem } from "@/types/navigation";
@@ -34,10 +35,10 @@ export default function MenuNav({ items, isOpen, onNavigate, onClose, ariaLabel 
                   style={{ transitionDelay: `${delay}ms` }}
                 >
                   {href ? (
-                    <a href={href} className={styles.link} onClick={(e) => onNavigate(e, href)}>
+                    <Link href={href} className={styles.link} onClick={(e) => onNavigate(e, href)}>
                       <span className={styles.index}>{index}</span>
                       <span className={styles.label}>{label}</span>
-                    </a>
+                    </Link>
                   ) : (
                     <button type="button" className={styles.link} onClick={onClose} disabled>
                       <span className={styles.index}>{index}</span>

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import FullscreenMenu from "../FullscreenMenu";
 import { MENU_ITEMS } from "@/data/menuItems";
@@ -77,5 +77,26 @@ describe("FullscreenMenu", () => {
 
     await userEvent.click(screen.getByRole("link", { name: /Home/ }));
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it("conserva el hash de la página actual en el historial al cerrar el menú", async () => {
+    window.history.replaceState(null, "", "/");
+    const target = document.createElement("section");
+    target.id = "projects";
+    document.body.appendChild(target);
+    const onClose = vi.fn();
+
+    try {
+      render(<FullscreenMenu isOpen onClose={onClose} locale="en" />);
+
+      fireEvent.click(screen.getByRole("link", { name: /Projects/ }));
+
+      expect(onClose).toHaveBeenCalledOnce();
+      await waitFor(() => expect(window.location.hash).toBe("#projects"));
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+    } finally {
+      target.remove();
+      window.history.replaceState(null, "", "/");
+    }
   });
 });

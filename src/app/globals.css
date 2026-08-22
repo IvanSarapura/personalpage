@@ -123,6 +123,7 @@
 
 /* Bordes primitivos con alpha */
 :root {
+  color-scheme: light;
   --color-border-subtle: rgba(235, 236, 255, 0.2);
   --color-border-muted: rgba(235, 236, 255, 0.08);
 }
@@ -152,6 +153,7 @@
 
 /* Semantic — dark */
 html.dark {
+  color-scheme: dark;
   --surface-primary: var(--color-deep);
   --surface-secondary: var(--color-deep);
   --surface-tertiary: var(--color-deep-elevated);
@@ -441,6 +443,7 @@ html.dark {
   }
 
   html {
+    background-color: var(--surface-primary);
     overflow-x: hidden;
     overflow-x: clip;
     overscroll-behavior-x: none;
@@ -470,7 +473,16 @@ html.dark {
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: var(--transition-theme);
+  }
+
+  /* La transición de tema se habilita únicamente después de que el usuario
+     acciona el toggle. Así, la clase inicial aplicada en <head> no anima el
+     primer paint ni los cambios de navegación. */
+  @media (prefers-reduced-motion: no-preference) {
+    html.theme-transitioning,
+    html.theme-transitioning body {
+      transition: var(--transition-theme);
+    }
   }
 
   a {

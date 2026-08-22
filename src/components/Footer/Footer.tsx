@@ -48,9 +48,15 @@ export default function Footer({ locale }: FooterProps) {
                 <ul className="m-0 flex list-none flex-col gap-[var(--space-2)] p-0 md:gap-[var(--space-3)]">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className={columnLinkClass}>
-                        {link.label}
-                      </a>
+                      {link.kind === "internal" ? (
+                        <Link href={link.href} className={columnLinkClass}>
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a href={link.href} className={columnLinkClass}>
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

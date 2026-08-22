@@ -48,13 +48,13 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
     ("/#focus", "/#projects"). Solo interceptamos las anclas que apuntan a la página ACTUAL:
     ahí hacemos smooth scroll manual (compensando la altura del navbar sticky y
     la condición de carrera con useLockBodyScroll). Para rutas y anclas de otra
-    página dejamos que el navegador haga la navegación por defecto.
+    página dejamos que <Link> gestione la transición de cliente.
   */
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       const hashIndex = href.indexOf("#");
       if (hashIndex === -1) {
-        // Ruta sin ancla: navegación por defecto; solo cerramos el menú.
+        // Ruta sin ancla: Link hace la transición de cliente; solo cerramos el menú.
         onClose();
         return;
       }
@@ -63,7 +63,7 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
       const targetPath = normalize(href.slice(0, hashIndex));
       const currentPath = normalize(window.location.pathname);
       if (targetPath !== currentPath) {
-        // Ancla de otra página: navegación por defecto.
+        // Ancla de otra página: Link hace la transición de cliente.
         onClose();
         return;
       }
@@ -75,6 +75,10 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
       window.setTimeout(() => {
         const target = document.querySelector(hash);
         if (!target) return;
+
+        if (window.location.hash !== hash) {
+          window.history.pushState(null, "", hash);
+        }
 
         const navbar = document.querySelector(`nav[aria-label='${ui.navbar.mainNavAriaLabel}']`);
         const navbarHeight = navbar?.getBoundingClientRect().height ?? 0;
