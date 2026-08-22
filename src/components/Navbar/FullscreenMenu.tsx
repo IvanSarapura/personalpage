@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback, useLayoutEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useLockBodyScroll, useFocusTrap, useIsClient } from "@/hooks";
 import { getMenuItems } from "@/data/menuItems";
@@ -18,17 +18,6 @@ interface FullscreenMenuProps {
 }
 
 const MENU_CLOSE_DELAY_MS = 100;
-
-/**
- * Fuerza un reflow leyendo una propiedad de layout. Evita que el navegador
- * agrupe el cambio de display+opacity para que la transición CSS de apertura
- * se dispare correctamente.
- */
-function forceReflow(element: HTMLElement): void {
-  // Lectura con efecto secundario de layout intencional (no es código muerto).
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  element.scrollHeight;
-}
 
 /**
  * Menú de navegación a pantalla completa, renderizado en un portal sobre el body.
@@ -90,13 +79,6 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
     },
     [onClose, ui.navbar.mainNavAriaLabel]
   );
-
-  // Forzar un reflow antes de la transición de apertura (ver forceReflow).
-  useLayoutEffect(() => {
-    if (isOpen && containerRef.current) {
-      forceReflow(containerRef.current);
-    }
-  }, [isOpen, containerRef]);
 
   // Cerrar con Escape
   useEffect(() => {

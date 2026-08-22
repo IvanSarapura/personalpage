@@ -8,19 +8,13 @@
   background: var(--surface-primary);
   display: flex;
   flex-direction: column;
-  opacity: 0;
   visibility: hidden;
-  transition:
-    opacity var(--duration-smooth) var(--ease-smooth),
-    visibility 0s linear var(--duration-smooth);
+  transition: visibility 0s linear var(--duration-smooth);
 }
 
 .overlayOpen {
-  opacity: 1;
   visibility: visible;
-  transition:
-    opacity var(--duration-smooth) var(--ease-smooth),
-    visibility 0s linear 0s;
+  transition: visibility 0s linear 0s;
 }
 
 .panel {
@@ -33,6 +27,13 @@
 }
 
 /* ─── Header — misma estructura que el navbar principal ─── */
+.headerBar {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  background: var(--surface-primary);
+}
+
 .headerInner {
   display: flex;
   justify-content: space-between;
@@ -263,14 +264,10 @@
 @media (prefers-reduced-motion: reduce) {
   .overlay {
     transition: none;
-    opacity: 1;
-    visibility: visible;
   }
 
   .item {
     transition: none;
-    opacity: 1;
-    transform: none;
   }
 
   .link {
