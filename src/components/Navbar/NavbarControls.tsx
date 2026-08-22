@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useTheme } from "@/providers/useTheme";
+import { scrollToTopInstantly } from "@/lib/smooth-scroll";
 import { MenuIcon, CloseIcon } from "@/components/Icons/MenuIcons";
 import { Switch } from "@/components/Switch";
 import FullscreenMenu from "./FullscreenMenu";
@@ -19,11 +21,26 @@ interface NavbarControlsProps {
 export default function NavbarControls({ locale }: NavbarControlsProps) {
   const { isDark, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const pendingMenuRouteRef = useRef<string | null>(null);
   const ui = getUi(locale);
 
   // El React Compiler memoiza estas funciones; useCallback sería redundante.
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
+  const prepareRouteNavigation = (href: string) => {
+    pendingMenuRouteRef.current = new URL(href, window.location.origin).pathname;
+  };
+
+  /* Next conserva el scroll si el nuevo Page sigue visible. Para las rutas
+     iniciadas desde el menú queremos una página de destino que se pinte arriba,
+     sin alterar la restauración nativa de Back/Forward. */
+  useLayoutEffect(() => {
+    if (pendingMenuRouteRef.current !== pathname) return;
+
+    scrollToTopInstantly();
+    pendingMenuRouteRef.current = null;
+  }, [pathname]);
 
   /* El label "Dark/Light" describe la acción (a dónde vas si pulsas),
      no el estado actual — es un CTA, coherente con el aria-label. */
@@ -56,7 +73,12 @@ export default function NavbarControls({ locale }: NavbarControlsProps) {
         </span>
       </button>
 
-      <FullscreenMenu isOpen={isMenuOpen} onClose={closeMenu} locale={locale} />
+      <FullscreenMenu
+        isOpen={isMenuOpen}
+        onClose={closeMenu}
+        locale={locale}
+        onRouteNavigation={prepareRouteNavigation}
+      />
     </div>
   );
 }

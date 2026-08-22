@@ -10,6 +10,19 @@ function easeInOutSine(progress: number): number {
   return -(Math.cos(Math.PI * progress) - 1) / 2;
 }
 
+/** Restablece el inicio sin heredar el scroll suave global del documento. */
+export function scrollToTopInstantly(): void {
+  const root = document.documentElement;
+  const originalScrollBehavior = root.style.scrollBehavior;
+
+  root.style.scrollBehavior = "auto";
+  try {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  } finally {
+    root.style.scrollBehavior = originalScrollBehavior;
+  }
+}
+
 /**
  * Desplaza la ventana con una duración predecible y una curva suave.
  * Una nueva navegación o una interacción directa del usuario cancela la

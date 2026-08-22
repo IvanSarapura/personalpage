@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { renderHook } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { useLockBodyScroll } from "../useLockBodyScroll";
 
 describe("useLockBodyScroll", () => {
@@ -33,6 +33,16 @@ describe("useLockBodyScroll", () => {
     unmount();
 
     expect(window.scrollTo).toHaveBeenCalledWith(0, 240);
+  });
+
+  it("does not restore scroll when a navigation takes ownership of it", () => {
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 240 });
+    const { result, unmount } = renderHook(() => useLockBodyScroll(true));
+
+    act(() => result.current());
+    unmount();
+
+    expect(window.scrollTo).not.toHaveBeenCalled();
   });
 
   it("restores overflow when locked changes from true to false", () => {

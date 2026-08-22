@@ -35,7 +35,12 @@ export default function MenuNav({ items, isOpen, onNavigate, onClose, ariaLabel 
                   style={{ transitionDelay: `${delay}ms` }}
                 >
                   {href ? (
-                    <Link href={href} className={styles.link} onClick={(e) => onNavigate(e, href)}>
+                    <Link
+                      href={href}
+                      scroll={href.includes("#") ? undefined : false}
+                      className={styles.link}
+                      onClick={(e) => onNavigate(e, href)}
+                    >
                       <span className={styles.index}>{index}</span>
                       <span>{label}</span>
                     </Link>

@@ -88,6 +88,17 @@ describe("FullscreenMenu", () => {
     expect(onClose).toHaveBeenCalled();
   });
 
+  it("prepara el scroll al inicio para una navegación a otra página", () => {
+    const onRouteNavigation = vi.fn();
+    render(
+      <FullscreenMenu isOpen onClose={() => {}} locale="en" onRouteNavigation={onRouteNavigation} />
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: /Research/ }));
+
+    expect(onRouteNavigation).toHaveBeenCalledWith("/research");
+  });
+
   it("conserva el hash de la página actual en el historial al cerrar el menú", async () => {
     window.history.replaceState(null, "", "/");
     const target = document.createElement("section");

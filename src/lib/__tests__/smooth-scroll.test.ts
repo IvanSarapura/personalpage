@@ -1,11 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { smoothScrollTo } from "@/lib/smooth-scroll";
+import { scrollToTopInstantly, smoothScrollTo } from "@/lib/smooth-scroll";
 
 describe("smoothScrollTo", () => {
   const originalMatchMedia = window.matchMedia;
   const originalScrollY = window.scrollY;
   const originalRequestAnimationFrame = window.requestAnimationFrame;
   const originalCancelAnimationFrame = window.cancelAnimationFrame;
+  const originalScrollTo = window.scrollTo;
+  const originalScrollBehavior = document.documentElement.style.scrollBehavior;
 
   beforeEach(() => {
     Object.defineProperty(window, "scrollY", { configurable: true, value: 0 });
@@ -18,6 +20,8 @@ describe("smoothScrollTo", () => {
     window.matchMedia = originalMatchMedia;
     window.requestAnimationFrame = originalRequestAnimationFrame;
     window.cancelAnimationFrame = originalCancelAnimationFrame;
+    window.scrollTo = originalScrollTo;
+    document.documentElement.style.scrollBehavior = originalScrollBehavior;
   });
 
   it("llega al destino mediante frames de animación", () => {
@@ -41,5 +45,18 @@ describe("smoothScrollTo", () => {
 
     expect(window.requestAnimationFrame).not.toHaveBeenCalled();
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 240, behavior: "auto" });
+  });
+
+  it("restablece el inicio sin heredar el scroll suave global", () => {
+    document.documentElement.style.scrollBehavior = "smooth";
+    const scrollToSpy = vi.fn(() => {
+      expect(document.documentElement.style.scrollBehavior).toBe("auto");
+    });
+    window.scrollTo = scrollToSpy;
+
+    scrollToTopInstantly();
+
+    expect(scrollToSpy).toHaveBeenCalledWith({ top: 0, left: 0, behavior: "auto" });
+    expect(document.documentElement.style.scrollBehavior).toBe("smooth");
   });
 });

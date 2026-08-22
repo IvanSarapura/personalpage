@@ -16,6 +16,7 @@ interface FullscreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
   locale: Locale;
+  onRouteNavigation?: (href: string) => void;
 }
 
 const MENU_CLOSE_DELAY_MS = 100;
@@ -25,12 +26,17 @@ const MENU_CLOSE_DELAY_MS = 100;
  * Orquesta los hooks (lock de scroll, focus trap, cierre por Escape/backdrop) y
  * compone la cabecera, la navegación y el pie.
  */
-export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMenuProps) {
+export default function FullscreenMenu({
+  isOpen,
+  onClose,
+  locale,
+  onRouteNavigation,
+}: FullscreenMenuProps) {
   const isClient = useIsClient();
   const ui = getUi(locale);
   const items = getMenuItems(locale);
 
-  useLockBodyScroll(isOpen);
+  const skipScrollRestoration = useLockBodyScroll(isOpen);
   const containerRef = useFocusTrap<HTMLDivElement>(isOpen);
 
   /*
@@ -44,6 +50,12 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       const hashIndex = href.indexOf("#");
       if (hashIndex === -1) {
+        const normalize = (path: string) => path.replace(/\/+$/, "") || "/";
+        if (normalize(href) !== normalize(window.location.pathname)) {
+          skipScrollRestoration();
+          onRouteNavigation?.(href);
+        }
+
         // Ruta sin ancla: Link hace la transición de cliente; solo cerramos el menú.
         onClose();
         return;
@@ -54,6 +66,7 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
       const currentPath = normalize(window.location.pathname);
       if (targetPath !== currentPath) {
         // Ancla de otra página: Link hace la transición de cliente.
+        skipScrollRestoration();
         onClose();
         return;
       }
@@ -78,7 +91,7 @@ export default function FullscreenMenu({ isOpen, onClose, locale }: FullscreenMe
         smoothScrollTo(targetPosition);
       }, MENU_CLOSE_DELAY_MS);
     },
-    [onClose, ui.navbar.mainNavAriaLabel]
+    [onClose, onRouteNavigation, skipScrollRestoration, ui.navbar.mainNavAriaLabel]
   );
 
   // Cerrar con Escape
