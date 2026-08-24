@@ -6,13 +6,13 @@ import { useTheme } from "@/providers/useTheme";
 import { scrollToTopInstantly } from "@/lib/smooth-scroll";
 import { MenuIcon, CloseIcon } from "@/components/Icons/MenuIcons";
 import { Switch } from "@/components/Switch";
-import FullscreenMenu from "./FullscreenMenu";
+import FullscreenMenu, { FULLSCREEN_MENU_ID } from "./FullscreenMenu";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 
 const menuBtnClass =
-  "inline-flex h-[var(--navbar-touch-target)] w-[var(--navbar-touch-target)] cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[var(--text-on-light)] [transition:opacity_var(--duration-base)_var(--ease-out)] hover:opacity-[var(--opacity-moderate)]";
+  "inline-flex h-[var(--navbar-touch-target)] w-[var(--navbar-touch-target)] cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[var(--section-text)] [transition:opacity_var(--duration-base)_var(--ease-out)] hover:opacity-[var(--navbar-hover-opacity)]";
 
 interface NavbarControlsProps {
   locale: Locale;
@@ -42,9 +42,8 @@ export default function NavbarControls({ locale }: NavbarControlsProps) {
     pendingMenuRouteRef.current = null;
   }, [pathname]);
 
-  /* El label "Dark/Light" describe la acción (a dónde vas si pulsas),
-     no el estado actual — es un CTA, coherente con el aria-label. */
-  const switchLabel = isDark ? ui.navbar.switchToLight : ui.navbar.switchToDark;
+  // Se conserva el nombre accesible estable; el texto visible mantiene el
+  // diseño original y describe la acción siguiente.
   const labelText = isDark ? ui.navbar.lightLabel : ui.navbar.darkLabel;
 
   return (
@@ -52,18 +51,19 @@ export default function NavbarControls({ locale }: NavbarControlsProps) {
       <LocaleSwitcher locale={locale} />
 
       <div className="flex items-center gap-[var(--space-3)]">
-        <Switch checked={isDark} onChange={toggleTheme} ariaLabel={switchLabel} />
-        <span className="text-label hidden min-w-[36px] text-center tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] select-none md:inline-block">
+        <Switch checked={isDark} onChange={toggleTheme} ariaLabel={ui.navbar.themeLabel} />
+        <span className="text-label hidden min-w-[36px] text-center tracking-[var(--letter-spacing-wide)] text-[var(--section-text)] select-none md:inline-block">
           {labelText}
         </span>
       </div>
 
       <button
         type="button"
-        className={`${menuBtnClass}${isMenuOpen ? " opacity-[var(--opacity-moderate)]" : ""}`}
+        className={`${menuBtnClass}${isMenuOpen ? " opacity-[var(--navbar-hover-opacity)]" : ""}`}
         onClick={isMenuOpen ? closeMenu : openMenu}
         aria-label={isMenuOpen ? ui.navbar.closeMenu : ui.navbar.openMenu}
         aria-expanded={isMenuOpen}
+        aria-controls={FULLSCREEN_MENU_ID}
       >
         <span
           className="inline-flex h-[var(--navbar-icon-size)] w-[var(--navbar-icon-size)] items-center justify-center overflow-hidden [&>svg]:block [&>svg]:h-full [&>svg]:w-full"

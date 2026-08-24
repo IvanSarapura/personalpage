@@ -56,6 +56,22 @@ describe("Switch", () => {
     expect(screen.getByRole("switch")).toHaveAttribute("aria-label", "Switch to dark mode");
   });
 
+  it("keeps its accessible name stable when state changes", () => {
+    const { rerender } = render(
+      <Switch checked={false} onChange={() => {}} ariaLabel="Color theme" />
+    );
+    expect(screen.getByRole("switch", { name: "Color theme" })).toHaveAttribute(
+      "aria-checked",
+      "false"
+    );
+
+    rerender(<Switch checked onChange={() => {}} ariaLabel="Color theme" />);
+    expect(screen.getByRole("switch", { name: "Color theme" })).toHaveAttribute(
+      "aria-checked",
+      "true"
+    );
+  });
+
   it("forwards ariaDescribedby", () => {
     render(
       <Switch

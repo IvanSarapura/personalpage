@@ -4,12 +4,12 @@
   gap: var(--space-5);
   align-items: end;
   padding-bottom: var(--section-gap);
-  border-bottom: var(--border-width-thin) solid var(--color-blue-screen-muted);
+  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
 }
 
 .pageTitle {
   max-width: 820px;
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--heading-1);
   font-weight: 400;
   line-height: var(--heading-1-lh);
@@ -19,12 +19,11 @@
 
 .pageIntro {
   max-width: 58ch;
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-snug);
-  opacity: var(--opacity-strong);
   text-wrap: pretty;
 }
 
@@ -35,7 +34,7 @@
   justify-content: space-between;
   margin-top: var(--content-gap);
   margin-bottom: var(--space-5);
-  color: var(--text-on-light);
+  color: var(--section-text);
 }
 
 .archiveHeading h2 {
@@ -61,12 +60,12 @@
 .list {
   margin: 0;
   padding: 0;
-  border-top: var(--border-width-thin) solid var(--color-blue-screen-muted);
+  border-top: var(--border-width-thin) solid var(--section-border-decorative);
   list-style: none;
 }
 
 .item {
-  border-bottom: var(--border-width-thin) solid var(--color-blue-screen-muted);
+  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
 }
 
 .article {
@@ -88,19 +87,17 @@
   line-height: 1;
   letter-spacing: var(--heading-2-tracking);
   font-variant-numeric: tabular-nums;
-  color: var(--text-on-light);
-  opacity: var(--opacity-muted);
+  color: var(--section-text-secondary);
 }
 
 .date {
   margin: 0 0 var(--space-3);
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--caption);
   font-weight: 400;
   line-height: var(--caption-lh);
   letter-spacing: var(--letter-spacing-wide);
   font-variant-numeric: tabular-nums;
-  opacity: var(--opacity-secondary);
 }
 
 .date time {
@@ -112,7 +109,7 @@
 .title {
   max-width: 30ch;
   margin-bottom: var(--space-3);
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--heading-2);
   font-weight: 400;
   line-height: var(--heading-2-lh);
@@ -128,11 +125,10 @@
 .subtitle {
   max-width: 56ch;
   margin-bottom: var(--space-5);
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: 400;
   line-height: var(--body-lh);
-  opacity: var(--opacity-secondary);
   text-wrap: pretty;
 }
 
@@ -152,72 +148,42 @@
 .metadataRow dt,
 .metadataRow dd {
   margin: 0;
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--caption);
   line-height: var(--caption-lh);
 }
 
 .metadataRow dt {
   font-weight: 700;
+  color: var(--section-text-secondary);
   letter-spacing: var(--letter-spacing-wide);
-  opacity: var(--opacity-secondary);
 }
 
 .metadataRow dd {
   font-weight: 400;
+  color: var(--section-text-secondary);
   overflow-wrap: anywhere;
-  opacity: var(--opacity-strong);
 }
 
 .summary {
   max-width: 68ch;
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-normal);
-  opacity: var(--opacity-strong);
   overflow-wrap: anywhere;
   text-wrap: pretty;
 }
 
 .link {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  gap: var(--space-2);
   margin-top: var(--space-5);
-  color: var(--text-on-light);
-  font-size: var(--body);
-  font-weight: 500;
-  line-height: var(--body-lh);
-  letter-spacing: var(--letter-spacing-wide);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.link:focus-visible {
-  outline: 2px solid var(--accent-emphasis);
-  outline-offset: 3px;
-}
-
-.link svg {
-  width: var(--icon-xs);
-  height: var(--icon-xs);
-  flex: 0 0 auto;
 }
 
 :global(html.dark) .hero,
 :global(html.dark) .list,
 :global(html.dark) .item {
-  border-color: var(--border-subtle);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .link:hover {
-    text-decoration-thickness: 2px;
-    text-underline-offset: 6px;
-  }
+  border-color: var(--section-border-decorative);
 }
 
 @media (min-width: 56.25rem) {

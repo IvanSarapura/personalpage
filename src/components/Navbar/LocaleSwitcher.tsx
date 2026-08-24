@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DEFAULT_LOCALE, localePath, type Locale } from "@/data/locale";
+import { DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
+import styles from "./Navbar.module.css";
 
 const switcherClass =
-  "inline-flex items-center justify-center rounded-[var(--radius-full)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--text-on-light)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] no-underline [transition:var(--transition-hover)] hover:bg-[var(--text-on-light)] hover:text-[var(--color-white-pure)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-blue-screen)] dark:hover:text-[var(--color-deep)]";
+  "inline-flex items-center justify-center rounded-[var(--radius-full)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--section-text)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text)] no-underline [transition:var(--transition-hover)] hover:bg-[var(--section-text)] hover:text-[var(--navbar-locale-hover-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--primitive-color-blue-600)]";
 
 interface LocaleSwitcherProps {
   locale: Locale;
@@ -18,18 +19,21 @@ export default function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
   const pathname = usePathname() || "/";
 
   // Ruta canónica sin prefijo de locale.
-  const basePath =
-    pathname === "/es"
-      ? "/"
-      : pathname.startsWith("/es/")
-        ? pathname.slice("/es".length)
-        : pathname;
+  const pathnameLocale = LOCALES.find(
+    (supportedLocale) =>
+      pathname === `/${supportedLocale}` || pathname.startsWith(`/${supportedLocale}/`)
+  );
+  const basePath = pathnameLocale ? pathname.slice(`/${pathnameLocale}`.length) || "/" : pathname;
 
   const targetHref =
     locale === DEFAULT_LOCALE ? localePath("es", basePath) : localePath(DEFAULT_LOCALE, basePath);
 
   return (
-    <Link href={targetHref} className={switcherClass} aria-label={ui.navbar.switchLocale}>
+    <Link
+      href={targetHref}
+      className={`${styles.localeSwitcher} ${switcherClass}`}
+      aria-label={ui.navbar.switchLocale}
+    >
       {ui.navbar.switchLocaleShort}
     </Link>
   );

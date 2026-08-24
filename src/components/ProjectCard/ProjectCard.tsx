@@ -1,16 +1,11 @@
-import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { localePath, type Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
+import { Badge } from "@/components/ui/badge";
+import SectionLink from "@/components/SectionLink/SectionLink";
 
 const cardClass =
-  "flex h-full flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] bg-[var(--surface-secondary)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--color-blue-screen-moderate)] dark:border-[color:var(--border-subtle)] dark:bg-[var(--color-deep-elevated)] dark:hover:border-[color:var(--color-b-white-moderate)]";
-
-const chipClass =
-  "inline-block rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]";
-
-const externalLinkClass =
-  "text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--color-blue-screen)]";
+  "flex h-full flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--section-border-decorative)] bg-[var(--section-surface-elevated)] p-[var(--content-gap)] hover:border-[color:var(--section-border-interactive)] motion-safe:[transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] motion-safe:hover:-translate-y-0.5";
 
 interface ProjectCardProps {
   project: Project;
@@ -22,18 +17,18 @@ export default function ProjectCard({ project, locale }: ProjectCardProps) {
 
   return (
     <article className={cardClass} aria-labelledby={`project-title-${project.slug}`}>
-      <span className="text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] opacity-[var(--opacity-subtle)]">
+      <span className="text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text-secondary)]">
         {project.num} · {project.status}
       </span>
 
       <h3
         id={`project-title-${project.slug}`}
-        className="text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--text-on-light)]"
+        className="text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--section-text)]"
       >
         {project.title}
       </h3>
 
-      <p className="text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)]">
+      <p className="text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)]">
         {project.tagline}
       </p>
 
@@ -43,7 +38,7 @@ export default function ProjectCard({ project, locale }: ProjectCardProps) {
         </p>
       )}
 
-      <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-emphasized)]">
+      <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)]">
         {project.summary}
       </p>
 
@@ -53,37 +48,31 @@ export default function ProjectCard({ project, locale }: ProjectCardProps) {
           aria-label={ui.stackAriaLabel}
         >
           {project.stack.map((tech) => (
-            <li key={tech} className={chipClass}>
-              {tech}
+            <li key={tech}>
+              <Badge variant="emphasis">{tech}</Badge>
             </li>
           ))}
         </ul>
       )}
 
       <div className="mt-[var(--space-2)] flex flex-wrap items-center gap-[var(--space-4)]">
-        <Link href={localePath(locale, `/projects/${project.slug}`)} className={externalLinkClass}>
+        <SectionLink href={localePath(locale, `/projects/${project.slug}`)}>
           {ui.readCaseStudy}
-        </Link>
+        </SectionLink>
         {project.links.demo && (
-          <a href={project.links.demo} className={externalLinkClass} target="_blank" rel="noopener">
+          <SectionLink href={project.links.demo} external opensInNewTabLabel={ui.opensInNewTab}>
             {ui.liveDemo}
-          </a>
+          </SectionLink>
         )}
         {project.links.repo && (
-          <a href={project.links.repo} className={externalLinkClass} target="_blank" rel="noopener">
+          <SectionLink href={project.links.repo} external opensInNewTabLabel={ui.opensInNewTab}>
             {ui.repo}
-          </a>
+          </SectionLink>
         )}
         {project.links.paper && (
-          <a
-            href={project.links.paper}
-            className={externalLinkClass}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${ui.paper} (${ui.opensInNewTab})`}
-          >
+          <SectionLink href={project.links.paper} external opensInNewTabLabel={ui.opensInNewTab}>
             {ui.paper}
-          </a>
+          </SectionLink>
         )}
       </div>
     </article>

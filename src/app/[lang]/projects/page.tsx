@@ -36,14 +36,14 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/projec
   const ui = getUi(lang).projectsPage;
 
   return (
-    <main id="main-content">
-      <Section variant="white" paddingY="lg" ariaLabel={ui.title}>
+    <main id="main-content" tabIndex={-1}>
+      <Section variant="surface" paddingY="lg" ariaLabel={ui.title}>
         <Container>
-          <h1 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
+          <h1 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--section-text)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
             {ui.title}
           </h1>
 
-          <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:mb-[var(--section-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
+          <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--section-text-secondary)] md:mb-[var(--section-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
             {ui.intro}
           </p>
 

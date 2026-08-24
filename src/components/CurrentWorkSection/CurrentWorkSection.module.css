@@ -4,7 +4,7 @@
 
 .heading {
   margin-bottom: var(--element-gap);
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--heading-1);
   font-weight: 400;
   line-height: var(--heading-1-lh);
@@ -14,12 +14,11 @@
 
 .subheading {
   max-width: var(--content-max-text);
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-snug);
-  opacity: var(--opacity-strong);
   text-wrap: pretty;
 }
 
@@ -28,8 +27,8 @@
   grid-template-columns: minmax(0, 1fr);
   margin: 0;
   padding: 0;
-  border-top: var(--border-width-thin) solid var(--color-blue-screen-moderate);
-  border-bottom: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+  border-top: var(--border-width-thin) solid var(--section-border-interactive);
+  border-bottom: var(--border-width-thin) solid var(--section-border-interactive);
   list-style: none;
 }
 
@@ -38,7 +37,7 @@
 }
 
 .item + .item {
-  border-top: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+  border-top: var(--border-width-thin) solid var(--section-border-interactive);
 }
 
 .article {
@@ -51,17 +50,16 @@
 
 .eyebrow {
   margin-bottom: var(--space-4);
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--caption);
   font-weight: 600;
   line-height: var(--caption-lh);
   letter-spacing: var(--letter-spacing-wide);
-  opacity: var(--opacity-secondary);
 }
 
 .title {
   margin-bottom: var(--space-4);
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--heading-3);
   font-weight: var(--heading-3-weight);
   line-height: var(--heading-3-lh);
@@ -71,54 +69,23 @@
 
 .description {
   max-width: 58ch;
-  color: var(--text-on-light);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-normal);
-  opacity: var(--opacity-strong);
   overflow-wrap: anywhere;
   text-wrap: pretty;
 }
 
 .link {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  gap: var(--space-2);
   margin-top: auto;
   padding-top: var(--space-4);
-  color: var(--text-on-light);
-  font-size: var(--caption);
-  font-weight: 600;
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wide);
-  text-decoration-line: underline;
-  text-decoration-thickness: var(--border-width-thin);
-  text-underline-offset: 4px;
-  transition: opacity var(--duration-base) var(--ease-out);
-}
-
-.link:focus-visible {
-  outline: 2px solid var(--accent-emphasis);
-  outline-offset: 3px;
-}
-
-.link svg {
-  width: var(--icon-xs);
-  height: var(--icon-xs);
-  flex: 0 0 auto;
 }
 
 :global(html.dark) .list,
 :global(html.dark) .item + .item {
-  border-color: var(--border-subtle);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .link:hover {
-    opacity: var(--opacity-moderate);
-  }
+  border-color: var(--section-border-decorative);
 }
 
 @media (min-width: 48rem) {
@@ -143,7 +110,7 @@
 
   .item + .item {
     border-top: 0;
-    border-inline-start: var(--border-width-thin) solid var(--color-blue-screen-moderate);
+    border-inline-start: var(--border-width-thin) solid var(--section-border-interactive);
   }
 
   .article {

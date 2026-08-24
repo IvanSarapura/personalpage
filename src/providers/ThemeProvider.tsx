@@ -37,9 +37,16 @@ export function useThemeContext() {
 const MEDIA_QUERY = "(prefers-color-scheme: dark)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const THEME_TRANSITION_CLASS = "theme-transitioning";
-const THEME_TRANSITION_DURATION_MS = 350;
 const THEME_CHANGE_EVENT = "themechange";
 const THEME_STORAGE_KEY = "theme";
+
+function readCssDurationMs(element: Element, property: string): number {
+  const value = window.getComputedStyle(element).getPropertyValue(property).trim();
+  const duration = Number.parseFloat(value);
+
+  if (!Number.isFinite(duration)) return 0;
+  return value.endsWith("ms") ? duration : value.endsWith("s") ? duration * 1000 : 0;
+}
 
 function getThemeFromDOM(): Theme {
   if (typeof document === "undefined") return "light";
@@ -153,9 +160,11 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
 
     html.classList.add(THEME_TRANSITION_CLASS);
 
+    const transitionDurationMs = readCssDurationMs(html, "--duration-slow");
+
     const timeoutId = window.setTimeout(() => {
       clearThemeTransitionRef.current?.();
-    }, THEME_TRANSITION_DURATION_MS);
+    }, transitionDurationMs);
 
     clearThemeTransitionRef.current = () => {
       window.clearTimeout(timeoutId);

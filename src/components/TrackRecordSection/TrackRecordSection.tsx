@@ -1,6 +1,6 @@
-import { ExternalLink } from "lucide-react";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { type Locale } from "@/data/locale";
 import { getRecognitions, type Recognition, type RecognitionEvidence } from "@/data/recognition";
 import { getUi } from "@/data/ui";
@@ -24,15 +24,9 @@ function EvidenceLinks({ evidence, opensInNewTab }: EvidenceLinksProps) {
     <ul className={styles.actions} role="list">
       {evidence.map((item) => (
         <li key={item.href}>
-          <a
-            href={item.href}
-            className={styles.actionLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>{item.label}</span> <span className="sr-only"> ({opensInNewTab})</span>
-            <ExternalLink aria-hidden="true" focusable="false" />
-          </a>
+          <SectionLink href={item.href} external opensInNewTabLabel={opensInNewTab} size="caption">
+            {item.label}
+          </SectionLink>
         </li>
       ))}
     </ul>
@@ -66,7 +60,7 @@ export default function TrackRecordSection({ locale }: TrackRecordSectionProps) 
   const featuredTitleId = `track-record-${featured.id}`;
 
   return (
-    <Section variant="blue" paddingY="lg" ariaLabelledBy={headingId}>
+    <Section variant="brand" paddingY="lg" ariaLabelledBy={headingId}>
       <Container>
         <header className={styles.header}>
           <h2 id={headingId} className={styles.headline}>

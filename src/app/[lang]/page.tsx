@@ -13,7 +13,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   if (!hasLocale(lang)) notFound();
 
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1}>
       <LeadSection locale={lang} />
       <ResearchSection locale={lang} />
       <SignalsSection locale={lang} />

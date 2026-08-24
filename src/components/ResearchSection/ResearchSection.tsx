@@ -18,7 +18,7 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
   const headingId = "research-heading";
 
   return (
-    <Section variant="blue" paddingY="lg" ariaLabelledBy={headingId} id="research">
+    <Section variant="brand" paddingY="lg" ariaLabelledBy={headingId} id="research">
       <Container>
         <header className={styles.header}>
           <h2 id={headingId} className={styles.heading}>

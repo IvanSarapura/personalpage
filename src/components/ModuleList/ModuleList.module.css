@@ -2,7 +2,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border-top: var(--divider-thickness) solid var(--border-default);
+  border-top: var(--divider-thickness) solid var(--section-border-interactive);
 }
 
 .item {
@@ -11,7 +11,7 @@
   --module-row-padding: var(--space-4);
   --module-action-size: var(--icon-md);
 
-  border-bottom: var(--divider-thickness) solid var(--border-default);
+  border-bottom: var(--divider-thickness) solid var(--section-border-interactive);
 }
 
 /* La fila visible completa es un único control para mouse, touch y teclado. */
@@ -40,7 +40,7 @@
 }
 
 .trigger:focus-visible {
-  outline: 2px solid var(--text-primary);
+  outline: 0.125rem solid currentColor;
   outline-offset: -2px;
 }
 
@@ -48,8 +48,7 @@
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
-  color: var(--text-secondary);
-  opacity: var(--opacity-subtle);
+  color: var(--section-text-secondary);
   text-align: center;
 }
 
@@ -58,7 +57,7 @@
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
-  color: var(--text-primary);
+  color: var(--section-text);
   letter-spacing: var(--letter-spacing-normal);
   overflow-wrap: anywhere;
 }
@@ -69,9 +68,9 @@
   width: var(--module-action-size);
   height: var(--module-action-size);
   border-radius: 50%;
-  border: var(--border-width-thin) solid var(--text-secondary);
+  border: var(--border-width-thin) solid var(--section-text-secondary);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--section-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,8 +82,8 @@
 
 @media (hover: hover) and (pointer: fine) {
   .trigger:hover .toggleIndicator {
-    background: var(--text-secondary);
-    color: var(--surface-primary);
+    background: var(--section-text-secondary);
+    color: var(--section-surface);
   }
 }
 
@@ -106,8 +105,8 @@
 }
 
 .triggerOpen .toggleIndicator {
-  background: var(--text-secondary);
-  color: var(--surface-primary);
+  background: var(--section-text-secondary);
+  color: var(--section-surface);
 }
 
 /* ─── Expandable Content ───
@@ -163,8 +162,7 @@
   font-size: var(--caption);
   font-weight: var(--body-weight);
   line-height: 1.45;
-  color: var(--text-secondary);
-  opacity: var(--opacity-strong);
+  color: var(--section-text-secondary);
   letter-spacing: var(--letter-spacing-normal);
   max-width: var(--content-max-description);
   overflow-wrap: anywhere;

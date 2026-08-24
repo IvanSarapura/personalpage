@@ -1,11 +1,25 @@
 "use client";
 
-import { useActionState, useEffect, useRef, type FormEvent, type InvalidEvent } from "react";
+import {
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type InvalidEvent,
+} from "react";
 import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { sendContactMessage } from "@/app/actions/contact";
 import type { Locale } from "@/data/locale";
-import type { UiDict } from "@/data/ui";
-import { CONTACT_LIMITS, INITIAL_CONTACT_STATE } from "@/lib/contact";
+import { getUi, type UiDict } from "@/data/ui";
+import {
+  CONTACT_LIMITS,
+  INITIAL_CONTACT_STATE,
+  type ContactActionState,
+  type ContactField,
+} from "@/lib/contact";
 import styles from "./ContactForm.module.css";
 
 interface ContactFormProps {
@@ -27,16 +41,42 @@ function isContactControl(target: unknown): target is ContactControl {
   return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
 }
 
-function syncValidity(target: EventTarget) {
-  if (!isContactControl(target) || target.name === "website") return;
-  target.setAttribute("aria-invalid", String(!target.validity.valid));
+function isContactField(name: string): name is ContactField {
+  return name === "name" || name === "email" || name === "message";
+}
+
+function isControlValid(control: ContactControl, field: ContactField): boolean {
+  const value = control.value.trim();
+
+  if (field === "name") {
+    return value.length >= CONTACT_LIMITS.nameMin && value.length <= CONTACT_LIMITS.nameMax;
+  }
+  if (field === "message") {
+    return value.length >= CONTACT_LIMITS.messageMin && value.length <= CONTACT_LIMITS.messageMax;
+  }
+  return value.length <= CONTACT_LIMITS.emailMax && control.validity.valid;
 }
 
 export default function ContactForm({ locale, copy, fallbackHref }: ContactFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const submissionIdRef = useRef<HTMLInputElement>(null);
   const submittedValuesRef = useRef<SubmittedContactValues | null>(null);
-  const localizedAction = sendContactMessage.bind(null, locale);
+  const [visibleFieldErrors, setVisibleFieldErrors] = useState<ReadonlySet<ContactField>>(
+    new Set()
+  );
+  async function localizedAction(previousState: ContactActionState, formData: FormData) {
+    const nextState = await sendContactMessage(locale, previousState, formData);
+    setVisibleFieldErrors(
+      nextState.status === "validation-error"
+        ? new Set(
+            (Object.keys(nextState.fieldErrors ?? {}) as ContactField[]).filter(
+              (field) => nextState.fieldErrors?.[field] === true
+            )
+          )
+        : new Set()
+    );
+    return nextState;
+  }
   const [state, formAction, isPending] = useActionState(localizedAction, INITIAL_CONTACT_STATE);
 
   useEffect(() => {
@@ -69,6 +109,7 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
   }, [state]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    setVisibleFieldErrors(new Set());
     const formData = new FormData(event.currentTarget);
     submittedValuesRef.current = {
       name: String(formData.get("name") ?? ""),
@@ -79,11 +120,38 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
   }
 
   function handleInput(event: FormEvent<HTMLFormElement>) {
-    syncValidity(event.target);
+    if (!isContactControl(event.target) || !isContactField(event.target.name)) return;
+
+    const target = event.target;
+    const field = target.name as ContactField;
+    if (!isControlValid(target, field)) return;
+
+    setVisibleFieldErrors((current) => {
+      if (!current.has(field)) return current;
+      const next = new Set(current);
+      next.delete(field);
+      return next;
+    });
+  }
+
+  function handleBlur(event: FormEvent<HTMLFormElement>) {
+    if (!isContactControl(event.target) || !isContactField(event.target.name)) return;
+
+    const target = event.target;
+    const field = target.name as ContactField;
+    setVisibleFieldErrors((current) => {
+      const next = new Set(current);
+      if (isControlValid(target, field)) next.delete(field);
+      else next.add(field);
+      return next;
+    });
   }
 
   function handleInvalid(event: InvalidEvent<HTMLFormElement>) {
-    syncValidity(event.target);
+    if (!isContactControl(event.target) || !isContactField(event.target.name)) return;
+
+    const field = event.target.name as ContactField;
+    setVisibleFieldErrors((current) => new Set(current).add(field));
   }
 
   const showStatus = state.status !== "idle";
@@ -99,6 +167,11 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
         : state.status === "rate-limited"
           ? copy.rateLimited
           : copy.error;
+  const hasFieldError = (field: ContactField) => visibleFieldErrors.has(field);
+  const nameHasError = hasFieldError("name");
+  const emailHasError = hasFieldError("email");
+  const messageHasError = hasFieldError("message");
+  const opensInNewTabLabel = getUi(locale).caseStudy.opensInNewTab;
 
   return (
     <div className={styles.card}>
@@ -106,10 +179,11 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
         ref={formRef}
         action={formAction}
         className={styles.form}
-        onBlurCapture={handleInput}
+        onBlurCapture={handleBlur}
         onInputCapture={handleInput}
         onInvalidCapture={handleInvalid}
         onSubmitCapture={handleSubmit}
+        aria-busy={isPending}
       >
         <input ref={submissionIdRef} type="hidden" name="submissionId" />
 
@@ -135,17 +209,15 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
             required
             minLength={CONTACT_LIMITS.nameMin}
             maxLength={CONTACT_LIMITS.nameMax}
-            aria-invalid={state.fieldErrors?.name || undefined}
-            aria-errormessage="contact-name-error"
+            aria-invalid={nameHasError || undefined}
+            aria-errormessage={nameHasError ? "contact-name-error" : undefined}
           />
-          <p
-            id="contact-name-error"
-            className={styles.fieldError}
-            data-visible={state.fieldErrors?.name || undefined}
-          >
-            <CircleAlert aria-hidden="true" />
-            {copy.nameError}
-          </p>
+          {nameHasError && (
+            <p id="contact-name-error" className={styles.fieldError} aria-live="polite">
+              <CircleAlert aria-hidden="true" />
+              {copy.nameError}
+            </p>
+          )}
         </div>
 
         <div className={styles.field}>
@@ -166,17 +238,15 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
             placeholder={copy.emailPlaceholder}
             required
             maxLength={CONTACT_LIMITS.emailMax}
-            aria-invalid={state.fieldErrors?.email || undefined}
-            aria-errormessage="contact-email-error"
+            aria-invalid={emailHasError || undefined}
+            aria-errormessage={emailHasError ? "contact-email-error" : undefined}
           />
-          <p
-            id="contact-email-error"
-            className={styles.fieldError}
-            data-visible={state.fieldErrors?.email || undefined}
-          >
-            <CircleAlert aria-hidden="true" />
-            {copy.emailError}
-          </p>
+          {emailHasError && (
+            <p id="contact-email-error" className={styles.fieldError} aria-live="polite">
+              <CircleAlert aria-hidden="true" />
+              {copy.emailError}
+            </p>
+          )}
         </div>
 
         <div className={styles.field}>
@@ -196,29 +266,23 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
             minLength={CONTACT_LIMITS.messageMin}
             maxLength={CONTACT_LIMITS.messageMax}
             rows={6}
-            aria-invalid={state.fieldErrors?.message || undefined}
-            aria-errormessage="contact-message-error"
+            aria-invalid={messageHasError || undefined}
+            aria-errormessage={messageHasError ? "contact-message-error" : undefined}
           />
-          <p
-            id="contact-message-error"
-            className={styles.fieldError}
-            data-visible={state.fieldErrors?.message || undefined}
-          >
-            <CircleAlert aria-hidden="true" />
-            {copy.messageError}
-          </p>
+          {messageHasError && (
+            <p id="contact-message-error" className={styles.fieldError} aria-live="polite">
+              <CircleAlert aria-hidden="true" />
+              {copy.messageError}
+            </p>
+          )}
         </div>
 
-        <button className={styles.submit} type="submit" disabled={isPending}>
+        <Button className={styles.submit} size="sm" type="submit" disabled={isPending}>
           {isPending && <LoaderCircle className={styles.spinner} aria-hidden="true" />}
           {isPending ? copy.submitting : copy.submit}
-        </button>
+        </Button>
 
-        <div
-          className={styles.statusRegion}
-          aria-live={isError ? "assertive" : "polite"}
-          aria-atomic="true"
-        >
+        <div className={styles.statusRegion} aria-live="polite" aria-atomic="true">
           {showStatus && (
             <div className={isError ? styles.errorStatus : styles.successStatus}>
               {isError ? <CircleAlert aria-hidden="true" /> : <CircleCheck aria-hidden="true" />}
@@ -227,9 +291,14 @@ export default function ContactForm({ locale, copy, fallbackHref }: ContactFormP
                 {state.status === "error" && (
                   <p className={styles.fallback}>
                     {copy.fallbackPrefix}{" "}
-                    <a href={fallbackHref} target="_blank" rel="noreferrer">
+                    <SectionLink
+                      href={fallbackHref}
+                      external
+                      opensInNewTabLabel={opensInNewTabLabel}
+                      size="caption"
+                    >
                       {copy.fallbackLink}
-                    </a>
+                    </SectionLink>
                     .
                   </p>
                 )}

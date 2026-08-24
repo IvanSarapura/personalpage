@@ -10,8 +10,7 @@ export interface UiDict {
     mainNavAriaLabel: string;
     openMenu: string;
     closeMenu: string;
-    switchToLight: string;
-    switchToDark: string;
+    themeLabel: string;
     lightLabel: string;
     darkLabel: string;
     menuDialogLabel: string;
@@ -155,8 +154,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       mainNavAriaLabel: "Main navigation",
       openMenu: "Open menu",
       closeMenu: "Close menu",
-      switchToLight: "Switch to light mode",
-      switchToDark: "Switch to dark mode",
+      themeLabel: "Color theme",
       lightLabel: "Light",
       darkLabel: "Dark",
       menuDialogLabel: "Main navigation menu",
@@ -311,8 +309,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       mainNavAriaLabel: "Navegación principal",
       openMenu: "Abrir menú",
       closeMenu: "Cerrar menú",
-      switchToLight: "Cambiar a modo claro",
-      switchToDark: "Cambiar a modo oscuro",
+      themeLabel: "Tema de color",
       lightLabel: "Claro",
       darkLabel: "Oscuro",
       menuDialogLabel: "Menú de navegación principal",

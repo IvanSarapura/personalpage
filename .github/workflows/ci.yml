@@ -12,9 +12,9 @@ concurrency:
 
 jobs:
   quality:
-    name: Lint, typecheck, test, format, build
+    name: Quality, E2E and build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,6 +31,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Design system check
+        run: npm run lint:design
+
       - name: Typecheck
         run: npm run typecheck
 
@@ -44,3 +47,20 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://portfolio.example.com
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: End-to-end, accessibility and visual tests
+        run: npm run test:e2e:ci
+
+      - name: Upload Playwright failure artifacts
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failure-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14

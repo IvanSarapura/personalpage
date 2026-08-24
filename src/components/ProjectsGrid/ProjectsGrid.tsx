@@ -5,15 +5,7 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { getProjects, PROJECT_TAGS, type ProjectTag } from "@/data/projects";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
-
-const filterBtnBase =
-  "cursor-pointer rounded-[var(--radius-full)] border-[length:var(--border-width-thin)] border-solid px-[var(--space-4)] py-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] [transition:var(--transition-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-blue-screen)]";
-
-const filterBtnInactive =
-  "border-[color:var(--color-blue-screen-muted)] bg-transparent text-[var(--text-on-light)] hover:border-[color:var(--color-blue-screen-moderate)] dark:border-[color:var(--border-subtle)] dark:hover:border-[color:var(--color-b-white-moderate)]";
-
-const filterBtnActive =
-  "border-[color:var(--text-on-light)] bg-[var(--text-on-light)] text-[var(--color-white-pure)] dark:text-[var(--color-deep)]";
+import { ToggleChip } from "@/components/ui/toggle-chip";
 
 interface ProjectsGridProps {
   locale: Locale;
@@ -35,24 +27,13 @@ export default function ProjectsGrid({ locale }: ProjectsGridProps) {
         aria-label={ui.filterGroupLabel}
         className="mb-[var(--content-gap)] flex flex-wrap gap-[var(--space-3)]"
       >
-        <button
-          type="button"
-          onClick={() => setActiveTag(null)}
-          aria-pressed={activeTag === null}
-          className={`${filterBtnBase} ${activeTag === null ? filterBtnActive : filterBtnInactive}`}
-        >
+        <ToggleChip onClick={() => setActiveTag(null)} pressed={activeTag === null}>
           {ui.filterAll}
-        </button>
+        </ToggleChip>
         {PROJECT_TAGS.map((tag) => (
-          <button
-            key={tag}
-            type="button"
-            onClick={() => setActiveTag(tag)}
-            aria-pressed={activeTag === tag}
-            className={`${filterBtnBase} ${activeTag === tag ? filterBtnActive : filterBtnInactive}`}
-          >
+          <ToggleChip key={tag} onClick={() => setActiveTag(tag)} pressed={activeTag === tag}>
             {tag}
-          </button>
+          </ToggleChip>
         ))}
       </div>
 

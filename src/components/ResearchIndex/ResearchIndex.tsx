@@ -1,6 +1,6 @@
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
-import { ExternalLink } from "lucide-react";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import type { Locale } from "@/data/locale";
 import { getResearch } from "@/data/research";
 import { getUi } from "@/data/ui";
@@ -21,13 +21,7 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
   const research = getResearch(locale);
 
   return (
-    <Section
-      variant="white"
-      paddingY="lg"
-      as="section"
-      ariaLabelledBy="research-page-title"
-      className="dark:bg-[var(--surface-tertiary)]"
-    >
+    <Section variant="elevated" paddingY="lg" as="section" ariaLabelledBy="research-page-title">
       <Container>
         <header className={styles.hero}>
           <h1 id="research-page-title" className={styles.pageTitle}>
@@ -103,16 +97,14 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
                     <p className={styles.summary}>{item.summary}</p>
 
                     {item.kind === "published" && (
-                      <a
+                      <SectionLink
                         href={item.link.href}
+                        external
+                        opensInNewTabLabel={ui.opensInNewTab}
                         className={styles.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${item.link.label} (${ui.opensInNewTab})`}
                       >
                         {item.link.label}
-                        <ExternalLink aria-hidden="true" focusable="false" />
-                      </a>
+                      </SectionLink>
                     )}
                   </div>
                 </article>

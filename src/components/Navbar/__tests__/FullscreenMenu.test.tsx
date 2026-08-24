@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import FullscreenMenu from "../FullscreenMenu";
+import FullscreenMenu, { FULLSCREEN_MENU_ID } from "../FullscreenMenu";
 import { MENU_ITEMS } from "@/data/menuItems";
 
 const { smoothScrollToMock } = vi.hoisted(() => ({
@@ -26,7 +26,10 @@ describe("FullscreenMenu", () => {
   it("renderiza un diálogo accesible con todos los ítems del menú", () => {
     render(<FullscreenMenu isOpen onClose={() => {}} locale="en" />);
 
-    expect(screen.getByRole("dialog", { name: DIALOG_NAME })).toBeInTheDocument();
+    expect(screen.getByRole("dialog", { name: DIALOG_NAME })).toHaveAttribute(
+      "id",
+      FULLSCREEN_MENU_ID
+    );
     for (const label of ITEM_LABELS) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }

@@ -20,6 +20,7 @@ interface FullscreenMenuProps {
 }
 
 const MENU_CLOSE_DELAY_MS = 100;
+export const FULLSCREEN_MENU_ID = "fullscreen-menu-dialog";
 
 /**
  * Menú de navegación a pantalla completa, renderizado en un portal sobre el body.
@@ -127,6 +128,7 @@ export default function FullscreenMenu({
     // teclado ya lo cubre la tecla Escape, por eso se omiten los listeners de teclado.
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <div
+      id={FULLSCREEN_MENU_ID}
       ref={containerRef}
       className={overlayClass}
       role="dialog"

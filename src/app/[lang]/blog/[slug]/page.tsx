@@ -6,6 +6,7 @@ import Section from "@/components/Section/Section";
 import { getPost, getPosts } from "@/data/posts";
 import { hasLocale, localePath, LOCALES, type Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
+import { buttonVariants } from "@/components/ui/button";
 
 type PostPageProps = PageProps<"/[lang]/blog/[slug]">;
 
@@ -43,8 +44,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-const linkClass =
-  "text-[length:var(--body)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[color:var(--color-blue-screen)]";
+const linkClass = buttonVariants({
+  variant: "link",
+  size: "sm",
+  className: "px-0 py-0 text-[length:var(--body)]",
+});
 
 function formatDate(iso: string, locale: Locale): string {
   return new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
@@ -66,8 +70,8 @@ export default async function PostPage({ params }: PostPageProps) {
   const { default: PostContent } = await import(`@/content/posts/${slug}.mdx`);
 
   return (
-    <main id="main-content">
-      <Section variant="white" paddingY="lg" ariaLabel={post.title}>
+    <main id="main-content" tabIndex={-1}>
+      <Section variant="surface" paddingY="lg" ariaLabel={post.title}>
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
             <Link href={localePath(lang, "/blog")} className={linkClass}>
@@ -77,11 +81,11 @@ export default async function PostPage({ params }: PostPageProps) {
             {/* El contenido del post es monolingüe: se declara su idioma real
                 para lectores de pantalla cuando difiere del chrome. */}
             <article lang={post.lang}>
-              <p className="mt-[var(--content-gap)] mb-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--text-on-light)] opacity-[var(--opacity-subtle)]">
+              <p className="mt-[var(--content-gap)] mb-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text-secondary)]">
                 {formatDate(post.date, lang)} · {post.readingMinutes} {ui.readingTime}
               </p>
 
-              <h1 className="mb-[var(--content-gap)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)]">
+              <h1 className="mb-[var(--content-gap)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--section-text)]">
                 {post.title}
               </h1>
 

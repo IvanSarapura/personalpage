@@ -1,0 +1,51 @@
+.navbar {
+  --section-surface: var(--surface-paper);
+  --section-surface-elevated: var(--surface-paper);
+  --section-text: var(--text-on-paper);
+  --section-text-secondary: var(--text-on-paper-secondary);
+  --section-border-interactive: var(--border-on-paper-interactive);
+  --section-border-decorative: var(--border-on-paper-decorative);
+  --section-focus-ring: var(--text-on-paper);
+  --section-error-text: var(--text-error-on-paper);
+  --section-selection-bg: var(--surface-brand);
+  --section-selection-text: var(--text-on-brand);
+  --control-fill: var(--surface-brand);
+  --control-fill-text: var(--text-on-brand);
+  --control-hover: var(--primitive-color-blue-500);
+  --control-subtle: var(--accent-surface-subtle);
+}
+
+:global(html.dark) .navbar {
+  --section-surface: var(--surface-ink);
+  --section-surface-elevated: var(--surface-ink-elevated);
+  --section-text: var(--text-on-ink);
+  --section-text-secondary: var(--text-on-ink-secondary);
+  --section-border-interactive: var(--border-on-ink-interactive);
+  --section-border-decorative: var(--border-on-ink-decorative);
+  --section-focus-ring: var(--text-on-ink);
+  --section-error-text: var(--text-error-on-ink);
+  --section-selection-bg: var(--text-on-ink);
+  --section-selection-text: var(--surface-ink);
+  --control-fill: var(--text-on-ink);
+  --control-fill-text: var(--surface-ink);
+  --control-hover: var(--text-on-ink-secondary);
+  --control-subtle: var(--primitive-alpha-paper-08);
+}
+
+/* These hit areas intentionally sit outside layout: the navbar's visible
+   geometry is art-directed and must remain pixel-identical. */
+.homeLink,
+.localeSwitcher {
+  position: relative;
+}
+
+.homeLink::after,
+.localeSwitcher::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: max(100%, var(--touch-target));
+  height: max(100%, var(--touch-target));
+  transform: translate(-50%, -50%);
+}

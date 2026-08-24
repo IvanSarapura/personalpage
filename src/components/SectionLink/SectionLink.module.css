@@ -4,11 +4,17 @@
   min-height: 44px;
   align-items: center;
   gap: var(--space-2);
-  color: var(--text-primary);
+  color: var(--section-text);
   font-size: var(--body);
   font-weight: 500;
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-wide);
+}
+
+.caption {
+  font-size: var(--caption);
+  font-weight: 600;
+  line-height: var(--caption-lh);
 }
 
 .label {
@@ -26,8 +32,8 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--text-primary);
-  outline-offset: 3px;
+  outline: 0.125rem solid currentColor;
+  outline-offset: 0.1875rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -42,7 +48,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .arrow {
+  .arrow,
+  .link:hover .arrow {
     transition: none;
+    transform: none;
   }
 }

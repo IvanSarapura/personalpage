@@ -8,6 +8,7 @@ import { localePath, type Locale } from "@/data/locale";
 import { getPosts, type PostMeta } from "@/data/posts";
 import { getUi } from "@/data/ui";
 import styles from "./BlogIndex.module.css";
+import { Badge } from "@/components/ui/badge";
 
 interface BlogIndexProps {
   locale: Locale;
@@ -51,7 +52,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
 
   return (
     <>
-      <Section variant="white" paddingY="none" as="div" className={styles.heroSection}>
+      <Section variant="surface" paddingY="none" as="div" className={styles.heroSection}>
         <Container>
           <header className={styles.hero}>
             <h1 className={styles.title}>{ui.heading}</h1>
@@ -76,12 +77,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         </Container>
       </Section>
 
-      <Section
-        variant="blue"
-        paddingY="lg"
-        as="section"
-        className="dark:bg-[var(--surface-tertiary)]"
-      >
+      <Section variant="brand" paddingY="lg" as="section" className={styles.featuredSection}>
         <Container>
           <div className={styles.sectionHeadingOnBlue}>
             <h2>{ui.featured}</h2>
@@ -125,7 +121,9 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
               {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
               <ul role="list" className={styles.featuredTags} aria-label={ui.tagsLabel}>
                 {featuredPost.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
+                  <li key={tag}>
+                    <Badge>{tag}</Badge>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -133,7 +131,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         </Container>
       </Section>
 
-      <Section variant="white" paddingY="lg" as="section">
+      <Section variant="surface" paddingY="lg" as="section">
         <Container>
           <div className={styles.archiveHeading}>
             <h2>{ui.archive}</h2>
@@ -174,7 +172,9 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
                   {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
                   <ul role="list" className={styles.archiveTags} aria-label={ui.tagsLabel}>
                     {post.tags.map((tag) => (
-                      <li key={tag}>{tag}</li>
+                      <li key={tag}>
+                        <Badge variant="emphasis">{tag}</Badge>
+                      </li>
                     ))}
                   </ul>
                 </article>

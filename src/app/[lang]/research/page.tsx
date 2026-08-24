@@ -39,7 +39,7 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildResearchJsonLd(lang)) }}
       />
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <ResearchIndex locale={lang} />
       </main>
     </>

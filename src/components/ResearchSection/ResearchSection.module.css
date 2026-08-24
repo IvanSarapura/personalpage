@@ -4,7 +4,7 @@
 
 .heading {
   margin-bottom: var(--element-gap);
-  color: var(--text-primary);
+  color: var(--section-text);
   font-size: var(--heading-1);
   font-weight: 400;
   line-height: var(--heading-1-lh);
@@ -14,12 +14,11 @@
 
 .subheading {
   max-width: var(--content-max-text);
-  color: var(--text-primary);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-snug);
-  opacity: var(--opacity-strong);
   text-wrap: pretty;
 }
 
@@ -32,8 +31,8 @@
   grid-template-columns: minmax(0, 1fr);
   margin: 0;
   padding: 0;
-  border-top: var(--border-width-thin) solid var(--border-subtle);
-  border-bottom: var(--border-width-thin) solid var(--border-subtle);
+  border-top: var(--border-width-thin) solid var(--section-border-decorative);
+  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
   list-style: none;
 }
 
@@ -42,7 +41,7 @@
 }
 
 .item + .item {
-  border-top: var(--border-width-thin) solid var(--border-subtle);
+  border-top: var(--border-width-thin) solid var(--section-border-decorative);
 }
 
 .article {
@@ -60,19 +59,17 @@
   line-height: 1;
   letter-spacing: var(--heading-2-tracking);
   font-variant-numeric: tabular-nums;
-  color: var(--text-primary);
-  opacity: var(--opacity-muted);
+  color: var(--section-text-secondary);
 }
 
 .date {
   margin: 0 0 var(--space-3);
-  color: var(--text-primary);
+  color: var(--section-text-secondary);
   font-size: var(--caption);
   font-weight: 400;
   line-height: var(--caption-lh);
   letter-spacing: var(--letter-spacing-wide);
   font-variant-numeric: tabular-nums;
-  opacity: var(--opacity-secondary);
 }
 
 .date time {
@@ -83,7 +80,7 @@
 
 .title {
   margin-bottom: var(--space-3);
-  color: var(--text-primary);
+  color: var(--section-text);
   font-size: var(--heading-3);
   font-weight: var(--heading-3-weight);
   line-height: var(--heading-3-lh);
@@ -98,12 +95,11 @@
 
 .preview {
   max-width: 54ch;
-  color: var(--text-primary);
+  color: var(--section-text-secondary);
   font-size: var(--body);
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-normal);
-  opacity: var(--opacity-strong);
   text-wrap: pretty;
 }
 
@@ -129,7 +125,7 @@
 
   .item + .item {
     border-top: 0;
-    border-inline-start: var(--border-width-thin) solid var(--border-subtle);
+    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
   }
 
   .article {

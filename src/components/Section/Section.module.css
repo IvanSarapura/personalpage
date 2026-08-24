@@ -1,0 +1,107 @@
+.brand,
+.surface,
+.elevated,
+.inverse {
+  background: var(--section-surface);
+  color: var(--section-text);
+}
+
+.brand {
+  --section-surface: var(--surface-brand);
+  --section-surface-elevated: color-mix(
+    in oklab,
+    var(--surface-brand) 92%,
+    var(--primitive-color-white) 8%
+  );
+  --section-text: var(--text-on-brand);
+  --section-text-secondary: var(--text-on-brand-secondary);
+  --section-border-interactive: var(--border-on-brand-interactive);
+  --section-border-decorative: var(--border-on-brand-decorative);
+  --section-focus-ring: var(--text-on-brand);
+  --section-error-text: var(--text-error-on-brand);
+  --section-selection-bg: var(--text-on-brand);
+  --section-selection-text: var(--surface-brand);
+  --control-fill: var(--text-on-brand);
+  --control-fill-text: var(--surface-brand);
+  --control-hover: var(--text-on-brand-secondary);
+  --control-subtle: var(--primitive-alpha-paper-08);
+}
+
+.surface {
+  --section-surface: var(--surface-paper);
+  --section-surface-elevated: var(--primitive-color-white);
+  --section-text: var(--text-on-paper);
+  --section-text-secondary: var(--text-on-paper-secondary);
+  --section-border-interactive: var(--border-on-paper-interactive);
+  --section-border-decorative: var(--border-on-paper-decorative);
+  --section-focus-ring: var(--text-on-paper);
+  --section-error-text: var(--text-error-on-paper);
+  --section-selection-bg: var(--surface-brand);
+  --section-selection-text: var(--text-on-brand);
+  --control-fill: var(--surface-brand);
+  --control-fill-text: var(--text-on-brand);
+  --control-hover: var(--primitive-color-blue-500);
+  --control-subtle: var(--accent-surface-subtle);
+}
+
+.elevated {
+  --section-surface: var(--primitive-color-white);
+  --section-surface-elevated: var(--surface-paper);
+  --section-text: var(--text-on-paper);
+  --section-text-secondary: var(--text-on-paper-secondary);
+  --section-border-interactive: var(--border-on-paper-interactive);
+  --section-border-decorative: var(--border-on-paper-decorative);
+  --section-focus-ring: var(--text-on-paper);
+  --section-error-text: var(--text-error-on-paper);
+  --section-selection-bg: var(--surface-brand);
+  --section-selection-text: var(--text-on-brand);
+  --control-fill: var(--surface-brand);
+  --control-fill-text: var(--text-on-brand);
+  --control-hover: var(--primitive-color-blue-500);
+  --control-subtle: var(--accent-surface-subtle);
+}
+
+.inverse {
+  --section-surface: var(--surface-ink-elevated);
+  --section-surface-elevated: var(--surface-ink);
+  --section-text: var(--text-on-ink);
+  --section-text-secondary: var(--text-on-ink-elevated-secondary);
+  --section-border-interactive: var(--border-on-ink-interactive);
+  --section-border-decorative: var(--border-on-ink-decorative);
+  --section-focus-ring: var(--text-on-ink);
+  --section-error-text: var(--text-error-on-ink);
+  --section-selection-bg: var(--text-on-ink);
+  --section-selection-text: var(--surface-ink);
+  --control-fill: var(--text-on-ink);
+  --control-fill-text: var(--surface-ink);
+  --control-hover: var(--text-on-ink-secondary);
+  --control-subtle: var(--primitive-alpha-paper-08);
+}
+
+:global(html.dark) .brand,
+:global(html.dark) .surface,
+:global(html.dark) .elevated {
+  --section-surface: var(--surface-ink);
+  --section-surface-elevated: var(--surface-ink-elevated);
+  --section-text: var(--text-on-ink);
+  --section-text-secondary: var(--text-on-ink-secondary);
+  --section-border-interactive: var(--border-on-ink-interactive);
+  --section-border-decorative: var(--border-on-ink-decorative);
+  --section-focus-ring: var(--text-on-ink);
+  --section-error-text: var(--text-error-on-ink);
+  --section-selection-bg: var(--text-on-ink);
+  --section-selection-text: var(--surface-ink);
+  --control-fill: var(--text-on-ink);
+  --control-fill-text: var(--surface-ink);
+  --control-hover: var(--text-on-ink-secondary);
+  --control-subtle: var(--primitive-alpha-paper-08);
+}
+
+:global(html.dark) .elevated {
+  --section-surface: var(--surface-ink-elevated);
+  --section-surface-elevated: var(--surface-ink);
+  --section-text-secondary: var(--text-on-ink-elevated-secondary);
+  --section-selection-text: var(--surface-ink-elevated);
+  --control-fill-text: var(--surface-ink-elevated);
+  --control-hover: var(--text-on-ink-elevated-secondary);
+}

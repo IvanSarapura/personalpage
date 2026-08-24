@@ -7,7 +7,7 @@ interface SwitchProps {
   checked: boolean;
   /** Handler invocado al activar/desactivar. */
   onChange: () => void;
-  /** Etiqueta accesible — debe describir la **acción** (a dónde vas), no el estado actual. */
+  /** Nombre accesible estable; `aria-checked` comunica el estado actual. */
   ariaLabel: string;
   /** ID de elemento que describe el switch (opcional). */
   ariaDescribedby?: string;
@@ -23,7 +23,7 @@ interface SwitchProps {
  * Usa `<button role="switch">` semántico: Enter/Space, focus ring nativo,
  * gestión de SR y formularios funcionan sin código extra.
  *
- * Geometría parametrizada por tokens `--switch-*` en `globals.css`.
+ * Geometría parametrizada por tokens `--switch-*` en `tokens.css`.
  * Respeta `prefers-reduced-motion: reduce`.
  */
 export function Switch({

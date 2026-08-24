@@ -1,0 +1,89 @@
+/* Truly global document styles. Tailwind Preflight owns normalization. */
+
+@layer base {
+  html {
+    background-color: var(--section-surface);
+    overflow-x: hidden;
+    overflow-x: clip;
+    overscroll-behavior-inline: none;
+    scroll-behavior: smooth;
+  }
+
+  [id] {
+    scroll-margin-block-start: 5rem;
+  }
+
+  @media (min-width: 48rem) {
+    [id] {
+      scroll-margin-block-start: 6.25rem;
+    }
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--section-surface);
+    color: var(--section-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.theme-transitioning,
+    html.theme-transitioning body {
+      transition: var(--transition-theme);
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 0.125rem solid currentColor;
+    outline-offset: 0.125rem;
+  }
+
+  ::selection {
+    background: var(--section-selection-bg);
+    color: var(--section-selection-text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline-color: Highlight !important;
+    }
+  }
+
+  .skip-link {
+    position: absolute;
+    inset-block-start: -100%;
+    inset-inline-start: var(--space-4);
+    z-index: var(--z-overlay);
+    padding: var(--space-2) var(--space-4);
+    border: var(--border-width-thin) solid var(--border-on-brand-interactive);
+    border-radius: var(--radius-md);
+    background: var(--section-surface);
+    color: var(--section-text);
+    font-size: var(--body);
+    transition: inset-block-start var(--duration-fast) var(--ease-out);
+  }
+
+  .skip-link:focus-visible {
+    inset-block-start: var(--space-4);
+    outline-color: var(--primitive-color-white);
+    box-shadow: 0 0 0 0.375rem var(--primitive-color-ink-950);
+  }
+
+  @media (forced-colors: active) {
+    .skip-link:focus-visible {
+      box-shadow: none;
+    }
+  }
+}

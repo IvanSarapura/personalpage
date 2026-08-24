@@ -48,10 +48,47 @@ vercel env pull
 
 ## Quality checks
 
+The design tokens, component contracts and contribution rules are documented in
+[`docs/design-system.md`](docs/design-system.md).
+
 ```bash
 npm run lint
+npm run lint:design
 npm run typecheck
 npm run test
 npm run format:check
 npm run build
+npm run test:e2e
 ```
+
+### End-to-end, accessibility and visual tests
+
+The Playwright suite starts a controlled `next start` production server on port 3100. Build first,
+then run the suite. Install the evergreen browser engines once after `npm install`:
+
+```bash
+npx playwright install chromium firefox webkit
+npm run build
+npm run test:e2e
+```
+
+Chromium runs the complete suite, including the visual matrix. Firefox and WebKit run axe,
+interactions, media preferences, responsive reflow and target checks. The suite covers English and
+Spanish routes, list/detail pages, both themes, keyboard/menu/filter/form interactions, forced
+colors, reduced motion, 320 px reflow and pointer targets. Axe enforces WCAG 2.2 AA without rule
+exclusions. Versioned Linux/Chromium snapshots cover seven routes at 390×844 and 1440×900,
+critical interactive states, and focused below-fold desktop regions. The viewport matrix catches
+page-level regressions without fragile giant full-page captures; focused screenshots give denser
+coverage to representative home, footer, blog-list and article content.
+
+After an intentional visual change, review the generated images before updating the baseline:
+
+```bash
+npm run test:e2e:update
+```
+
+Failure artifacts are written to `test-results/`; the local HTML report is written to
+`playwright-report/`. Both are ignored by Git.
+
+Automated reflow at 320 px complements, but does not replace, the required manual browser check at
+200% zoom and a screen-reader review.

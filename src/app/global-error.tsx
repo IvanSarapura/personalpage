@@ -2,19 +2,18 @@
 
 import { useEffect } from "react";
 
-/** Fallback raíz de Next.js: reemplaza el layout completo, así que no puede
- *  depender de globals.css ni del script anti-flash (viven en el layout).
- *  Usa valores literales del design system y respeta prefers-color-scheme. */
+/** Fallback raíz de Next.js: reemplaza el layout completo, así que es
+ *  deliberadamente autónomo y no depende de globals.css ni de providers. */
 const LIGHT = {
   bg: "#ebecff",
   text: "#0051e9",
-  textInverted: "#ffffff",
+  buttonText: "#ffffff",
 };
 
 const DARK = {
   bg: "#19192d",
   text: "#ebecff",
-  textInverted: "#121226",
+  buttonText: "#121226",
 };
 
 export default function GlobalError({
@@ -24,7 +23,6 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  // Registrar el error para diagnóstico; no se traga en silencio.
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -34,40 +32,73 @@ export default function GlobalError({
       <head>
         <style>{`
           :root { color-scheme: light; }
+          .global-error-body {
+            --error-bg: ${LIGHT.bg};
+            --error-text: ${LIGHT.text};
+            --error-button-text: ${LIGHT.buttonText};
+          }
+          .global-error-button {
+            min-height: 2.75rem;
+            border: 0.09375rem solid var(--error-text);
+            border-radius: 9999px;
+            padding: 0.5rem 1.25rem;
+            background: transparent;
+            color: var(--error-text);
+            font: inherit;
+            font-size: 0.8125rem;
+            line-height: 1.38;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: background-color 200ms, color 200ms;
+          }
+          .global-error-button:focus-visible {
+            outline: 0.125rem solid var(--error-text);
+            outline-offset: 0.125rem;
+          }
+          @media (hover: hover) and (pointer: fine) {
+            .global-error-button:hover {
+              background: var(--error-text);
+              color: var(--error-button-text);
+            }
+          }
           @media (prefers-color-scheme: dark) {
             :root { color-scheme: dark; }
+            .global-error-body {
+              --error-bg: ${DARK.bg};
+              --error-text: ${DARK.text};
+              --error-button-text: ${DARK.buttonText};
+            }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .global-error-body, .global-error-button { transition: none !important; }
+          }
+          @media (forced-colors: active) {
+            .global-error-button:focus-visible { outline-color: Highlight; }
           }
         `}</style>
       </head>
       <body
+        className="global-error-body"
         style={{
           margin: 0,
           minHeight: "100dvh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "48px 24px",
-          fontFamily:
-            "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-          background: LIGHT.bg,
-          color: LIGHT.text,
+          padding: "3rem 1.5rem",
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+          background: "var(--error-bg)",
+          color: "var(--error-text)",
           WebkitFontSmoothing: "antialiased",
           transition: "background-color 300ms, color 300ms",
         }}
       >
-        <style>{`
-          @media (prefers-color-scheme: dark) {
-            body {
-              background: ${DARK.bg};
-              color: ${DARK.text};
-            }
-          }
-        `}</style>
-        <main role="alert" style={{ maxWidth: "620px", textAlign: "left" }}>
+        <main style={{ maxWidth: "38.75rem", textAlign: "left" }}>
           <h1
             style={{
-              margin: "0 0 16px",
-              fontSize: "clamp(40px, 5vw, 56px)",
+              margin: "0 0 1rem",
+              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
               lineHeight: 1,
               fontWeight: 400,
               letterSpacing: "-0.03em",
@@ -77,67 +108,19 @@ export default function GlobalError({
             Something went wrong
           </h1>
           <p
+            role="alert"
             style={{
-              margin: "0 0 32px",
-              fontSize: "20px",
+              margin: "0 0 2rem",
+              fontSize: "1.25rem",
               lineHeight: 1.5,
-              opacity: 0.85,
               textWrap: "pretty",
             }}
           >
             An unexpected error occurred. Try again, and if the problem persists, get in touch.
           </p>
-          <button
-            type="button"
-            onClick={reset}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: `1.5px solid ${LIGHT.text}`,
-              borderRadius: "100px",
-              padding: "8px 20px",
-              background: "transparent",
-              color: "inherit",
-              fontFamily: "inherit",
-              fontSize: "13px",
-              lineHeight: 1.38,
-              letterSpacing: "0.02em",
-              cursor: "pointer",
-              touchAction: "manipulation",
-              transition: "background-color 200ms, color 200ms",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = LIGHT.text;
-              e.currentTarget.style.color = LIGHT.textInverted;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = "";
-            }}
-          >
+          <button className="global-error-button" type="button" onClick={reset}>
             Try again
           </button>
-          <style>{`
-            @media (prefers-color-scheme: dark) {
-              button {
-                border-color: ${DARK.text};
-              }
-              button:hover {
-                background: ${DARK.text};
-                color: ${DARK.textInverted};
-              }
-            }
-            @media (hover: hover) and (pointer: fine) {
-              button:hover {
-                background: ${LIGHT.text};
-                color: ${LIGHT.textInverted};
-              }
-            }
-            @media (prefers-reduced-motion: reduce) {
-              body, button { transition: none; }
-            }
-          `}</style>
         </main>
       </body>
     </html>

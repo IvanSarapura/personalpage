@@ -12,6 +12,7 @@ import { getSignals, type SignalId } from "@/data/signals";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 import type { ReactElement } from "react";
+import { Badge } from "@/components/ui/badge";
 
 const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
   "web3-contracts": <MapPinIcon />,
@@ -23,7 +24,7 @@ const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
 };
 
 const cardClass =
-  "flex flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--signal-card-border)] bg-[var(--color-white-pure)] p-[var(--content-gap)] [transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] hover:-translate-y-0.5 hover:border-[color:var(--signal-card-border-hover)] dark:bg-[var(--surface-primary)]";
+  "flex flex-col gap-[var(--element-gap-sm)] rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--signal-card-border)] bg-[var(--primitive-color-white)] p-[var(--content-gap)] hover:border-[color:var(--signal-card-border-hover)] motion-safe:[transition:transform_var(--duration-slow)_var(--ease-out),border-color_var(--duration-slow)_var(--ease-out)] motion-safe:hover:-translate-y-0.5 dark:bg-[var(--section-surface)]";
 
 interface SignalsSectionProps {
   locale: Locale;
@@ -34,19 +35,13 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
   const signals = getSignals(locale);
 
   return (
-    <Section
-      variant="white"
-      paddingY="lg"
-      ariaLabel={ui.focus.ariaLabel}
-      className="dark:bg-[var(--surface-tertiary)]"
-      id="focus"
-    >
+    <Section variant="elevated" paddingY="lg" ariaLabel={ui.focus.ariaLabel} id="focus">
       <Container>
-        <h2 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--text-on-light)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
+        <h2 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--section-text)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
           {ui.focus.heading}
         </h2>
 
-        <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:mb-[var(--section-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
+        <p className="mb-[var(--content-gap)] max-w-[var(--content-max-text)] text-[length:var(--body)] leading-[var(--body-lh)] font-normal tracking-[var(--letter-spacing-snug)] text-[var(--section-text-secondary)] md:mb-[var(--section-gap)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]">
           {ui.focus.subheading}
         </p>
 
@@ -64,15 +59,15 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
               >
                 {SIGNAL_ICONS[signal.id]}
               </div>
-              <h3 className="text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--text-on-light)]">
+              <h3 className="text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--section-text)]">
                 {signal.title}
               </h3>
-              <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-emphasized)]">
+              <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)]">
                 {signal.description}
               </p>
-              <span className="inline-block self-start rounded-[var(--radius-full)] bg-[var(--accent-surface-subtle)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--accent-emphasis)]">
+              <Badge variant="emphasis" className="self-start">
                 {signal.meta}
-              </span>
+              </Badge>
             </li>
           ))}
         </ul>

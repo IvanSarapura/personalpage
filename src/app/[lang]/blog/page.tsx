@@ -32,7 +32,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
   if (!hasLocale(lang)) notFound();
 
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1}>
       <BlogIndex locale={lang} />
     </main>
   );

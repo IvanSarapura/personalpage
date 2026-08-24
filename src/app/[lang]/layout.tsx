@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
@@ -13,9 +13,12 @@ import { hasLocale, localePath, LOCALES } from "@/data/locale";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+};
 
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));

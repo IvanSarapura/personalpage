@@ -1,9 +1,11 @@
 .card {
-  --contact-control-surface: var(--surface-secondary);
+  --contact-control-surface: var(--section-surface-elevated);
+  --contact-control-text: var(--surface-ink);
+  --contact-placeholder: var(--text-on-paper-secondary);
 
   width: 100%;
   overflow: hidden;
-  border: var(--border-width-thin) solid var(--text-on-light);
+  border: var(--border-width-thin) solid var(--section-border-interactive);
   border-radius: var(--radius-lg);
   background: transparent;
 }
@@ -24,7 +26,7 @@
 }
 
 .label {
-  color: var(--text-on-light);
+  color: var(--section-text);
   font-size: var(--label);
   font-weight: 600;
   line-height: var(--label-lh);
@@ -39,10 +41,10 @@
 .control {
   width: 100%;
   min-height: 48px;
-  border: var(--border-width-thin) solid var(--text-on-light);
+  border: var(--border-width-thin) solid var(--section-border-interactive);
   border-radius: var(--radius-lg);
   background: var(--contact-control-surface);
-  color: var(--color-deep);
+  color: var(--contact-control-text);
   font: inherit;
   font-size: var(--body);
   line-height: var(--body-lh);
@@ -51,13 +53,13 @@
 }
 
 .control::placeholder {
-  color: rgba(25, 25, 45, 0.48);
+  color: var(--contact-placeholder);
 }
 
 .control:is(:autofill, :-webkit-autofill) {
   box-shadow: 0 0 0 100vmax var(--contact-control-surface) inset;
-  -webkit-text-fill-color: var(--color-deep);
-  caret-color: var(--color-deep);
+  -webkit-text-fill-color: var(--contact-control-text);
+  caret-color: var(--contact-control-text);
 }
 
 .control:hover {
@@ -66,7 +68,7 @@
 
 .control:focus-visible {
   border-color: transparent;
-  outline: 2px solid var(--accent-emphasis);
+  outline: 0.125rem solid currentColor;
   outline-offset: calc(-1 * var(--border-width-thin));
 }
 
@@ -76,10 +78,10 @@
 }
 
 .fieldError {
-  display: none;
+  display: flex;
   align-items: flex-start;
   gap: var(--space-2);
-  color: var(--destructive);
+  color: var(--section-error-text);
   font-size: var(--caption);
   line-height: var(--caption-lh);
 }
@@ -90,68 +92,17 @@
   flex: 0 0 auto;
 }
 
-.control:user-invalid + .fieldError,
-.control[aria-invalid="true"] + .fieldError,
-.fieldError[data-visible="true"] {
-  display: flex;
-}
-
-.control:user-invalid:not(:focus-visible),
 .control[aria-invalid="true"]:not(:focus-visible) {
   border-color: var(--destructive);
 }
 
 .submit {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
   align-self: center;
-  border: var(--border-width-thin) solid var(--text-on-light);
-  border-radius: var(--btn-radius);
-  background: var(--text-on-light);
-  color: var(--color-white-pure);
-  cursor: pointer;
-  font: inherit;
-  font-size: var(--label);
-  font-weight: 400;
-  letter-spacing: var(--letter-spacing-wide);
-  padding: var(--btn-padding-y-sm) var(--btn-padding-x-sm);
-  touch-action: manipulation;
-  transition: var(--transition-hover);
-}
-
-/* Mantiene el hit target recomendado sin alterar la altura visual compacta
-   que comparte con el CTA "Get in touch". */
-.submit::before {
-  content: "";
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-start: 0;
-  width: 100%;
-  height: 48px;
-  transform: translateY(-50%);
 }
 
 .submit svg {
   width: var(--icon-xs);
   height: var(--icon-xs);
-}
-
-.submit:hover:not(:disabled) {
-  background: transparent;
-  color: var(--text-on-light);
-}
-
-.submit:focus-visible {
-  outline: 2px solid var(--accent-emphasis);
-  outline-offset: 2px;
-}
-
-.submit:disabled {
-  cursor: wait;
-  opacity: var(--opacity-subtle);
 }
 
 .spinner {
@@ -174,15 +125,15 @@
 }
 
 .successStatus {
-  border: 1px solid var(--color-blue-screen-moderate);
-  background: var(--color-blue-screen-subtle);
-  color: var(--text-on-light);
+  border: var(--border-width-thin) solid var(--section-border-interactive);
+  background: var(--accent-surface-subtle);
+  color: var(--section-text);
 }
 
 .errorStatus {
   border: 1px solid color-mix(in oklab, var(--destructive) 35%, transparent);
   background: color-mix(in oklab, var(--destructive) 8%, transparent);
-  color: var(--text-on-light);
+  color: var(--section-text);
 }
 
 .successStatus > svg,
@@ -202,7 +153,7 @@
 
 .fallback {
   margin-top: var(--space-2);
-  opacity: var(--opacity-secondary);
+  color: var(--section-text-secondary);
 }
 
 .fallback a {
@@ -238,26 +189,12 @@
 }
 
 :global(html.dark) .card {
-  --contact-control-surface: var(--color-deep-elevated);
-}
-
-:global(html.dark) .control {
-  color: var(--color-b-white);
-}
-
-:global(html.dark) .control::placeholder {
-  color: rgba(235, 236, 255, 0.46);
+  --contact-control-surface: var(--surface-ink-elevated);
+  --contact-control-text: var(--text-on-ink);
+  --contact-placeholder: var(--text-on-ink-elevated-secondary);
 }
 
 :global(html.dark) .control:is(:autofill, :-webkit-autofill) {
-  -webkit-text-fill-color: var(--color-b-white);
-  caret-color: var(--color-b-white);
-}
-
-:global(html.dark) .submit:hover:not(:disabled) {
-  color: var(--color-white-pure);
-}
-
-:global(html.dark) .submit {
-  color: var(--color-deep);
+  -webkit-text-fill-color: var(--contact-control-text);
+  caret-color: var(--contact-control-text);
 }

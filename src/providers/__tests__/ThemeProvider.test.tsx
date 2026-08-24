@@ -29,6 +29,7 @@ function renderProvider() {
 describe("ThemeProvider", () => {
   beforeEach(() => {
     document.documentElement.classList.remove("dark");
+    document.documentElement.style.setProperty("--duration-slow", "300ms");
     localStorage.clear();
     systemMediaChangeListener = undefined;
     systemDark = false;
@@ -58,6 +59,7 @@ describe("ThemeProvider", () => {
     vi.unstubAllGlobals();
     document.documentElement.classList.remove("dark");
     document.documentElement.classList.remove("theme-transitioning");
+    document.documentElement.style.removeProperty("--duration-slow");
     localStorage.clear();
   });
 
@@ -120,7 +122,7 @@ describe("ThemeProvider", () => {
     fireEvent.click(screen.getByRole("button", { name: "toggle" }));
     expect(document.documentElement).toHaveClass("theme-transitioning");
 
-    act(() => vi.advanceTimersByTime(350));
+    act(() => vi.advanceTimersByTime(300));
     expect(document.documentElement).not.toHaveClass("theme-transitioning");
   });
 
@@ -132,11 +134,11 @@ describe("ThemeProvider", () => {
     fireEvent.click(toggle);
     act(() => vi.advanceTimersByTime(200));
     fireEvent.click(toggle);
-    act(() => vi.advanceTimersByTime(200));
+    act(() => vi.advanceTimersByTime(299));
 
     expect(document.documentElement).toHaveClass("theme-transitioning");
 
-    act(() => vi.advanceTimersByTime(150));
+    act(() => vi.advanceTimersByTime(1));
     expect(document.documentElement).not.toHaveClass("theme-transitioning");
   });
 

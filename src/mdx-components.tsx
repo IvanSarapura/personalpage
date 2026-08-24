@@ -5,16 +5,16 @@ import type { MDXComponents } from "mdx/types";
  *  sin estilos ad-hoc. */
 
 const bodyText =
-  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--text-on-light)] opacity-[var(--opacity-strong)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
+  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
 
 const components: MDXComponents = {
   h2: ({ children }) => (
-    <h2 className="mt-[var(--content-gap)] mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--text-on-light)]">
+    <h2 className="mt-[var(--content-gap)] mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--section-text)]">
       {children}
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-[var(--element-gap)] mb-[var(--space-2)] text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--text-on-light)]">
+    <h3 className="mt-[var(--element-gap)] mb-[var(--space-2)] text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--section-text)]">
       {children}
     </h3>
   ),
@@ -33,13 +33,13 @@ const components: MDXComponents = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="font-medium text-[var(--text-on-light)] underline underline-offset-4 [transition:var(--transition-hover)] hover:opacity-70"
+      className="font-medium text-[var(--section-text)] underline decoration-[length:var(--border-width-thin)] underline-offset-4 [transition:var(--transition-hover)] hover:decoration-2 hover:underline-offset-[0.375rem]"
     >
       {children}
     </a>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="mb-[var(--element-gap)] border-l-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] pl-[var(--element-gap)] italic opacity-[var(--opacity-emphasized)] dark:border-[color:var(--border-subtle)]">
+    <blockquote className="mb-[var(--element-gap)] border-l-[length:var(--border-width-thin)] border-solid border-[color:var(--section-border-decorative)] pl-[var(--element-gap)] text-[var(--section-text-secondary)] italic">
       {children}
     </blockquote>
   ),
@@ -49,12 +49,12 @@ const components: MDXComponents = {
     </code>
   ),
   pre: ({ children }) => (
-    <pre className="mb-[var(--element-gap)] overflow-x-auto rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--color-blue-screen-muted)] bg-[var(--color-white-pure)] p-[var(--element-gap)] text-[length:var(--body)] leading-[var(--body-lh)] dark:border-[color:var(--border-subtle)] dark:bg-[var(--surface-primary)] [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-[var(--text-on-light)]">
+    <pre className="mb-[var(--element-gap)] overflow-x-auto rounded-[var(--radius-lg)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--section-border-decorative)] bg-[var(--primitive-color-white)] p-[var(--element-gap)] text-[length:var(--body)] leading-[var(--body-lh)] dark:border-[color:var(--section-border-decorative)] dark:bg-[var(--section-surface)] [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-[var(--section-text)]">
       {children}
     </pre>
   ),
   hr: () => (
-    <hr className="my-[var(--content-gap)] border-t border-[color:var(--color-blue-screen-muted)] dark:border-[color:var(--border-subtle)]" />
+    <hr className="my-[var(--content-gap)] border-t border-[color:var(--section-border-decorative)] dark:border-[color:var(--section-border-decorative)]" />
   ),
 };
 

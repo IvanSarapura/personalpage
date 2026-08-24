@@ -1,6 +1,6 @@
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
-import { ExternalLink } from "lucide-react";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { getCurrentWork } from "@/data/current-work";
 import type { Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
@@ -15,13 +15,7 @@ export default function CurrentWorkSection({ locale }: CurrentWorkSectionProps) 
   const items = getCurrentWork(locale);
 
   return (
-    <Section
-      variant="white"
-      paddingY="lg"
-      ariaLabel={ui.ariaLabel}
-      className="dark:bg-[var(--surface-tertiary)]"
-      id="building"
-    >
+    <Section variant="elevated" paddingY="lg" ariaLabel={ui.ariaLabel} id="building">
       <Container>
         <header className={styles.header}>
           <h2 className={styles.heading}>{ui.heading}</h2>
@@ -46,16 +40,15 @@ export default function CurrentWorkSection({ locale }: CurrentWorkSectionProps) 
                   <p className={styles.description}>{item.description}</p>
 
                   {item.link && (
-                    <a
+                    <SectionLink
                       href={item.link.href}
+                      external
+                      opensInNewTabLabel={ui.opensInNewTab}
+                      size="caption"
                       className={styles.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       {item.link.label}
-                      <ExternalLink aria-hidden="true" focusable="false" />
-                      <span className="sr-only"> ({ui.opensInNewTab})</span>
-                    </a>
+                    </SectionLink>
                   )}
                 </article>
               </li>
