@@ -47,8 +47,7 @@
   font-weight: var(--body-weight);
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-wide);
-  color: var(--section-text);
-  opacity: var(--navbar-menu-muted-opacity);
+  color: var(--text-on-brand);
   text-transform: uppercase;
   user-select: none;
 }
@@ -175,15 +174,9 @@
   width: 2ch;
   font: inherit;
   letter-spacing: inherit;
-  color: inherit;
+  color: var(--text-on-brand);
   font-variant-numeric: tabular-nums;
-  opacity: var(--navbar-menu-index-opacity);
   flex-shrink: 0;
-  transition: opacity var(--duration-base) var(--ease-out);
-}
-
-.link:hover:not(:disabled) .index {
-  opacity: var(--navbar-menu-index-hover-opacity);
 }
 
 /* ─── Footer del menú ─── */
@@ -208,8 +201,7 @@
   font-size: var(--caption);
   font-weight: var(--caption-weight);
   line-height: var(--caption-lh);
-  color: var(--section-text);
-  opacity: var(--navbar-menu-muted-opacity);
+  color: var(--text-on-brand);
   margin: 0;
 }
 

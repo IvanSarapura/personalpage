@@ -122,6 +122,7 @@
   --accent-emphasis: var(--primitive-color-blue-600);
   --accent-surface-subtle: var(--primitive-alpha-blue-08);
   --navbar-bg-scrolled: var(--primitive-alpha-paper-72);
+  --navbar-bg-scrolled-solid: var(--surface-paper);
   --navbar-border-scrolled: var(--primitive-alpha-paper-35);
   --navbar-divider: var(--surface-brand);
   --navbar-locale-hover-text: var(--primitive-color-white);
@@ -162,6 +163,7 @@ html.dark {
   --accent-emphasis: var(--primitive-color-paper-100);
   --accent-surface-subtle: var(--primitive-alpha-paper-08);
   --navbar-bg-scrolled: var(--primitive-alpha-ink-950-72);
+  --navbar-bg-scrolled-solid: var(--surface-ink);
   --navbar-border-scrolled: var(--primitive-alpha-paper-10);
   --navbar-divider: var(--text-on-ink);
   --navbar-locale-hover-text: var(--surface-ink);
@@ -224,11 +226,8 @@ html.dark {
   --navbar-touch-target: 2.75rem;
   --navbar-icon-size: 1.75rem;
   --navbar-divider-opacity: 0.2;
-  --navbar-menu-index-opacity: 0.35;
   --navbar-hover-opacity: 0.7;
   --navbar-disabled-opacity: 0.4;
-  --navbar-menu-muted-opacity: 0.5;
-  --navbar-menu-index-hover-opacity: 0.8;
   --navbar-menu-link-opacity: 0.85;
   --icon-xs: 1rem;
   --icon-sm: 1.5rem;

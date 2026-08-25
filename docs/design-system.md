@@ -112,10 +112,14 @@ visuales, foco visible y pseudo-elementos para ampliar el área táctil sin
 alterar el layout. Cualquier cambio visual requiere revisión explícita de diseño
 y comparación contra la referencia aprobada.
 
-El menú fullscreen conserva deliberadamente sus opacidades art-directed para
-texto y estados: forman parte de la composición aprobada y son una excepción
-local, documentada y vigilada por el checker. No deben copiarse a otros
-componentes ni convertirse automáticamente en colores precompuestos.
+El menú fullscreen aplica el token semántico `--text-on-brand` (blanco sobre la
+superficie brand en claro) para la etiqueta, los índices y el tagline, sin
+opacidad sobre texto: la jerarquía se expresa por tipografía (uppercase,
+letter-spacing y tabular-nums). Suele conservar una leve opacidad en el enlace
+(`--navbar-menu-link-opacity`) que se revisa contra WCAG AA. Estos estilos son una
+excepción local art-directed, documentada y vigilada por el checker; no deben
+copiarse a otros componentes ni convertirse automáticamente en colores
+precompuestos.
 
 ### Button
 
