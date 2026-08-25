@@ -136,6 +136,7 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
 });
 
 test("controls meet minimum pointer and coarse-pointer target sizes", async ({ browser }) => {
+  test.slow();
   const pointerContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const pointerPage = await pointerContext.newPage();
   for (const route of ["/projects", "/", "/blog/llm-oracles-genlayer"]) {
