@@ -32,6 +32,15 @@
   --control-subtle: var(--primitive-alpha-paper-08);
 }
 
+/* Estado "scrolled": al volver el fondo translúcido (glass), el texto se
+   oscurece para mantener el contraste AA sobre cualquier sección. En claro
+   gana a .navbar por mayor especificidad; en dark lo ganaría html.dark .navbar,
+   pero ahí --navbar-text-scrolled coincide con --text-on-ink, así que el
+   resultado es idéntico. */
+.navbar.navbarScrolled {
+  --section-text: var(--navbar-text-scrolled);
+}
+
 /* These hit areas intentionally sit outside layout: the navbar's visible
    geometry is art-directed and must remain pixel-identical. */
 .homeLink,

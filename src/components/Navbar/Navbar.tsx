@@ -17,19 +17,19 @@ export default function Navbar({ locale }: NavbarProps) {
   const scrolled = useScrolled(8);
   const ui = getUi(locale);
 
-  // Fondo en un solo origen condicional: en reposo papel en light
-  // y tinta elevada en dark; al hacer scroll, el surface sólido del navbar
-  // (blur + hairline) mantiene el texto azul en contraste AA sobre cualquier
-  // sección. Evita conflictos de especificidad entre utilidades bg-[...] de
-  // igual jerarquía.
+  // Fondo en un solo origen condicional: en reposo papel en light y tinta
+  // elevada en dark; al hacer scroll, glassmorphism (bg translúcido + blur +
+  // hairline) y el texto se oscurece (--navbar-text-scrolled) para conservar
+  // el contraste AA sobre cualquier sección. Evita conflictos de especificidad
+  // entre utilidades bg-[...] de igual jerarquía.
   const surfaceClass = scrolled
-    ? "bg-[var(--navbar-bg-scrolled-solid)] [backdrop-filter:blur(var(--navbar-backdrop-blur))] [-webkit-backdrop-filter:blur(var(--navbar-backdrop-blur))] shadow-[0_1px_0_0_var(--navbar-border-scrolled)]"
+    ? "bg-[var(--navbar-bg-scrolled)] [backdrop-filter:blur(var(--navbar-backdrop-blur))] [-webkit-backdrop-filter:blur(var(--navbar-backdrop-blur))] shadow-[0_1px_0_0_var(--navbar-border-scrolled)]"
     : "bg-[var(--section-surface-elevated)]";
 
   return (
     <nav
       aria-label={ui.navbar.mainNavAriaLabel}
-      className={`${styles.navbar} sticky top-0 z-[var(--z-nav)] w-full text-[var(--section-text)] [transition:var(--navbar-transition)] ${surfaceClass}`}
+      className={`${styles.navbar}${scrolled ? ` ${styles.navbarScrolled}` : ""} sticky top-0 z-[var(--z-nav)] w-full text-[var(--section-text)] [transition:var(--navbar-transition)] ${surfaceClass}`}
     >
       <Container className="flex items-center justify-between py-[var(--navbar-padding-y-mobile)] md:py-[var(--navbar-padding-y)]">
         <Link

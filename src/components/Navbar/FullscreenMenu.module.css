@@ -42,16 +42,6 @@
   padding-bottom: var(--navbar-padding-y-mobile);
 }
 
-.navLabel {
-  font-size: var(--body);
-  font-weight: var(--body-weight);
-  line-height: var(--body-lh);
-  letter-spacing: var(--letter-spacing-wide);
-  color: var(--text-on-brand);
-  text-transform: uppercase;
-  user-select: none;
-}
-
 .closeBtn {
   display: inline-flex;
   align-items: center;
