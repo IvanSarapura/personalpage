@@ -1,6 +1,6 @@
 .navbar {
   --section-surface: var(--surface-paper);
-  --section-surface-elevated: var(--surface-paper);
+  --section-surface-elevated: var(--primitive-color-white);
   --section-text: var(--text-on-paper);
   --section-text-secondary: var(--text-on-paper-secondary);
   --section-border-interactive: var(--border-on-paper-interactive);
