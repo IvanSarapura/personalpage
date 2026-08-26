@@ -1,5 +1,5 @@
 .card {
-  --contact-control-surface: var(--section-surface-elevated);
+  --contact-control-surface: var(--section-surface);
   --contact-control-text: var(--surface-ink);
   --contact-placeholder: var(--text-on-paper-secondary);
 
@@ -68,7 +68,7 @@
 
 .control:focus-visible {
   border-color: transparent;
-  outline: 0.125rem solid currentColor;
+  outline: 0.125rem solid var(--accent-emphasis);
   outline-offset: calc(-1 * var(--border-width-thin));
 }
 
