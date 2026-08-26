@@ -8,7 +8,7 @@ import styles from "./SectionLink.module.css";
 interface SectionLinkBaseProps {
   href: string;
   children: ReactNode;
-  icon?: "arrow" | "external";
+  icon?: "arrow" | "arrowUp" | "external";
   size?: "body" | "caption";
   className?: string;
   ariaLabel?: string;
@@ -43,6 +43,20 @@ export default function SectionLink(props: SectionLinkProps) {
       </span>
       {icon === "external" ? (
         <ExternalLink className={styles.arrow} aria-hidden="true" focusable="false" />
+      ) : icon === "arrowUp" ? (
+        <svg
+          className={styles.arrowUp}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+          />
+        </svg>
       ) : (
         <ArrowRight className={styles.arrow} aria-hidden="true" focusable="false" />
       )}

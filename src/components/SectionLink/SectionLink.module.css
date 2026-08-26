@@ -31,6 +31,22 @@
   transition: transform var(--duration-base) var(--ease-out);
 }
 
+/* Contenedor de la flecha: 20x20, mismo footprint que los iconos lucide
+   (.arrow). El path de la flecha se escala a 15x15 manteniéndose centrado. */
+.arrowUp {
+  --arrow-up-scale: 1.5;
+  width: calc((var(--icon-xs) + var(--icon-sm)) / 2);
+  height: calc((var(--icon-xs) + var(--icon-sm)) / 2);
+  flex: 0 0 auto;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.arrowUp path {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(var(--arrow-up-scale));
+}
+
 .link:focus-visible {
   outline: 0.125rem solid currentColor;
   outline-offset: 0.1875rem;
@@ -45,11 +61,17 @@
   .link:hover .arrow {
     transform: translateX(4px);
   }
+
+  .link:hover .arrowUp {
+    transform: translateY(-4px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .arrow,
-  .link:hover .arrow {
+  .arrowUp,
+  .link:hover .arrow,
+  .link:hover .arrowUp {
     transition: none;
     transform: none;
   }

@@ -59,7 +59,9 @@ export default function ResearchSection({ locale }: ResearchSectionProps) {
         </ul>
 
         <div className={styles.archiveLink}>
-          <SectionLink href={localePath(locale, "/research")}>{ui.allResearch}</SectionLink>
+          <SectionLink href={localePath(locale, "/research")} icon="arrowUp">
+            {ui.allResearch}
+          </SectionLink>
         </div>
       </Container>
     </Section>

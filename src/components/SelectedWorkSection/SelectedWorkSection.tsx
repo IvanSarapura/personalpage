@@ -24,7 +24,9 @@ export default function SelectedWorkSection({ locale }: SelectedWorkSectionProps
           <ModuleList modules={getModules(locale)} />
 
           <div className="mt-[var(--content-gap)]">
-            <SectionLink href={localePath(locale, "/projects")}>{ui.allCaseStudies}</SectionLink>
+            <SectionLink href={localePath(locale, "/projects")} icon="arrowUp">
+              {ui.allCaseStudies}
+            </SectionLink>
           </div>
         </div>
       </Container>
