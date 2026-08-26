@@ -12,7 +12,7 @@ import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 
 const menuBtnClass =
-  "inline-flex h-[var(--navbar-touch-target)] w-[var(--navbar-touch-target)] cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[var(--section-text)] [transition:opacity_var(--duration-base)_var(--ease-out)] hover:opacity-[var(--navbar-hover-opacity)]";
+  "inline-flex h-[var(--navbar-touch-target)] w-[var(--navbar-touch-target)] cursor-pointer items-center justify-center border-none bg-transparent p-0 text-[var(--navbar-control-color)] [transition:opacity_var(--duration-base)_var(--ease-out)] hover:opacity-[var(--navbar-hover-opacity)]";
 
 interface NavbarControlsProps {
   locale: Locale;

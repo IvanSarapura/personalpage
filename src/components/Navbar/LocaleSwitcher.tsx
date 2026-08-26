@@ -7,7 +7,7 @@ import { getUi } from "@/data/ui";
 import styles from "./Navbar.module.css";
 
 const switcherClass =
-  "inline-flex items-center justify-center rounded-[var(--radius-full)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--section-text)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text)] no-underline [transition:var(--transition-hover)] hover:bg-[var(--section-text)] hover:text-[var(--navbar-locale-hover-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--primitive-color-blue-600)]";
+  "inline-flex items-center justify-center rounded-[var(--radius-full)] border-[length:var(--border-width-thin)] border-solid border-[color:var(--navbar-control-color)] px-[var(--space-3)] py-[var(--space-1)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--navbar-control-color)] no-underline [transition:var(--transition-hover)] hover:bg-[var(--navbar-control-color)] hover:text-[var(--navbar-locale-hover-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--primitive-color-blue-600)]";
 
 interface LocaleSwitcherProps {
   locale: Locale;

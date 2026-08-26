@@ -37,7 +37,7 @@ export default function Navbar({ locale }: NavbarProps) {
           className={`${styles.homeLink} flex items-center`}
           aria-label={ui.navbar.homeAriaLabel}
         >
-          <Logo className="h-auto w-[40px] text-[var(--section-text)] md:w-[48px]" />
+          <Logo className="h-auto w-[40px] text-[var(--navbar-control-color)] md:w-[48px]" />
         </Link>
         <NavbarControls locale={locale} />
       </Container>
