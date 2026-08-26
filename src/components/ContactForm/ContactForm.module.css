@@ -5,7 +5,7 @@
 
   width: 100%;
   overflow: hidden;
-  border: var(--border-width-thin) solid var(--section-border-interactive);
+  border: var(--border-width-thin) solid var(--accent-emphasis);
   border-radius: var(--radius-lg);
   background: transparent;
 }
@@ -41,7 +41,7 @@
 .control {
   width: 100%;
   min-height: 48px;
-  border: var(--border-width-thin) solid var(--section-border-interactive);
+  border: var(--border-width-thin) solid var(--accent-emphasis);
   border-radius: var(--radius-lg);
   background: var(--contact-control-surface);
   color: var(--contact-control-text);
