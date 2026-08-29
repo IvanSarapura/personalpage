@@ -73,7 +73,7 @@ No se debe inferir el color del texto a partir de “claro/oscuro” ni usar opa
 
 Inter se carga como fuente variable mediante `next/font` y publica `--font-inter`. Las familias de respaldo viven en `--font-family`.
 
-La escala pública es `display-1`, `display-2`, `heading-1`, `heading-2`, `heading-3`, `body-large`, `body`, `caption` y `label`. Cada nivel tiene tamaño, altura de línea y, cuando corresponde, peso y tracking. Los tamaños son `rem`; los títulos fluidos combinan `rem` y `vw` mediante `clamp()`.
+La escala pública es `display-1`, `display-2`, `heading-1`, `heading-2`, `heading-3`, `body-large`, `body`, `caption` y `label`. Cada nivel tiene tamaño, altura de línea y, cuando corresponde, peso y tracking. Los tamaños son `rem`; los títulos fluidos combinan `rem` y `vw` mediante `clamp()`. Los pesos disponibles son `regular` (400), `medium` (500), `semibold` (600) y `bold` (700).
 
 No se permiten `font-size` en `px` en la interfaz. En Tailwind se prefieren utilidades como `text-heading-2`; en CSS Modules, `font-size: var(--heading-2)`.
 
@@ -83,7 +83,7 @@ La escala de espaciado va de `--space-1` (0.25rem) a `--space-10` (8rem). En Tai
 
 Los radios son `sm`, `md`, `lg` y `full`, derivados de una base de 0.75rem. `full` usa 9999px deliberadamente para controles tipo píldora; no es un tamaño tipográfico.
 
-Los tamaños locales de iconos, columnas o targets pueden derivarse con `calc()` cuando no existe un escalón exacto.
+Los tamaños locales de iconos, columnas o targets pueden derivarse con `calc()` cuando no existe un escalón exacto. En patrones exclusivos de un componente, las columnas pueden declararse como variables privadas del CSS Module en `rem`, siempre que no dupliquen colores, tipografía o espaciado global.
 
 ### Movimiento
 

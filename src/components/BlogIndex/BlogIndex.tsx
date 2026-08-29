@@ -77,10 +77,16 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         </Container>
       </Section>
 
-      <Section variant="brand" paddingY="lg" as="section" className={styles.featuredSection}>
+      <Section
+        variant="brand"
+        paddingY="lg"
+        as="section"
+        className={styles.featuredSection}
+        ariaLabelledBy="blog-featured-heading"
+      >
         <Container>
           <div className={styles.sectionHeadingOnBlue}>
-            <h2>{ui.featured}</h2>
+            <h2 id="blog-featured-heading">{ui.featured}</h2>
             <span aria-hidden="true" />
           </div>
 
@@ -129,10 +135,10 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         </Container>
       </Section>
 
-      <Section variant="surface" paddingY="lg" as="section">
+      <Section variant="surface" paddingY="lg" as="section" ariaLabelledBy="blog-archive-heading">
         <Container>
           <div className={styles.archiveHeading}>
-            <h2>{ui.archive}</h2>
+            <h2 id="blog-archive-heading">{ui.archive}</h2>
             <span>{String(archivePosts.length).padStart(2, "0")}</span>
           </div>
 

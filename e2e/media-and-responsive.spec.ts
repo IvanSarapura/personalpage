@@ -144,8 +144,13 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
 
 test("blog archive keeps a stable grid structure across breakpoints", async ({ page }) => {
   const viewports = [
+    { width: 320, height: 844 },
+    { width: 375, height: 844 },
     { width: 390, height: 844 },
+    { width: 641, height: 900 },
+    { width: 767, height: 900 },
     { width: 768, height: 900 },
+    { width: 1024, height: 900 },
     { width: 1440, height: 900 },
   ];
 

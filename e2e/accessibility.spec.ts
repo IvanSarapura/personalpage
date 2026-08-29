@@ -15,6 +15,7 @@ const routes = [
   "/projects",
   "/research",
   "/blog",
+  "/es/blog",
   "/projects/proven",
   "/blog/llm-oracles-genlayer",
 ];
