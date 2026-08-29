@@ -1,7 +1,14 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import ResearchIndex from "@/components/ResearchIndex/ResearchIndex";
 import { CHAIN_OF_CUSTODY_PAPER_URL } from "@/data/research";
+
+/** El conteo de publicaciones propias vive en la barra de la sección. */
+function getArchiveCount() {
+  const section = screen.getByRole("region", { name: "Sort research" });
+  return within(section).getByText("02");
+}
 
 describe("ResearchIndex", () => {
   it("renderiza el archivo completo con jerarquía editorial y metadatos académicos", () => {
@@ -11,7 +18,7 @@ describe("ResearchIndex", () => {
       screen.getByRole("heading", { level: 1, name: "Publications & research" })
     ).toBeVisible();
     // El conteo de publicaciones propias: número + etiqueta en spans separados.
-    expect(screen.getByText("02")).toBeVisible();
+    expect(getArchiveCount()).toBeVisible();
     expect(screen.getByText("publications")).toBeVisible();
 
     // Cada bloque de la página es una región con nombre accesible propio.
@@ -45,13 +52,13 @@ describe("ResearchIndex", () => {
     expect(paperLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  it("alterna el orden de la lista con el control de ordenamiento", () => {
+  it("alterna el orden de la lista con el control de ordenamiento", async () => {
     const { container } = render(<ResearchIndex locale="en" />);
 
     const firstArticle = container.querySelector("article");
     expect(firstArticle).toHaveAttribute("id", "cryptographic-infrastructure");
 
-    screen.getByRole("button", { name: "Sorted by most recent" }).click();
+    await userEvent.click(screen.getByRole("button", { name: "Sorted by most recent" }));
 
     const reordered = container.querySelector("article");
     expect(reordered).toHaveAttribute("id", "cardano-chain-of-custody");
@@ -64,8 +71,9 @@ describe("ResearchIndex", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "Publicaciones e investigación" })
     ).toBeVisible();
-    expect(screen.getByText("02")).toBeVisible();
-    expect(screen.getByText("publicaciones")).toBeVisible();
+    const sortRegion = screen.getByRole("region", { name: "Ordenar investigaciones" });
+    expect(within(sortRegion).getByText("02")).toBeVisible();
+    expect(within(sortRegion).getByText("publicaciones")).toBeVisible();
     expect(screen.getByRole("button", { name: "Ordenadas por más recientes" })).toBeVisible();
     expect(screen.getByRole("region", { name: "Lista de investigaciones" })).toBeVisible();
     expect(
