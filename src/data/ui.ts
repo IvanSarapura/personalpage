@@ -32,8 +32,13 @@ export interface UiDict {
     pageTitle: string;
     pageDescription: string;
     pageIntro: string;
-    archiveHeading: string;
-    worksLabel: string;
+    archiveListLabel: string;
+    ownPublications: string;
+    sortGroupLabel: string;
+    sortRecent: string;
+    sortOldest: string;
+    sortRecentLabel: string;
+    sortOldestLabel: string;
     authorLabel: string;
     authorsLabel: string;
     contextLabel: string;
@@ -179,8 +184,13 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Academic research by Iván Sarapura on legal technology, cryptographic infrastructure and digital evidence.",
       pageIntro:
         "Work that sits where law, cryptography and digital evidence meet. You'll find research in progress and published papers, each with context, authorship and a link to the full work when it's available.",
-      archiveHeading: "Research archive",
-      worksLabel: "works",
+      archiveListLabel: "Research list",
+      ownPublications: "publications",
+      sortGroupLabel: "Sort research",
+      sortRecent: "Most recent",
+      sortOldest: "Oldest",
+      sortRecentLabel: "Sorted by most recent",
+      sortOldestLabel: "Sorted by oldest",
       authorLabel: "Author",
       authorsLabel: "Authors",
       contextLabel: "Context",
@@ -335,8 +345,13 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Investigación académica de Iván Sarapura sobre tecnología jurídica, infraestructura criptográfica y evidencia digital.",
       pageIntro:
         "Trabajo que se ubica donde se juntan el derecho, la criptografía y la evidencia digital. Vas a encontrar investigaciones en desarrollo y papers publicados, cada uno con su contexto, autoría y acceso al trabajo completo cuando está disponible.",
-      archiveHeading: "Archivo de investigaciones",
-      worksLabel: "trabajos",
+      archiveListLabel: "Lista de investigaciones",
+      ownPublications: "publicaciones",
+      sortGroupLabel: "Ordenar investigaciones",
+      sortRecent: "Más recientes",
+      sortOldest: "Más antiguas",
+      sortRecentLabel: "Ordenadas por más recientes",
+      sortOldestLabel: "Ordenadas por más antiguas",
       authorLabel: "Autor",
       authorsLabel: "Autores",
       contextLabel: "Contexto",
