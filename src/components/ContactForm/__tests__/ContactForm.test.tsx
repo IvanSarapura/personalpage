@@ -79,9 +79,11 @@ describe("ContactForm", () => {
       "Enviaste varios mensajes en poco tiempo. Intentá nuevamente en unos minutos."
     );
     expect(feedback.closest("[aria-live]")).toHaveAttribute("aria-live", "polite");
-    expect(name).toHaveValue("Ada Lovelace");
-    expect(email).toHaveValue("ada@example.com");
-    expect(message).toHaveValue("Me gustaría conversar sobre una colaboración profesional.");
+    await waitFor(() => {
+      expect(name).toHaveValue("Ada Lovelace");
+      expect(email).toHaveValue("ada@example.com");
+      expect(message).toHaveValue("Me gustaría conversar sobre una colaboración profesional.");
+    });
     expect(screen.queryByRole("link", { name: /linkedin/i })).not.toBeInTheDocument();
   });
 

@@ -221,12 +221,17 @@
 .archiveArticle {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-areas:
+    "index meta"
+    "index copy"
+    "index tags";
   gap: var(--space-4);
   align-items: start;
   padding: var(--space-5) 0;
 }
 
 .archiveIndex {
+  grid-area: index;
   padding-top: var(--space-1);
   color: var(--section-text-secondary);
   font-size: var(--caption);
@@ -236,6 +241,7 @@
 }
 
 .archiveMeta {
+  grid-area: meta;
   display: flex;
   flex-flow: row wrap;
   gap: var(--space-2) var(--space-3);
@@ -248,6 +254,7 @@
 }
 
 .archiveCopy {
+  grid-area: copy;
   min-width: 0;
 }
 
@@ -296,6 +303,7 @@
 }
 
 .archiveTags {
+  grid-area: tags;
   align-content: flex-start;
   margin-top: 0;
 }
@@ -314,10 +322,13 @@
 
   .archiveArticle {
     grid-template-columns: 40px 150px minmax(0, 1fr);
+    grid-template-areas:
+      "index meta copy"
+      "index meta tags";
   }
 
   .archiveTags {
-    grid-column: 3;
+    grid-column: auto;
   }
 
   :global(.dark) .heroMetrics {
@@ -375,13 +386,9 @@
 
   .archiveArticle {
     grid-template-columns: 48px 170px minmax(0, 1fr) minmax(170px, 220px);
+    grid-template-areas: "index meta copy tags";
     gap: var(--space-5);
     padding: var(--space-6) 0;
-  }
-
-  .archiveMeta,
-  .archiveCopy {
-    grid-column: auto;
   }
 
   .archiveMeta {

@@ -13,6 +13,7 @@ const routes = [
   { name: "projects-list", path: "/projects" },
   { name: "research-list", path: "/research" },
   { name: "blog-list", path: "/blog" },
+  { name: "blog-list-es", path: "/es/blog" },
   { name: "project-detail", path: "/projects/proven" },
   { name: "blog-detail", path: "/blog/llm-oracles-genlayer" },
 ];

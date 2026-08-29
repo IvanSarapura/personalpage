@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page, type Route } from "@playwright/test";
 
 export type Theme = "light" | "dark";
-const baseURL = "http://localhost:3100";
+const baseURL = `http://localhost:${process.env.PLAYWRIGHT_PORT ?? 3100}`;
 
 export async function setTheme(page: Page, theme: Theme) {
   await page.addInitScript((selectedTheme) => {

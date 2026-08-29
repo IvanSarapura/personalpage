@@ -123,7 +123,14 @@ test("forced colors preserves focus and theme-switch operability", async ({
 test("content reflows at a 320px viewport without horizontal overflow", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
 
-  for (const route of ["/", "/projects", "/projects/proven", "/blog/llm-oracles-genlayer"]) {
+  for (const route of [
+    "/",
+    "/projects",
+    "/projects/proven",
+    "/blog",
+    "/es/blog",
+    "/blog/llm-oracles-genlayer",
+  ]) {
     await gotoStable(page, route);
     const overflow = await page.evaluate(() => ({
       clientWidth: document.documentElement.clientWidth,
@@ -132,6 +139,53 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
     expect(overflow.scrollWidth, `${route} overflows horizontally`).toBeLessThanOrEqual(
       overflow.clientWidth + 1
     );
+  }
+});
+
+test("blog archive keeps a stable grid structure across breakpoints", async ({ page }) => {
+  const viewports = [
+    { width: 390, height: 844 },
+    { width: 768, height: 900 },
+    { width: 1440, height: 900 },
+  ];
+
+  await page.setViewportSize(viewports[0]!);
+  await gotoStable(page, "/blog");
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+
+    const layout = await page
+      .locator("ol article")
+      .first()
+      .evaluate((article) => {
+        const style = getComputedStyle(article);
+        const copy = article.querySelector<HTMLElement>("[class*='archiveCopy']");
+        const tags = article.querySelector<HTMLElement>("[class*='archiveTags']");
+
+        return {
+          areas: style.gridTemplateAreas,
+          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          copyLeft: copy?.getBoundingClientRect().left ?? 0,
+          tagsLeft: tags?.getBoundingClientRect().left ?? 0,
+        };
+      });
+
+    expect(
+      layout.overflow,
+      `${viewport.width}px blog layout overflows horizontally`
+    ).toBeLessThanOrEqual(1);
+    if (viewport.width < 768) {
+      expect(layout.areas).toContain('"index meta"');
+      expect(layout.areas).toContain('"index copy"');
+      expect(layout.areas).toContain('"index tags"');
+    } else if (viewport.width < 1024) {
+      expect(layout.areas).toContain('"index meta copy"');
+      expect(layout.areas).toContain('"index meta tags"');
+    } else {
+      expect(layout.areas).toBe('"index meta copy tags"');
+      expect(layout.tagsLeft).toBeGreaterThan(layout.copyLeft);
+    }
   }
 });
 
