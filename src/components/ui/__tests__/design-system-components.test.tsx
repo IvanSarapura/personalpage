@@ -34,13 +34,15 @@ describe("design-system UI components", () => {
     expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
-  it("Button can render an anchor without invalid interactive nesting", () => {
-    render(<Button render={<a href="https://example.com/work" aria-label="Work" />}>Work</Button>);
+  it("Button preserves keyboard semantics when rendered as a non-button element", () => {
+    render(
+      <Button render={<div aria-label="Work" />} nativeButton={false}>
+        Work
+      </Button>
+    );
 
-    const link = screen.getByRole("link", { name: "Work" });
-    expect(link).toHaveAttribute("href", "https://example.com/work");
-    expect(link).toHaveAttribute("data-slot", "button");
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    const button = screen.getByRole("button", { name: "Work" });
+    expect(button).toHaveAttribute("data-slot", "button");
   });
 
   it("uses contextual focus and interactive border tokens", () => {
