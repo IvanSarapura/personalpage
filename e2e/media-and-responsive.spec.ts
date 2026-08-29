@@ -158,9 +158,11 @@ test("blog article keeps navigation and editorial headings consistent", async ({
         const title = article.querySelector("h1");
         const sectionHeading = article.querySelector("h2");
         const backLink = document.querySelector("main > section a");
+        const backLinkLabel = backLink?.querySelector("span");
         const titleStyle = title ? getComputedStyle(title) : null;
         const sectionStyle = sectionHeading ? getComputedStyle(sectionHeading) : null;
         const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
+        const backLinkLabelStyle = backLinkLabel ? getComputedStyle(backLinkLabel) : null;
 
         return {
           titleFont: titleStyle?.fontFamily,
@@ -169,7 +171,7 @@ test("blog article keeps navigation and editorial headings consistent", async ({
           sectionSize: Number.parseFloat(sectionStyle?.fontSize ?? "0"),
           backLinkHeight: backLink?.getBoundingClientRect().height ?? 0,
           backLinkDisplay: backLinkStyle?.display,
-          backLinkDecoration: backLinkStyle?.textDecorationLine,
+          backLinkDecoration: backLinkLabelStyle?.textDecorationLine,
           backLinkSvgCount: backLink?.querySelectorAll("svg").length ?? 0,
           backLinkText: backLink?.textContent?.trim() ?? "",
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
