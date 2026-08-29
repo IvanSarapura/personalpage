@@ -142,57 +142,77 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
   }
 });
 
-test("blog article keeps navigation and editorial headings consistent", async ({ page }) => {
-  for (const viewport of [
-    { width: 320, height: 800 },
-    { width: 390, height: 844 },
-    { width: 1440, height: 900 },
+test("blog article keeps navigation, metadata and editorial headings consistent", async ({
+  page,
+}) => {
+  for (const locale of [
+    { path: "/blog/zero-to-agent-v0", backText: "All posts", readingText: "4 min read" },
+    {
+      path: "/es/blog/zero-to-agent-v0",
+      backText: "Todos los posts",
+      readingText: "4 min de lectura",
+    },
   ]) {
-    await page.setViewportSize(viewport);
-    await gotoStable(page, "/blog/zero-to-agent-v0");
+    for (const viewport of [
+      { width: 320, height: 800 },
+      { width: 390, height: 844 },
+      { width: 1440, height: 900 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await gotoStable(page, locale.path);
 
-    const typography = await page
-      .locator("article")
-      .first()
-      .evaluate((article) => {
-        const title = article.querySelector("h1");
-        const sectionHeading = article.querySelector("h2");
-        const backLink = document.querySelector("main > section a");
-        const backLinkLabel = backLink?.querySelector("span");
-        const articleMeta = article.querySelector("header p");
-        const titleStyle = title ? getComputedStyle(title) : null;
-        const sectionStyle = sectionHeading ? getComputedStyle(sectionHeading) : null;
-        const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
-        const backLinkLabelStyle = backLinkLabel ? getComputedStyle(backLinkLabel) : null;
+      const typography = await page
+        .locator("article")
+        .first()
+        .evaluate((article) => {
+          const title = article.querySelector("h1");
+          const sectionHeading = article.querySelector("h2");
+          const articleHeader = article.querySelector("header");
+          const backLink = articleHeader?.querySelector("a");
+          const backLinkLabel = backLink?.querySelector("span");
+          const articleMeta = articleHeader?.querySelector("p");
+          const titleStyle = title ? getComputedStyle(title) : null;
+          const sectionStyle = sectionHeading ? getComputedStyle(sectionHeading) : null;
+          const headerStyle = articleHeader ? getComputedStyle(articleHeader) : null;
+          const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
+          const backLinkLabelStyle = backLinkLabel ? getComputedStyle(backLinkLabel) : null;
+          const articleMetaStyle = articleMeta ? getComputedStyle(articleMeta) : null;
 
-        return {
-          titleFont: titleStyle?.fontFamily,
-          sectionFont: sectionStyle?.fontFamily,
-          titleSize: Number.parseFloat(titleStyle?.fontSize ?? "0"),
-          sectionSize: Number.parseFloat(sectionStyle?.fontSize ?? "0"),
-          backLinkHeight: backLink?.getBoundingClientRect().height ?? 0,
-          backLinkDisplay: backLinkStyle?.display,
-          backLinkDecoration: backLinkLabelStyle?.textDecorationLine,
-          backLinkSvgCount: backLink?.querySelectorAll("svg").length ?? 0,
-          backLinkText: backLink?.textContent?.trim() ?? "",
-          backLinkRight: backLink?.getBoundingClientRect().right ?? 0,
-          articleMetaLeft: articleMeta?.getBoundingClientRect().left ?? 0,
-          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        };
-      });
+          return {
+            titleFont: titleStyle?.fontFamily,
+            sectionFont: sectionStyle?.fontFamily,
+            titleSize: Number.parseFloat(titleStyle?.fontSize ?? "0"),
+            sectionSize: Number.parseFloat(sectionStyle?.fontSize ?? "0"),
+            headerMarginBottom: Number.parseFloat(headerStyle?.marginBottom ?? "0"),
+            backLinkHeight: backLink?.getBoundingClientRect().height ?? 0,
+            backLinkDisplay: backLinkStyle?.display,
+            backLinkDecoration: backLinkLabelStyle?.textDecorationLine,
+            backLinkSvgCount: backLink?.querySelectorAll("svg").length ?? 0,
+            backLinkText: backLink?.textContent?.trim() ?? "",
+            backLinkRight: backLink?.getBoundingClientRect().right ?? 0,
+            articleMetaLeft: articleMeta?.getBoundingClientRect().left ?? 0,
+            articleMetaFontSize: Number.parseFloat(articleMetaStyle?.fontSize ?? "0"),
+            articleMetaText: articleMeta?.textContent?.trim() ?? "",
+            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          };
+        });
 
-    await expect(page.getByRole("link", { name: "All posts" })).toBeVisible();
-    expect(typography.titleFont).toBe(typography.sectionFont);
-    expect(typography.titleSize).toBeGreaterThan(typography.sectionSize);
-    expect(typography.backLinkHeight).toBeGreaterThanOrEqual(24);
-    expect(typography.backLinkDisplay).toBe("inline-flex");
-    expect(typography.backLinkDecoration).toContain("underline");
-    expect(typography.backLinkSvgCount).toBe(1);
-    expect(typography.backLinkText).toBe("All posts");
-    if (viewport.width >= 390) {
-      expect(typography.articleMetaLeft).toBeGreaterThanOrEqual(typography.backLinkRight);
+      await expect(page.getByRole("link", { name: locale.backText })).toBeVisible();
+      expect(typography.titleFont).toBe(typography.sectionFont);
+      expect(typography.titleSize).toBeGreaterThan(typography.sectionSize);
+      expect(typography.headerMarginBottom).toBe(32);
+      expect(typography.backLinkHeight).toBeGreaterThanOrEqual(44);
+      expect(typography.backLinkDisplay).toBe("inline-flex");
+      expect(typography.backLinkDecoration).toContain("underline");
+      expect(typography.backLinkSvgCount).toBe(1);
+      expect(typography.backLinkText).toBe(locale.backText);
+      expect(typography.articleMetaFontSize).toBe(16);
+      expect(typography.articleMetaText).toBe(locale.readingText);
+      if (viewport.width >= 390) {
+        expect(typography.articleMetaLeft).toBeGreaterThanOrEqual(typography.backLinkRight);
+      }
+      expect(typography.overflow).toBeLessThanOrEqual(1);
     }
-    expect(typography.overflow).toBeLessThanOrEqual(1);
   }
 });
 
