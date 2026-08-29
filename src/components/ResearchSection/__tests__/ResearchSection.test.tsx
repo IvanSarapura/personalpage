@@ -17,7 +17,7 @@ describe("ResearchSection", () => {
     const articles = container.querySelectorAll("article");
     expect(articles).toHaveLength(2);
     expect(within(articles[0]!).getByRole("heading", { level: 3 })).toHaveTextContent(
-      "Infraestructura criptográfica implementable"
+      "Cuando blockchain desaparece"
     );
     expect(articles[0]!.querySelector('span[aria-hidden="true"]')).toHaveTextContent("01");
     expect(within(articles[0]!).getByText("October, 2026")).toHaveAttribute("datetime", "2026");

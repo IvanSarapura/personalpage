@@ -43,7 +43,7 @@ describe("structured data", () => {
     expect(inProgress).toMatchObject({
       dateCreated: "2026",
       creativeWorkStatus: "Research in progress",
-      inLanguage: "es",
+      inLanguage: "en",
     });
     expect(inProgress).not.toHaveProperty("datePublished");
     expect(inProgress).not.toHaveProperty("url");
@@ -51,9 +51,8 @@ describe("structured data", () => {
 
     expect(published).toMatchObject({
       datePublished: "2025-11-24",
-      alternativeHeadline: "¿Puede esta tecnología mejorar el resguardo de la evidencia?",
       award: "1st prize — Cardano Academic LegalThon 2025",
-      inLanguage: "es",
+      inLanguage: "en",
       url: expect.stringMatching(/\.pdf$/),
       sourceOrganization: {
         "@type": "Organization",

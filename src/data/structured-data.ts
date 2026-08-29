@@ -41,7 +41,6 @@ function buildResearchArticle(item: ResearchItem) {
   if (item.kind === "published") {
     return {
       ...article,
-      alternativeHeadline: item.subtitle,
       datePublished: item.datePublished,
       url: item.link.href,
       award: item.recognition,

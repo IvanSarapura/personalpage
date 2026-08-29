@@ -2,7 +2,6 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import ResearchIndex from "@/components/ResearchIndex/ResearchIndex";
-import { CHAIN_OF_CUSTODY_PAPER_URL } from "@/data/research";
 
 /** El conteo de publicaciones propias vive en la barra de la sección. */
 function getArchiveCount() {
@@ -33,23 +32,26 @@ describe("ResearchIndex", () => {
     expect(articles).toHaveLength(2);
     expect(articles[0]).toHaveAttribute("id", "cryptographic-infrastructure");
     expect(within(articles[0]!).getByText("Sarapura, Iván Enzo")).toBeVisible();
-    expect(
-      within(articles[0]!).getByText(
-        "Law studies — UBA · Blockchain & Digital Finance diploma program — UTN"
-      )
-    ).toBeVisible();
+    // El eyebrow del item en desarrollo: fecha · estado.
+    expect(within(articles[0]!).getByText("October, 2026")).toBeVisible();
+    expect(within(articles[0]!).getByText("Research in progress")).toBeVisible();
 
     expect(articles[1]).toHaveAttribute("id", "cardano-chain-of-custody");
+    // El reconocimiento no forma parte del eyebrow visual del listado.
     expect(
-      within(articles[1]!).getByText("1st prize — Cardano Academic LegalThon 2025")
+      within(articles[1]!).queryByText("1st prize — Cardano Academic LegalThon 2025")
+    ).not.toBeInTheDocument();
+    // El título traducido al inglés y el subtítulo eliminado.
+    expect(
+      within(articles[1]!).getByText(
+        "Blockchain as a technology applicable to the chain of custody"
+      )
     ).toBeVisible();
-
-    const paperLink = within(articles[1]!).getByRole("link", {
-      name: "Read paper (PDF) (opens in a new tab)",
-    });
-    expect(paperLink).toHaveAttribute("href", CHAIN_OF_CUSTODY_PAPER_URL);
-    expect(paperLink).toHaveAttribute("target", "_blank");
-    expect(paperLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(
+      screen.queryByText("¿Puede esta tecnología mejorar el resguardo de la evidencia?")
+    ).not.toBeInTheDocument();
+    // El link al paper ya no se muestra en el listado.
+    expect(screen.queryByRole("link", { name: /Read paper/i })).not.toBeInTheDocument();
   });
 
   it("alterna el orden de la lista con el control de ordenamiento", async () => {
@@ -77,9 +79,11 @@ describe("ResearchIndex", () => {
     expect(screen.getByRole("button", { name: "Ordenadas por más recientes" })).toBeVisible();
     expect(screen.getByRole("region", { name: "Lista de investigaciones" })).toBeVisible();
     expect(
-      screen.getByRole("link", {
-        name: "Leer paper (PDF) (se abre en una pestaña nueva)",
-      })
-    ).toHaveAttribute("href", CHAIN_OF_CUSTODY_PAPER_URL);
+      screen.getByText("La blockchain como tecnología aplicable a la cadena de custodia")
+    ).toBeVisible();
+    expect(
+      screen.queryByText("¿Puede esta tecnología mejorar el resguardo de la evidencia?")
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Leer paper/i })).not.toBeInTheDocument();
   });
 });

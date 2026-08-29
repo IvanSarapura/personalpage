@@ -42,8 +42,6 @@ export interface UiDict {
     authorLabel: string;
     authorsLabel: string;
     contextLabel: string;
-    backgroundLabel: string;
-    recognitionLabel: string;
     opensInNewTab: string;
   };
   focus: {
@@ -194,8 +192,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       authorLabel: "Author",
       authorsLabel: "Authors",
       contextLabel: "Context",
-      backgroundLabel: "Academic background",
-      recognitionLabel: "Recognition",
       opensInNewTab: "opens in a new tab",
     },
     focus: {
@@ -355,8 +351,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       authorLabel: "Autor",
       authorsLabel: "Autores",
       contextLabel: "Contexto",
-      backgroundLabel: "Formación académica",
-      recognitionLabel: "Reconocimiento",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     focus: {

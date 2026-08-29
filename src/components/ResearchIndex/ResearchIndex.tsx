@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { ArrowUpDown } from "lucide-react";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
-import SectionLink from "@/components/SectionLink/SectionLink";
 import type { Locale } from "@/data/locale";
 import { getResearch, type ResearchItem } from "@/data/research";
 import { getUi } from "@/data/ui";
@@ -85,36 +84,25 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
           {/* role="list" preserva la semántica en Safari cuando CSS elimina el marcador. */}
           {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
           <ol className={styles.list} role="list">
-            {visibleResearch.map((item, index) => {
+            {visibleResearch.map((item) => {
               const titleId = `research-${item.id}-title`;
               const dateTime = item.kind === "published" ? item.datePublished : item.dateCreated;
 
               return (
                 <li key={item.id} className={styles.item}>
                   <article id={item.id} className={styles.article} aria-labelledby={titleId}>
-                    <span className={styles.numeral} aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
                     <div className={styles.content}>
+                      <p className={styles.eyebrow}>
+                        <time dateTime={dateTime}>{item.dateLabel}</time>
+                        <span aria-hidden="true">·</span>
+                        <span>{item.status}</span>
+                      </p>
+
                       <h3 id={titleId} className={styles.title}>
                         <cite lang={locale === "en" ? item.titleLanguage : undefined}>
                           {item.title}
                         </cite>
                       </h3>
-
-                      <p className={styles.date}>
-                        <time dateTime={dateTime}>{item.dateLabel}</time>
-                      </p>
-
-                      {item.kind === "published" && (
-                        <p
-                          className={styles.subtitle}
-                          lang={locale === "en" ? item.titleLanguage : undefined}
-                        >
-                          {item.subtitle}
-                        </p>
-                      )}
 
                       <dl className={styles.metadata}>
                         <div className={styles.metadataRow}>
@@ -125,32 +113,9 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
                           <dt>{ui.contextLabel}</dt>
                           <dd>{item.context}</dd>
                         </div>
-                        {item.kind === "in-progress" && (
-                          <div className={styles.metadataRow}>
-                            <dt>{ui.backgroundLabel}</dt>
-                            <dd>{item.academicBackground.join(" · ")}</dd>
-                          </div>
-                        )}
-                        {item.kind === "published" && (
-                          <div className={styles.metadataRow}>
-                            <dt>{ui.recognitionLabel}</dt>
-                            <dd>{item.recognition}</dd>
-                          </div>
-                        )}
                       </dl>
 
                       <p className={styles.summary}>{item.summary}</p>
-
-                      {item.kind === "published" && (
-                        <SectionLink
-                          href={item.link.href}
-                          external
-                          opensInNewTabLabel={ui.opensInNewTab}
-                          className={styles.link}
-                        >
-                          {item.link.label}
-                        </SectionLink>
-                      )}
                     </div>
                   </article>
                 </li>

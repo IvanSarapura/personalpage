@@ -21,7 +21,7 @@ describe("research data", () => {
       expect(item.status).toBe(
         locale === "en" ? "Research in progress" : "Investigación en desarrollo"
       );
-      expect(item.titleLanguage).toBe("es");
+      expect(item.titleLanguage).toBe(locale === "en" ? "en" : "es");
       expect(item?.authors).toEqual([{ name: "Sarapura, Iván Enzo", isSiteOwner: true }]);
       expect(item).not.toHaveProperty("sourceOrganization");
       expect(item.academicBackground).toEqual(
@@ -48,8 +48,13 @@ describe("research data", () => {
 
       expect(item.datePublished).toBe("2025-11-24");
       expect(item.status).toBe(locale === "en" ? "Published paper" : "Paper publicado");
-      expect(item.titleLanguage).toBe("es");
+      expect(item.titleLanguage).toBe(locale === "en" ? "en" : "es");
       expect(item.authors).toEqual(expectedAuthors);
+      expect(item.context).toBe(
+        locale === "en"
+          ? "Faculty of Law, University of Buenos Aires, Cardano and Project Catalyst"
+          : "Facultad de Derecho, Universidad de Buenos Aires, Cardano y Project Catalyst"
+      );
       expect(item.recognition).toBe(
         locale === "en"
           ? "1st prize — Cardano Academic LegalThon 2025"

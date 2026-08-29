@@ -22,7 +22,7 @@ interface ResearchItemBase {
   status: string;
   dateLabel: string;
   title: string;
-  titleLanguage: "es";
+  titleLanguage: "es" | "en";
   authors: readonly ResearchAuthor[];
   context: string;
   preview: string;
@@ -38,7 +38,6 @@ export interface InProgressResearchItem extends ResearchItemBase {
 export interface PublishedResearchItem extends ResearchItemBase {
   kind: "published";
   datePublished: string;
-  subtitle: string;
   recognition: string;
   sourceOrganization: string;
   link: ResearchLink;
@@ -54,8 +53,9 @@ const RESEARCH_BY_LOCALE: Record<Locale, readonly ResearchItem[]> = {
       status: "Research in progress",
       dateLabel: "October, 2026",
       dateCreated: "2026",
-      title: "Infraestructura criptográfica implementable para propiciar la seguridad jurídica",
-      titleLanguage: "es",
+      title:
+        "When blockchain disappears: from crypto product to digital infrastructure, autonomous agents, and security",
+      titleLanguage: "en",
       authors: [{ name: "Sarapura, Iván Enzo", isSiteOwner: true }],
       context: "Developed for UCEMA",
       preview:
@@ -73,16 +73,14 @@ const RESEARCH_BY_LOCALE: Record<Locale, readonly ResearchItem[]> = {
       status: "Published paper",
       dateLabel: "November, 2025",
       datePublished: "2025-11-24",
-      title: "La blockchain como tecnología aplicable a la cadena de custodia",
-      titleLanguage: "es",
-      subtitle: "¿Puede esta tecnología mejorar el resguardo de la evidencia?",
+      title: "Blockchain as a technology applicable to the chain of custody",
+      titleLanguage: "en",
       authors: [
         { name: "José G. Damiani Corraro" },
         { name: "Lara M. Quevedo Arcuri" },
         { name: "Iván E. Sarapura", isSiteOwner: true },
       ],
-      context:
-        "Faculty of Law, University of Buenos Aires · LegalThon, Academic Hackathon on Decentralized Governance",
+      context: "Faculty of Law, University of Buenos Aires, Cardano and Project Catalyst",
       preview:
         "A Cardano-based model that preserves the integrity of digital evidence without exposing case data.",
       summary:
@@ -102,7 +100,8 @@ const RESEARCH_BY_LOCALE: Record<Locale, readonly ResearchItem[]> = {
       status: "Investigación en desarrollo",
       dateLabel: "octubre de 2026",
       dateCreated: "2026",
-      title: "Infraestructura criptográfica implementable para propiciar la seguridad jurídica",
+      title:
+        "Cuando blockchain desaparece: de producto crypto a infraestructura digital, agentes autónomos y seguridad",
       titleLanguage: "es",
       authors: [{ name: "Sarapura, Iván Enzo", isSiteOwner: true }],
       context: "Desarrollado para UCEMA",
@@ -123,14 +122,12 @@ const RESEARCH_BY_LOCALE: Record<Locale, readonly ResearchItem[]> = {
       datePublished: "2025-11-24",
       title: "La blockchain como tecnología aplicable a la cadena de custodia",
       titleLanguage: "es",
-      subtitle: "¿Puede esta tecnología mejorar el resguardo de la evidencia?",
       authors: [
         { name: "José G. Damiani Corraro" },
         { name: "Lara M. Quevedo Arcuri" },
         { name: "Iván E. Sarapura", isSiteOwner: true },
       ],
-      context:
-        "Facultad de Derecho, Universidad de Buenos Aires · LegalThon, Hackathon Académico de Gobernanza Descentralizada",
+      context: "Facultad de Derecho, Universidad de Buenos Aires, Cardano y Project Catalyst",
       preview:
         "Un modelo sobre Cardano que preserva la integridad de la evidencia digital sin exponer los datos del proceso.",
       summary:
