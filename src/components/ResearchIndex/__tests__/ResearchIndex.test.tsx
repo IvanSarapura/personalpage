@@ -32,9 +32,9 @@ describe("ResearchIndex", () => {
     expect(articles).toHaveLength(2);
     expect(articles[0]).toHaveAttribute("id", "cryptographic-infrastructure");
     expect(within(articles[0]!).getByText("Sarapura, Iván Enzo")).toBeVisible();
-    // El eyebrow del item en desarrollo: fecha · estado.
-    expect(within(articles[0]!).getByText("October, 2026")).toBeVisible();
-    expect(within(articles[0]!).getByText("Research in progress")).toBeVisible();
+    // Fecha y estado se conservan en los datos, pero no forman parte del listado visual.
+    expect(within(articles[0]!).queryByText("October, 2026")).not.toBeInTheDocument();
+    expect(within(articles[0]!).queryByText("Research in progress")).not.toBeInTheDocument();
 
     expect(articles[1]).toHaveAttribute("id", "cardano-chain-of-custody");
     // El reconocimiento no forma parte del eyebrow visual del listado.

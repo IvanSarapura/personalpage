@@ -86,18 +86,11 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
           <ol className={styles.list} role="list">
             {visibleResearch.map((item) => {
               const titleId = `research-${item.id}-title`;
-              const dateTime = item.kind === "published" ? item.datePublished : item.dateCreated;
 
               return (
                 <li key={item.id} className={styles.item}>
                   <article id={item.id} className={styles.article} aria-labelledby={titleId}>
                     <div className={styles.content}>
-                      <p className={styles.eyebrow}>
-                        <time dateTime={dateTime}>{item.dateLabel}</time>
-                        <span aria-hidden="true">·</span>
-                        <span>{item.status}</span>
-                      </p>
-
                       <h3 id={titleId} className={styles.title}>
                         <cite lang={locale === "en" ? item.titleLanguage : undefined}>
                           {item.title}

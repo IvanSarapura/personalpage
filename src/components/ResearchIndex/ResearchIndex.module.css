@@ -46,7 +46,7 @@
 }
 
 .archiveCount > span:first-child {
-  font-size: var(--heading-2);
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: var(--heading-2-lh);
   letter-spacing: var(--heading-2-tracking);
@@ -54,9 +54,9 @@
 }
 
 .archiveCountLabel {
-  font-size: var(--caption);
+  font-size: var(--body);
   font-weight: 500;
-  line-height: var(--caption-lh);
+  line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--section-text-secondary);
@@ -77,10 +77,6 @@
   letter-spacing: var(--letter-spacing-wide);
   cursor: pointer;
   transition: var(--transition-hover);
-}
-
-.sortToggle:hover {
-  color: var(--section-text-secondary);
 }
 
 .sortToggle:focus-visible {
@@ -130,23 +126,6 @@
 
 .content {
   min-width: 0;
-}
-
-.eyebrow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  align-items: baseline;
-  margin: 0 0 var(--space-3);
-  color: var(--section-text-secondary);
-  font-size: var(--caption);
-  font-weight: 500;
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wide);
-}
-
-.eyebrow time {
-  font-variant-numeric: tabular-nums;
 }
 
 .title {
