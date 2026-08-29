@@ -194,6 +194,42 @@ test("blog archive keeps a stable grid structure across breakpoints", async ({ p
   }
 });
 
+test("blog hero separates the title from its publication metrics", async ({ page }) => {
+  const viewports = [
+    { width: 375, height: 844 },
+    { width: 1024, height: 900 },
+    { width: 1440, height: 900 },
+  ];
+
+  await page.setViewportSize(viewports[0]!);
+  await gotoStable(page, "/blog");
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+
+    const layout = await page
+      .locator("main header")
+      .first()
+      .evaluate((header) => {
+        const title = header.querySelector("h1")?.getBoundingClientRect();
+        const metrics = header.querySelector("dl")?.getBoundingClientRect();
+
+        return {
+          titleBottom: title?.bottom ?? 0,
+          titleLeft: title?.left ?? 0,
+          metricsTop: metrics?.top ?? 0,
+          metricsLeft: metrics?.left ?? 0,
+        };
+      });
+
+    if (viewport.width < 1024) {
+      expect(layout.metricsTop).toBeGreaterThanOrEqual(layout.titleBottom);
+    } else {
+      expect(layout.metricsLeft).toBeGreaterThan(layout.titleLeft);
+    }
+  }
+});
+
 test("controls meet minimum pointer and coarse-pointer target sizes", async ({ browser }) => {
   test.slow();
   const pointerContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });

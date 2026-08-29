@@ -16,11 +16,23 @@ describe("BlogIndex", () => {
     const { container } = render(<BlogIndex locale="en" />);
     const posts = getPosts();
     const archive = container.querySelector("ol");
+    const surfaces = container.querySelectorAll("[data-surface]");
 
     expect(screen.getByRole("heading", { level: 1, name: "Personal Blog" })).toBeVisible();
+    const heroHeader = screen
+      .getByRole("heading", { level: 1, name: "Personal Blog" })
+      .closest("header");
+    expect(heroHeader).toContainElement(container.querySelector("dl"));
+    expect(surfaces[0]).toHaveAttribute("data-surface", "elevated");
     expect(screen.getByRole("heading", { level: 2, name: "Featured note" })).toBeVisible();
-    expect(screen.getByRole("region", { name: "Featured note" })).toBeVisible();
-    expect(screen.getByRole("region", { name: "The index" })).toBeVisible();
+    expect(screen.getByRole("region", { name: "Featured note" })).toHaveAttribute(
+      "data-surface",
+      "surface"
+    );
+    expect(screen.getByRole("region", { name: "The index" })).toHaveAttribute(
+      "data-surface",
+      "elevated"
+    );
     expect(screen.queryByText("In English")).not.toBeInTheDocument();
     expect(screen.queryByText("In Spanish")).not.toBeInTheDocument();
     expect(archive).not.toBeNull();
@@ -40,10 +52,18 @@ describe("BlogIndex", () => {
   it("selecciona el featured localizado y conserva los destinos del archivo", () => {
     const { container } = render(<BlogIndex locale="es" />);
     const archive = container.querySelector("ol");
+    const surfaces = container.querySelectorAll("[data-surface]");
 
     expect(screen.getByRole("heading", { level: 1, name: "Blog Personal" })).toBeVisible();
-    expect(screen.getByRole("region", { name: "Nota destacada" })).toBeVisible();
-    expect(screen.getByRole("region", { name: "El índice" })).toBeVisible();
+    expect(surfaces[0]).toHaveAttribute("data-surface", "elevated");
+    expect(screen.getByRole("region", { name: "Nota destacada" })).toHaveAttribute(
+      "data-surface",
+      "surface"
+    );
+    expect(screen.getByRole("region", { name: "El índice" })).toHaveAttribute(
+      "data-surface",
+      "elevated"
+    );
     expect(screen.queryByText("En inglés")).not.toBeInTheDocument();
     expect(screen.queryByText("En español")).not.toBeInTheDocument();
     expect(container.querySelector("article")).toHaveAttribute("lang", "es");

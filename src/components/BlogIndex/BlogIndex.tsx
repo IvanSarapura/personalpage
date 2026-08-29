@@ -52,7 +52,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
 
   return (
     <>
-      <Section variant="surface" paddingY="none" as="div" className={styles.heroSection}>
+      <Section variant="elevated" paddingY="none" as="div" className={styles.heroSection}>
         <Container>
           <header className={styles.hero}>
             <h1 className={styles.title}>{ui.heading}</h1>
@@ -78,14 +78,14 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
       </Section>
 
       <Section
-        variant="brand"
+        variant="surface"
         paddingY="lg"
         as="section"
         className={styles.featuredSection}
         ariaLabelledBy="blog-featured-heading"
       >
         <Container>
-          <div className={styles.sectionHeadingOnBlue}>
+          <div className={styles.sectionHeading}>
             <h2 id="blog-featured-heading">{ui.featured}</h2>
             <span aria-hidden="true" />
           </div>
@@ -135,7 +135,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         </Container>
       </Section>
 
-      <Section variant="surface" paddingY="lg" as="section" ariaLabelledBy="blog-archive-heading">
+      <Section variant="elevated" paddingY="lg" as="section" ariaLabelledBy="blog-archive-heading">
         <Container>
           <div className={styles.archiveHeading}>
             <h2 id="blog-archive-heading">{ui.archive}</h2>
