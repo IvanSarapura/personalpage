@@ -1,0 +1,21 @@
+When I started building the Food Code compliance oracle, I assumed the hard part would be the model. I was wrong: the hard part is the data.
+
+## The problem is not AI, it is the source
+
+Public datasets from ANMAT, SENASA and FAO were not designed to be consumed by software. Each organization publishes in different formats, with structures that change without warning and without versioning. A record that lives in a table today may appear inside a scanned PDF tomorrow. For a RAG system, that means the ingestion pipeline matters more than the prompt.
+
+Three decisions organized the work:
+
+1. **Normalize before indexing.** Each source passes through its own normalization layer and produces a common schema: organization, regulation, article and effective date. The index never sees the original format.
+2. **Version the regulation.** The Food Code changes frequently; an answer that is correct today may be wrong next month. Every indexed chunk carries its effective date, and answers cite the exact version of the rule.
+3. **Make everything traceable.** In a regulatory domain, an answer without a citation is worse than no answer. Every oracle claim points to the record and article it came from.
+
+## What legal practice taught me about RAG
+
+My commercial-law background gave me a useful instinct here: the source controls. A lawyer does not cite “the law” in the abstract; they cite an article, subsection and precedent. A compliance RAG system has to behave the same way — retrieval is the argument, and generation is only the wording.
+
+That standard changes how the system should be evaluated. The metric that matters is not whether an answer sounds right, but whether an auditor can verify every claim by following its citations. Auditable first, eloquent second.
+
+## Next step
+
+I am working on automatically matching product formulations with the applicable articles of the Food Code — the step that turns the oracle into a pre-approval tool rather than just a search interface. If you work with Argentine public data or food regulation, I would like to compare notes.

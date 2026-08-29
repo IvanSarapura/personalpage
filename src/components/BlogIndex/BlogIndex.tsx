@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import blogVisual from "@/assets/blog/legal-engineering-log.png";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
 import { localePath, type Locale } from "@/data/locale";
-import { getPosts, type PostMeta } from "@/data/posts";
+import { getPosts, type LocalizedPost } from "@/data/posts";
 import { getUi } from "@/data/ui";
 import styles from "./BlogIndex.module.css";
 import { Badge } from "@/components/ui/badge";
@@ -36,15 +35,15 @@ function formatDayMonth(iso: string, locale: Locale): string {
     .join(" ");
 }
 
-function postHref(locale: Locale, post: PostMeta): string {
+function postHref(locale: Locale, post: LocalizedPost): string {
   return localePath(locale, `/blog/${post.slug}`);
 }
 
 export default function BlogIndex({ locale }: BlogIndexProps) {
   const ui = getUi(locale).blog;
-  const posts = getPosts();
+  const posts = getPosts(locale);
   const latestPost = posts[0];
-  const featuredPost = posts.find((post) => post.lang === locale) ?? posts[0];
+  const featuredPost = posts[0];
 
   if (!latestPost || !featuredPost) return null;
 
@@ -78,7 +77,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
       </Section>
 
       <Section
-        variant="surface"
+        variant="brand"
         paddingY="lg"
         as="section"
         className={styles.featuredSection}
@@ -114,10 +113,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
               </p>
 
               <h3 id={`featured-title-${featuredPost.slug}`} className={styles.featuredTitle}>
-                <Link href={postHref(locale, featuredPost)}>
-                  {featuredPost.title}
-                  <ArrowUpRight aria-hidden="true" />
-                </Link>
+                <Link href={postHref(locale, featuredPost)}>{featuredPost.title}</Link>
               </h3>
 
               <p className={styles.featuredDescription}>{featuredPost.description}</p>
@@ -157,6 +153,7 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
 
                   <p className={styles.archiveMeta}>
                     <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
+                    <span aria-hidden="true">·</span>
                     <span>
                       {post.readingMinutes} {ui.readingTime}
                     </span>
@@ -166,7 +163,6 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
                     <h3 id={`post-title-${post.slug}`}>
                       <Link href={postHref(locale, post)}>
                         <span>{post.title}</span>
-                        <ArrowUpRight aria-hidden="true" />
                       </Link>
                     </h3>
                     <p>{post.description}</p>

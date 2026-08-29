@@ -287,12 +287,12 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       publications: "Publications",
       latestPublication: "Latest post",
       featured: "Featured note",
-      archive: "The index",
+      archive: "Index",
       tagsLabel: "Topics",
       featuredImageAlt:
         "Annotated legal documents, an evidence envelope and software code arranged on a blue work surface",
       readingTime: "min read",
-      backToBlog: "← All posts",
+      backToBlog: "All posts",
     },
     notFound: {
       title: "Page not found",
@@ -442,15 +442,15 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       heading: "Blog Personal",
       description:
         "Notas sobre contratos inteligentes, RegTech, cumplimiento con IA y los proyectos detrás.",
-      publications: "Publicaciones",
+      publications: "Publicaciones realizadas",
       latestPublication: "Última publicación",
       featured: "Nota destacada",
-      archive: "El índice",
+      archive: "Índice",
       tagsLabel: "Temas",
       featuredImageAlt:
         "Documentos legales anotados, un sobre de evidencia y código de software sobre una mesa azul",
       readingTime: "min de lectura",
-      backToBlog: "← Todos los posts",
+      backToBlog: "Todos los posts",
     },
     notFound: {
       title: "Página no encontrada",

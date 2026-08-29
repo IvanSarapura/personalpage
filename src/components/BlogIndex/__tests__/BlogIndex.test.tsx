@@ -25,11 +25,17 @@ describe("BlogIndex", () => {
     expect(heroHeader).toContainElement(container.querySelector("dl"));
     expect(surfaces[0]).toHaveAttribute("data-surface", "elevated");
     expect(screen.getByRole("heading", { level: 2, name: "Featured note" })).toBeVisible();
+    const metrics = container.querySelectorAll("dl > div");
+    expect(metrics).toHaveLength(2);
+    expect(metrics[0]?.querySelector("dt")).toHaveTextContent("Publications");
+    expect(metrics[0]?.querySelector("dd")).toHaveTextContent("04");
+    expect(metrics[1]?.querySelector("dt")).toHaveTextContent("Latest post");
+    expect(metrics[1]?.querySelector("dd")).toHaveTextContent("Jun 10");
     expect(screen.getByRole("region", { name: "Featured note" })).toHaveAttribute(
       "data-surface",
-      "surface"
+      "brand"
     );
-    expect(screen.getByRole("region", { name: "The index" })).toHaveAttribute(
+    expect(screen.getByRole("region", { name: "Index" })).toHaveAttribute(
       "data-surface",
       "elevated"
     );
@@ -37,13 +43,21 @@ describe("BlogIndex", () => {
     expect(screen.queryByText("In Spanish")).not.toBeInTheDocument();
     expect(archive).not.toBeNull();
     expect(archive?.querySelectorAll("article")).toHaveLength(posts.length - 1);
+    expect(archive?.querySelectorAll('p span[aria-hidden="true"]')).toHaveLength(posts.length - 1);
 
     const firstArchiveArticle = archive?.querySelector("article");
     expect(firstArchiveArticle).not.toBeNull();
-    expect(firstArchiveArticle).toHaveAttribute("lang", "es");
+    expect(firstArchiveArticle).toHaveAttribute("lang", "en");
     expect(within(firstArchiveArticle!).getByRole("heading", { level: 3 })).toHaveTextContent(
       posts[1]!.title
     );
+    expect(
+      screen.getByRole("heading", {
+        level: 3,
+        name: /Crossing public food databases with RAG/,
+      })
+    ).toBeVisible();
+    expect(screen.queryByText(/Cruzar bases públicas alimentarias/)).not.toBeInTheDocument();
     expect(firstArchiveArticle?.querySelectorAll("[data-slot='badge']")).toHaveLength(
       posts[1]!.tags.length
     );
@@ -55,12 +69,15 @@ describe("BlogIndex", () => {
     const surfaces = container.querySelectorAll("[data-surface]");
 
     expect(screen.getByRole("heading", { level: 1, name: "Blog Personal" })).toBeVisible();
+    const metrics = container.querySelectorAll("dl > div");
+    expect(metrics[0]?.querySelector("dt")).toHaveTextContent("Publicaciones realizadas");
+    expect(metrics[1]?.querySelector("dt")).toHaveTextContent("Última publicación");
     expect(surfaces[0]).toHaveAttribute("data-surface", "elevated");
     expect(screen.getByRole("region", { name: "Nota destacada" })).toHaveAttribute(
       "data-surface",
-      "surface"
+      "brand"
     );
-    expect(screen.getByRole("region", { name: "El índice" })).toHaveAttribute(
+    expect(screen.getByRole("region", { name: "Índice" })).toHaveAttribute(
       "data-surface",
       "elevated"
     );
@@ -68,9 +85,13 @@ describe("BlogIndex", () => {
     expect(screen.queryByText("En español")).not.toBeInTheDocument();
     expect(container.querySelector("article")).toHaveAttribute("lang", "es");
     expect(screen.getByRole("heading", { level: 3, name: /Cruzar bases públicas/ })).toBeVisible();
+    expect(screen.queryByText(/Crossing public food databases with RAG/)).not.toBeInTheDocument();
 
     const archiveLinks = archive?.querySelectorAll("h3 a");
     expect(archiveLinks).toHaveLength(getPosts().length - 1);
-    expect(archiveLinks?.[0]).toHaveAttribute("href", "/es/blog/llm-oracles-genlayer");
+    expect(archiveLinks?.[0]).toHaveAttribute(
+      "href",
+      "/es/blog/cruzar-bases-publicas-alimentarias"
+    );
   });
 });

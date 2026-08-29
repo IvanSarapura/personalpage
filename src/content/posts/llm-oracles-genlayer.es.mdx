@@ -1,0 +1,21 @@
+Proven, el protocolo de resolución de disputas que comenzamos con mi equipo en el Bradbury Builders Hackathon de GenLayer, se apoya en un primitivo inusual: contratos inteligentes que piden a modelos LLM que evalúen evidencia. Construir sobre oráculos no deterministas resultó muy distinto de todo lo que enseña un contrato determinista.
+
+## El determinismo era el objetivo. ¿Y ahora qué?
+
+Los contratos inteligentes clásicos son valiosos precisamente porque son deterministas: con la misma entrada, cada nodo obtiene la misma salida. Los contratos de lógica subjetiva de GenLayer rompen esa propiedad deliberadamente: los validadores ejecutan inferencias LLM sobre la evidencia que presenta cada parte y la red alcanza consenso sobre juicios, no hashes.
+
+Ese intercambio habilita problemas que las blockchains no podían resolver, pero incorpora todas las realidades operativas de los LLM al diseño del protocolo:
+
+- **La latencia queda atada al consenso.** El validador más lento define el piso temporal.
+- **El costo escala con el tamaño de la evidencia.** Cada página es una cantidad de tokens que todos los validadores deben procesar.
+- **El desacuerdo es una característica.** El protocolo debe definir qué ocurre en los márgenes, del mismo modo que existe la revisión de apelación porque los tribunales pueden equivocarse.
+
+## Cuando la formación jurídica resulta útil
+
+Al diseñar el flujo de evidencia, recurrí a conceptos procesales: admisibilidad, carga de la prueba y estándar de revisión. No son metáforas, sino requisitos. Un protocolo de disputas sin ellos produce veredictos en los que nadie confía.
+
+La lección más interesante del hackathon fue que escribir el prompt de un validador se parece mucho a redactar instrucciones para un jurado: se especifica, en lenguaje claro, cómo debe ponderar la evidencia dentro de ciertos límites.
+
+## Próximo paso
+
+Seguimos construyendo Proven más allá del hackathon. El foco actual es hacer los veredictos suficientemente reproducibles para auditarlos sin volverlos fáciles de manipular. Si trabajás en consenso subjetivo o resolución computacional de disputas, escribime.

@@ -142,6 +142,52 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
   }
 });
 
+test("blog article keeps navigation and editorial headings consistent", async ({ page }) => {
+  for (const viewport of [
+    { width: 320, height: 800 },
+    { width: 390, height: 844 },
+    { width: 1440, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await gotoStable(page, "/blog/zero-to-agent-v0");
+
+    const typography = await page
+      .locator("article")
+      .first()
+      .evaluate((article) => {
+        const title = article.querySelector("h1");
+        const sectionHeading = article.querySelector("h2");
+        const backLink = document.querySelector("main > section a");
+        const titleStyle = title ? getComputedStyle(title) : null;
+        const sectionStyle = sectionHeading ? getComputedStyle(sectionHeading) : null;
+        const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
+
+        return {
+          titleFont: titleStyle?.fontFamily,
+          sectionFont: sectionStyle?.fontFamily,
+          titleSize: Number.parseFloat(titleStyle?.fontSize ?? "0"),
+          sectionSize: Number.parseFloat(sectionStyle?.fontSize ?? "0"),
+          backLinkHeight: backLink?.getBoundingClientRect().height ?? 0,
+          backLinkDisplay: backLinkStyle?.display,
+          backLinkDecoration: backLinkStyle?.textDecorationLine,
+          backLinkSvgCount: backLink?.querySelectorAll("svg").length ?? 0,
+          backLinkText: backLink?.textContent?.trim() ?? "",
+          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        };
+      });
+
+    await expect(page.getByRole("link", { name: "All posts" })).toBeVisible();
+    expect(typography.titleFont).toBe(typography.sectionFont);
+    expect(typography.titleSize).toBeGreaterThan(typography.sectionSize);
+    expect(typography.backLinkHeight).toBeGreaterThanOrEqual(24);
+    expect(typography.backLinkDisplay).toBe("inline-flex");
+    expect(typography.backLinkDecoration).toContain("underline");
+    expect(typography.backLinkSvgCount).toBe(1);
+    expect(typography.backLinkText).toBe("All posts");
+    expect(typography.overflow).toBeLessThanOrEqual(1);
+  }
+});
+
 test("blog archive keeps a stable grid structure across breakpoints", async ({ page }) => {
   const viewports = [
     { width: 320, height: 844 },
@@ -213,14 +259,29 @@ test("blog hero separates the title from its publication metrics", async ({ page
       .evaluate((header) => {
         const title = header.querySelector("h1")?.getBoundingClientRect();
         const metrics = header.querySelector("dl")?.getBoundingClientRect();
+        const metricGroups = [...header.querySelectorAll("dl > div")].map((group) => ({
+          box: group.getBoundingClientRect(),
+          label: group.querySelector("dt")?.getBoundingClientRect(),
+          value: group.querySelector("dd")?.getBoundingClientRect(),
+        }));
 
         return {
           titleBottom: title?.bottom ?? 0,
           titleLeft: title?.left ?? 0,
           metricsTop: metrics?.top ?? 0,
           metricsLeft: metrics?.left ?? 0,
+          metricGroups,
+          scrollWidth: document.documentElement.scrollWidth,
+          clientWidth: document.documentElement.clientWidth,
         };
       });
+
+    expect(layout.metricGroups).toHaveLength(2);
+    for (const metric of layout.metricGroups) {
+      expect(metric.label?.top ?? 0).toBeLessThanOrEqual(metric.value?.top ?? 0);
+    }
+    expect(layout.metricGroups[1]?.box.left).toBeGreaterThan(layout.metricGroups[0]?.box.left ?? 0);
+    expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth + 1);
 
     if (viewport.width < 1024) {
       expect(layout.metricsTop).toBeGreaterThanOrEqual(layout.titleBottom);

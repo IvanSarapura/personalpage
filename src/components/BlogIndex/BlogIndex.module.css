@@ -26,24 +26,18 @@
 .heroMetrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-5);
   margin: 0;
 }
 
 .metric {
-  --blog-metric-min-block-size: 5.75rem;
-
   display: grid;
   grid-template-areas:
-    "value"
-    "label";
+    "label"
+    "value";
   gap: var(--space-2);
+  min-inline-size: 0;
   min-block-size: auto;
-  padding-inline-start: 0;
-  border-inline-start: 0;
-}
-
-.metric + .metric {
-  padding-inline-start: var(--space-4);
 }
 
 .metricLabel {
@@ -54,6 +48,8 @@
   line-height: var(--body-lh);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .metricValue {
@@ -64,6 +60,7 @@
   font-weight: var(--type-weight-regular);
   line-height: var(--heading-3-lh);
   letter-spacing: var(--heading-3-tracking);
+  font-variant-numeric: tabular-nums;
   text-transform: uppercase;
 }
 
@@ -129,10 +126,10 @@
 
 .featuredTitle {
   color: var(--section-text);
-  font-size: var(--heading-2);
-  font-weight: var(--type-weight-regular);
-  line-height: var(--heading-2-lh);
-  letter-spacing: var(--heading-2-tracking);
+  font-size: var(--heading-3);
+  font-weight: var(--type-weight-medium);
+  line-height: var(--heading-3-lh);
+  letter-spacing: var(--heading-3-tracking);
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
@@ -145,14 +142,6 @@
   text-decoration: underline;
   text-decoration-thickness: var(--border-width-thin);
   text-underline-offset: var(--space-1);
-}
-
-.featuredTitle svg {
-  display: inline;
-  inline-size: 0.72em;
-  block-size: 0.72em;
-  margin-inline-start: var(--space-2);
-  vertical-align: 0.08em;
 }
 
 .featuredDescription {
@@ -229,17 +218,17 @@
   grid-area: index;
   padding-top: var(--space-1);
   color: var(--section-text-secondary);
-  font-size: var(--caption);
-  font-weight: var(--type-weight-semibold);
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wider);
+  font-size: var(--heading-3);
+  font-weight: var(--type-weight-regular);
+  line-height: var(--heading-3-lh);
+  letter-spacing: var(--heading-3-tracking);
 }
 
 .archiveMeta {
   grid-area: meta;
   display: flex;
   flex-flow: row wrap;
-  gap: var(--space-2) var(--space-3);
+  gap: var(--space-2);
   padding-top: var(--space-1);
   color: var(--section-text-secondary);
   font-size: var(--caption);
@@ -264,10 +253,8 @@
 }
 
 .archiveCopy h3 a {
-  display: flex;
-  gap: var(--space-2);
+  display: block;
   align-items: flex-start;
-  justify-content: space-between;
   min-inline-size: 0;
 }
 
@@ -275,18 +262,6 @@
   text-decoration: underline;
   text-decoration-thickness: var(--border-width-thin);
   text-underline-offset: var(--space-1);
-}
-
-.archiveCopy h3 svg {
-  inline-size: var(--icon-xs);
-  block-size: var(--icon-xs);
-  flex: 0 0 auto;
-  margin-top: 0.2em;
-  transition: transform var(--duration-base) var(--ease-out);
-}
-
-.archiveCopy h3 a:hover svg {
-  transform: translate(2px, -2px);
 }
 
 .archiveCopy p {
@@ -354,14 +329,13 @@
   }
 
   .metric {
-    min-block-size: var(--blog-metric-min-block-size);
-    padding-top: 0;
-    padding-inline-start: var(--space-5);
-    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
+    padding-inline-start: 0;
+    border-inline-start: 0;
   }
 
   .metric + .metric {
-    padding-inline-start: 0;
+    padding-inline-start: var(--space-5);
+    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
   }
 
   .featuredDescription {
@@ -374,12 +348,6 @@
 
     grid-template-columns: minmax(0, 7fr) minmax(var(--blog-featured-aside-min), 5fr);
     gap: var(--space-7);
-  }
-
-  .featuredTitle {
-    font-size: var(--heading-1);
-    line-height: var(--heading-1-lh);
-    letter-spacing: var(--heading-1-tracking);
   }
 
   .archiveArticle {
@@ -398,19 +366,5 @@
   .archiveMeta {
     flex-direction: column;
     gap: var(--space-2);
-  }
-
-  .archiveCopy h3 a {
-    gap: var(--space-3);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .archiveCopy h3 svg {
-    transition: none;
-  }
-
-  .archiveCopy h3 a:hover svg {
-    transform: none;
   }
 }

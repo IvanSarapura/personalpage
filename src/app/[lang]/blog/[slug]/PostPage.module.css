@@ -1,0 +1,11 @@
+.articleTitle {
+  max-inline-size: var(--content-max-wide);
+  margin-bottom: var(--element-gap);
+  color: var(--section-text);
+  font-size: var(--heading-1);
+  font-weight: var(--type-weight-regular);
+  line-height: var(--heading-1-lh);
+  letter-spacing: var(--heading-1-tracking);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}

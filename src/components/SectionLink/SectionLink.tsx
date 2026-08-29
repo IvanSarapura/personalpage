@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import styles from "./SectionLink.module.css";
@@ -8,7 +8,7 @@ import styles from "./SectionLink.module.css";
 interface SectionLinkBaseProps {
   href: string;
   children: ReactNode;
-  icon?: "arrow" | "arrowUp" | "external";
+  icon?: "arrow" | "arrowLeft" | "arrowUp" | "external";
   size?: "body" | "caption";
   className?: string;
   ariaLabel?: string;
@@ -35,6 +35,7 @@ export default function SectionLink(props: SectionLinkProps) {
     ariaLabel ??
     (external && typeof children === "string" ? `${children} (${opensInNewTabLabel})` : undefined);
   const linkClass = cn(styles.link, size === "caption" && styles.caption, className);
+  const arrowClass = cn(styles.arrow, icon === "arrowLeft" && styles.arrowLeft);
   const content = (
     <>
       <span className={styles.label}>
@@ -57,8 +58,10 @@ export default function SectionLink(props: SectionLinkProps) {
             d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
           />
         </svg>
+      ) : icon === "arrowLeft" ? (
+        <ArrowLeft className={arrowClass} aria-hidden="true" focusable="false" />
       ) : (
-        <ArrowRight className={styles.arrow} aria-hidden="true" focusable="false" />
+        <ArrowRight className={arrowClass} aria-hidden="true" focusable="false" />
       )}
     </>
   );

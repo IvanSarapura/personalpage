@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import { getPost, getPosts } from "@/data/posts";
 import { hasLocale, localePath, LOCALES, type Locale } from "@/data/locale";
 import { getUi } from "@/data/ui";
-import { buttonVariants } from "@/components/ui/button";
+import styles from "./PostPage.module.css";
 
 type PostPageProps = PageProps<"/[lang]/blog/[slug]">;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   const { lang, slug } = await params;
   if (!hasLocale(lang)) return {};
 
-  const post = getPost(slug);
+  const post = getPost(slug, lang);
   if (!post) return {};
 
   return {
@@ -30,9 +30,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     alternates: {
       canonical: localePath(lang, `/blog/${post.slug}`),
       languages: {
-        en: `/blog/${post.slug}`,
-        es: `/es/blog/${post.slug}`,
-        "x-default": `/blog/${post.slug}`,
+        en: localePath("en", `/blog/${post.slug}`),
+        es: localePath("es", `/blog/${post.slug}`),
+        "x-default": localePath("en", `/blog/${post.slug}`),
       },
     },
     openGraph: {
@@ -43,12 +43,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     },
   };
 }
-
-const linkClass = buttonVariants({
-  variant: "link",
-  size: "sm",
-  className: "px-0 py-0 text-[length:var(--body)]",
-});
 
 function formatDate(iso: string, locale: Locale): string {
   return new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
@@ -63,31 +57,32 @@ export default async function PostPage({ params }: PostPageProps) {
   const { lang, slug } = await params;
   if (!hasLocale(lang)) notFound();
 
-  const post = getPost(slug);
+  const post = getPost(slug, lang);
   if (!post) notFound();
 
   const ui = getUi(lang).blog;
-  const { default: PostContent } = await import(`@/content/posts/${slug}.mdx`);
+  const { default: PostContent } = await import(`@/content/posts/${post.contentFile}.mdx`);
 
   return (
     <main id="main-content" tabIndex={-1}>
       <Section variant="surface" paddingY="lg" ariaLabel={post.title}>
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
-            <Link href={localePath(lang, "/blog")} className={linkClass}>
+            <SectionLink
+              href={localePath(lang, "/blog")}
+              icon="arrowLeft"
+              ariaLabel={ui.backToBlog}
+            >
               {ui.backToBlog}
-            </Link>
+            </SectionLink>
 
-            {/* El contenido del post es monolingüe: se declara su idioma real
-                para lectores de pantalla cuando difiere del chrome. */}
-            <article lang={post.lang}>
-              <p className="mt-[var(--content-gap)] mb-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text-secondary)]">
+            {/* El contenido se resuelve según la locale activa de la ruta. */}
+            <article lang={lang}>
+              <p className="mt-[var(--space-2)] mb-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text-secondary)]">
                 {formatDate(post.date, lang)} · {post.readingMinutes} {ui.readingTime}
               </p>
 
-              <h1 className="mb-[var(--content-gap)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--section-text)]">
-                {post.title}
-              </h1>
+              <h1 className={styles.articleTitle}>{post.title}</h1>
 
               <PostContent />
             </article>

@@ -5,16 +5,16 @@ import type { MDXComponents } from "mdx/types";
  *  sin estilos ad-hoc. */
 
 const bodyText =
-  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)] md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
+  "text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)] text-pretty md:text-[length:var(--body-large)] md:leading-[var(--body-large-lh)]";
 
 const components: MDXComponents = {
   h2: ({ children }) => (
-    <h2 className="mt-[var(--content-gap)] mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--section-text)]">
+    <h2 className="mt-[var(--content-gap)] mb-[var(--element-gap-sm)] text-[length:var(--heading-2)] leading-[var(--heading-2-lh)] font-semibold tracking-[var(--heading-2-tracking)] text-[var(--section-text)] text-balance">
       {children}
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-[var(--element-gap)] mb-[var(--space-2)] text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--section-text)]">
+    <h3 className="mt-[var(--element-gap)] mb-[var(--space-2)] text-[length:var(--heading-3)] leading-[var(--heading-3-lh)] font-semibold tracking-[var(--heading-3-tracking)] text-[var(--section-text)] text-balance">
       {children}
     </h3>
   ),

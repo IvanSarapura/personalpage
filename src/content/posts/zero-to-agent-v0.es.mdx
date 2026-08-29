@@ -1,0 +1,17 @@
+La restricción era publicar un agente type-safe sin escribir la interfaz a mano. Esto es lo que funcionó, lo que no y por qué cambió mi flujo para construir MVPs.
+
+## El prototipo como contrato
+
+v0 redujo el costo inicial de explorar una interfaz, pero no eliminó las decisiones de producto. Cada generación debía confrontarse con estados reales: carga, error, datos vacíos, validación y navegación por teclado.
+
+El AI SDK aportó una capa tipada para conectar la interfaz con el modelo. Esa separación permitió iterar sobre la experiencia sin acoplarla a una respuesta específica del proveedor.
+
+## Lo que resistió
+
+- Los contratos de datos explícitos evitaron que la interfaz dependiera de texto generado accidentalmente.
+- Los estados de error y carga se diseñaron junto con el camino feliz.
+- La revisión manual siguió siendo necesaria para accesibilidad y contenido.
+
+## Lo que cambió en mi flujo
+
+El prototipo dejó de ser una pantalla descartable y pasó a ser una hipótesis verificable. La velocidad importa, pero sólo cuando cada iteración conserva límites claros, estados observables y una ruta de implementación mantenible.

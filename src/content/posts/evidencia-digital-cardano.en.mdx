@@ -1,0 +1,23 @@
+My team and I won the Decentralized Governance LegalThon at the University of Buenos Aires, supported by Cardano, with a paper proposing a Cardano-based redesign of digital evidence custody. This is the short version of why the problem matters and what I learned while writing it.
+
+## Chain of custody is a protocol... on paper
+
+Every legal process depends on answering one simple question: is this the same evidence that was collected, without alteration? Today the answer is a record of forms, signatures and seals — a protocol implemented through paper and people. Every human handoff is a failure point, as invalidated custody procedures demonstrate.
+
+Our proposal is not to “put evidence on the blockchain” — a common mistake, since sensitive evidence should not be public. The idea is to record the interactions with the evidence:
+
+- Every access, transfer or examination produces a cryptographic signature anchored to Cardano.
+- The content never leaves the judicial environment; only the hash and custody metadata are published.
+- Timestamping no longer depends solely on an administrative record and becomes independently verifiable.
+
+## Translating procedural requirements into protocol rules
+
+The hardest part of the paper was not the technology, but the translation. “Signature by an authorized official” sounds straightforward until the system must decide: authorized according to which registry? Who rotates the keys? What happens if a court loses them? Every procedural requirement hides system-design decisions, and every technical decision has procedural consequences.
+
+That is why the paper includes guidelines for a draft bill: without regulatory reform, the best protocol in the world is only a demo. Technology and law have to move together — that is, literally, the thesis behind everything I build.
+
+## From paper to practice
+
+The natural next step is a pilot with low-risk case files, where the on-chain record runs in parallel with the traditional process without replacing it. That is the right pattern for judicial modernization: first demonstrate equivalence, then propose substitution.
+
+If you work on the digitization of justice, digital evidence or DLT governance, write to me — the paper and its guidelines are meant to be discussed.

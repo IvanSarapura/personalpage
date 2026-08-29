@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { POSTS, getPosts, getPost } from "@/data/posts";
+import { POSTS, getMissingTranslations, getPosts, getPost } from "@/data/posts";
 import { LOCALES } from "@/data/locale";
 
 const CONTENT_DIR = join(process.cwd(), "src", "content", "posts");
@@ -12,35 +12,51 @@ describe("POSTS (registro de la Bitácora)", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 
-  it("cada entrada del registro tiene su archivo MDX en src/content/posts", () => {
+  it("cada traducción tiene su archivo MDX en src/content/posts", () => {
     for (const post of POSTS) {
-      expect(existsSync(join(CONTENT_DIR, `${post.slug}.mdx`)), `${post.slug}.mdx`).toBe(true);
+      for (const locale of LOCALES) {
+        const contentFile = post.translations[locale].contentFile;
+        expect(existsSync(join(CONTENT_DIR, `${contentFile}.mdx`)), `${contentFile}.mdx`).toBe(
+          true
+        );
+      }
     }
   });
 
   it("cada post tiene metadata completa y válida", () => {
     for (const post of POSTS) {
-      expect(post.title).toBeTruthy();
-      expect(post.description).toBeTruthy();
       expect(post.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(Number.isNaN(Date.parse(post.date))).toBe(false);
-      expect(LOCALES).toContain(post.lang);
-      expect(post.tags.length).toBeGreaterThan(0);
       expect(post.readingMinutes).toBeGreaterThan(0);
+      for (const locale of LOCALES) {
+        const translation = post.translations[locale];
+        expect(translation.title).toBeTruthy();
+        expect(translation.description).toBeTruthy();
+        expect(translation.tags.length).toBeGreaterThan(0);
+        expect(translation.contentFile).toBeTruthy();
+      }
     }
   });
 
+  it("tiene traducciones completas para todos los locales soportados", () => {
+    expect(getMissingTranslations()).toEqual([]);
+  });
+
   it("getPosts ordena por fecha descendente sin mutar el registro", () => {
-    const posts = getPosts();
-    const dates = posts.map((p) => p.date);
+    const posts = getPosts("en");
+    const dates = posts.map((post) => post.date);
     expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
     expect(posts).not.toBe(POSTS);
+    expect(posts.every((post) => post.lang === "en")).toBe(true);
   });
 
   it("getPost resuelve slugs válidos y rechaza inválidos", () => {
     const first = POSTS[0];
     expect(first).toBeDefined();
-    expect(getPost(first!.slug)).toBe(first);
+    expect(getPost(first!.slug, "es")?.lang).toBe("es");
+    expect(getPost(first!.slug, "es")?.title).toBe(
+      "Evaluar evidencia con oráculos LLM en GenLayer"
+    );
     expect(getPost("no-existe")).toBeUndefined();
   });
 

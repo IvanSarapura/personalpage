@@ -31,6 +31,10 @@
   transition: transform var(--duration-base) var(--ease-out);
 }
 
+.arrowLeft {
+  order: -1;
+}
+
 /* Contenedor de la flecha: 20x20, mismo footprint que los iconos lucide
    (.arrow). El path de la flecha se escala a 15x15 manteniéndose centrado. */
 .arrowUp {
@@ -62,6 +66,10 @@
     transform: translateX(4px);
   }
 
+  .link:hover .arrowLeft {
+    transform: translateX(-4px);
+  }
+
   .link:hover .arrowUp {
     transform: translateY(-4px);
   }
@@ -69,8 +77,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .arrow,
+  .arrowLeft,
   .arrowUp,
   .link:hover .arrow,
+  .link:hover .arrowLeft,
   .link:hover .arrowUp {
     transition: none;
     transform: none;
