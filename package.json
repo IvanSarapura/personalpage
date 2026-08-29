@@ -20,7 +20,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ci": "playwright test --fail-on-flaky-tests",
-    "test:e2e:ci:snapshot": "playwright test --update-snapshots --fail-on-flaky-tests",
+    "test:e2e:ci:snapshot": "npm run test:e2e:ci",
     "test:e2e:update": "playwright test --update-snapshots",
     "prepare": "husky"
   },

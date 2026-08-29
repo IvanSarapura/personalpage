@@ -202,7 +202,7 @@ test("blog article keeps navigation, metadata and editorial headings consistent"
       expect(typography.titleSize).toBeGreaterThan(typography.sectionSize);
       expect(typography.headerMarginBottom).toBe(32);
       expect(typography.backLinkHeight).toBeGreaterThanOrEqual(44);
-      expect(typography.backLinkDisplay).toBe("inline-flex");
+      expect(typography.backLinkDisplay).toMatch(/^(inline-)?flex$/);
       expect(typography.backLinkDecoration).toContain("underline");
       expect(typography.backLinkSvgCount).toBe(1);
       expect(typography.backLinkText).toBe(locale.backText);

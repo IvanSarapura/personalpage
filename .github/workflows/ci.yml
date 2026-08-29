@@ -52,7 +52,7 @@ jobs:
         run: npx playwright install --with-deps chromium firefox webkit
 
       - name: End-to-end, accessibility and visual tests
-        run: npm run test:e2e:ci:snapshot
+        run: npm run test:e2e:ci
 
       - name: Upload Playwright failure artifacts
         if: failure() || cancelled()

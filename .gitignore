@@ -50,7 +50,6 @@ next-env.d.ts
 # Local implementation note retained outside the published documentation set.
 docs/implementation/theme-navigation-fouc-foundation.md
 
-# Playwright snapshots and reports
-/e2e/__snapshots__/
+# Playwright reports and test artifacts
 /playwright-report/
 /test-results/
