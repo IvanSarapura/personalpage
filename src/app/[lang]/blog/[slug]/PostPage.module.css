@@ -1,3 +1,23 @@
+.articleHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--content-gap);
+  margin-bottom: var(--space-6);
+}
+
+.articleMeta {
+  min-width: 0;
+  margin: 0;
+  color: var(--section-text-secondary);
+  font-size: var(--body);
+  font-weight: var(--type-weight-medium);
+  line-height: var(--body-lh);
+  letter-spacing: var(--letter-spacing-wide);
+  text-align: right;
+}
+
 .articleTitle {
   max-inline-size: var(--content-max-wide);
   margin-bottom: var(--element-gap);

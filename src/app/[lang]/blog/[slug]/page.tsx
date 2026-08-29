@@ -4,7 +4,7 @@ import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
 import SectionLink from "@/components/SectionLink/SectionLink";
 import { getPost, getPosts } from "@/data/posts";
-import { hasLocale, localePath, LOCALES, type Locale } from "@/data/locale";
+import { hasLocale, localePath, LOCALES } from "@/data/locale";
 import { getUi } from "@/data/ui";
 import styles from "./PostPage.module.css";
 
@@ -44,15 +44,6 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-function formatDate(iso: string, locale: Locale): string {
-  return new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(`${iso}T00:00:00Z`));
-}
-
 export default async function PostPage({ params }: PostPageProps) {
   const { lang, slug } = await params;
   if (!hasLocale(lang)) notFound();
@@ -68,19 +59,21 @@ export default async function PostPage({ params }: PostPageProps) {
       <Section variant="surface" paddingY="lg" ariaLabel={post.title}>
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
-            <SectionLink
-              href={localePath(lang, "/blog")}
-              icon="arrowLeft"
-              ariaLabel={ui.backToBlog}
-            >
-              {ui.backToBlog}
-            </SectionLink>
-
             {/* El contenido se resuelve según la locale activa de la ruta. */}
             <article lang={lang}>
-              <p className="mt-[var(--space-2)] mb-[var(--space-2)] text-[length:var(--caption)] leading-[var(--caption-lh)] font-medium tracking-[var(--letter-spacing-wide)] text-[var(--section-text-secondary)]">
-                {formatDate(post.date, lang)} · {post.readingMinutes} {ui.readingTime}
-              </p>
+              <header className={styles.articleHeader}>
+                <SectionLink
+                  href={localePath(lang, "/blog")}
+                  icon="arrowLeft"
+                  ariaLabel={ui.backToBlog}
+                >
+                  {ui.backToBlog}
+                </SectionLink>
+
+                <p className={styles.articleMeta}>
+                  {post.readingMinutes} {ui.readingTime}
+                </p>
+              </header>
 
               <h1 className={styles.articleTitle}>{post.title}</h1>
 

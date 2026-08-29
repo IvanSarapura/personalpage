@@ -159,6 +159,7 @@ test("blog article keeps navigation and editorial headings consistent", async ({
         const sectionHeading = article.querySelector("h2");
         const backLink = document.querySelector("main > section a");
         const backLinkLabel = backLink?.querySelector("span");
+        const articleMeta = article.querySelector("header p");
         const titleStyle = title ? getComputedStyle(title) : null;
         const sectionStyle = sectionHeading ? getComputedStyle(sectionHeading) : null;
         const backLinkStyle = backLink ? getComputedStyle(backLink) : null;
@@ -174,6 +175,8 @@ test("blog article keeps navigation and editorial headings consistent", async ({
           backLinkDecoration: backLinkLabelStyle?.textDecorationLine,
           backLinkSvgCount: backLink?.querySelectorAll("svg").length ?? 0,
           backLinkText: backLink?.textContent?.trim() ?? "",
+          backLinkRight: backLink?.getBoundingClientRect().right ?? 0,
+          articleMetaLeft: articleMeta?.getBoundingClientRect().left ?? 0,
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         };
       });
@@ -186,6 +189,9 @@ test("blog article keeps navigation and editorial headings consistent", async ({
     expect(typography.backLinkDecoration).toContain("underline");
     expect(typography.backLinkSvgCount).toBe(1);
     expect(typography.backLinkText).toBe("All posts");
+    if (viewport.width >= 390) {
+      expect(typography.articleMetaLeft).toBeGreaterThanOrEqual(typography.backLinkRight);
+    }
     expect(typography.overflow).toBeLessThanOrEqual(1);
   }
 });
