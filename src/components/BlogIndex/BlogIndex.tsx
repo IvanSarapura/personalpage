@@ -105,8 +105,6 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
                 <span>
                   {featuredPost.readingMinutes} {ui.readingTime}
                 </span>
-                <span aria-hidden="true">·</span>
-                <span>{ui.langBadge[featuredPost.lang]}</span>
               </p>
 
               <h3 id={`featured-title-${featuredPost.slug}`} className={styles.featuredTitle}>
@@ -156,7 +154,6 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
                     <span>
                       {post.readingMinutes} {ui.readingTime}
                     </span>
-                    <span>{ui.langBadge[post.lang]}</span>
                   </p>
 
                   <div className={styles.archiveCopy}>

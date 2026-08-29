@@ -19,6 +19,8 @@ describe("BlogIndex", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "Personal Blog" })).toBeVisible();
     expect(screen.getByRole("heading", { level: 2, name: "Featured note" })).toBeVisible();
+    expect(screen.queryByText("In English")).not.toBeInTheDocument();
+    expect(screen.queryByText("In Spanish")).not.toBeInTheDocument();
     expect(archive).not.toBeNull();
     expect(archive?.querySelectorAll("article")).toHaveLength(posts.length - 1);
 
@@ -38,6 +40,8 @@ describe("BlogIndex", () => {
     const archive = container.querySelector("ol");
 
     expect(screen.getByRole("heading", { level: 1, name: "Blog Personal" })).toBeVisible();
+    expect(screen.queryByText("En inglés")).not.toBeInTheDocument();
+    expect(screen.queryByText("En español")).not.toBeInTheDocument();
     expect(container.querySelector("article")).toHaveAttribute("lang", "es");
     expect(screen.getByRole("heading", { level: 3, name: /Cruzar bases públicas/ })).toBeVisible();
 

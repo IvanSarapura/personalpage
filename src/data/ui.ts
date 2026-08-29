@@ -135,7 +135,6 @@ export interface UiDict {
     featuredImageAlt: string;
     readingTime: string;
     backToBlog: string;
-    langBadge: Record<Locale, string>;
   };
   notFound: {
     title: string;
@@ -294,7 +293,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Annotated legal documents, an evidence envelope and software code arranged on a blue work surface",
       readingTime: "min read",
       backToBlog: "← All posts",
-      langBadge: { en: "In English", es: "In Spanish" },
     },
     notFound: {
       title: "Page not found",
@@ -453,7 +451,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Documentos legales anotados, un sobre de evidencia y código de software sobre una mesa azul",
       readingTime: "min de lectura",
       backToBlog: "← Todos los posts",
-      langBadge: { en: "En inglés", es: "En español" },
     },
     notFound: {
       title: "Página no encontrada",
