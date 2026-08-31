@@ -131,6 +131,10 @@ export interface UiDict {
     latestPublication: string;
     featured: string;
     archive: string;
+    sortRecent: string;
+    sortOldest: string;
+    sortRecentLabel: string;
+    sortOldestLabel: string;
     tagsLabel: string;
     featuredImageAlt: string;
     readingTime: string;
@@ -288,6 +292,10 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       latestPublication: "Latest post",
       featured: "Featured note",
       archive: "Index",
+      sortRecent: "Most recent",
+      sortOldest: "Oldest",
+      sortRecentLabel: "Sorted by most recent",
+      sortOldestLabel: "Sorted by oldest",
       tagsLabel: "Topics",
       featuredImageAlt:
         "Annotated legal documents, an evidence envelope and software code arranged on a blue work surface",
@@ -446,6 +454,10 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       latestPublication: "Última publicación",
       featured: "Nota destacada",
       archive: "Índice",
+      sortRecent: "Más recientes",
+      sortOldest: "Más antiguas",
+      sortRecentLabel: "Ordenadas por más recientes",
+      sortOldestLabel: "Ordenadas por más antiguas",
       tagsLabel: "Temas",
       featuredImageAlt:
         "Documentos legales anotados, un sobre de evidencia y código de software sobre una mesa azul",

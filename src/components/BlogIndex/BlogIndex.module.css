@@ -180,11 +180,45 @@
   letter-spacing: var(--heading-2-tracking);
 }
 
-.archiveHeading > span {
-  font-size: var(--caption);
-  font-weight: var(--type-weight-semibold);
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wider);
+.sortToggle {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--section-text);
+  font-size: var(--body);
+  font-weight: var(--type-weight-medium);
+  line-height: var(--body-lh);
+  letter-spacing: var(--letter-spacing-wide);
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.sortToggle:focus-visible {
+  outline: 0.125rem solid var(--section-focus-ring);
+  outline-offset: 0.1875rem;
+  border-radius: var(--radius-sm);
+}
+
+.sortToggle .sortArrow {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  flex: 0 0 auto;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.sortToggle[data-order="oldest"] .sortArrow {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sortToggle,
+  .sortToggle .sortArrow {
+    transition: none;
+  }
 }
 
 .archiveList {

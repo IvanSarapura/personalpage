@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import BlogIndex from "@/components/BlogIndex/BlogIndex";
 import { getPosts } from "@/data/posts";
@@ -35,9 +35,15 @@ describe("BlogIndex", () => {
       "data-surface",
       "brand"
     );
-    expect(screen.getByRole("region", { name: "Index" })).toHaveAttribute(
-      "data-surface",
-      "elevated"
+    const indexRegion = screen.getByRole("region", { name: "Index" });
+    expect(indexRegion).toHaveAttribute("data-surface", "elevated");
+    const sortToggle = within(indexRegion).getByRole("button", {
+      name: "Sorted by most recent",
+    });
+    expect(sortToggle).toHaveTextContent("Most recent");
+    fireEvent.click(sortToggle);
+    expect(within(indexRegion).getByRole("button", { name: "Sorted by oldest" })).toHaveTextContent(
+      "Oldest"
     );
     expect(screen.queryByText("In English")).not.toBeInTheDocument();
     expect(screen.queryByText("In Spanish")).not.toBeInTheDocument();
@@ -49,7 +55,7 @@ describe("BlogIndex", () => {
     expect(firstArchiveArticle).not.toBeNull();
     expect(firstArchiveArticle).toHaveAttribute("lang", "en");
     expect(within(firstArchiveArticle!).getByRole("heading", { level: 3 })).toHaveTextContent(
-      posts[1]!.title
+      posts.at(-1)!.title
     );
     expect(
       screen.getByRole("heading", {

@@ -1,5 +1,9 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpDown } from "lucide-react";
 import blogVisual from "@/assets/blog/legal-engineering-log.png";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
@@ -12,6 +16,8 @@ import { Badge } from "@/components/ui/badge";
 interface BlogIndexProps {
   locale: Locale;
 }
+
+type SortOrder = "recent" | "oldest";
 
 function formatDate(iso: string, locale: Locale): string {
   return new Intl.DateTimeFormat(locale === "es" ? "es-AR" : "en-US", {
@@ -39,15 +45,24 @@ function postHref(locale: Locale, post: LocalizedPost): string {
   return localePath(locale, `/blog/${post.slug}`);
 }
 
+function sortPosts(posts: readonly LocalizedPost[], order: SortOrder): LocalizedPost[] {
+  const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+  return order === "oldest" ? sorted.reverse() : sorted;
+}
+
 export default function BlogIndex({ locale }: BlogIndexProps) {
   const ui = getUi(locale).blog;
-  const posts = getPosts(locale);
+  const posts = useMemo(() => getPosts(locale), [locale]);
   const latestPost = posts[0];
   const featuredPost = posts[0];
+  const [sortOrder, setSortOrder] = useState<SortOrder>("recent");
+  const featuredSlug = featuredPost?.slug;
+  const archivePosts = useMemo(
+    () => sortPosts(posts, sortOrder).filter((post) => post.slug !== featuredSlug),
+    [posts, sortOrder, featuredSlug]
+  );
 
   if (!latestPost || !featuredPost) return null;
-
-  const archivePosts = posts.filter((post) => post.slug !== featuredPost.slug);
 
   return (
     <>
@@ -135,7 +150,16 @@ export default function BlogIndex({ locale }: BlogIndexProps) {
         <Container>
           <div className={styles.archiveHeading}>
             <h2 id="blog-archive-heading">{ui.archive}</h2>
-            <span>{String(archivePosts.length).padStart(2, "0")}</span>
+            <button
+              type="button"
+              className={styles.sortToggle}
+              data-order={sortOrder}
+              onClick={() => setSortOrder(sortOrder === "recent" ? "oldest" : "recent")}
+              aria-label={sortOrder === "recent" ? ui.sortRecentLabel : ui.sortOldestLabel}
+            >
+              <ArrowUpDown className={styles.sortArrow} aria-hidden="true" />
+              {sortOrder === "recent" ? ui.sortRecent : ui.sortOldest}
+            </button>
           </div>
 
           {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
