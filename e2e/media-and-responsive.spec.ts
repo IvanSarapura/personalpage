@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { gotoStable } from "./helpers";
+import { gotoStable, setTheme } from "./helpers";
 
 async function expectMinimumTargets(page: Page, minimum: number) {
   const controls = page.locator(
@@ -212,6 +212,42 @@ test("blog article keeps navigation, metadata and editorial headings consistent"
         expect(typography.articleMetaLeft).toBeGreaterThanOrEqual(typography.backLinkRight);
       }
       expect(typography.overflow).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test("blog articles use the navbar surface in both themes", async ({ page }) => {
+  const articlePaths = [
+    "/blog/llm-oracles-genlayer",
+    "/blog/cruzar-bases-publicas-alimentarias",
+    "/blog/evidencia-digital-cardano",
+    "/blog/zero-to-agent-v0",
+    "/es/blog/llm-oracles-genlayer",
+    "/es/blog/cruzar-bases-publicas-alimentarias",
+    "/es/blog/evidencia-digital-cardano",
+    "/es/blog/zero-to-agent-v0",
+  ];
+
+  for (const theme of ["light", "dark"] as const) {
+    for (const articlePath of articlePaths) {
+      await setTheme(page, theme);
+      await gotoStable(page, articlePath);
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await expect(page.locator("nav").first()).not.toHaveClass(/navbarScrolled/);
+
+      const surfaces = await page.evaluate(() => {
+        const articleSection = document.querySelector("main > section");
+        const navbar = document.querySelector("nav");
+
+        return {
+          article: articleSection ? getComputedStyle(articleSection).backgroundColor : null,
+          navbar: navbar ? getComputedStyle(navbar).backgroundColor : null,
+        };
+      });
+
+      expect(surfaces.article, `${articlePath} does not match the navbar surface`).toBe(
+        surfaces.navbar
+      );
     }
   }
 });
