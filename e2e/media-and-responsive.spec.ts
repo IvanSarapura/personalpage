@@ -252,6 +252,29 @@ test("blog articles use the navbar surface in both themes", async ({ page }) => 
   }
 });
 
+test("about pages use the navbar surface in both themes", async ({ page }) => {
+  for (const theme of ["light", "dark"] as const) {
+    for (const aboutPath of ["/about", "/es/about"]) {
+      await setTheme(page, theme);
+      await gotoStable(page, aboutPath);
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await expect(page.locator("nav").first()).not.toHaveClass(/navbarScrolled/);
+
+      const surfaces = await page.evaluate(() => {
+        const pageSection = document.querySelector("main > section");
+        const navbar = document.querySelector("nav");
+
+        return {
+          page: pageSection ? getComputedStyle(pageSection).backgroundColor : null,
+          navbar: navbar ? getComputedStyle(navbar).backgroundColor : null,
+        };
+      });
+
+      expect(surfaces.page, `${aboutPath} does not match the navbar surface`).toBe(surfaces.navbar);
+    }
+  }
+});
+
 test("blog archive keeps a stable grid structure across breakpoints", async ({ page }) => {
   const viewports = [
     { width: 320, height: 844 },

@@ -45,7 +45,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <Section variant="surface" paddingY="lg" ariaLabel={ui.ariaLabel}>
+      <Section variant="elevated" paddingY="lg" ariaLabel={ui.ariaLabel}>
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
             <h1 className="mb-[var(--element-gap-sm)] text-[length:var(--heading-1)] leading-[var(--heading-1-lh)] font-normal tracking-[var(--heading-1-tracking)] text-[var(--section-text)] md:mb-[var(--element-gap)] md:text-[length:var(--display-2)] md:leading-[var(--display-2-lh)] md:tracking-[var(--display-2-tracking)]">
