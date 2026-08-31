@@ -97,5 +97,8 @@ los baselines canónicos.
 Failure artifacts are written to `test-results/`; the local HTML report is written to
 `playwright-report/`. Both are ignored by Git.
 
+For the complete post-change verification checklist, including focused E2E runs, snapshot review
+and failure triage, see [the design-system documentation](docs/design-system.md#checklist-posterior-a-un-cambio).
+
 Automated reflow at 320 px complements, but does not replace, the required manual browser check at
 200% zoom and a screen-reader review.

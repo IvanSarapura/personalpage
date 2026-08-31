@@ -298,7 +298,7 @@ El comando forma parte de CI antes de los tests y del hook pre-commit. Los tests
 4. Actualiza el componente compartido antes que las instancias. Conserva semántica HTML, teclado, foco visible, targets y reduced motion.
 5. Migra todos los consumidores y elimina el nombre anterior en el mismo cambio. No mantengas alias indefinidamente.
 6. Actualiza este documento y las pruebas del componente/checker cuando cambie una API o una regla.
-7. Ejecuta `npm run lint:design`, lint, typecheck, tests, formato y build antes de integrar.
+7. Ejecuta `npm run lint:design`, lint, typecheck, tests, formato, build y `git diff --check` antes de integrar.
 
 Los cambios que alteren color, escala, API o comportamiento deben incluir una nota de migración en la descripción del PR y revisión visual en los dos temas.
 
@@ -319,6 +319,57 @@ recuperado en fallo del gate y se instalan los tres motores mediante
 `npx playwright install --with-deps chromium firefox webkit`. Ante un fallo se publican el reporte
 HTML, screenshots, vídeos y traces. La automatización de reflow a 320 px no sustituye una revisión
 manual con zoom al 200 %, lector de pantalla ni pruebas con usuarios.
+
+## Checklist posterior a un cambio
+
+Esta checklist es el contrato operativo antes de abrir o integrar un PR. Ajusta el alcance de las
+pruebas al riesgo del cambio, pero no omitas las comprobaciones que cubran el comportamiento
+modificado.
+
+1. Revisa `git diff` y confirma qué rutas, componentes, temas y estados pueden haberse visto
+   afectados. Para un cambio de diseño, verifica siempre claro y oscuro; para una interacción,
+   incluye teclado, foco, reduced motion y el estado de error o carga que corresponda.
+2. Ejecuta las validaciones estáticas y unitarias:
+
+   ```bash
+   npm run lint:design
+   npm run lint
+   npm run typecheck
+   npm run test
+   npm run format:check
+   git diff --check
+   ```
+
+3. Construye producción antes de validar en navegador:
+
+   ```bash
+   npm run build
+   ```
+
+4. Para un cambio localizado, ejecuta la prueba E2E o visual más específica posible. Por ejemplo,
+   para una baseline visual concreta:
+
+   ```bash
+   npx playwright test e2e/visual.spec.ts --project=chromium --workers=1 --grep "<título del test>"
+   ```
+
+   Este comando compara contra la baseline existente; no debe incluir `--update-snapshots`. Para
+   cambios transversales, ejecuta `npm run test:e2e:ci` antes de integrar. No se acepta una suite
+   con fallos o tests flaky; los skips sólo son admisibles si están documentados como intencionales.
+
+5. Si el cambio visual es intencional, en Ubuntu 24.04 regenera primero toda la matriz canónica con
+   `npm run test:e2e:update`. Revisa los PNG modificados y ejecuta después el comando de comparación
+   del paso anterior sin `--update-snapshots`. No aumentes umbrales, uses máscaras ni actualices
+   snapshots desde CI para ocultar una diferencia sin explicar.
+6. Revisa que el diff contenga sólo archivos y píxeles esperados. Una modificación de interfaz no
+   debe alterar contenido, tokens, helpers E2E o snapshots ajenos a su alcance sin una justificación
+   explícita. Adjunta la evidencia visual relevante al PR cuando el cambio afecte diseño.
+7. Si Playwright no puede iniciar porque el puerto está ocupado, no habilites la reutilización del
+   servidor. Identifica el proceso y detenlo sólo si pertenece a este repositorio, o usa un puerto
+   alternativo de forma explícita, por ejemplo `PLAYWRIGHT_PORT=3111`.
+8. Ante un fallo, conserva y revisa `playwright-report/` y `test-results/`: compara expected/actual/
+   diff, y abre el trace con `npx playwright show-trace <ruta-al-trace.zip>`. Corrige la causa antes
+   de volver a generar una baseline.
 
 ### Handoff de seguridad de dependencias (2026-08-24)
 
