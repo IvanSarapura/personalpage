@@ -29,3 +29,8 @@
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
+
+/* The food-database article uses the same elevated dark surface as the navbar. */
+:global(html.dark) .foodArticle {
+  --section-surface: var(--surface-ink-elevated);
+}

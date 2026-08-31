@@ -56,7 +56,12 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <Section variant="surface" paddingY="lg" ariaLabel={post.title}>
+      <Section
+        variant="surface"
+        paddingY="lg"
+        ariaLabel={post.title}
+        className={slug === "cruzar-bases-publicas-alimentarias" ? styles.foodArticle : undefined}
+      >
         <Container>
           <div className="mx-auto max-w-[var(--content-max-text)]">
             {/* El contenido se resuelve según la locale activa de la ruta. */}
