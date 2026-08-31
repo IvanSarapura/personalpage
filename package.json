@@ -20,8 +20,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ci": "playwright test --fail-on-flaky-tests",
-    "test:e2e:ci:snapshot": "npm run test:e2e:ci",
-    "test:e2e:update": "playwright test --update-snapshots",
+    "test:e2e:update": "npm run build && playwright test e2e/visual.spec.ts --project=chromium --workers=1 --update-snapshots=all",
     "prepare": "husky"
   },
   "dependencies": {
@@ -47,7 +46,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@next/bundle-analyzer": "16.2.9",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",

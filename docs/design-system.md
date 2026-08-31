@@ -305,14 +305,16 @@ Los cambios que alteren color, escala, API o comportamiento deben incluir una no
 ## Verificación en navegador
 
 Playwright y axe complementan el checker estático y Vitest sobre un build de producción servido con
-`next start` en un puerto dedicado:
+`next start` en un puerto dedicado. Playwright posee ese proceso y nunca reutiliza un servidor
+externo:
 
 - después de `npm run build`, `npm run test:e2e` valida rutas representativas en inglés y español, ambos temas, navegación por teclado, foco, menú modal, filtros, formulario, preferencias de medios, reflow y targets táctiles;
 - axe se ejecuta con las etiquetas WCAG 2.0/2.1/2.2 nivel A y AA. La política es cero violaciones en las rutas cubiertas; no hay reglas excluidas;
-- Chromium ejecuta la matriz completa; Firefox y WebKit cubren axe, interacción, medios y responsive. Los snapshots se generan sólo en Linux/Chromium, con fuentes/imágenes cargadas y estabilización visual acotada a las capturas. La estrategia combina siete rutas en viewports de 390×844 y 1440×900, estados interactivos críticos y regiones focales below-fold de home, footer, listado de blog y artículo. Así se conserva contexto de página y detalle útil sin depender de capturas `fullPage` gigantes y frágiles;
-- `npm run test:e2e:update` actualiza los baselines únicamente después de revisar que el cambio visual sea intencional.
+- Chromium ejecuta la matriz completa; Firefox y WebKit cubren axe, interacción, medios y responsive. Los snapshots canónicos se generan sólo en Ubuntu 24.04/Chromium, con fuentes/imágenes cargadas y estabilización visual acotada a las capturas. La estrategia combina ocho rutas en viewports de 390×844 y 1440×900, estados interactivos críticos y regiones focales below-fold de home, footer, listado de blog y artículo. Así se conserva contexto de página y detalle útil sin depender de capturas `fullPage` gigantes y frágiles;
+- `npm run test:e2e:update` crea primero el build de producción, inicia su propio `next start` y actualiza en serie los 46 baselines de Chromium. Sólo debe ejecutarse cuando el cambio visual sea intencional y todas las imágenes resultantes puedan revisarse antes de integrarlas.
+- La actualización canónica debe ejecutarse en Ubuntu 24.04. En macOS o Windows, la plantilla de snapshots genera otra carpeta de plataforma y no sustituye las referencias Linux/Chromium versionadas.
 
-En CI el build ocurre una sola vez antes de E2E, `--fail-on-flaky-tests` convierte cualquier retry
+En CI sobre Ubuntu 24.04 el build ocurre una sola vez antes de E2E, `--fail-on-flaky-tests` convierte cualquier retry
 recuperado en fallo del gate y se instalan los tres motores mediante
 `npx playwright install --with-deps chromium firefox webkit`. Ante un fallo se publican el reporte
 HTML, screenshots, vídeos y traces. La automatización de reflow a 320 px no sustituye una revisión

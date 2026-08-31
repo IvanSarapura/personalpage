@@ -50,7 +50,6 @@ export default defineConfig({
   webServer: {
     command: `npm run start -- --hostname localhost --port ${port}`,
     url: baseURL,
-    reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === "1",
     timeout: 120_000,
     stdout: "pipe",
     stderr: "pipe",

@@ -63,8 +63,9 @@ npm run test:e2e
 
 ### End-to-end, accessibility and visual tests
 
-The Playwright suite starts a controlled `next start` production server on port 3100. Build first,
-then run the suite. Install the evergreen browser engines once after `npm install`:
+The Playwright suite owns and starts a controlled `next start` production server on port 3100; it
+will not reuse a server started outside the test run. Build first, then run the suite. Install the
+evergreen browser engines once after `npm install`:
 
 ```bash
 npx playwright install chromium firefox webkit
@@ -76,16 +77,22 @@ Chromium runs the complete suite, including the visual matrix. Firefox and WebKi
 interactions, media preferences, responsive reflow and target checks. The suite covers English and
 Spanish routes, list/detail pages, both themes, keyboard/menu/filter/form interactions, forced
 colors, reduced motion, 320 px reflow and pointer targets. Axe enforces WCAG 2.2 AA without rule
-exclusions. Versioned Linux/Chromium snapshots cover seven routes at 390×844 and 1440×900,
+exclusions. Versioned Ubuntu 24.04/Chromium snapshots cover eight routes at 390×844 and 1440×900,
 critical interactive states, and focused below-fold desktop regions. The viewport matrix catches
 page-level regressions without fragile giant full-page captures; focused screenshots give denser
 coverage to representative home, footer, blog-list and article content.
 
-After an intentional visual change, review the generated images before updating the baseline:
+After an intentional visual change, regenerate the complete Chromium baseline in production. The
+update command builds the application, owns its `next start` server and serially replaces all 46
+Ubuntu 24.04/Chromium snapshots; review every generated image before committing the baseline:
 
 ```bash
 npm run test:e2e:update
 ```
+
+Ejecuta este comando en Ubuntu 24.04, el entorno canónico de snapshots Linux/Chromium. En
+macOS o Windows Playwright escribe referencias bajo otra carpeta de plataforma y no reemplaza
+los baselines canónicos.
 
 Failure artifacts are written to `test-results/`; the local HTML report is written to
 `playwright-report/`. Both are ignored by Git.
