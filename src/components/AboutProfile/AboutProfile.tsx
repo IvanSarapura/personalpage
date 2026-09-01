@@ -50,7 +50,7 @@ export default function AboutProfile({ profile }: AboutProfileProps) {
         ariaLabelledBy="about-method-title"
       >
         <Container>
-          <div className={styles.sectionFrame}>
+          <div className={`${styles.sectionFrame} ${styles.sectionFrameWithDivider}`}>
             <div className={`${styles.sectionContent} ${styles.principlesSection}`}>
               <div className={styles.sectionIntro}>
                 <h2 id="about-method-title">{profile.principles.heading}</h2>
@@ -75,7 +75,7 @@ export default function AboutProfile({ profile }: AboutProfileProps) {
       </Section>
 
       <Section
-        variant="elevated"
+        variant="brand"
         paddingY="none"
         id={ABOUT_SECTION_IDS.formation}
         ariaLabelledBy="about-formation-title"

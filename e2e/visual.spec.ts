@@ -124,6 +124,7 @@ const focalRegions = [
   { name: "about-formation", path: "/about", target: "#about-formation" },
   { name: "about-stack", path: "/about", target: "#about-stack" },
   { name: "blog-featured", path: "/blog", target: "main article" },
+  { name: "blog-index", path: "/blog", target: "main section:last-of-type ol" },
   {
     name: "blog-detail-content",
     path: "/blog/llm-oracles-genlayer",

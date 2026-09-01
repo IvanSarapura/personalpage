@@ -157,7 +157,9 @@ test("About index is reserved for the desktop layout", async ({ page }) => {
   await expect(index).toHaveCSS("position", "static");
 });
 
-test("About uses four independent containers with aligned section dividers", async ({ page }) => {
+test("About uses four independent containers with the requested section divider", async ({
+  page,
+}) => {
   for (const viewport of [
     { width: 320, height: 800 },
     { width: 1440, height: 900 },
@@ -186,11 +188,13 @@ test("About uses four independent containers with aligned section dividers", asy
     expect(structure.map(({ containerTag }) => containerTag)).toEqual(["DIV", "DIV", "DIV", "DIV"]);
     expect(new Set(structure.map(({ frameLeft }) => frameLeft)).size).toBe(1);
     expect(new Set(structure.map(({ frameRight }) => frameRight)).size).toBe(1);
-    const dividerWidths = structure
-      .slice(1)
-      .map(({ borderBlockStartWidth }) => borderBlockStartWidth);
-    expect(new Set(dividerWidths).size).toBe(1);
-    expect(Number.parseFloat(dividerWidths[0] ?? "0")).toBeGreaterThan(0);
+    const dividerWidths = structure.map(({ borderBlockStartWidth }) =>
+      Number.parseFloat(borderBlockStartWidth ?? "0")
+    );
+    expect(dividerWidths[0]).toBe(0);
+    expect(dividerWidths[1]).toBeGreaterThan(0);
+    expect(dividerWidths[2]).toBe(0);
+    expect(dividerWidths[3]).toBe(0);
   }
 });
 

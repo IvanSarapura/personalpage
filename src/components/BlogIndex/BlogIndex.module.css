@@ -224,12 +224,12 @@
 .archiveList {
   margin: 0;
   padding: 0;
-  border-top: var(--border-width-thin) solid var(--section-border-decorative);
+  border-top: var(--border-width-thin) solid var(--section-border-interactive);
   list-style: none;
 }
 
 .archiveItem {
-  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
+  border-bottom: var(--border-width-thin) solid var(--section-border-interactive);
 }
 
 .archiveArticle {

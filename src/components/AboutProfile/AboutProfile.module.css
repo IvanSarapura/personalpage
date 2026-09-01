@@ -114,6 +114,9 @@
 .sectionFrame {
   display: grid;
   padding-block: var(--space-6);
+}
+
+.sectionFrameWithDivider {
   border-block-start: var(--border-width-thin) solid var(--section-border-interactive);
 }
 

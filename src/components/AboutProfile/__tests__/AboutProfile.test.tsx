@@ -11,6 +11,9 @@ describe("AboutProfile", () => {
 
     const topLevelSections = container.querySelectorAll(":scope > section");
     expect(topLevelSections).toHaveLength(4);
+    expect(Array.from(topLevelSections, (section) => section.getAttribute("data-surface"))).toEqual(
+      ["elevated", "elevated", "brand", "elevated"]
+    );
     for (const section of topLevelSections) {
       expect(section.children).toHaveLength(1);
       expect(section.firstElementChild?.tagName).toBe("DIV");
