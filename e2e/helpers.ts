@@ -2,6 +2,12 @@ import { expect, type Locator, type Page, type Route } from "@playwright/test";
 
 export type Theme = "light" | "dark";
 const baseURL = `http://localhost:${process.env.PLAYWRIGHT_PORT ?? 3100}`;
+const stablePageAssetTimeoutMs = 10_000;
+
+interface StablePageOptions {
+  /** Wait for visible images as well as fonts (needed before screenshots). */
+  waitForImages?: boolean;
+}
 
 export async function setTheme(page: Page, theme: Theme) {
   await page.addInitScript((selectedTheme) => {
@@ -9,23 +15,76 @@ export async function setTheme(page: Page, theme: Theme) {
   }, theme);
 }
 
-export async function waitForStablePage(page: Page) {
+export async function waitForStablePage(page: Page, options: StablePageOptions = {}) {
   await expect(page.locator("main")).toBeVisible();
   // The fullscreen menu is client-only. Its portal is a stable signal that
   // React hydration completed before a test clicks interactive controls.
   await page.locator("#fullscreen-menu-dialog").waitFor({ state: "attached" });
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    await Promise.all(
-      Array.from(document.images, (image) => {
+  await page.evaluate(
+    async ({ timeoutMs, waitForImages }) => {
+      const relevantImages = Array.from(document.images).filter((image) => {
+        if (!waitForImages) return false;
+        const bounds = image.getBoundingClientRect();
+        return bounds.width > 0 && bounds.height > 0;
+      });
+
+      const waitForImage = (image: HTMLImageElement) => {
         if (image.complete) return Promise.resolve();
+
         return new Promise<void>((resolve) => {
-          image.addEventListener("load", () => resolve(), { once: true });
-          image.addEventListener("error", () => resolve(), { once: true });
+          let settled = false;
+          const settle = () => {
+            if (settled) return;
+            settled = true;
+            image.removeEventListener("load", settle);
+            image.removeEventListener("error", settle);
+            resolve();
+          };
+
+          image.addEventListener("load", settle, { once: true });
+          image.addEventListener("error", settle, { once: true });
+
+          // The resource can complete between the initial check and listener
+          // registration. Re-checking closes that race window in WebKit.
+          if (image.complete) settle();
         });
-      })
-    );
-  });
+      };
+
+      const pendingImageDetails = () =>
+        relevantImages
+          .filter((image) => !image.complete)
+          .map((image) => ({
+            src: image.currentSrc || image.src,
+            complete: image.complete,
+            naturalWidth: image.naturalWidth,
+            naturalHeight: image.naturalHeight,
+          }));
+
+      let timeoutId: number | undefined;
+      const timeout = new Promise<never>((_, reject) => {
+        timeoutId = window.setTimeout(() => {
+          reject(
+            new Error(
+              `Timed out waiting for page assets (fontStatus=${document.fonts.status}, pendingImages=${JSON.stringify(pendingImageDetails())})`
+            )
+          );
+        }, timeoutMs);
+      });
+
+      try {
+        await Promise.race([
+          Promise.all([
+            document.fonts.ready,
+            Promise.all(relevantImages.map((image) => waitForImage(image))),
+          ]),
+          timeout,
+        ]);
+      } finally {
+        if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      }
+    },
+    { timeoutMs: stablePageAssetTimeoutMs, waitForImages: options.waitForImages ?? false }
+  );
 }
 
 /**
@@ -52,7 +111,7 @@ export async function waitForUiAnimations(page: Page, scope?: Locator) {
 }
 
 export async function prepareVisualPage(page: Page) {
-  await waitForStablePage(page);
+  await waitForStablePage(page, { waitForImages: true });
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
