@@ -1,10 +1,6 @@
-.profile {
-  color: var(--section-text);
-}
-
 .hero {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-6);
   padding-block: var(--space-6);
 }
 
@@ -38,10 +34,6 @@
   text-wrap: pretty;
 }
 
-.contentSection {
-  border-block-start: var(--border-width-thin) solid var(--section-border-interactive);
-}
-
 .sectionIntro {
   display: grid;
   gap: var(--space-3);
@@ -72,15 +64,12 @@
   list-style: none;
 }
 
-.bodyGrid {
-  display: grid;
-  gap: var(--space-7);
+.indexGrid {
+  display: none;
 }
 
 .index {
-  display: none;
-  padding-block: var(--space-5);
-  border-block: var(--border-width-thin) solid var(--section-border-interactive);
+  align-self: start;
 }
 
 .index > p {
@@ -122,18 +111,15 @@
   outline-color: var(--section-focus-ring);
 }
 
-.contentSection {
+.sectionFrame {
+  display: grid;
+  padding-block: var(--space-6);
+  border-block-start: var(--border-width-thin) solid var(--section-border-interactive);
+}
+
+.sectionContent {
   display: grid;
   gap: var(--space-6);
-  padding-block: var(--space-7);
-}
-
-.contentSection.principlesSection {
-  padding-block: var(--space-6);
-}
-
-.contentSection.formationSection {
-  padding-block: var(--space-6);
 }
 
 .principles h3,
@@ -261,9 +247,8 @@
     letter-spacing: var(--display-1-tracking);
   }
 
-  .contentSection {
+  .sectionContent {
     gap: var(--space-7);
-    padding-block: var(--space-8);
   }
 
   .principles {
@@ -304,17 +289,22 @@
     align-self: end;
   }
 
-  .bodyGrid {
+  .indexGrid,
+  .sectionFrame {
     grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
     gap: var(--space-8);
   }
 
+  .indexGrid {
+    display: grid;
+  }
+
   .index {
-    display: block;
-    align-self: start;
-    position: sticky;
-    inset-block-start: calc(var(--navbar-touch-target) + var(--space-7));
-    border-block-end: 0;
+    grid-column: 1;
+  }
+
+  .sectionContent {
+    grid-column: 2;
   }
 
   .index ul {

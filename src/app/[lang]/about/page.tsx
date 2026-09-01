@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import AboutProfile from "@/components/AboutProfile/AboutProfile";
-import Container from "@/components/Container/Container";
-import Section from "@/components/Section/Section";
 import { getAboutMetadata, getAboutProfile } from "@/data/about";
 import { hasLocale, localePath } from "@/data/locale";
 
@@ -38,11 +36,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <Section variant="elevated" paddingY="none" as="section" ariaLabelledBy="about-profile-title">
-        <Container>
-          <AboutProfile locale={lang} profile={profile} />
-        </Container>
-      </Section>
+      <AboutProfile profile={profile} />
     </main>
   );
 }

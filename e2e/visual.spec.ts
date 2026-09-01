@@ -121,6 +121,8 @@ test.describe("interactive state baselines", () => {
 const focalRegions = [
   { name: "home-research", path: "/", target: "#research" },
   { name: "home-footer", path: "/", target: "footer" },
+  { name: "about-formation", path: "/about", target: "#about-formation" },
+  { name: "about-stack", path: "/about", target: "#about-stack" },
   { name: "blog-featured", path: "/blog", target: "main article" },
   {
     name: "blog-detail-content",

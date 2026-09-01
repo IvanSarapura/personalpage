@@ -3,6 +3,7 @@ import { type Locale } from "@/data/locale";
 export const ABOUT_SECTION_IDS = {
   method: "about-method",
   formation: "about-formation",
+  stack: "about-stack",
 } as const;
 
 type AboutSectionId = (typeof ABOUT_SECTION_IDS)[keyof typeof ABOUT_SECTION_IDS];
@@ -98,8 +99,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     index: {
       label: "On this page",
       items: [
-        { id: ABOUT_SECTION_IDS.method, label: "Method" },
-        { id: ABOUT_SECTION_IDS.formation, label: "Formation" },
+        { id: ABOUT_SECTION_IDS.method, label: "Working principles" },
+        { id: ABOUT_SECTION_IDS.formation, label: "Education & practice" },
+        { id: ABOUT_SECTION_IDS.stack, label: "Operating stack" },
       ],
     },
     principles: {
@@ -173,8 +175,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     index: {
       label: "En esta página",
       items: [
-        { id: ABOUT_SECTION_IDS.method, label: "Método" },
-        { id: ABOUT_SECTION_IDS.formation, label: "Formación" },
+        { id: ABOUT_SECTION_IDS.method, label: "Principios de trabajo" },
+        { id: ABOUT_SECTION_IDS.formation, label: "Formación y práctica" },
+        { id: ABOUT_SECTION_IDS.stack, label: "Stack de trabajo" },
       ],
     },
     principles: {

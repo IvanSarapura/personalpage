@@ -153,6 +153,45 @@ test("About index is reserved for the desktop layout", async ({ page }) => {
 
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(index).toBeVisible();
+  await expect(index.getByRole("link")).toHaveCount(3);
+  await expect(index).toHaveCSS("position", "static");
+});
+
+test("About uses four independent containers with aligned section dividers", async ({ page }) => {
+  for (const viewport of [
+    { width: 320, height: 800 },
+    { width: 1440, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await gotoStable(page, "/about");
+
+    const structure = await page.locator("main > section").evaluateAll((sections) =>
+      sections.map((section) => {
+        const container = section.firstElementChild;
+        const frame = container?.firstElementChild;
+        const rect = frame?.getBoundingClientRect();
+
+        return {
+          containerChildren: section.children.length,
+          containerTag: container?.tagName ?? null,
+          frameLeft: rect?.left ?? null,
+          frameRight: rect?.right ?? null,
+          borderBlockStartWidth: frame ? getComputedStyle(frame).borderBlockStartWidth : null,
+        };
+      })
+    );
+
+    expect(structure).toHaveLength(4);
+    expect(structure.map(({ containerChildren }) => containerChildren)).toEqual([1, 1, 1, 1]);
+    expect(structure.map(({ containerTag }) => containerTag)).toEqual(["DIV", "DIV", "DIV", "DIV"]);
+    expect(new Set(structure.map(({ frameLeft }) => frameLeft)).size).toBe(1);
+    expect(new Set(structure.map(({ frameRight }) => frameRight)).size).toBe(1);
+    const dividerWidths = structure
+      .slice(1)
+      .map(({ borderBlockStartWidth }) => borderBlockStartWidth);
+    expect(new Set(dividerWidths).size).toBe(1);
+    expect(Number.parseFloat(dividerWidths[0] ?? "0")).toBeGreaterThan(0);
+  }
 });
 
 test("About working principles uses the compact vertical spacing", async ({ page }) => {
@@ -165,9 +204,11 @@ test("About working principles uses the compact vertical spacing", async ({ page
 
     const section = page.getByRole("region", { name: "Working principles" });
     const padding = await section.evaluate((element) => {
-      const style = getComputedStyle(element);
+      const frame = element.querySelector(":scope > div > div");
+      if (!frame) throw new Error("About principles frame not found");
+      const style = getComputedStyle(frame);
       const markerSizes = Array.from(
-        element.querySelectorAll(":scope > ol > li > span"),
+        element.querySelectorAll("ol > li > span"),
         (marker) => getComputedStyle(marker).fontSize
       );
       return {
@@ -184,14 +225,18 @@ test("About working principles uses the compact vertical spacing", async ({ page
       name: "Education and professional practice",
     });
     const formationPadding = await formation.evaluate((element) => {
-      const style = getComputedStyle(element);
+      const frame = element.querySelector(":scope > div > div");
+      if (!frame) throw new Error("About formation frame not found");
+      const style = getComputedStyle(frame);
       return { blockStart: style.paddingBlockStart, blockEnd: style.paddingBlockEnd };
     });
     expect(formationPadding).toEqual({ blockStart: "32px", blockEnd: "32px" });
 
     const stack = page.getByRole("region", { name: "Operating stack" });
     const stackPadding = await stack.evaluate((element) => {
-      const style = getComputedStyle(element);
+      const frame = element.querySelector(":scope > div > div");
+      if (!frame) throw new Error("About stack frame not found");
+      const style = getComputedStyle(frame);
       return {
         blockStart: style.paddingBlockStart,
         blockEnd: style.paddingBlockEnd,

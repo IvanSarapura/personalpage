@@ -7,7 +7,14 @@ import { getAboutMetadata, getAboutProfile } from "@/data/about";
 describe("AboutProfile", () => {
   it("renders the editorial map and method in English", () => {
     const profile = getAboutProfile("en");
-    render(<AboutProfile locale="en" profile={profile} />);
+    const { container } = render(<AboutProfile profile={profile} />);
+
+    const topLevelSections = container.querySelectorAll(":scope > section");
+    expect(topLevelSections).toHaveLength(4);
+    for (const section of topLevelSections) {
+      expect(section.children).toHaveLength(1);
+      expect(section.firstElementChild?.tagName).toBe("DIV");
+    }
 
     expect(
       screen.getByRole("heading", {
@@ -15,6 +22,7 @@ describe("AboutProfile", () => {
         name: "About me",
       })
     ).toBeVisible();
+    expect(screen.getByRole("region", { name: "About me" })).toBeVisible();
     expect(
       screen.getByText(
         "I develop and study systems for contexts where rules, technology and real-world decisions have to work together."
@@ -22,12 +30,17 @@ describe("AboutProfile", () => {
     ).toBeVisible();
 
     const index = screen.getByRole("navigation", { name: "On this page" });
-    expect(within(index).getAllByRole("link")).toHaveLength(2);
+    expect(within(index).getAllByRole("link")).toHaveLength(3);
     expect(
       within(index)
         .getAllByRole("link")
         .map((link) => link.textContent)
-    ).toEqual(["Method", "Formation"]);
+    ).toEqual(["Working principles", "Education & practice", "Operating stack"]);
+    expect(
+      within(index)
+        .getAllByRole("link")
+        .map((link) => link.getAttribute("href"))
+    ).toEqual(["#about-method", "#about-formation", "#about-stack"]);
 
     const principles = screen.getByRole("region", { name: "Working principles" });
     expect(principles).toBeVisible();
@@ -82,7 +95,7 @@ describe("AboutProfile", () => {
 
   it("localizes navigation and the method in Spanish", () => {
     const profile = getAboutProfile("es");
-    render(<AboutProfile locale="es" profile={profile} />);
+    render(<AboutProfile profile={profile} />);
 
     expect(
       screen.getByRole("heading", {
@@ -95,7 +108,12 @@ describe("AboutProfile", () => {
         "Desarrollo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas."
       )
     ).toBeVisible();
-    expect(screen.getByRole("navigation", { name: "En esta página" })).toBeVisible();
+    const index = screen.getByRole("navigation", { name: "En esta página" });
+    expect(
+      within(index)
+        .getAllByRole("link")
+        .map((link) => link.textContent)
+    ).toEqual(["Principios de trabajo", "Formación y práctica", "Stack de trabajo"]);
     const principles = screen.getByRole("region", { name: "Principios de trabajo" });
     for (const heading of ["Traducir la regla", "Diseñar la prueba", "Construir la interfaz"]) {
       expect(within(principles).getByRole("heading", { name: heading })).toBeVisible();
