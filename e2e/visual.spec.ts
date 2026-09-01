@@ -122,7 +122,6 @@ const focalRegions = [
   { name: "home-research", path: "/", target: "#research" },
   { name: "home-footer", path: "/", target: "footer" },
   { name: "blog-featured", path: "/blog", target: "main article" },
-  { name: "about-evidence", path: "/about", target: "#about-evidence" },
   {
     name: "blog-detail-content",
     path: "/blog/llm-oracles-genlayer",

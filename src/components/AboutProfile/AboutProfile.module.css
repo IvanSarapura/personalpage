@@ -13,8 +13,7 @@
   gap: var(--space-5);
 }
 
-.eyebrow,
-.cardMeta {
+.eyebrow {
   font-size: var(--caption);
   font-weight: var(--type-weight-semibold);
   line-height: var(--caption-lh);
@@ -43,16 +42,13 @@
 
 .introduction p,
 .sectionIntro p,
-.summary,
 .principles p,
-.formationGroup p,
-.contact p {
+.formationGroup p {
   text-wrap: pretty;
 }
 
 .translation,
-.contentSection,
-.contact {
+.contentSection {
   border-block-start: var(--border-width-thin) solid var(--section-border-decorative);
 }
 
@@ -68,8 +64,7 @@
   max-width: var(--content-max-wide);
 }
 
-.sectionIntro h2,
-.contact h2 {
+.sectionIntro h2 {
   max-width: 20ch;
   font-size: var(--heading-2);
   font-weight: var(--heading-2-weight);
@@ -78,8 +73,7 @@
   text-wrap: balance;
 }
 
-.sectionIntro p,
-.contact p {
+.sectionIntro p {
   max-width: 62ch;
   font-size: var(--body);
   line-height: var(--body-lh);
@@ -88,11 +82,8 @@
 
 .translationSteps,
 .index ul,
-.workGrid,
 .stackList,
-.principles,
-.evidenceGrid,
-.evidenceLinks {
+.principles {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -156,10 +147,7 @@
   gap: var(--space-2) var(--space-5);
 }
 
-.index a,
-.inlineLink,
-.contactLink,
-.secondaryLink {
+.index a {
   display: inline-flex;
   min-height: var(--touch-target);
   align-items: center;
@@ -178,10 +166,7 @@
   justify-content: center;
 }
 
-.index a:focus-visible,
-.inlineLink:focus-visible,
-.contactLink:focus-visible,
-.secondaryLink:focus-visible {
+.index a:focus-visible {
   outline-color: var(--section-focus-ring);
 }
 
@@ -191,41 +176,6 @@
   padding-block: var(--space-7);
 }
 
-.workGrid,
-.evidenceGrid {
-  display: grid;
-}
-
-.workGrid > li,
-.evidenceGrid > li {
-  min-width: 0;
-  border-block-start: var(--border-width-thin) solid var(--section-border-decorative);
-}
-
-.workCard,
-.evidenceCard {
-  display: flex;
-  min-width: 0;
-  height: 100%;
-  flex-direction: column;
-  padding-block: var(--space-5);
-}
-
-.cardMeta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-4);
-  margin-block-end: var(--space-4);
-}
-
-.cardMeta time,
-.cardMeta span:last-child {
-  font-variant-numeric: tabular-nums;
-}
-
-.workCard h3,
-.evidenceCard h3,
 .principles h3,
 .formationGrid h3 {
   font-size: var(--heading-3);
@@ -236,38 +186,11 @@
   text-wrap: balance;
 }
 
-.tagline,
-.outcome {
-  margin-block-start: var(--space-2);
-  font-size: var(--body);
-  font-weight: var(--type-weight-semibold);
-  line-height: var(--body-lh);
-  color: var(--section-text);
-}
-
-.summary {
-  margin-block-start: var(--space-4);
-  font-size: var(--body);
-  line-height: var(--body-lh);
-  color: var(--section-text-secondary);
-}
-
 .stackList {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-block-start: var(--space-5);
-}
-
-.inlineLink,
-.evidenceLinks,
-.contactLink {
-  margin-block-start: auto;
-}
-
-.inlineLink {
-  padding-block-start: var(--space-5);
-  width: fit-content;
 }
 
 .principles {
@@ -296,27 +219,6 @@
   font-size: var(--body);
   line-height: var(--body-lh);
   color: var(--section-text-secondary);
-}
-
-.issuer {
-  margin-block-start: var(--space-2);
-  font-size: var(--caption);
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wide);
-  color: var(--section-text-secondary);
-}
-
-.evidenceLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  padding-block-start: var(--space-4);
-}
-
-.staticLink svg,
-.staticLink.staticLink:hover svg {
-  transition: none;
-  transform: none;
 }
 
 .formationGrid {
@@ -369,21 +271,6 @@
   margin-block-start: var(--space-4);
 }
 
-.contact {
-  display: grid;
-  gap: var(--space-4);
-  padding-block: var(--space-7) var(--space-8);
-}
-
-.contactLink {
-  width: fit-content;
-}
-
-.secondaryLink {
-  width: fit-content;
-  color: var(--section-text-secondary);
-}
-
 @media (min-width: 48rem) {
   .hero {
     padding-block: var(--space-8) var(--space-9);
@@ -419,31 +306,6 @@
   .contentSection {
     gap: var(--space-7);
     padding-block: var(--space-8);
-  }
-
-  .workGrid,
-  .evidenceGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .workGrid > li:nth-child(even),
-  .evidenceGrid > li:nth-child(even) {
-    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
-  }
-
-  .workCard,
-  .evidenceCard {
-    padding: var(--space-6);
-  }
-
-  .workGrid > li:nth-child(odd) .workCard,
-  .evidenceGrid > li:nth-child(odd) .evidenceCard {
-    padding-inline-start: 0;
-  }
-
-  .workGrid > li:nth-child(even) .workCard,
-  .evidenceGrid > li:nth-child(even) .evidenceCard {
-    padding-inline-end: 0;
   }
 
   .principles {

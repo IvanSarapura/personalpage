@@ -1,20 +1,9 @@
 import { type Locale } from "@/data/locale";
-import { getProjects, type Project, type ProjectSlug } from "@/data/projects";
-import { getRecognitions, type Recognition } from "@/data/recognition";
 
 export const ABOUT_SECTION_IDS = {
-  work: "about-work",
   method: "about-method",
-  evidence: "about-evidence",
   formation: "about-formation",
 } as const;
-
-export const ABOUT_PROJECT_SLUGS = [
-  "ecotrace",
-  "food-code-oracle",
-  "sana",
-  "zero-to-agent",
-] as const satisfies readonly ProjectSlug[];
 
 type AboutSectionId = (typeof ABOUT_SECTION_IDS)[keyof typeof ABOUT_SECTION_IDS];
 
@@ -68,20 +57,10 @@ interface AboutCopy {
     label: string;
     items: readonly AboutIndexItem[];
   };
-  work: {
-    heading: string;
-    description: string;
-    linkLabel: string;
-  };
   principles: {
     heading: string;
     description: string;
     items: readonly Principle[];
-  };
-  evidence: {
-    heading: string;
-    description: string;
-    opensInNewTab: string;
   };
   formation: {
     heading: string;
@@ -91,17 +70,9 @@ interface AboutCopy {
     groups: readonly FormationGroup[];
     stackGroupTitles: StackGroupTitles;
   };
-  contact: {
-    heading: string;
-    description: string;
-    primaryLabel: string;
-    secondaryLabel: string;
-  };
 }
 
-export interface AboutProfileData extends Omit<AboutCopy, "work" | "evidence" | "formation"> {
-  work: AboutCopy["work"] & { projects: readonly Project[] };
-  evidence: AboutCopy["evidence"] & { recognitions: readonly Recognition[] };
+export interface AboutProfileData extends Omit<AboutCopy, "formation"> {
   formation: Omit<AboutCopy["formation"], "stackGroupTitles"> & {
     stackGroups: readonly StackGroup[];
   };
@@ -156,17 +127,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     index: {
       label: "On this page",
       items: [
-        { id: ABOUT_SECTION_IDS.work, label: "Work" },
         { id: ABOUT_SECTION_IDS.method, label: "Method" },
-        { id: ABOUT_SECTION_IDS.evidence, label: "Evidence" },
         { id: ABOUT_SECTION_IDS.formation, label: "Formation" },
       ],
-    },
-    work: {
-      heading: "Four working proofs",
-      description:
-        "Each project tests the same thesis in a different institution: environmental reporting, food compliance, post-visit care and AI-agent tooling.",
-      linkLabel: "Read the case study",
     },
     principles: {
       heading: "Working principles",
@@ -187,12 +150,6 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
             "Turn that logic into a product people can understand, operate and challenge.",
         },
       ],
-    },
-    evidence: {
-      heading: "Claims need sources",
-      description:
-        "Published work, official results and programs provide a record outside this portfolio.",
-      opensInNewTab: "opens in a new tab",
     },
     formation: {
       heading: "Formation for both sides of the interface",
@@ -230,12 +187,6 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
       ],
       stackGroupTitles: ["Product engineering", "AI & retrieval", "Verifiable systems"],
     },
-    contact: {
-      heading: "Have a specific problem at the edge of law and software?",
-      description: "Tell me what must be interpreted, verified or made executable.",
-      primaryLabel: "Start a conversation",
-      secondaryLabel: "View all projects",
-    },
   },
   es: {
     eyebrow: "Sobre mí · Ingeniería legal",
@@ -266,17 +217,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     index: {
       label: "En esta página",
       items: [
-        { id: ABOUT_SECTION_IDS.work, label: "Trabajo" },
         { id: ABOUT_SECTION_IDS.method, label: "Método" },
-        { id: ABOUT_SECTION_IDS.evidence, label: "Evidencia" },
         { id: ABOUT_SECTION_IDS.formation, label: "Formación" },
       ],
-    },
-    work: {
-      heading: "Cuatro pruebas en funcionamiento",
-      description:
-        "Cada proyecto pone a prueba la misma tesis en una institución distinta: reportes ambientales, cumplimiento alimentario, cuidado post-consulta y herramientas para agentes de IA.",
-      linkLabel: "Leer el caso de estudio",
     },
     principles: {
       heading: "Principios de trabajo",
@@ -298,12 +241,6 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
             "Convertir esa lógica en un producto que las personas puedan entender, operar y cuestionar.",
         },
       ],
-    },
-    evidence: {
-      heading: "Las afirmaciones necesitan fuentes",
-      description:
-        "El trabajo publicado, los resultados oficiales y los programas dejan un registro fuera de este portfolio.",
-      opensInNewTab: "se abre en una pestaña nueva",
     },
     formation: {
       heading: "Formación para los dos lados de la interfaz",
@@ -341,25 +278,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
       ],
       stackGroupTitles: ["Ingeniería de producto", "IA y recuperación", "Sistemas verificables"],
     },
-    contact: {
-      heading: "¿Tenés un problema concreto en la intersección entre derecho y software?",
-      description: "Contame qué necesitás interpretar, verificar o volver ejecutable.",
-      primaryLabel: "Iniciar una conversación",
-      secondaryLabel: "Ver todos los proyectos",
-    },
   },
 };
-
-function selectProjects(locale: Locale): readonly Project[] {
-  const projects = getProjects(locale);
-  const bySlug = new Map(projects.map((project) => [project.slug, project]));
-
-  return ABOUT_PROJECT_SLUGS.map((slug) => {
-    const project = bySlug.get(slug);
-    if (!project) throw new Error(`Missing About project: ${slug}`);
-    return project;
-  });
-}
 
 function buildStackGroups(copy: AboutCopy): readonly StackGroup[] {
   const titles = copy.formation.stackGroupTitles;
@@ -377,12 +297,8 @@ export function getAboutMetadata(locale: Locale): AboutMetadata {
 
 export function getAboutProfile(locale: Locale): AboutProfileData {
   const copy = ABOUT_COPY[locale];
-  const projects = selectProjects(locale);
-
   return {
     ...copy,
-    work: { ...copy.work, projects },
-    evidence: { ...copy.evidence, recognitions: getRecognitions(locale) },
     formation: {
       heading: copy.formation.heading,
       description: copy.formation.description,
