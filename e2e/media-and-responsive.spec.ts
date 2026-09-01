@@ -181,7 +181,7 @@ test("About working principles uses the compact vertical spacing", async ({ page
     expect(padding.markerSizes).toEqual(["24px", "24px", "24px"]);
 
     const formation = page.getByRole("region", {
-      name: "Formation for both sides of the interface",
+      name: "Education and professional practice",
     });
     const formationPadding = await formation.evaluate((element) => {
       const style = getComputedStyle(element);

@@ -122,9 +122,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
       ],
     },
     formation: {
-      heading: "Formation for both sides of the interface",
+      heading: "Education and professional practice",
       description:
-        "Formal legal study, applied technical training and founder programs shape how I frame and ship the work.",
+        "Formal legal study, applied technical training and founder programs shape how I frame and build my professional path.",
       educationHeading: "Education & programs",
       stackHeading: "Operating stack",
       groups: [
@@ -197,9 +197,9 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
       ],
     },
     formation: {
-      heading: "Formación para los dos lados de la interfaz",
+      heading: "Formación y práctica profesional",
       description:
-        "El estudio jurídico formal, la formación técnica aplicada y los programas para founders definen cómo encuadro y construyo cada trabajo.",
+        "El estudio jurídico formal, la formación técnica aplicada y los programas para founders definen cómo encuadro y construyo mi camino profesional.",
       educationHeading: "Educación y programas",
       stackHeading: "Stack de trabajo",
       groups: [
