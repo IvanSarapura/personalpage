@@ -5,21 +5,12 @@
 .hero {
   display: grid;
   gap: var(--space-8);
-  padding-block: var(--space-7) var(--space-8);
+  padding-block: var(--space-6);
 }
 
 .heroCopy {
   display: grid;
   gap: var(--space-5);
-}
-
-.eyebrow {
-  font-size: var(--caption);
-  font-weight: var(--type-weight-semibold);
-  line-height: var(--caption-lh);
-  letter-spacing: var(--letter-spacing-wider);
-  text-transform: uppercase;
-  color: var(--section-text-secondary);
 }
 
 .title {
@@ -177,14 +168,31 @@
   padding-block: var(--space-7);
 }
 
+.contentSection.principlesSection {
+  padding-block: var(--space-6);
+}
+
+.contentSection.formationSection {
+  padding-block: var(--space-6);
+}
+
 .principles h3,
-.formationGrid h3 {
+.formationSection h3 {
   font-size: var(--heading-3);
   font-weight: var(--heading-3-weight);
   line-height: var(--heading-3-lh);
   letter-spacing: var(--heading-3-tracking);
   overflow-wrap: anywhere;
   text-wrap: balance;
+}
+
+.stackGroup h3 {
+  font-size: var(--caption);
+  font-weight: var(--type-weight-semibold);
+  line-height: var(--caption-lh);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--section-text-secondary);
 }
 
 .stackList {
@@ -208,8 +216,8 @@
 
 .principles li > span {
   padding-block-start: var(--space-1);
-  font-size: var(--caption);
-  line-height: var(--caption-lh);
+  font-size: 1.5rem;
+  line-height: var(--heading-3-lh);
   font-variant-numeric: tabular-nums;
   color: var(--section-text-secondary);
 }
@@ -222,11 +230,6 @@
   color: var(--section-text-secondary);
 }
 
-.formationGrid {
-  display: grid;
-  gap: var(--space-7);
-}
-
 .formationGroup,
 .stackGroup {
   margin-block-start: var(--space-5);
@@ -234,8 +237,15 @@
   border-block-start: var(--border-width-thin) solid var(--section-border-decorative);
 }
 
-.formationGroup h4,
-.stackGroup h4 {
+.stackGroups {
+  display: grid;
+}
+
+.stackGroups .stackGroup:first-child {
+  margin-block-start: 0;
+}
+
+.formationGroup h4 {
   font-size: var(--caption);
   font-weight: var(--type-weight-semibold);
   line-height: var(--caption-lh);
@@ -256,6 +266,14 @@
 }
 
 .formationGroup strong {
+  font-size: var(--body-large);
+  line-height: var(--body-large-lh);
+  color: var(--section-text);
+}
+
+.formationInstitution {
+  display: block;
+  margin-block-start: var(--space-1);
   font-size: var(--body);
   line-height: var(--body-lh);
   color: var(--section-text);
@@ -273,10 +291,6 @@
 }
 
 @media (min-width: 48rem) {
-  .hero {
-    padding-block: var(--space-8) var(--space-9);
-  }
-
   .title {
     font-size: var(--display-1);
     line-height: var(--display-1-lh);
@@ -329,20 +343,6 @@
   .principles li + li {
     border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
   }
-
-  .formationGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-  }
-
-  .formationGrid > div:first-child {
-    padding-inline-end: var(--space-7);
-  }
-
-  .stackColumn {
-    padding-inline-start: var(--space-7);
-    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
-  }
 }
 
 @media (min-width: 64rem) {
@@ -352,7 +352,6 @@
     column-gap: var(--space-8);
   }
 
-  .heroCopy .eyebrow,
   .heroCopy .title {
     grid-column: 1;
   }

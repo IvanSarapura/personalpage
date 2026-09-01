@@ -23,7 +23,8 @@ interface Principle {
 }
 
 interface FormationItem {
-  name: string;
+  title: string;
+  institution: string;
   detail: string;
 }
 
@@ -45,7 +46,6 @@ interface AboutMetadata {
 }
 
 interface AboutCopy {
-  eyebrow: string;
   title: string;
   introduction: readonly string[];
   translation: {
@@ -99,8 +99,7 @@ const ABOUT_METADATA: Record<Locale, AboutMetadata> = {
 
 const ABOUT_COPY: Record<Locale, AboutCopy> = {
   en: {
-    eyebrow: "About · Legal engineering",
-    title: "From legal rule to executable system.",
+    title: "About me",
     introduction: [
       "I'm Iván Enzo Sarapura. I study commercial law at UBA and blockchain and digital finance at UTN. I build software where those disciplines have to work together.",
       "My focus is the translation layer: turning obligations, evidence and institutional decisions into systems people can inspect, test and revise.",
@@ -162,11 +161,13 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           title: "Formal education",
           items: [
             {
-              name: "Law, Business orientation — Universidad de Buenos Aires",
+              title: "Law, Business orientation",
+              institution: "University of Buenos Aires",
               detail: "Commercial, corporate and intellectual-property law. In progress.",
             },
             {
-              name: "Diploma in Blockchain & Digital Finance — UTN",
+              title: "Diploma in Blockchain & Digital Finance",
+              institution: "National Technological University",
               detail: "Smart contracts, asset tokenization and regulatory frameworks for DLT.",
             },
           ],
@@ -175,11 +176,13 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           title: "Product & venture formation",
           items: [
             {
-              name: "Founder School",
+              title: "Founder School",
+              institution: "Aleph Crecimiento & Protocol Labs",
               detail: "Intensive company-building program in the Crecimiento ecosystem.",
             },
             {
-              name: "Trama Entrepreneurship BootCamp — ITBA",
+              title: "Trama Entrepreneurship BootCamp",
+              institution: "Buenos Aires Institute of Technology",
               detail: "Product validation, go-to-market and investor evaluation.",
             },
           ],
@@ -189,8 +192,7 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     },
   },
   es: {
-    eyebrow: "Sobre mí · Ingeniería legal",
-    title: "De la regla jurídica al sistema ejecutable.",
+    title: "Sobre mí",
     introduction: [
       "Soy Iván Enzo Sarapura. Estudio derecho comercial en la UBA y blockchain y finanzas digitales en la UTN. Construyo software donde esas disciplinas tienen que trabajar juntas.",
       "Me concentro en la capa de traducción: convertir obligaciones, evidencia y decisiones institucionales en sistemas que se puedan inspeccionar, probar y revisar.",
@@ -253,11 +255,13 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           title: "Educación formal",
           items: [
             {
-              name: "Abogacía, orientación empresarial — Universidad de Buenos Aires",
+              title: "Abogacía, orientación empresarial",
+              institution: "Universidad de Buenos Aires",
               detail: "Derecho comercial, societario y de la propiedad intelectual. En curso.",
             },
             {
-              name: "Diplomatura en Blockchain y Finanzas Digitales — UTN",
+              title: "Diplomatura en Blockchain & Finanzas Digitales",
+              institution: "Universidad Tecnológica Nacional",
               detail: "Contratos inteligentes, tokenización de activos y marcos regulatorios DLT.",
             },
           ],
@@ -266,11 +270,13 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           title: "Formación de producto y negocio",
           items: [
             {
-              name: "Founder School",
+              title: "Founder School",
+              institution: "Aleph Crecimiento & Protocol Labs",
               detail: "Programa intensivo de construcción de empresas del ecosistema Crecimiento.",
             },
             {
-              name: "BootCamp Emprendedor de Trama — ITBA",
+              title: "Trama Entrepreneurship Bootcamp",
+              institution: "Instituto Tecnológico de Buenos Aires",
               detail: "Validación de producto, go-to-market y evaluación ante inversores.",
             },
           ],

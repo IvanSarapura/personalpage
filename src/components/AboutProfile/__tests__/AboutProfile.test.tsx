@@ -12,7 +12,7 @@ describe("AboutProfile", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "From legal rule to executable system.",
+        name: "About me",
       })
     ).toBeVisible();
     expect(
@@ -34,7 +34,25 @@ describe("AboutProfile", () => {
     for (const heading of ["Translate the rule", "Design the proof", "Build the interface"]) {
       expect(within(principles).getByRole("heading", { name: heading })).toBeVisible();
     }
+    expect(screen.getByRole("region", { name: "Operating stack" })).toBeVisible();
     expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThanOrEqual(5);
+
+    expect(
+      profile.formation.groups.flatMap((group) =>
+        group.items.map(({ title, institution }) => ({ title, institution }))
+      )
+    ).toEqual([
+      { title: "Law, Business orientation", institution: "University of Buenos Aires" },
+      {
+        title: "Diploma in Blockchain & Digital Finance",
+        institution: "National Technological University",
+      },
+      { title: "Founder School", institution: "Aleph Crecimiento & Protocol Labs" },
+      {
+        title: "Trama Entrepreneurship BootCamp",
+        institution: "Buenos Aires Institute of Technology",
+      },
+    ]);
 
     expect(profile.formation.stackGroups.map((group) => group.items)).toEqual([
       ["TypeScript", "Next.js", "Tailwind CSS"],
@@ -65,7 +83,7 @@ describe("AboutProfile", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "De la regla jurídica al sistema ejecutable.",
+        name: "Sobre mí",
       })
     ).toBeVisible();
     expect(screen.getByRole("navigation", { name: "En esta página" })).toBeVisible();
@@ -73,6 +91,24 @@ describe("AboutProfile", () => {
     for (const heading of ["Traducir la regla", "Diseñar la prueba", "Construir la interfaz"]) {
       expect(within(principles).getByRole("heading", { name: heading })).toBeVisible();
     }
+    expect(screen.getByRole("region", { name: "Stack de trabajo" })).toBeVisible();
+
+    expect(
+      profile.formation.groups.flatMap((group) =>
+        group.items.map(({ title, institution }) => ({ title, institution }))
+      )
+    ).toEqual([
+      { title: "Abogacía, orientación empresarial", institution: "Universidad de Buenos Aires" },
+      {
+        title: "Diplomatura en Blockchain & Finanzas Digitales",
+        institution: "Universidad Tecnológica Nacional",
+      },
+      { title: "Founder School", institution: "Aleph Crecimiento & Protocol Labs" },
+      {
+        title: "Trama Entrepreneurship Bootcamp",
+        institution: "Instituto Tecnológico de Buenos Aires",
+      },
+    ]);
 
     expect(
       screen.queryByRole("heading", { name: /Cuatro pruebas en funcionamiento/i })

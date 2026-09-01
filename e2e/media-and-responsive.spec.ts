@@ -155,6 +155,61 @@ test("About index is reserved for the desktop layout", async ({ page }) => {
   await expect(index).toBeVisible();
 });
 
+test("About working principles uses the compact vertical spacing", async ({ page }) => {
+  for (const viewport of [
+    { width: 320, height: 800 },
+    { width: 1440, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await gotoStable(page, "/about");
+
+    const section = page.getByRole("region", { name: "Working principles" });
+    const padding = await section.evaluate((element) => {
+      const style = getComputedStyle(element);
+      const markerSizes = Array.from(
+        element.querySelectorAll(":scope > ol > li > span"),
+        (marker) => getComputedStyle(marker).fontSize
+      );
+      return {
+        blockStart: style.paddingBlockStart,
+        blockEnd: style.paddingBlockEnd,
+        markerSizes,
+      };
+    });
+    expect(padding.blockStart).toBe("32px");
+    expect(padding.blockEnd).toBe("32px");
+    expect(padding.markerSizes).toEqual(["24px", "24px", "24px"]);
+
+    const formation = page.getByRole("region", {
+      name: "Formation for both sides of the interface",
+    });
+    const formationPadding = await formation.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { blockStart: style.paddingBlockStart, blockEnd: style.paddingBlockEnd };
+    });
+    expect(formationPadding).toEqual({ blockStart: "32px", blockEnd: "32px" });
+
+    const stack = page.getByRole("region", { name: "Operating stack" });
+    const stackPadding = await stack.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        blockStart: style.paddingBlockStart,
+        blockEnd: style.paddingBlockEnd,
+      };
+    });
+    expect(stackPadding.blockStart).toBe("32px");
+    expect(stackPadding.blockEnd).toBe("32px");
+
+    const heroPadding = await page.getByRole("heading", { level: 1 }).evaluate((heading) => {
+      const hero = heading.closest("header");
+      if (!hero) throw new Error("About hero header not found");
+      const style = getComputedStyle(hero);
+      return { blockStart: style.paddingBlockStart, blockEnd: style.paddingBlockEnd };
+    });
+    expect(heroPadding).toEqual({ blockStart: "32px", blockEnd: "32px" });
+  }
+});
+
 test("blog article keeps navigation, metadata and editorial headings consistent", async ({
   page,
 }) => {
