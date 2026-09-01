@@ -144,6 +144,17 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
   }
 });
 
+test("About index is reserved for the desktop layout", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await gotoStable(page, "/about");
+
+  const index = page.getByRole("navigation", { name: "On this page" });
+  await expect(index).toBeHidden();
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(index).toBeVisible();
+});
+
 test("blog article keeps navigation, metadata and editorial headings consistent", async ({
   page,
 }) => {

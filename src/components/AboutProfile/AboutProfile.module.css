@@ -127,6 +127,7 @@
 }
 
 .index {
+  display: none;
   padding-block: var(--space-5);
   border-block: var(--border-width-thin) solid var(--section-border-decorative);
 }
@@ -372,6 +373,7 @@
   }
 
   .index {
+    display: block;
     align-self: start;
     position: sticky;
     inset-block-start: calc(var(--navbar-touch-target) + var(--space-7));
