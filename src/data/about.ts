@@ -88,12 +88,12 @@ const ABOUT_METADATA: Record<Locale, AboutMetadata> = {
   en: {
     title: "About",
     description:
-      "Iván Sarapura builds verifiable software at the intersection of commercial law, blockchain, AI compliance and product design.",
+      "Iván Sarapura studies business law and builds products as a freelancer, with interests in legaltech, blockchain, artificial intelligence and AI Safety research.",
   },
   es: {
     title: "Sobre mí",
     description:
-      "Iván Sarapura construye software verificable en la intersección del derecho comercial, blockchain, cumplimiento con IA y diseño de producto.",
+      "Iván Sarapura estudia derecho empresarial y construye productos como freelancer, con intereses en legaltech, blockchain, inteligencia artificial e investigación en AI Safety.",
   },
 };
 
@@ -101,8 +101,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
   en: {
     title: "About me",
     introduction: [
-      "I'm Iván Enzo Sarapura. I study commercial law at UBA and blockchain and digital finance at UTN. I build software where those disciplines have to work together.",
-      "My focus is the translation layer: turning obligations, evidence and institutional decisions into systems people can inspect, test and revise.",
+      "I'm Iván Sarapura. I study business law and build products as a freelancer. My work and interests connect legaltech, blockchain, product development, artificial intelligence and AI Safety research.",
+      "I develop and study systems for contexts where rules, technology and real-world decisions have to work together. I have published one research paper and am developing a second.",
     ],
     translation: {
       heading: "One translation, three disciplines",
@@ -194,8 +194,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
   es: {
     title: "Sobre mí",
     introduction: [
-      "Soy Iván Enzo Sarapura. Estudio derecho comercial en la UBA y blockchain y finanzas digitales en la UTN. Construyo software donde esas disciplinas tienen que trabajar juntas.",
-      "Me concentro en la capa de traducción: convertir obligaciones, evidencia y decisiones institucionales en sistemas que se puedan inspeccionar, probar y revisar.",
+      "Soy Iván Sarapura. Estudio derecho empresarial y construyo productos como freelancer. Mi trabajo y mis intereses conectan legaltech, blockchain, desarrollo de producto, inteligencia artificial e investigación en AI Safety.",
+      "Desarrollo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas. Ya publiqué un trabajo de investigación y estoy desarrollando un segundo.",
     ],
     translation: {
       heading: "Una traducción, tres disciplinas",

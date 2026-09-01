@@ -17,7 +17,7 @@ describe("AboutProfile", () => {
     ).toBeVisible();
     expect(
       screen.getByText(
-        "My focus is the translation layer: turning obligations, evidence and institutional decisions into systems people can inspect, test and revise."
+        "I build and study systems for contexts where rules, technology and real-world decisions have to work together. I have published one research paper and am developing a second."
       )
     ).toBeVisible();
 
@@ -36,6 +36,7 @@ describe("AboutProfile", () => {
     }
     expect(screen.getByRole("region", { name: "Operating stack" })).toBeVisible();
     expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThanOrEqual(5);
+    expect(screen.queryByText(/I study commercial law at UBA/i)).not.toBeInTheDocument();
 
     expect(
       profile.formation.groups.flatMap((group) =>
@@ -71,7 +72,7 @@ describe("AboutProfile", () => {
     expect(getAboutMetadata("en")).toEqual({
       title: "About",
       description:
-        "Iván Sarapura builds verifiable software at the intersection of commercial law, blockchain, AI compliance and product design.",
+        "Iván Sarapura studies business law and builds products as a freelancer, with interests in legaltech, blockchain, artificial intelligence and AI Safety research.",
     });
     expect(getAboutProfile("en")).not.toHaveProperty("metadata");
   });
@@ -85,6 +86,11 @@ describe("AboutProfile", () => {
         level: 1,
         name: "Sobre mí",
       })
+    ).toBeVisible();
+    expect(
+      screen.getByText(
+        "Construyo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas. Ya publiqué un trabajo de investigación y estoy desarrollando un segundo."
+      )
     ).toBeVisible();
     expect(screen.getByRole("navigation", { name: "En esta página" })).toBeVisible();
     const principles = screen.getByRole("region", { name: "Principios de trabajo" });
