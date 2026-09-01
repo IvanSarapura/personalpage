@@ -56,9 +56,9 @@ describe("AboutProfile", () => {
     ]);
 
     expect(profile.formation.stackGroups.map((group) => group.items)).toEqual([
-      ["TypeScript", "Next.js", "Tailwind CSS"],
-      ["Claude API", "Vercel AI SDK", "RAG"],
-      ["Solidity", "Hyperledger Fabric", "GenLayer"],
+      ["TypeScript", "Next.js", "Tailwind CSS", "React", "Angular", "Node.js", "SQL"],
+      ["Claude", "Vercel AI SDK", "Codex", "DeepSeek", "Kimi"],
+      ["Solidity", "Hyperledger Fabric", "Rust", "Hardhat", "Foundry", "Compact"],
     ]);
     for (const technology of profile.formation.stackGroups.flatMap((group) => group.items)) {
       expect(screen.getAllByText(technology).at(-1)).toHaveAttribute("translate", "no");

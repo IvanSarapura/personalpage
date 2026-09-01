@@ -69,9 +69,9 @@ export interface AboutProfileData extends Omit<AboutCopy, "formation"> {
 }
 
 const STACK_TECHNOLOGIES = [
-  ["TypeScript", "Next.js", "Tailwind CSS"],
-  ["Claude API", "Vercel AI SDK", "RAG"],
-  ["Solidity", "Hyperledger Fabric", "GenLayer"],
+  ["TypeScript", "Next.js", "Tailwind CSS", "React", "Angular", "Node.js", "SQL"],
+  ["Claude", "Vercel AI SDK", "Codex", "DeepSeek", "Kimi"],
+  ["Solidity", "Hyperledger Fabric", "Rust", "Hardhat", "Foundry", "Compact"],
 ] as const;
 
 const ABOUT_METADATA: Record<Locale, AboutMetadata> = {
@@ -159,7 +159,7 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           ],
         },
       ],
-      stackGroupTitles: ["Product engineering", "AI & retrieval", "Verifiable systems"],
+      stackGroupTitles: ["Product engineering", "AI & models", "Verifiable systems"],
     },
   },
   es: {
@@ -234,7 +234,7 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
           ],
         },
       ],
-      stackGroupTitles: ["Ingeniería de producto", "IA y recuperación", "Sistemas verificables"],
+      stackGroupTitles: ["Ingeniería de producto", "IA y modelos", "Sistemas verificables"],
     },
   },
 };
