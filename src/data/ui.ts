@@ -115,14 +115,6 @@ export interface UiDict {
     stackAriaLabel: string;
     stackAndTagsAriaLabel: string;
   };
-  aboutPage: {
-    title: string;
-    description: string;
-    ariaLabel: string;
-    journey: string;
-    education: string;
-    stack: string;
-  };
   blog: {
     title: string;
     heading: string;
@@ -275,15 +267,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       stackAriaLabel: "Stack",
       stackAndTagsAriaLabel: "Stack and tags",
     },
-    aboutPage: {
-      title: "About",
-      description:
-        "Commercial-law student at UBA, blockchain developer at UTN, and founder-track builder. Hackathon winner, co-author of an awarded paper on Cardano and Founder School alumnus.",
-      ariaLabel: "About me",
-      journey: "Journey",
-      education: "Education & credentials",
-      stack: "Stack",
-    },
     blog: {
       title: "Personal Blog",
       heading: "Personal Blog",
@@ -435,15 +418,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       getInTouch: "Contactame",
       stackAriaLabel: "Stack",
       stackAndTagsAriaLabel: "Stack y tags",
-    },
-    aboutPage: {
-      title: "Sobre mí",
-      description:
-        "Estudiante de derecho comercial en la UBA, desarrollador blockchain en la UTN y constructor en etapa fundacional. Ganador de hackathons, coautor de un paper premiado sobre Cardano y alumni de Founder School.",
-      ariaLabel: "Sobre mí",
-      journey: "Recorrido",
-      education: "Educación y credenciales",
-      stack: "Stack",
     },
     blog: {
       title: "Blog Personal",

@@ -10,6 +10,17 @@ export const RECOGNITION_IDS = [
 
 export type RecognitionId = (typeof RECOGNITION_IDS)[number];
 
+export const FIRST_PRIZE_RECOGNITION_IDS = [
+  "legalthon-uba-cardano",
+  "genlayer-bradbury-builders",
+] as const satisfies readonly RecognitionId[];
+
+export const AWARDED_PAPER_RECOGNITION_IDS = [
+  "legalthon-uba-cardano",
+] as const satisfies readonly RecognitionId[];
+
+export const FOUNDER_SCHOOL_COHORT = "FS26-2" as const;
+
 export type RecognitionKind =
   | "academic-award"
   | "product-award"
@@ -39,13 +50,14 @@ interface RecognitionBase {
   evidence: readonly RecognitionEvidenceBase[];
 }
 
-interface RecognitionCopy {
+interface RecognitionCopyBase {
   eyebrow: string;
-  outcome?: string;
-  title?: string;
   issuer: string;
   summary: string;
 }
+
+type RecognitionCopy = RecognitionCopyBase &
+  ({ title: string; outcome?: string } | { title?: never; outcome: string });
 
 export type Recognition = Omit<RecognitionBase, "evidence"> &
   RecognitionCopy & {
@@ -143,7 +155,7 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     },
     "founder-school": {
       eyebrow: "Founder program",
-      outcome: "Selected for Founder School · FS26-2",
+      outcome: `Selected for Founder School · ${FOUNDER_SCHOOL_COHORT}`,
       issuer: "Crecimiento ecosystem and Protocol Labs",
       summary:
         "Selected for an intensive program focused on building, validating and scaling technology startups.",
@@ -173,7 +185,7 @@ const RECOGNITION_COPY: Record<Locale, Record<RecognitionId, RecognitionCopy>> =
     },
     "founder-school": {
       eyebrow: "Programa para founders",
-      outcome: "Seleccionado para Founder School · FS26-2",
+      outcome: `Seleccionado para Founder School · ${FOUNDER_SCHOOL_COHORT}`,
       issuer: "Ecosistema Crecimiento y Protocol Labs",
       summary:
         "Seleccionado para un programa intensivo enfocado en construir, validar y escalar startups tecnológicas.",

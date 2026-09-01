@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { gotoStable, setTheme } from "./helpers";
 
-async function expectMinimumTargets(page: Page, minimum: number) {
+async function expectMinimumTargets(page: Page, minimum: number, diagnosticContext: string) {
   const controls = page.locator(
     ":is(nav, main, footer, [role='dialog']) :is(a[href], button, input:not([type='hidden']), select, textarea, [role='button'], [role='link'], [role='switch']):visible"
   );
@@ -38,7 +38,7 @@ async function expectMinimumTargets(page: Page, minimum: number) {
           `${element.tagName.toLowerCase()}${element.getAttribute("href") ? `[href="${element.getAttribute("href")}"]` : ""} (${fallback})`,
         index
       ));
-    expect(box, `control ${name} has no box`).not.toBeNull();
+    expect(box, `[${diagnosticContext}] control ${name} has no box`).not.toBeNull();
     const hitArea = await control.evaluate((element, boxSize) => {
       const pseudo = getComputedStyle(element, "::after");
       const pseudoWidth = pseudo.content === "none" ? 0 : Number.parseFloat(pseudo.width);
@@ -50,11 +50,11 @@ async function expectMinimumTargets(page: Page, minimum: number) {
     }, box!);
     expect(
       hitArea.width,
-      `control ${name} has an effective hit area narrower than ${minimum}px`
+      `[${diagnosticContext}] control ${name} has an effective hit area narrower than ${minimum}px`
     ).toBeGreaterThanOrEqual(minimum);
     expect(
       hitArea.height,
-      `control ${name} has an effective hit area shorter than ${minimum}px`
+      `[${diagnosticContext}] control ${name} has an effective hit area shorter than ${minimum}px`
     ).toBeGreaterThanOrEqual(minimum);
   }
 }
@@ -125,6 +125,8 @@ test("content reflows at a 320px viewport without horizontal overflow", async ({
 
   for (const route of [
     "/",
+    "/about",
+    "/es/about",
     "/projects",
     "/projects/proven",
     "/blog",
@@ -378,32 +380,65 @@ test("blog hero separates the title from its publication metrics", async ({ page
   }
 });
 
-test("controls meet minimum pointer and coarse-pointer target sizes", async ({ browser }) => {
-  test.slow();
-  const pointerContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  const pointerPage = await pointerContext.newPage();
-  for (const route of ["/projects", "/", "/blog/llm-oracles-genlayer"]) {
-    await gotoStable(pointerPage, route);
-    await expectMinimumTargets(pointerPage, 24);
-  }
-  await gotoStable(pointerPage, "/");
-  await pointerPage.getByRole("button", { name: "Open menu" }).click();
-  await expect(pointerPage.getByRole("dialog", { name: "Main navigation menu" })).toBeVisible();
-  await expectMinimumTargets(pointerPage, 24);
-  await pointerContext.close();
+const POINTER_TARGET_ROUTES = [
+  "/projects",
+  "/",
+  "/about",
+  "/es/about",
+  "/blog/llm-oracles-genlayer",
+] as const;
+const COARSE_TARGET_ROUTES = ["/projects", "/", "/about", "/es/about"] as const;
 
-  const coarseContext = await browser.newContext({
-    viewport: { width: 390, height: 844 },
-    hasTouch: true,
-    isMobile: true,
-  });
-  const coarsePage = await coarseContext.newPage();
-  for (const route of ["/projects", "/"]) {
-    await gotoStable(coarsePage, route);
-    await expectMinimumTargets(coarsePage, 44);
+test.describe("minimum target sizes", () => {
+  for (const route of POINTER_TARGET_ROUTES) {
+    test(`pointer · ${route} · controls are at least 24px`, async ({ page }) => {
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await gotoStable(page, route);
+      await expectMinimumTargets(page, 24, `pointer · ${route}`);
+    });
   }
-  await coarsePage.getByRole("button", { name: "Open menu" }).click();
-  await expect(coarsePage.getByRole("dialog", { name: "Main navigation menu" })).toBeVisible();
-  await expectMinimumTargets(coarsePage, 44);
-  await coarseContext.close();
+
+  test("pointer · menu · controls are at least 24px", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await gotoStable(page, "/");
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await expect(page.getByRole("dialog", { name: "Main navigation menu" })).toBeVisible();
+    await expectMinimumTargets(page, 24, "pointer · menu");
+  });
+
+  for (const route of COARSE_TARGET_ROUTES) {
+    test(`coarse · ${route} · controls are at least 44px`, async ({ browser }) => {
+      const context = await browser.newContext({
+        viewport: { width: 390, height: 844 },
+        hasTouch: true,
+        isMobile: true,
+      });
+
+      try {
+        const page = await context.newPage();
+        await gotoStable(page, route);
+        await expectMinimumTargets(page, 44, `coarse · ${route}`);
+      } finally {
+        await context.close();
+      }
+    });
+  }
+
+  test("coarse · menu · controls are at least 44px", async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      hasTouch: true,
+      isMobile: true,
+    });
+
+    try {
+      const page = await context.newPage();
+      await gotoStable(page, "/");
+      await page.getByRole("button", { name: "Open menu" }).click();
+      await expect(page.getByRole("dialog", { name: "Main navigation menu" })).toBeVisible();
+      await expectMinimumTargets(page, 44, "coarse · menu");
+    } finally {
+      await context.close();
+    }
+  });
 });

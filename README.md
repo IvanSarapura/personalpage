@@ -77,13 +77,13 @@ Chromium runs the complete suite, including the visual matrix. Firefox and WebKi
 interactions, media preferences, responsive reflow and target checks. The suite covers English and
 Spanish routes, list/detail pages, both themes, keyboard/menu/filter/form interactions, forced
 colors, reduced motion, 320 px reflow and pointer targets. Axe enforces WCAG 2.2 AA without rule
-exclusions. Versioned Ubuntu 24.04/Chromium snapshots cover eight routes at 390×844 and 1440×900,
+exclusions. Versioned Ubuntu 24.04/Chromium snapshots cover ten routes at 390×844 and 1440×900,
 critical interactive states, and focused below-fold desktop regions. The viewport matrix catches
 page-level regressions without fragile giant full-page captures; focused screenshots give denser
-coverage to representative home, footer, blog-list and article content.
+coverage to representative home, footer, about, blog-list and article content.
 
 After an intentional visual change, regenerate the complete Chromium baseline in production. The
-update command builds the application, owns its `next start` server and serially replaces all 46
+update command builds the application, owns its `next start` server and serially replaces all 56
 Ubuntu 24.04/Chromium snapshots; review every generated image before committing the baseline:
 
 ```bash

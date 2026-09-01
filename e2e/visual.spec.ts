@@ -10,6 +10,8 @@ import {
 const routes = [
   { name: "home-en", path: "/" },
   { name: "home-es", path: "/es" },
+  { name: "about-en", path: "/about" },
+  { name: "about-es", path: "/es/about" },
   { name: "projects-list", path: "/projects" },
   { name: "research-list", path: "/research" },
   { name: "blog-list", path: "/blog" },
@@ -120,6 +122,7 @@ const focalRegions = [
   { name: "home-research", path: "/", target: "#research" },
   { name: "home-footer", path: "/", target: "footer" },
   { name: "blog-featured", path: "/blog", target: "main article" },
+  { name: "about-evidence", path: "/about", target: "#about-evidence" },
   {
     name: "blog-detail-content",
     path: "/blog/llm-oracles-genlayer",

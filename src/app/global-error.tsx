@@ -18,10 +18,10 @@ const DARK = {
 
 export default function GlobalError({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   useEffect(() => {
     console.error(error);
@@ -30,6 +30,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <head>
+        <title>Something went wrong</title>
         <style>{`
           :root { color-scheme: light; }
           .global-error-body {
@@ -94,7 +95,7 @@ export default function GlobalError({
           transition: "background-color 300ms, color 300ms",
         }}
       >
-        <main style={{ maxWidth: "38.75rem", textAlign: "left" }}>
+        <main style={{ width: "100%", maxWidth: "38.75rem", textAlign: "center" }}>
           <h1
             style={{
               margin: "0 0 1rem",
@@ -118,7 +119,7 @@ export default function GlobalError({
           >
             An unexpected error occurred. Try again, and if the problem persists, get in touch.
           </p>
-          <button className="global-error-button" type="button" onClick={reset}>
+          <button className="global-error-button" type="button" onClick={unstable_retry}>
             Try again
           </button>
         </main>

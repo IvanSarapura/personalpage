@@ -12,6 +12,8 @@ import {
 const routes = [
   "/",
   "/es",
+  "/about",
+  "/es/about",
   "/projects",
   "/research",
   "/blog",

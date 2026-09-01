@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { LOCALES } from "@/data/locale";
-import { RECOGNITION_IDS, getRecognitions } from "@/data/recognition";
+import {
+  AWARDED_PAPER_RECOGNITION_IDS,
+  FIRST_PRIZE_RECOGNITION_IDS,
+  FOUNDER_SCHOOL_COHORT,
+  RECOGNITION_IDS,
+  getRecognitions,
+} from "@/data/recognition";
 
 const EXPECTED_YEARS = {
   "legalthon-uba-cardano": 2025,
@@ -47,6 +53,16 @@ describe("recognition data", () => {
       for (const item of recognitions) {
         expect(item.year).toBe(EXPECTED_YEARS[item.id]);
       }
+    }
+  });
+
+  it("deriva las métricas de credibilidad de reconocimientos canónicos", () => {
+    expect(FIRST_PRIZE_RECOGNITION_IDS).toHaveLength(2);
+    expect(AWARDED_PAPER_RECOGNITION_IDS).toEqual(["legalthon-uba-cardano"]);
+
+    for (const locale of LOCALES) {
+      const founderSchool = getRecognitions(locale).find((item) => item.id === "founder-school");
+      expect(founderSchool?.outcome).toContain(FOUNDER_SCHOOL_COHORT);
     }
   });
 });

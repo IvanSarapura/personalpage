@@ -19,10 +19,10 @@ function useRouteLocale(): Locale {
 
 export default function Error({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   const ui = getUi(useRouteLocale()).errorPage;
 
@@ -34,12 +34,12 @@ export default function Error({
   return (
     <main id="main-content" tabIndex={-1} aria-labelledby="error-page-title">
       <Section variant="surface" paddingY="lg" as="div">
-        <Container className="flex flex-col items-start gap-[var(--element-gap)]">
+        <Container className={styles.content}>
           <h1 id="error-page-title" className={styles.title}>
             {ui.title}
           </h1>
           <p className={styles.message}>{ui.message}</p>
-          <Button type="button" variant="outline" size="sm" onClick={reset}>
+          <Button type="button" variant="outline" size="sm" onClick={unstable_retry}>
             {ui.retry}
           </Button>
         </Container>
