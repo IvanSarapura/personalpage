@@ -98,6 +98,7 @@ export default function AboutProfile({ profile }: AboutProfileProps) {
           >
             <div className={styles.sectionIntro}>
               <h2 id="about-stack-title">{profile.formation.stackHeading}</h2>
+              <p>{profile.formation.stackDescription}</p>
             </div>
             <div className={styles.stackGroups}>
               {profile.formation.stackGroups.map((group) => (

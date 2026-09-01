@@ -32,8 +32,8 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding: var(--space-5) 0;
-  border-top: var(--border-width-thin) solid var(--section-border-decorative);
-  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
+  border-top: var(--border-width-thin) solid var(--section-border-interactive);
+  border-bottom: var(--border-width-thin) solid var(--section-border-interactive);
   color: var(--section-text);
 }
 
@@ -110,7 +110,7 @@
 }
 
 .item {
-  border-bottom: var(--border-width-thin) solid var(--section-border-decorative);
+  border-bottom: var(--border-width-thin) solid var(--section-border-interactive);
 }
 
 /* El primer ítem de la lista no tiene borde superior: su artículo no
@@ -195,7 +195,7 @@
 
 :global(html.dark) .archiveHeading,
 :global(html.dark) .item {
-  border-color: var(--section-border-decorative);
+  border-color: var(--section-border-interactive);
 }
 
 @media (min-width: 56.25rem) {

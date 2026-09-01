@@ -57,6 +57,7 @@ interface AboutCopy {
     description: string;
     educationHeading: string;
     stackHeading: string;
+    stackDescription: string;
     groups: readonly FormationGroup[];
     stackGroupTitles: StackGroupTitles;
   };
@@ -127,6 +128,7 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
         "Formal legal study, applied technical training and founder programs shape how I frame and build my professional path.",
       educationHeading: "Education & programs",
       stackHeading: "Operating stack",
+      stackDescription: "Technologies, frameworks and tools I use to develop my projects.",
       groups: [
         {
           title: "Formal education",
@@ -202,6 +204,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
         "El estudio jurídico formal, la formación técnica aplicada y los programas para founders definen cómo encuadro y construyo mi camino profesional.",
       educationHeading: "Educación y programas",
       stackHeading: "Stack de trabajo",
+      stackDescription:
+        "Tecnologías, frameworks y herramientas que utilizo para desarrollar mis proyectos.",
       groups: [
         {
           title: "Educación formal",
@@ -262,6 +266,7 @@ export function getAboutProfile(locale: Locale): AboutProfileData {
       description: copy.formation.description,
       educationHeading: copy.formation.educationHeading,
       stackHeading: copy.formation.stackHeading,
+      stackDescription: copy.formation.stackDescription,
       groups: copy.formation.groups,
       stackGroups: buildStackGroups(copy),
     },

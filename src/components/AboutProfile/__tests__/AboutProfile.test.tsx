@@ -35,6 +35,9 @@ describe("AboutProfile", () => {
       expect(within(principles).getByRole("heading", { name: heading })).toBeVisible();
     }
     expect(screen.getByRole("region", { name: "Operating stack" })).toBeVisible();
+    expect(
+      screen.getByText("Technologies, frameworks and tools I use to develop my projects.")
+    ).toBeVisible();
     expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThanOrEqual(5);
     expect(screen.queryByText(/I study commercial law at UBA/i)).not.toBeInTheDocument();
 
@@ -98,6 +101,11 @@ describe("AboutProfile", () => {
       expect(within(principles).getByRole("heading", { name: heading })).toBeVisible();
     }
     expect(screen.getByRole("region", { name: "Stack de trabajo" })).toBeVisible();
+    expect(
+      screen.getByText(
+        "Tecnologías, frameworks y herramientas que utilizo para desarrollar mis proyectos."
+      )
+    ).toBeVisible();
 
     expect(
       profile.formation.groups.flatMap((group) =>
