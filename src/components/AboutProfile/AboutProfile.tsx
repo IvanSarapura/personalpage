@@ -24,23 +24,6 @@ export default function AboutProfile({ profile }: AboutProfileProps) {
         </div>
       </header>
 
-      <section className={styles.translation} aria-labelledby="about-translation-title">
-        <div className={styles.sectionIntro}>
-          <h2 id="about-translation-title">{profile.translation.heading}</h2>
-          <p>{profile.translation.description}</p>
-        </div>
-        {/* role="list" preserves semantics in Safari when CSS removes markers. */}
-        {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
-        <ol className={styles.translationSteps} role="list">
-          {profile.translation.steps.map((step) => (
-            <li key={step.term}>
-              <strong>{step.term}</strong>
-              <p>{step.description}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       <div className={styles.bodyGrid}>
         <nav className={styles.index} aria-label={profile.index.label}>
           <p>{profile.index.label}</p>

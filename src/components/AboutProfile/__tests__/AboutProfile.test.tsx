@@ -17,7 +17,7 @@ describe("AboutProfile", () => {
     ).toBeVisible();
     expect(
       screen.getByText(
-        "I build and study systems for contexts where rules, technology and real-world decisions have to work together. I have published one research paper and am developing a second."
+        "I develop and study systems for contexts where rules, technology and real-world decisions have to work together."
       )
     ).toBeVisible();
 
@@ -89,7 +89,7 @@ describe("AboutProfile", () => {
     ).toBeVisible();
     expect(
       screen.getByText(
-        "Construyo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas. Ya publiqué un trabajo de investigación y estoy desarrollando un segundo."
+        "Desarrollo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas."
       )
     ).toBeVisible();
     expect(screen.getByRole("navigation", { name: "En esta página" })).toBeVisible();

@@ -38,15 +38,8 @@
   text-wrap: pretty;
 }
 
-.translation,
 .contentSection {
   border-block-start: var(--border-width-thin) solid var(--section-border-decorative);
-}
-
-.translation {
-  display: grid;
-  gap: var(--space-6);
-  padding-block-start: var(--space-6);
 }
 
 .sectionIntro {
@@ -71,45 +64,12 @@
   color: var(--section-text-secondary);
 }
 
-.translationSteps,
 .index ul,
 .stackList,
 .principles {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.translationSteps {
-  display: grid;
-  border-block: var(--border-width-thin) solid var(--section-border-decorative);
-}
-
-.translationSteps li {
-  display: grid;
-  gap: var(--space-3);
-  min-width: 0;
-  padding-block: var(--space-5);
-}
-
-.translationSteps li + li {
-  border-block-start: var(--border-width-thin) solid var(--section-border-decorative);
-}
-
-.translationSteps strong {
-  font-size: var(--heading-3);
-  font-weight: var(--heading-3-weight);
-  line-height: var(--heading-3-lh);
-  letter-spacing: var(--heading-3-tracking);
-  text-wrap: balance;
-}
-
-.translationSteps p {
-  max-width: 32ch;
-  font-size: var(--body);
-  line-height: var(--body-lh);
-  color: var(--section-text-secondary);
-  text-wrap: pretty;
 }
 
 .bodyGrid {
@@ -297,27 +257,6 @@
     letter-spacing: var(--display-1-tracking);
   }
 
-  .translationSteps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .translationSteps li {
-    padding: var(--space-5);
-  }
-
-  .translationSteps li:first-child {
-    padding-inline-start: 0;
-  }
-
-  .translationSteps li:last-child {
-    padding-inline-end: 0;
-  }
-
-  .translationSteps li + li {
-    border-block-start: 0;
-    border-inline-start: var(--border-width-thin) solid var(--section-border-decorative);
-  }
-
   .contentSection {
     gap: var(--space-7);
     padding-block: var(--space-8);
@@ -346,8 +285,7 @@
 }
 
 @media (min-width: 64rem) {
-  .heroCopy,
-  .translation {
+  .heroCopy {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     column-gap: var(--space-8);
   }
@@ -360,10 +298,6 @@
     grid-column: 2;
     grid-row: 1 / span 2;
     align-self: end;
-  }
-
-  .translationSteps {
-    grid-column: 1 / -1;
   }
 
   .bodyGrid {

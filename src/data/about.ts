@@ -12,11 +12,6 @@ interface AboutIndexItem {
   label: string;
 }
 
-interface TranslationStep {
-  term: string;
-  description: string;
-}
-
 interface Principle {
   title: string;
   description: string;
@@ -48,11 +43,6 @@ interface AboutMetadata {
 interface AboutCopy {
   title: string;
   introduction: readonly string[];
-  translation: {
-    heading: string;
-    description: string;
-    steps: readonly TranslationStep[];
-  };
   index: {
     label: string;
     items: readonly AboutIndexItem[];
@@ -102,27 +92,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     title: "About me",
     introduction: [
       "I'm Iván Sarapura. I study business law and build products as a freelancer. My work and interests connect legaltech, blockchain, product development, artificial intelligence and AI Safety research.",
-      "I develop and study systems for contexts where rules, technology and real-world decisions have to work together. I have published one research paper and am developing a second.",
+      "I develop and study systems for contexts where rules, technology and real-world decisions have to work together.",
     ],
-    translation: {
-      heading: "One translation, three disciplines",
-      description:
-        "The work moves in one direction, but every implementation has to survive review from all three sides.",
-      steps: [
-        {
-          term: "Law",
-          description: "Rules, evidence and compliance.",
-        },
-        {
-          term: "Executable regulation",
-          description: "Obligations, decisions and evidence requirements.",
-        },
-        {
-          term: "Code",
-          description: "Protocols, AI and interfaces.",
-        },
-      ],
-    },
     index: {
       label: "On this page",
       items: [
@@ -195,27 +166,8 @@ const ABOUT_COPY: Record<Locale, AboutCopy> = {
     title: "Sobre mí",
     introduction: [
       "Soy Iván Sarapura. Estudio derecho empresarial y construyo productos como freelancer. Mi trabajo y mis intereses conectan legaltech, blockchain, desarrollo de producto, inteligencia artificial e investigación en AI Safety.",
-      "Desarrollo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas. Ya publiqué un trabajo de investigación y estoy desarrollando un segundo.",
+      "Desarrollo y estudio sistemas para contextos donde las reglas, la tecnología y las decisiones concretas tienen que funcionar juntas.",
     ],
-    translation: {
-      heading: "Una traducción, tres disciplinas",
-      description:
-        "El trabajo avanza en una dirección, pero cada implementación tiene que resistir la revisión de los tres lados.",
-      steps: [
-        {
-          term: "Derecho",
-          description: "Reglas, evidencia y cumplimiento.",
-        },
-        {
-          term: "Regulación ejecutable",
-          description: "Obligaciones, decisiones y requisitos de evidencia.",
-        },
-        {
-          term: "Código",
-          description: "Protocolos, IA e interfaces.",
-        },
-      ],
-    },
     index: {
       label: "En esta página",
       items: [
