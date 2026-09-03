@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { ArrowUpDown } from "lucide-react";
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
+import SectionLink from "@/components/SectionLink/SectionLink";
 import type { Locale } from "@/data/locale";
 import { getResearch, type ResearchItem } from "@/data/research";
 import { getUi } from "@/data/ui";
@@ -109,6 +110,26 @@ export default function ResearchIndex({ locale }: ResearchIndexProps) {
                       </dl>
 
                       <p className={styles.summary}>{item.summary}</p>
+                      {item.link ? (
+                        <SectionLink
+                          href={item.link.href}
+                          external
+                          opensInNewTabLabel={ui.opensInNewTab}
+                          size="caption"
+                          className={styles.paperLink}
+                        >
+                          {item.link.label}
+                        </SectionLink>
+                      ) : (
+                        <SectionLink
+                          disabled
+                          icon="external"
+                          size="caption"
+                          className={styles.paperLink}
+                        >
+                          {ui.paperLabel}
+                        </SectionLink>
+                      )}
                     </div>
                   </article>
                 </li>

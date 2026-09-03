@@ -27,6 +27,8 @@ interface ResearchItemBase {
   context: string;
   preview: string;
   summary: string;
+  /** Optional until the full research is publicly available. */
+  link?: ResearchLink;
 }
 
 export interface InProgressResearchItem extends ResearchItemBase {

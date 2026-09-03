@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import { getProjects, PROJECT_TAGS, type ProjectTag } from "@/data/projects";
+import {
+  EXCLUDED_PROJECT_SLUGS,
+  getProjects,
+  PROJECT_TAGS,
+  type ProjectTag,
+} from "@/data/projects";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 import { ToggleChip } from "@/components/ui/toggle-chip";
@@ -14,7 +19,9 @@ interface ProjectsGridProps {
 export default function ProjectsGrid({ locale }: ProjectsGridProps) {
   const [activeTag, setActiveTag] = useState<ProjectTag | null>(null);
   const ui = getUi(locale).projectsPage;
-  const projects = getProjects(locale);
+  const projects = getProjects(locale).filter(
+    (project) => !EXCLUDED_PROJECT_SLUGS.has(project.slug)
+  );
 
   const visibleProjects = activeTag
     ? projects.filter((project) => project.tags.includes(activeTag))

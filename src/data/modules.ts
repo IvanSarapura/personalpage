@@ -1,5 +1,5 @@
 import { DEFAULT_LOCALE, type Locale } from "@/data/locale";
-import { getProjects } from "@/data/projects";
+import { EXCLUDED_PROJECT_SLUGS, getProjects } from "@/data/projects";
 
 export interface Module {
   num: string;
@@ -8,9 +8,7 @@ export interface Module {
 }
 
 /** Proyectos que no se muestran en el acordeón "Selected work" de la home,
- *  aunque sigan existiendo en /projects y sus case studies. */
-const EXCLUDED_PROJECT_SLUGS: ReadonlySet<string> = new Set(["lupio", "zero-to-agent"]);
-
+ *  aunque sus casos de estudio sigan disponibles. */
 /** Ítems del acordeón "Selected work" de la home, derivados de la única
  *  fuente de verdad de proyectos (src/data/projects.ts) para que la home y
  *  /projects nunca diverjan. */

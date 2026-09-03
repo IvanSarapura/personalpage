@@ -45,9 +45,9 @@
 }
 
 .num {
-  font-size: var(--body);
+  font-size: var(--modulelist-num-size);
   font-weight: var(--body-weight);
-  line-height: var(--body-lh);
+  line-height: 1;
   color: var(--section-text-secondary);
   text-align: center;
 }
@@ -175,11 +175,6 @@
     --module-row-gap: var(--element-gap);
     --module-row-padding: var(--space-5);
     --module-action-size: var(--action-btn-size);
-  }
-
-  .num {
-    font-size: var(--body-large);
-    line-height: var(--body-large-lh);
   }
 
   .name {

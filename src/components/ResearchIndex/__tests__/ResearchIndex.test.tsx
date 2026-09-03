@@ -50,8 +50,12 @@ describe("ResearchIndex", () => {
     expect(
       screen.queryByText("¿Puede esta tecnología mejorar el resguardo de la evidencia?")
     ).not.toBeInTheDocument();
-    // El link al paper ya no se muestra en el listado.
-    expect(screen.queryByRole("link", { name: /Read paper/i })).not.toBeInTheDocument();
+    const paperLink = within(articles[1]!).getByRole("link", { name: /Read paper/i });
+    expect(paperLink).toHaveAttribute("href", expect.stringContaining("Paper%2001"));
+    expect(paperLink).toHaveAttribute("target", "_blank");
+    expect(paperLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(within(articles[0]!).queryByRole("link")).not.toBeInTheDocument();
+    expect(within(articles[0]!).getByText("Read paper (PDF)")).toBeVisible();
   });
 
   it("alterna el orden de la lista con el control de ordenamiento", async () => {
@@ -84,6 +88,21 @@ describe("ResearchIndex", () => {
     expect(
       screen.queryByText("¿Puede esta tecnología mejorar el resguardo de la evidencia?")
     ).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /Leer paper/i })).not.toBeInTheDocument();
+    const paperLink = within(
+      screen
+        .getByText("La blockchain como tecnología aplicable a la cadena de custodia")
+        .closest("article")!
+    ).getByRole("link", { name: /Leer paper/i });
+    expect(paperLink).toHaveAttribute("target", "_blank");
+    expect(paperLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(
+      within(
+        screen
+          .getByText(
+            "Cuando blockchain desaparece: de producto crypto a infraestructura digital, agentes autónomos y seguridad"
+          )
+          .closest("article")!
+      ).getByText("Leer paper (PDF)")
+    ).toBeVisible();
   });
 });

@@ -42,6 +42,7 @@ export interface UiDict {
     authorLabel: string;
     authorsLabel: string;
     contextLabel: string;
+    paperLabel: string;
     opensInNewTab: string;
   };
   focus: {
@@ -187,6 +188,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       authorLabel: "Author",
       authorsLabel: "Authors",
       contextLabel: "Context",
+      paperLabel: "Read paper (PDF)",
       opensInNewTab: "opens in a new tab",
     },
     focus: {
@@ -340,6 +342,7 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
       authorLabel: "Autor",
       authorsLabel: "Autores",
       contextLabel: "Contexto",
+      paperLabel: "Leer paper (PDF)",
       opensInNewTab: "se abre en una pestaña nueva",
     },
     focus: {

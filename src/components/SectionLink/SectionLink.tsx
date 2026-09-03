@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import styles from "./SectionLink.module.css";
 
 interface SectionLinkBaseProps {
-  href: string;
+  href?: string;
   children: ReactNode;
   icon?: "arrow" | "arrowLeft" | "arrowUp" | "external";
   size?: "body" | "caption";
@@ -15,19 +15,34 @@ interface SectionLinkBaseProps {
 }
 
 type InternalSectionLinkProps = SectionLinkBaseProps & {
+  href: string;
   external?: false;
+  disabled?: false;
   opensInNewTabLabel?: never;
 };
 
 type ExternalSectionLinkProps = SectionLinkBaseProps & {
+  href: string;
   external: true;
+  disabled?: false;
   opensInNewTabLabel: string;
 };
 
-type SectionLinkProps = InternalSectionLinkProps | ExternalSectionLinkProps;
+type DisabledSectionLinkProps = Omit<SectionLinkBaseProps, "href"> & {
+  disabled: true;
+  external?: never;
+  href?: never;
+  opensInNewTabLabel?: never;
+};
+
+type SectionLinkProps =
+  | InternalSectionLinkProps
+  | ExternalSectionLinkProps
+  | DisabledSectionLinkProps;
 
 export default function SectionLink(props: SectionLinkProps) {
-  const { href, children, size = "body", className, ariaLabel } = props;
+  const { children, size = "body", className, ariaLabel } = props;
+  const disabled = props.disabled === true;
   const external = props.external === true;
   const icon = props.icon ?? (external ? "external" : "arrow");
   const opensInNewTabLabel = external ? props.opensInNewTabLabel : undefined;
@@ -66,10 +81,14 @@ export default function SectionLink(props: SectionLinkProps) {
     </>
   );
 
-  if (external) {
+  if (disabled) {
+    return <span className={linkClass}>{content}</span>;
+  }
+
+  if (props.external === true) {
     return (
       <a
-        href={href}
+        href={props.href}
         className={linkClass}
         target="_blank"
         rel="noopener noreferrer"
@@ -81,7 +100,7 @@ export default function SectionLink(props: SectionLinkProps) {
   }
 
   return (
-    <Link href={href} className={linkClass} aria-label={ariaLabel}>
+    <Link href={props.href} className={linkClass} aria-label={ariaLabel}>
       {content}
     </Link>
   );

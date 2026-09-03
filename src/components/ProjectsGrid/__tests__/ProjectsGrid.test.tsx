@@ -5,6 +5,13 @@ import { describe, expect, it } from "vitest";
 import ProjectsGrid from "../ProjectsGrid";
 
 describe("ProjectsGrid filters", () => {
+  it("excludes Lupio and Zero to Agent from the projects listing", () => {
+    render(<ProjectsGrid locale="en" />);
+
+    expect(screen.queryByText("Lupio")).not.toBeInTheDocument();
+    expect(screen.queryByText("Zero to Agent")).not.toBeInTheDocument();
+  });
+
   it("uses toggle-button semantics and updates the pressed filter", async () => {
     render(<ProjectsGrid locale="en" />);
 

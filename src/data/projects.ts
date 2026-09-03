@@ -98,6 +98,9 @@ const PROJECT_BASES = [
 
 export type ProjectSlug = (typeof PROJECT_BASES)[number]["slug"];
 
+/** Proyectos que no se muestran en los listados principales, aunque sus casos de estudio sigan disponibles. */
+export const EXCLUDED_PROJECT_SLUGS: ReadonlySet<string> = new Set(["lupio", "zero-to-agent"]);
+
 const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
   en: {
     proven: {

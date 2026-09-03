@@ -32,4 +32,15 @@ describe("SectionLink", () => {
       rel: "noopener noreferrer",
     });
   });
+
+  it("renders a non-navigable visual placeholder when disabled", () => {
+    render(
+      <SectionLink disabled icon="external">
+        Read paper (PDF)
+      </SectionLink>
+    );
+
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    expect(screen.getByText("Read paper (PDF)")).toBeVisible();
+  });
 });

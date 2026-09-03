@@ -193,6 +193,10 @@
   text-wrap: pretty;
 }
 
+.paperLink {
+  margin-top: var(--space-4);
+}
+
 :global(html.dark) .archiveHeading,
 :global(html.dark) .item {
   border-color: var(--section-border-interactive);

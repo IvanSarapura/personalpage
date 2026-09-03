@@ -247,6 +247,7 @@ html.dark {
   --footer-brand-col: 17.5rem;
   --modulelist-num-col: 4rem;
   --modulelist-num-col-mobile: 3rem;
+  --modulelist-num-size: 1.5rem;
   --transition-hover:
     background-color var(--duration-base) var(--ease-out),
     color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out),
