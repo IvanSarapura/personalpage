@@ -1,13 +1,6 @@
 import Container from "@/components/Container/Container";
 import Section from "@/components/Section/Section";
-import {
-  StarIcon,
-  ChatIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-  BellIcon,
-  ChartBarIcon,
-} from "@/components/Icons/SignalIcons";
+import { Blocks, BotMessageSquare, CodeXml, Rocket, Scale, ShieldCheck } from "lucide-react";
 import { getSignals, type SignalId } from "@/data/signals";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
@@ -15,12 +8,12 @@ import type { ReactElement } from "react";
 import { Badge } from "@/components/ui/badge";
 
 const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
-  "web3-contracts": <MapPinIcon />,
-  "ai-agents": <ChatIcon />,
-  regtech: <BellIcon />,
-  "legal-engineering": <StarIcon />,
-  "typesafe-frontend": <EnvelopeIcon />,
-  "product-venture": <ChartBarIcon />,
+  "web3-contracts": <Blocks aria-hidden="true" strokeWidth={1.75} />,
+  "ai-agents": <BotMessageSquare aria-hidden="true" strokeWidth={1.75} />,
+  regtech: <ShieldCheck aria-hidden="true" strokeWidth={1.75} />,
+  "legal-engineering": <Scale aria-hidden="true" strokeWidth={1.75} />,
+  "typesafe-frontend": <CodeXml aria-hidden="true" strokeWidth={1.75} />,
+  "product-venture": <Rocket aria-hidden="true" strokeWidth={1.75} />,
 };
 
 const cardClass =
@@ -54,7 +47,7 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
           {signals.map((signal) => (
             <li key={signal.id} className={cardClass}>
               <div
-                className="flex h-[var(--icon-lg)] w-[var(--icon-lg)] shrink-0 items-center justify-center text-[var(--accent-emphasis)]"
+                className="flex h-[var(--icon-lg)] w-[var(--icon-lg)] shrink-0 items-center justify-center text-[var(--accent-emphasis)] [&>svg]:h-full [&>svg]:w-full"
                 aria-hidden="true"
               >
                 {SIGNAL_ICONS[signal.id]}

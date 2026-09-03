@@ -23,18 +23,11 @@ export interface Signal {
  *  Los ids son estables entre locales: alimentan el mapa de íconos en SignalsSection. */
 const SIGNALS_EN = [
   {
-    id: "web3-contracts",
-    title: "Smart Contracts & Web3",
+    id: "legal-engineering",
+    title: "Legal Engineering",
     description:
-      "Subjective-logic contracts on GenLayer, Solidity on EVM networks and permissioned Hyperledger deployments. I build decentralized systems that hold up under real legal requirements.",
-    meta: "Proven · EcoTrace",
-  },
-  {
-    id: "ai-agents",
-    title: "AI Agents & LLM Apps",
-    description:
-      "Conversational agents and retrieval-augmented pipelines with Claude and the Vercel AI SDK. I design them for predictable, auditable answers in sensitive domains.",
-    meta: "Sana · Compliance oracle",
+      "Translating procedural law into protocol design. Digital evidence, chain of custody and governance, grounded in commercial-law training at UBA.",
+    meta: "Awarded paper",
   },
   {
     id: "regtech",
@@ -44,11 +37,11 @@ const SIGNALS_EN = [
     meta: "In development",
   },
   {
-    id: "legal-engineering",
-    title: "Legal Engineering",
+    id: "web3-contracts",
+    title: "Smart Contracts & Web3",
     description:
-      "Translating procedural law into protocol design. Digital evidence, chain of custody and governance, grounded in commercial-law training at UBA.",
-    meta: "Awarded paper",
+      "Subjective-logic contracts on GenLayer, Solidity on EVM networks and permissioned Hyperledger deployments. I build decentralized systems that hold up under real legal requirements.",
+    meta: "Proven · EcoTrace",
   },
   {
     id: "typesafe-frontend",
@@ -64,22 +57,22 @@ const SIGNALS_EN = [
       "From hackathon build to validated product. Market sizing, go-to-market discipline and fast iteration, trained at Trama (ITBA) and Founder School.",
     meta: "Founder School '26",
   },
+  {
+    id: "ai-agents",
+    title: "AI Agents & LLM Apps",
+    description:
+      "Conversational agents and retrieval-augmented pipelines with Claude and the Vercel AI SDK. I design them for predictable, auditable answers in sensitive domains.",
+    meta: "Sana · Compliance oracle",
+  },
 ] as const satisfies readonly Signal[];
 
 const SIGNALS_ES = [
   {
-    id: "web3-contracts",
-    title: "Smart Contracts y Web3",
+    id: "legal-engineering",
+    title: "Ingeniería Legal",
     description:
-      "Contratos de lógica subjetiva en GenLayer, Solidity en redes EVM y despliegues permisionados de Hyperledger. Construyo sistemas descentralizados que resisten requisitos legales reales.",
-    meta: "Proven · EcoTrace",
-  },
-  {
-    id: "ai-agents",
-    title: "Agentes de IA y apps con LLMs",
-    description:
-      "Agentes conversacionales y pipelines RAG con Claude y el Vercel AI SDK. Los diseño para respuestas predecibles y auditables en dominios sensibles.",
-    meta: "Sana · Oráculo de cumplimiento",
+      "Traducir derecho procesal a diseño de protocolos. Evidencia digital, cadena de custodia y gobernanza, con base en la formación en derecho comercial de la UBA.",
+    meta: "Paper premiado",
   },
   {
     id: "regtech",
@@ -89,11 +82,11 @@ const SIGNALS_ES = [
     meta: "En desarrollo",
   },
   {
-    id: "legal-engineering",
-    title: "Ingeniería Legal",
+    id: "web3-contracts",
+    title: "Smart Contracts y Web3",
     description:
-      "Traducir derecho procesal a diseño de protocolos. Evidencia digital, cadena de custodia y gobernanza, con base en la formación en derecho comercial de la UBA.",
-    meta: "Paper premiado",
+      "Contratos de lógica subjetiva en GenLayer, Solidity en redes EVM y despliegues permisionados de Hyperledger. Construyo sistemas descentralizados que resisten requisitos legales reales.",
+    meta: "Proven · EcoTrace",
   },
   {
     id: "typesafe-frontend",
@@ -108,6 +101,13 @@ const SIGNALS_ES = [
     description:
       "Del build de hackathon al producto validado. Dimensionamiento de mercado, disciplina de go-to-market e iteración rápida, entrenadas en Trama (ITBA) y Founder School.",
     meta: "Founder School '26",
+  },
+  {
+    id: "ai-agents",
+    title: "Agentes de IA y apps con LLMs",
+    description:
+      "Agentes conversacionales y pipelines RAG con Claude y el Vercel AI SDK. Los diseño para respuestas predecibles y auditables en dominios sensibles.",
+    meta: "Sana · Oráculo de cumplimiento",
   },
 ] as const satisfies readonly Signal[];
 
