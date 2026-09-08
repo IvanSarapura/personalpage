@@ -60,6 +60,13 @@ export async function waitForStablePage(page: Page, options: StablePageOptions =
             naturalHeight: image.naturalHeight,
           }));
 
+      const waitForFonts = () => {
+        // WebKit can report that its FontFaceSet is already loaded while its
+        // `ready` promise remains unsettled after a client-side navigation.
+        // The status is the authoritative readiness signal in that state.
+        return document.fonts.status === "loaded" ? Promise.resolve() : document.fonts.ready;
+      };
+
       let timeoutId: number | undefined;
       const timeout = new Promise<never>((_, reject) => {
         timeoutId = window.setTimeout(() => {
@@ -74,7 +81,7 @@ export async function waitForStablePage(page: Page, options: StablePageOptions =
       try {
         await Promise.race([
           Promise.all([
-            document.fonts.ready,
+            waitForFonts(),
             Promise.all(relevantImages.map((image) => waitForImage(image))),
           ]),
           timeout,
