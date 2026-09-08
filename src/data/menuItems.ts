@@ -15,7 +15,7 @@ const MENU_LABELS: Record<Locale, MenuLabels> = {
     home: "Home",
     research: "Research",
     projects: "Projects",
-    about: "About",
+    about: "About me",
     blog: "Blog",
     contact: "Contact",
   },
@@ -41,9 +41,9 @@ export function getMenuItems(locale: Locale): MenuItem[] {
   const labels = MENU_LABELS[locale];
   return [
     { label: labels.home, href: localePath(locale, "/"), index: "01" },
-    { label: labels.research, href: localePath(locale, "/research"), index: "02" },
-    { label: labels.projects, href: localePath(locale, "/projects"), index: "03" },
-    { label: labels.about, href: localePath(locale, "/about"), index: "04" },
+    { label: labels.about, href: localePath(locale, "/about"), index: "02" },
+    { label: labels.research, href: localePath(locale, "/research"), index: "03" },
+    { label: labels.projects, href: localePath(locale, "/projects"), index: "04" },
     { label: labels.blog, href: localePath(locale, "/blog"), index: "05" },
     { label: labels.contact, href: homeAnchor(locale, "#contact"), index: "06" },
   ];
