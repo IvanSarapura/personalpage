@@ -5,7 +5,6 @@ import { getSignals, type SignalId } from "@/data/signals";
 import { getUi } from "@/data/ui";
 import type { Locale } from "@/data/locale";
 import type { ReactElement } from "react";
-import { Badge } from "@/components/ui/badge";
 
 const SIGNAL_ICONS: Record<SignalId, ReactElement> = {
   "web3-contracts": <Blocks aria-hidden="true" strokeWidth={1.75} />,
@@ -58,9 +57,6 @@ export default function SignalsSection({ locale }: SignalsSectionProps) {
               <p className="grow text-[length:var(--body)] leading-[var(--body-lh)] font-normal text-[var(--section-text-secondary)]">
                 {signal.description}
               </p>
-              <Badge variant="emphasis" className="self-start">
-                {signal.meta}
-              </Badge>
             </li>
           ))}
         </ul>

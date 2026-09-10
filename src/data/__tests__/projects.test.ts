@@ -60,6 +60,12 @@ describe("PROJECTS (fuente de verdad de proyectos)", () => {
 });
 
 describe("MODULES (acordeón de la home, derivado de PROJECTS)", () => {
+  it("muestra Alimentis con su nombre de producto en ambos idiomas", () => {
+    for (const locale of LOCALES) {
+      expect(getProject("food-code-oracle", locale)).toMatchObject({ title: "Alimentis" });
+    }
+  });
+
   it("deriva un ítem por proyecto destacado, en el mismo orden", () => {
     expect(MODULES.length).toBeGreaterThan(0);
     expect(MODULES.length).toBeLessThanOrEqual(PROJECTS.length);

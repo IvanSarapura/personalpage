@@ -157,7 +157,7 @@ const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
       status: "Hackathon build",
     },
     "food-code-oracle": {
-      title: "Food-Code Compliance Oracle",
+      title: "Alimentis",
       tagline: "RegTech for the right to food",
       summary:
         "Independent research, in development. The oracle crosses ANMAT, SENASA and FAO datasets with the Argentine Food Code using retrieval-augmented generation, answering natural-language queries with auditable compliance reports.",
@@ -252,7 +252,7 @@ const PROJECT_COPY: Record<Locale, Record<ProjectSlug, ProjectCopy>> = {
       status: "Build de hackathon",
     },
     "food-code-oracle": {
-      title: "Oráculo del Código Alimentario",
+      title: "Alimentis",
       tagline: "RegTech por el derecho a la alimentación",
       summary:
         "Investigación independiente, en desarrollo. El oráculo cruza bases de ANMAT, SENASA y FAO con el Código Alimentario Argentino mediante RAG, respondiendo consultas en lenguaje natural con reportes de conformidad auditables.",

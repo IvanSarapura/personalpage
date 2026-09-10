@@ -15,4 +15,12 @@ describe("signals", () => {
     expect(getSignals("en").map((signal) => signal.id)).toEqual(expectedOrder);
     expect(getSignals("es").map((signal) => signal.id)).toEqual(expectedOrder);
   });
+
+  it("no incluye etiquetas auxiliares en las tarjetas", () => {
+    for (const locale of ["en", "es"] as const) {
+      for (const signal of getSignals(locale)) {
+        expect(signal).not.toHaveProperty("meta");
+      }
+    }
+  });
 });

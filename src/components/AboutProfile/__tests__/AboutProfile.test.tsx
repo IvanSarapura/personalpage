@@ -76,7 +76,7 @@ describe("AboutProfile", () => {
 
     expect(profile.formation.stackGroups.map((group) => group.items)).toEqual([
       ["TypeScript", "Next.js", "Tailwind CSS", "React", "Angular", "Node.js", "SQL"],
-      ["Claude", "Vercel AI SDK", "Codex", "DeepSeek", "Kimi"],
+      ["Claude", "Codex", "DeepSeek", "Kimi", "RAG", "LangChain", "LangGraph", "MCP"],
       ["Solidity", "Hyperledger Fabric", "Rust", "Hardhat", "Foundry", "Compact"],
     ]);
     for (const technology of profile.formation.stackGroups.flatMap((group) => group.items)) {
