@@ -7,6 +7,11 @@ describe("CurrentWorkSection", () => {
     render(<CurrentWorkSection locale="en" />);
 
     expect(screen.getByRole("heading", { level: 2, name: "What I'm building" })).toBeVisible();
+    expect(
+      screen.getByText(
+        "A selection of the projects I am currently driving forward, from early exploration to practical implementation."
+      )
+    ).toBeVisible();
     expect(screen.getByRole("heading", { level: 3, name: "Curiosity" })).toBeVisible();
     expect(screen.getByRole("heading", { level: 3, name: "Link2Pay" })).toBeVisible();
 
@@ -25,6 +30,11 @@ describe("CurrentWorkSection", () => {
     render(<CurrentWorkSection locale="es" />);
 
     expect(screen.getByRole("heading", { level: 2, name: "Qué estoy construyendo" })).toBeVisible();
+    expect(
+      screen.getByText(
+        "Una selección de los proyectos que estoy impulsando actualmente, desde la exploración inicial hasta su implementación práctica."
+      )
+    ).toBeVisible();
     expect(
       screen.getByRole("heading", { level: 3, name: "Curiosity" }).closest("article")
     ).toHaveTextContent("En desarrollo");
