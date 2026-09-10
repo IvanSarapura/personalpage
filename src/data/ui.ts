@@ -24,11 +24,6 @@ export interface UiDict {
     subheadline: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    driving: {
-      heading: string;
-      description: string;
-      projectDescription: string;
-    };
   };
   research: {
     heading: string;
@@ -173,13 +168,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "I build software where law meets code. Web apps with strict typing, smart contracts, and AI tools for regulatory compliance. I study law at UBA, develop on blockchain at UTN, and back the words with shipped work.",
       ctaPrimary: "View my work",
       ctaSecondary: "Get in touch",
-      driving: {
-        heading: "Driving forward",
-        description:
-          "This is the project I’m working on right now. Take a look, try it out, and see how it evolves.",
-        projectDescription:
-          "Alimentis brings ANMAT, SENASA and FAO data together with the Argentine Food Code, so teams can ask in plain language and trace every compliance answer back to its sources.",
-      },
     },
     research: {
       heading: "Publications & research",
@@ -333,13 +321,6 @@ const UI_BY_LOCALE: Record<Locale, UiDict> = {
         "Construyo software donde el derecho se encuentra con el código. Aplicaciones web con tipado estricto, contratos inteligentes y herramientas de IA para cumplimiento regulatorio. Estudio Abogacía en la UBA, desarrollo sobre blockchain en la UTN y respaldo lo que digo con trabajo publicado.",
       ctaPrimary: "Ver mis proyectos",
       ctaSecondary: "Contactame",
-      driving: {
-        heading: "Impulsando",
-        description:
-          "Este es el proyecto en el que estoy trabajando hoy. Podés conocerlo, probarlo y ver cómo evoluciona.",
-        projectDescription:
-          "Alimentis reúne datos de ANMAT, SENASA y FAO con el Código Alimentario Argentino para que los equipos consulten en lenguaje natural y rastreen cada respuesta de cumplimiento hasta sus fuentes.",
-      },
     },
     research: {
       heading: "Publicaciones e investigación",
